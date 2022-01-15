@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+// 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
+const includPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return includPush.call(this, location).catch(err => err)
+}
 Vue.use(Router)
 
 /* Layout */
@@ -50,116 +55,296 @@ export const constantRoutes = [
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
+      component: () => import('@/views/dashboard'),
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
-
+  /** **************** System ******************/
   {
-    path: '/example',
+    path: '/system',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    name: 'System',
+    meta: { title: 'System', icon: 'system' },
+    redirect: '/system/management',
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: 'management',
+        name: 'Management',
+        component: () => import('@/views/system/management'),
+        meta: { title: 'System Management', icon: 'submenu' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
+        path: 'cloud',
+        name: 'Cloud',
+        component: () => import('@/views/system/cloud-setting'),
+        meta: { title: 'Cloud Setting', icon: 'submenu' }
+      },
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
+        path: 'l3-feature',
+        name: 'L3-Feature',
+        component: () => import('@/views/system/l3-feature'),
+        meta: { title: 'L3-Feature', icon: 'submenu' },
+        redirect: '/system/l3-feature/ipv4-interface',
         children: [
           {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
+            path: 'ipv4-interface',
+            name: 'IPv4-Interface',
+            component: () => import('@/views/system/l3-feature/ipv4-interface'),
+            meta: { title: 'IPv4 Interface', icon: 'submenu' }
           },
           {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
+            path: 'ipv4-arp-aging-time',
+            name: 'IPv4-ARP-Aging-Time',
+            component: () => import('@/views/system/l3-feature/ipv4-arp-aging-time'),
+            meta: { title: 'IPv4 ARP Aging Time', icon: 'submenu' }
           },
           {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
+            path: 'ipv4-arp-table',
+            name: 'IPv4-ARP-Table',
+            component: () => import('@/views/system/l3-feature/ipv4-arp-table'),
+            meta: { title: 'IPv4 ARP Table', icon: 'submenu' }
+          },
+          {
+            path: 'ipv4-static-default-route',
+            name: 'IPv4-Static-Default-Route',
+            component: () => import('@/views/system/l3-feature/ipv4-static-default-route'),
+            meta: { title: 'IPv4 Static/Default Route', icon: 'submenu' }
+          },
+          {
+            path: 'ipv6-interface',
+            name: 'IPv6-Interface',
+            component: () => import('@/views/system/l3-feature/ipv6-interface'),
+            meta: { title: 'IPv6 Interface', icon: 'submenu' }
           }
         ]
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
+        path: 'dns',
+        name: 'DNS',
+        component: () => import('@/views/system/dns'),
+        meta: { title: 'DNS', icon: 'submenu' }
+      },
+      {
+        path: 'ip-access-list',
+        name: 'IP-Access-List',
+        component: () => import('@/views/system/ip-access-list'),
+        meta: { title: 'IP Access List', icon: 'submenu' }
       }
     ]
   },
-
+  /** **************** Network ******************/
   {
-    path: 'external-link',
+    path: '/network',
     component: Layout,
+    name: 'Network',
+    meta: { title: 'Network', icon: 'network' },
+    redirect: '/network/physical-interface',
     children: [
       {
-        path: 'https://cn.vuejs.org/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: 'physical-interface',
+        name: 'Physical-Interface',
+        component: () => import('@/views/network/physical-interface'),
+        meta: { title: 'Physical Interface', icon: 'submenu' }
+      },
+      {
+        path: 'spanning-tree',
+        name: 'Spanning-Tree',
+        component: () => import('@/views/network/spanning-tree/index'),
+        meta: { title: 'Spanning Tree', icon: 'submenu' },
+        redirect: '/network/spanning-tree/protocol',
+        children: [
+          {
+            path: 'protocol',
+            name: 'Protocol',
+            component: () => import('@/views/network/spanning-tree/protocol'),
+            meta: { title: 'Protocol', icon: 'submenu' }
+          },
+          {
+            path: 'port',
+            name: 'Port',
+            component: () => import('@/views/network/spanning-tree/port'),
+            meta: { title: 'Port', icon: 'submenu' }
+          }
+        ]
+      },
+      {
+        path: 'trunk',
+        name: 'Trunk',
+        component: () => import('@/views/network/trunk/index'),
+        meta: { title: 'Trunk', icon: 'submenu' },
+        children: [
+          {
+            path: 'settings',
+            name: 'Settings',
+            component: () => import('@/views/network/trunk/settings'),
+            meta: { title: 'Settings', icon: 'submenu' }
+          },
+          {
+            path: 'status',
+            name: 'Status',
+            component: () => import('@/views/network/trunk/status'),
+            meta: { title: 'Status', icon: 'submenu' }
+          },
+          {
+            path: 'port-priority',
+            name: 'Port-Pri',
+            component: () => import('@/views/network/trunk/port-priority'),
+            meta: { title: 'Port Priority', icon: 'submenu' }
+          }
+        ]
+      },
+      {
+        path: 'mirroring',
+        name: 'Mirroring',
+        component: () => import('@/views/network/mirroring'),
+        meta: { title: 'Mirroring', icon: 'submenu' }
       }
     ]
   },
-
+  /** **************** QoS ******************/
+  {
+    path: '/qos',
+    component: Layout,
+    name: 'QoS',
+    meta: { title: 'QoS', icon: 'QoS' },
+    redirect: '/qos/cos',
+    children: [
+      {
+        path: 'cos',
+        name: 'CoS',
+        component: () => import('@/views/qos/cos'),
+        meta: { title: 'CoS', icon: 'submenu' }
+      },
+      {
+        path: 'port-pri',
+        name: 'Port-Priority',
+        component: () => import('@/views/qos/port-priority'),
+        meta: { title: 'Port Priority', icon: 'submenu' }
+      }
+    ]
+  },
+  /** **************** PoE ******************/
+  {
+    path: '/poe',
+    component: Layout,
+    name: 'PoE',
+    meta: { title: 'PoE', icon: 'PoE' },
+    redirect: '/poe/cos',
+    children: [
+      {
+        path: 'power-over-ethernet',
+        name: 'Power-over-Ethernet',
+        component: () => import('@/views/poe/power-over-ethernet'),
+        meta: { title: 'Power over Ethernet', icon: 'submenu' }
+      },
+      {
+        path: 'time-range',
+        name: 'Time-Range',
+        component: () => import('@/views/poe/time-range'),
+        meta: { title: 'Time Range', icon: 'submenu' }
+      },
+      {
+        path: 'pd-alive',
+        name: 'PD-Alive',
+        component: () => import('@/views/poe/pd-alive'),
+        meta: { title: 'PD Alive', icon: 'submenu' }
+      }
+    ]
+  },
+  /** **************** Security ******************/
+  {
+    path: '/security',
+    component: Layout,
+    name: 'Security',
+    meta: { title: 'Security', icon: 'security' },
+    redirect: '/security/port-security',
+    children: [
+      {
+        path: 'port-security',
+        name: 'Port-Security',
+        component: () => import('@/views/security/port-security'),
+        meta: { title: 'Port Security', icon: 'submenu' },
+        redirect: '/security/global-settings',
+        children: [
+          {
+            path: 'global-settings',
+            name: 'Global-Settings',
+            component: () => import('@/views/security/port-security/global-settings'),
+            meta: { title: 'Global Settings', icon: 'submenu' }
+          },
+          {
+            path: 'port-settings',
+            name: 'Port-Settings',
+            component: () => import('@/views/security/port-security/port-settings'),
+            meta: { title: 'Port Settings', icon: 'submenu' }
+          },
+          {
+            path: 'port-address-settings',
+            name: 'Port-Address-Settings',
+            component: () => import('@/views/security/port-security/port-address-settings'),
+            meta: { title: 'Port Address Settings', icon: 'submenu' }
+          }
+        ]
+      },
+      {
+        path: 'port-access-control',
+        name: 'Port-Access-Control',
+        component: () => import('@/views/security/port-access-control'),
+        meta: { title: 'Port Access Control', icon: 'submenu' }
+      }
+    ]
+  },
+  /** **************** Tools ******************/
+  {
+    path: '/tools',
+    component: Layout,
+    name: 'Tools',
+    meta: { title: 'Tools', icon: 'tools' },
+    redirect: '/tools/firmware-upgrade',
+    children: [
+      {
+        path: 'firmware-upgrade',
+        name: 'Firmware-Upgrade',
+        component: () => import('@/views/tools/firmware-upgrade'),
+        meta: { title: 'Firmware Upgrade', icon: 'submenu' }
+      },
+      {
+        path: 'config-backup-restore',
+        name: 'Config-Backup-Restore',
+        component: () => import('@/views/tools/config-backup-restore'),
+        meta: { title: 'Config Backup/Restore', icon: 'submenu' }
+      },
+      {
+        path: 'diagnostics',
+        name: 'Diagnostics',
+        component: () => import('@/views/tools/diagnostics'),
+        meta: { title: 'Diagnostics', icon: 'submenu' }
+      },
+      {
+        path: 'reboot',
+        name: 'Reboot',
+        component: () => import('@/views/tools/reboot'),
+        meta: { title: 'Reboot', icon: 'submenu' }
+      },
+      {
+        path: 'ping',
+        name: 'Ping',
+        component: () => import('@/views/tools/ping'),
+        meta: { title: 'Ping', icon: 'submenu' }
+      }
+    ]
+  },
+  /** **************** Save ******************/
+  {
+    path: '/save',
+    component: Layout,
+    children: [{
+      path: 'save',
+      name: 'Save',
+      component: () => import('@/views/save'),
+      meta: { title: 'Save', icon: 'save' }
+    }]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

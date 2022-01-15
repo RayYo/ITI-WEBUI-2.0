@@ -3,7 +3,8 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <img class="logo" src="@/assets/logo/trendnet_logo.png">
+        <h3 class="title">{{ modelName }} Login</h3>
       </div>
 
       <el-form-item prop="username">
@@ -42,40 +43,33 @@
       </el-form-item>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
-      </div>
-
     </el-form>
   </div>
 </template>
 
 <script>
-import { validUsername } from '@/utils/validate'
 
 export default {
   name: 'Login',
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
+      if (value.length < 1) {
         callback(new Error('Please enter the correct user name'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+      if (value.length < 1) {
+        callback(new Error('The password can not be less than 1 digits'))
       } else {
         callback()
       }
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -83,7 +77,8 @@ export default {
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
+      modelName: 'TPE-2840WS'
     }
   },
   watch: {
@@ -126,10 +121,8 @@ export default {
 </script>
 
 <style lang="scss">
-/* 修复input 背景不协调 和光标变色 */
-/* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
+$bg:#19263F;
 $light_gray:#fff;
 $cursor: #fff;
 
@@ -145,6 +138,7 @@ $cursor: #fff;
     display: inline-block;
     height: 47px;
     width: 85%;
+    left: 5px;
 
     input {
       background: transparent;
@@ -160,12 +154,16 @@ $cursor: #fff;
         box-shadow: 0 0 0px 1000px $bg inset !important;
         -webkit-text-fill-color: $cursor !important;
       }
+
+      &::-webkit-input-placeholder {
+        color: #ccc;
+      }
     }
   }
 
   .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(22, 36, 61, 0.9);
     border-radius: 5px;
     color: #454545;
   }
@@ -173,7 +171,7 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg:#2d3a4b;
+$bg:#2e3c56;
 $dark_gray:#889aa4;
 $light_gray:#eee;
 
@@ -192,35 +190,33 @@ $light_gray:#eee;
     overflow: hidden;
   }
 
-  .tips {
-    font-size: 14px;
-    color: #fff;
-    margin-bottom: 10px;
-
-    span {
-      &:first-of-type {
-        margin-right: 16px;
-      }
-    }
-  }
-
   .svg-container {
     padding: 6px 5px 6px 15px;
     color: $dark_gray;
     vertical-align: middle;
     width: 30px;
     display: inline-block;
+
+    .svg-icon {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   .title-container {
     position: relative;
+    text-align: center;
+
+    .logo {
+      width: 60%;
+    }
 
     .title {
-      font-size: 26px;
+      font-size: 24px;
       color: $light_gray;
-      margin: 0px auto 40px auto;
+      margin: 20px auto 20px auto;
       text-align: center;
-      font-weight: bold;
+      font-weight: 700;
     }
   }
 

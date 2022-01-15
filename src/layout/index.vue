@@ -7,12 +7,13 @@
         <navbar />
       </div>
       <app-main />
+      <footerbar />
     </div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from './components'
+import { Navbar, Sidebar, AppMain, Footerbar } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -20,7 +21,8 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    AppMain
+    AppMain,
+    Footerbar
   },
   mixins: [ResizeMixin],
   computed: {
@@ -80,7 +82,7 @@ export default {
     right: 0;
     z-index: 9;
     width: calc(100% - #{$sideBarWidth});
-    transition: width 0.28s;
+    transition: width 0.5s;
   }
 
   .hideSidebar .fixed-header {

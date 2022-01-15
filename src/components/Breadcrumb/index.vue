@@ -71,8 +71,11 @@ export default {
   margin-left: 8px;
 
   .no-redirect {
-    color: #97a8be;
+    color: #99a7b8;
     cursor: text;
+    &:hover {
+      color: #99a7b8 !important;
+    }
   }
 }
 </style>
