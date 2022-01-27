@@ -27,7 +27,6 @@ export default {
   },
   data() {
     return {
-      title: 'Model Name??',
       logo: require('@/assets/logo/trendnet_logo.png')
     }
   },

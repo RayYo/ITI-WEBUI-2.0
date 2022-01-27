@@ -89,6 +89,14 @@ export default {
       immediate: true
     }
   },
+  created() {
+    this.$http.get('url_get_loginInfo').then(resp => {
+      document.title = resp.data.title
+    },
+    err => {
+      this.$message.error('login get info err', err)
+    })
+  },
   methods: {
     showPwd() {
       if (this.passwordType === 'password') {

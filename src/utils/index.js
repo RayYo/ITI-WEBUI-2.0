@@ -42,6 +42,8 @@ export function parseTime(time, cFormat) {
     const value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
     if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
+    // change month format
+    if (key === 'm') { return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][value - 1] }
     return value.toString().padStart(2, '0')
   })
   return time_str

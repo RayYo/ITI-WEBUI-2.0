@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <hamburger v-if="isDisplayHambruger" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
-    <div class="left-info">TPE-2840WS</div>
+    <div class="left-info">{{ modelName }}</div>
 
     <div class="right-menu">
       <svg-icon class="menu-item" icon-class="cloud" @click="redirectRoutePath('toCloud')" />
@@ -55,7 +55,7 @@ export default {
   },
   data() {
     return {
-      modelName: 'TPE-2840WS',
+      modelName: document.title,
       sysLogNum: 9,
       sysStartUpTime: '01/01/2018 00:01:59'
     }
