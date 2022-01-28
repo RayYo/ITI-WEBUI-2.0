@@ -1,4 +1,5 @@
 import router from './router'
+import store from './store'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
@@ -12,8 +13,11 @@ router.beforeEach(async(to, from, next) => {
   // start progress bar
   NProgress.start()
 
-  // set page title
-  // document.title = getPageTitle()
+  // init model info store for all components & set document title
+  if (store.getters.modelInfo('modelName') === '') {
+    const resp = await store.dispatch('modelConst/modelInfoSet')
+    document.title = resp.modelName
+  }
 
   // determine whether the user has logged in
   const hasToken = getToken()

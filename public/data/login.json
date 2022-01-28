@@ -6,6 +6,12 @@
     "optLanguage":1,
     "copyrightYear": "2014",
     "failReason": "lang('login', 'errLoginUserInvalid')",
-    "title":"GS8393-52"
+    
+    "modelName":"TPE-2840WS",
+    "portNum":28,
+    "lagNum": 8,
+    "fiberNum": 0,
+    "poeNum": 24,
+    "comboNum": 4
   }
 }

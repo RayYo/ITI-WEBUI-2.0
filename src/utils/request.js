@@ -1,6 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import store from '@/store'
+import router from '@/router'
 import { Message } from 'element-ui'
 import { getToken } from '@/utils/auth'
 import { urlRequestGet } from '@/utils/request-url-mapping'
@@ -73,6 +74,10 @@ request.interceptors.response.use(
         message: res.reason || 'Logout need auth',
         type: 'error',
         duration: 5 * 1000
+      })
+
+      store.dispatch('user/logout').then(() => {
+        router.push('/login')
       })
       return Promise.reject(new Error(res.reason || 'Logout need auth'))
     }

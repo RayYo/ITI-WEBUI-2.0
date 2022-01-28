@@ -55,7 +55,7 @@ export default {
   },
   data() {
     return {
-      modelName: document.title,
+      modelName: this.$store.getters.modelInfo('modelName'),
       sysLogNum: 9,
       sysStartUpTime: '01/01/2018 00:01:59'
     }

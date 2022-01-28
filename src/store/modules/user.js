@@ -25,8 +25,6 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        console.log('login data:', data)
         // mock data
         // data.token = 'temp-token'
         commit('SET_TOKEN', 'temp-token')

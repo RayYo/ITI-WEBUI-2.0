@@ -23,7 +23,7 @@ export default {
   },
   created() {
     this.$http.get('url_get_mainPage').then(resp => {
-      console.log('dashboard: ', resp)
+      // console.log('dashboard: ', resp)
     },
     err => {
       console.log('dashboard get error: ', err)

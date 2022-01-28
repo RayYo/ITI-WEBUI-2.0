@@ -78,7 +78,7 @@ export default {
       loading: false,
       passwordType: 'password',
       redirect: undefined,
-      modelName: 'TPE-2840WS'
+      modelName: this.$store.getters.modelInfo('modelName')
     }
   },
   watch: {
@@ -88,14 +88,6 @@ export default {
       },
       immediate: true
     }
-  },
-  created() {
-    this.$http.get('url_get_loginInfo').then(resp => {
-      document.title = resp.data.title
-    },
-    err => {
-      this.$message.error('login get info err', err)
-    })
   },
   methods: {
     showPwd() {
