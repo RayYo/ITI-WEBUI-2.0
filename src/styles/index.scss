@@ -59,6 +59,11 @@ div:focus {
   }
 }
 
+// Nprogress
+#nprogress .bar {
+  background: #cfcfcf !important; //自定义颜色
+}
+
 // main-container global css
 .app-container {
   padding: 20px;
