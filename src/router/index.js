@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
+// Fixed an error when VUe-Router repeatedly clicks the menu in ElementUI navigation bar above version 3.0
 const includPush = Router.prototype.push
 Router.prototype.push = function push(location) {
   return includPush.call(this, location).catch(err => err)
@@ -13,7 +13,6 @@ import Layout from '@/layout'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
- * Detail see: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
  *
  * hidden: true                   if set true, item will not show in the sidebar(default is false)
  * alwaysShow: true               if set true, will always show the root menu

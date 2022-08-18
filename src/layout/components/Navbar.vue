@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <hamburger v-if="isDisplayHambruger" :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
-    <div class="left-info">{{ modelName }}</div>
+    <div class="left-info">{{ modelInfo('modelName') }}</div>
 
     <div class="right-menu">
       <svg-icon class="menu-item" icon-class="cloud" @click="redirectRoutePath('toCloud')" />
@@ -55,14 +55,14 @@ export default {
   },
   data() {
     return {
-      modelName: this.$store.getters.modelInfo('modelName'),
       sysLogNum: 9,
       sysStartUpTime: '01/01/2018 00:01:59'
     }
   },
   computed: {
     ...mapGetters([
-      'sidebar'
+      'sidebar',
+      'modelInfo'
     ]),
     isDisplayHambruger() {
       return this.$store.state.app.device === 'mobile'

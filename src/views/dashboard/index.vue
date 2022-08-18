@@ -4,7 +4,11 @@
       <span>{{ getCurrentTime }}</span>
     </div>
     <el-tabs v-model="activeName" @tab-click="handleClick">
-      <el-tab-pane label="Dashboard" name="first">Dashboard</el-tab-pane>
+      <el-tab-pane label="Dashboard" name="first">
+        <div>
+          <first-view />
+        </div>
+      </el-tab-pane>
       <el-tab-pane label="Switch View" name="second">Switch View</el-tab-pane>
       <el-tab-pane label="Real-time Statistics" name="third">Real-time Statistics</el-tab-pane>
     </el-tabs>
@@ -12,22 +16,18 @@
 </template>
 <script>
 import { parseTime } from '@/utils'
+import firstView from '@/views/dashboard/components/first.vue'
 
 export default {
+  components: {
+    firstView
+  },
   data() {
     return {
       activeName: 'first',
       getCurrentTime: parseTime(new Date(), '{d} {m} {y} {h}:{i}:{s}'),
       timerId: 0
     }
-  },
-  created() {
-    this.$http.get('url_get_mainPage').then(resp => {
-      // console.log('dashboard: ', resp)
-    },
-    err => {
-      console.log('dashboard get error: ', err)
-    })
   },
   mounted() {
     this.timerId = setInterval(() => {

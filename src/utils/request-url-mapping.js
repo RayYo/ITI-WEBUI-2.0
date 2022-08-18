@@ -4,6 +4,10 @@ const urlMapping = {
     mockData: 'main.json',
     realRequest: 'cgi/get.cgi?cmd=home_main'
   },
+  url_get_statusSysinfo: {
+    mockData: 'status_sysinfo.json',
+    realRequest: 'cgi/get.cgi?cmd=sys_sysinfo'
+  },
   url_get_loginInfo: {
     mockData: 'login.json',
     realRequest: 'cgi/get.cgi?cmd=home_login'

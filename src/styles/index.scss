@@ -70,3 +70,57 @@ div:focus {
   padding-bottom: 20px;
   overflow: auto;
 }
+
+// from table global css
+.from_table {
+  border-collapse: collapse;
+  background-color: #fff;
+  width: 100%;
+  border-color: #ccc;
+  border-left: 0 none;
+  border-right: 0 none;
+  border-bottom: 0 none;
+  border-top: 0 none;
+  table-layout: fixed;
+  tr {
+    border-bottom: 1px solid #ccc;
+  }
+  tr>td:first-child {
+    padding: 10px;
+    width: 28%;
+    border-left: 0 none;
+  }
+  tr>td:last-child {
+    padding: 10px;
+    border-right: 0 none;
+    vertical-align: top;
+  }
+}
+
+.table_title {
+  background-color: #585f69;
+  color: #fff;
+  box-sizing: border-box;
+  height: 44px;
+  line-height: 44px;
+  font-size: 18px;
+  padding-left: 10px;
+  padding-right: 5px;
+  font-weight: 200;
+}
+
+.from_table tr {
+  border-bottom: 1px solid #ccc;
+}
+
+// for ds
+.das_form {
+  height: calc(100% - 45px);
+}
+.das_form tr>td:last-child, .das_form tr>td:nth-last-child(2) {
+  vertical-align: top;
+  border-bottom: 0 none;
+}
+.das_form>tbody>tr:last-child {
+    height: 100%;
+}

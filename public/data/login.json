@@ -1,12 +1,6 @@
 {
   "data":
   {
-    "https":false,
-    "httpsEnbl":true,
-    "optLanguage":1,
-    "copyrightYear": "2014",
-    "failReason": "lang('login', 'errLoginUserInvalid')",
-    
     "modelName":"TPE-2840WS",
     "portNum":28,
     "lagNum": 8,

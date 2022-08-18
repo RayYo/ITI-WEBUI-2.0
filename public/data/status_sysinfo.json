@@ -1,0 +1,23 @@
+{
+  "data":
+  {
+    "sysUpTime":"0 day(s),0 hr(s),49 min(s),41 sec(s)",
+    "fwVer":"3.1.0.51234",
+    "loaderVer":"1.0.0.41234",
+    "ramSize": "256MB",
+    "flashize": "32MB",
+		"hostname":	"Switch",
+		"location":	"Default",
+		"contact":	"Default",
+    "snNo": "",
+    "sysMac":"00:11:22:33:44:55",
+    "currIpv4":"192.168.1.1",
+    "currIpv4Mask":"255.255.255.0",
+    "currIpv4Gw":"",
+    "currIpv6": [ "fe80::dcad:beff:feef:102/64", "2002::1:99/64"],
+    "currIpv6Gw":"",
+    "currIpv6LinkLocalAddr":"",
+    "ipv4DHCP":"Enabled",
+    "ipv6DHCP":"Disabled"
+  }
+}
