@@ -73,6 +73,20 @@ export default {
       }
     },
     handleSelect(key, keyPath) {
+      /*
+       * Forcibly refresh components of the same route
+       * 1. Bind query to the current route
+       * 2. AppMain.vue -> <router-view :key="route.path + route.query"
+       */
+      if (key === this.$route.path) {
+        this.$router.push({
+          path: key,
+          query: {
+            flag: Date.now()
+          }
+        })
+      }
+
       if (keyPath.length === 1) {
         if (curruntSubMenuOpenedIdx !== null) {
           this.$refs.elMenu.close(curruntSubMenuOpenedIdx)
