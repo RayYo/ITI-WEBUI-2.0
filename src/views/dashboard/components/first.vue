@@ -65,16 +65,23 @@ export default {
   },
   data() {
     return {
-      swInfoTableData: [],
-      hwInfoTableData: [],
-      adminInfoTableData: [],
-      sysInfoTableData: [],
-      ipv6InfoTableData: [],
-      netFeaturesTableData: []
+      swInfoTableData: ['', '', ''],
+      hwInfoTableData: ['', ''],
+      adminInfoTableData: ['', '', ''],
+      sysInfoTableData: ['', '', '', '', ''],
+      ipv6InfoTableData: ['', '', ''],
+      netFeaturesTableData: ['', '']
     }
   },
   created() {
     this.$http.get('url_get_statusSysinfo').then(resp => {
+      this.swInfoTableData.length = 0
+      this.hwInfoTableData.length = 0
+      this.adminInfoTableData.length = 0
+      this.sysInfoTableData.length = 0
+      this.ipv6InfoTableData.length = 0
+      this.netFeaturesTableData.length = 0
+
       this.swInfoTableData.push(resp.data.sysUpTime, resp.data.fwVer, resp.data.loaderVer)
       this.hwInfoTableData.push(resp.data.ramSize, resp.data.flashize)
       this.adminInfoTableData.push(resp.data.hostname, resp.data.location, resp.data.contact)
