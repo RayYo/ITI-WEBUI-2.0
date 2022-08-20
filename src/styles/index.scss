@@ -100,6 +100,12 @@ div:focus {
     border-right: 0 none;
     vertical-align: top;
   }
+  tr td {
+    border-color: #ccc;
+      border-right-color: rgb(204, 204, 204);
+      border-left-color: rgb(204, 204, 204);
+    word-wrap: break-word;
+  }
 }
 
 .table_title {
@@ -128,4 +134,28 @@ div:focus {
 }
 .das_form>tbody>tr:last-child {
     height: 100%;
+}
+
+// base title
+#basetitle {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-size: 28px;
+  margin: 0;
+}
+
+// button margin
+.marginBtn {
+  margin-top: 11px;
+  margin-bottom: 15px;
+}
+
+// el-button style
+.el-button {
+  padding: 7.5px 20px 7.5px 20px;
+  font: normal 15px verdana,arial,sans-serif;
+}
+.el-button--primary {
+  background-color: #3398dc;
+  border: 1px solid #1890ff;
 }

@@ -4,6 +4,7 @@
     <div class="left-info">{{ modelInfo('modelName') }}</div>
 
     <div class="right-menu">
+      <svg-icon class="menu-item" icon-class="wizard" @click="redirectRoutePath('toWizard')" />
       <svg-icon class="menu-item" icon-class="cloud" @click="redirectRoutePath('toCloud')" />
       <svg-icon class="menu-item" icon-class="save-nav" @click="redirectRoutePath('toSave')" />
       <div id="navbar-warning" class="header-warning menu-item" style="display: contents;vertical-align: top;">
@@ -78,6 +79,9 @@ export default {
     },
     redirectRoutePath(newPath) {
       switch (newPath) {
+        case 'toWizard':
+          this.$router.push({ path: '/wizard' })
+          break
         case 'toCloud':
           this.$router.push({ path: '/system/cloud' })
           break

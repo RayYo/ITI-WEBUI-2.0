@@ -15,15 +15,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.app-wrapper .footer {
+  position: absolute;
+  bottom: 0;
+}
 .footer {
-overflow: hidden;
-width: 100%;
-height: 45px;
-line-height: 15px;
-background: #cfcfcf;
-  p {
-  text-align: right;
-  padding-right: 20px;
-  }
+  overflow: hidden;
+  width: 100%;
+  height: 45px;
+  line-height: 15px;
+  background: #cfcfcf;
+    p {
+    text-align: right;
+    padding-right: 20px;
+    }
 }
 </style>

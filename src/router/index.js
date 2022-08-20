@@ -10,6 +10,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import WizardLayout from '@/wizard/layout'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -57,6 +58,27 @@ export const constantRoutes = [
       component: () => import('@/views/dashboard'),
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
+  },
+
+  /** **************** Wizard ******************/
+  {
+    path: '/wizard',
+    component: WizardLayout,
+    name: 'Wizard',
+    hidden: true,
+    redirect: '/wizard/setup',
+    children: [
+      {
+        path: 'setup',
+        name: 'Setup',
+        component: () => import('@/wizard/components/Setup')
+      },
+      {
+        path: 'step1',
+        name: 'Step1',
+        component: () => import('@/wizard/components/Step1')
+      }
+    ]
   },
   /** **************** System ******************/
   {
