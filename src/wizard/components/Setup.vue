@@ -5,9 +5,9 @@
       <table class="from_table" cellspacing="0" border=""><tbody>
         <tr><td>This wizard will guide you through a step-by-step process to configure your switch and connect to the Internet.</td></tr></tbody>
       </table>
-      <div class="marginBtn">
-        <el-button type="primary" @click.native="next">Next</el-button>
-        <el-button type="primary" @click.native="cancel">Cancel</el-button>
+      <div class="margin1015">
+        <input type="button" class="btnOutTable" value="Next" @click="next">
+        <input type="button" class="btnOutTable" value="Cancel" @click="cancel">
       </div>
     </div>
   </div>

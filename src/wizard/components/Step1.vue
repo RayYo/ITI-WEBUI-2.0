@@ -1,33 +1,47 @@
 <template>
   <div class="main_body">
     <div id="basetitle">Switch Setup Wizard</div>
-    <div>
-      <div class="table_title">Step 1: Change your login credentials</div>
-      <table class="from_table" cellspacing="0" border="">
-        <tbody><tr><td>Username</td> <td><div id="UserName" title="admin" style="display: inline-block; width: 50%;">
-                 <input type="text" disabled="disabled" maxlength="20" placeholder="" autocomplete="off" class="baseInput disabledStyle"></div>
-               </td></tr>
-          <tr><td>Password</td>
-            <td><div id="Password" title="" style="display: inline-block; width: 50%;">
-              <input type="password" maxlength="20" placeholder="" autocomplete="new-password" class="baseInput"></div>
-              (Maximum length is 20)
-            </td></tr>
-          <tr><td>Confirm Password</td>
-            <td><div id="ConfirmPassword" title="" style="display: inline-block; width: 50%;">
-              <input type="password" maxlength="20" placeholder="" autocomplete="new-password" class="baseInput"></div></td></tr>
-        </tbody></table>
+      <common-table 
+        header-title="Step 1: Change your login credentials" 
+        :first-column="['Username','Password', 'Confirm Password']">
+          <template #0>
+            <div style="display: inline-block; width: 50%;">
+              <input type="text" :value="username" disabled="disabled" maxlength="20" class="baseInput disabledStyle">
+            </div>
+          </template>
+          <template #1>
+            <div style="display: inline-block; width: 50%;">
+              <input ref="psw" type="password" maxlength="20" autocomplete="new-password" class="baseInput"> 
+              </div> (Maximum length is 20)
+          </template>
+          <template #2>
+            <div style="display: inline-block; width: 50%;">
+              <input ref="confirm_psw" type="password" maxlength="20" autocomplete="new-password" class="baseInput">
+            </div>
+          </template>
+      </common-table>
 
-      <div class="marginBtn">
-        <el-button type="primary" @click.native="previous">Previous</el-button>
-        <el-button type="primary" @click.native="next">Next</el-button>
-        <el-button type="primary" @click.native="cancel">Cancel</el-button>
+      <div class="margin1015">
+        <input type="button" class="btnOutTable" value="Previous" @click="previous">
+        <input type="button" class="btnOutTable" value="Next" @click="next">
+        <input type="button" class="btnOutTable" value="Cancel" @click="cancel">
       </div>
-    </div>
-  </div></template>
+  </div>
+</template>
 
 <script>
+import commonTable from '@/components/CustomTable/common-table.vue'
+
 export default
 {
+  components: {
+    commonTable
+  },
+  data() {
+    return {
+      username: 'ffff'
+    }
+  },
   methods:
   {
     previous() {
@@ -35,6 +49,21 @@ export default
     },
 
     next() {
+      if (this.$refs.psw.value === '' || 
+        this.$refs.confirm_psw.value === '' ||
+        this.$refs.psw.value !== this.$refs.confirm_psw.value)
+      {
+        this.$msgbox({
+          type: 'warning',
+          title: 'Warning',
+          message: 'The passwords do not match.',
+        })
+
+        return
+      }
+      /**
+       * todo... add username/password to store
+       */
       this.$router.push('/wizard/step2')
     },
 
@@ -42,6 +71,16 @@ export default
       this.$router.push('/dashboard')
     }
   }
-
+  /**
+     * todo... get data
+     * this.username = resp...
+     */
+  // created() {
+  //   this.$http.get('url_get_xxx').then(resp => {
+  //   },
+  //   err => {
+  //     console.log('wizard get error: ', err)
+  //   })
+  // }
 }
 </script>
