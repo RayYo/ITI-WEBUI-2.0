@@ -77,6 +77,21 @@ export const constantRoutes = [
         path: 'step1',
         name: 'Step1',
         component: () => import('@/wizard/components/Step1')
+      },
+      {
+        path: 'step2',
+        name: 'Step2',
+        component: () => import('@/wizard/components/Step2')
+      },
+      {
+        path: 'step3',
+        name: 'Step3',
+        component: () => import('@/wizard/components/Step3')
+      },
+      {
+        path: 'step4',
+        name: 'Step4',
+        component: () => import('@/wizard/components/Step4')
       }
     ]
   },

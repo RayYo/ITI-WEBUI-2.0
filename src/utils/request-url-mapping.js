@@ -27,6 +27,14 @@ const urlMapping = {
   url_set_logout: {
     mockData: 'status_ok.json',
     realRequest: 'cgi/set.cgi?cmd=home_logout'
+  },
+  url_get_wizard: {
+    mockData: 'wizard.json',
+    realRequest: 'cgi/get.cgi?cmd=home_wizard'
+  },
+  url_set_wizard: {
+    mockData: 'status_ok.json',
+    realRequest: 'cgi/set.cgi?cmd=home_wizard'
   }
 }
 

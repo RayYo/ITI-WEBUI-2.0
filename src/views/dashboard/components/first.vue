@@ -70,28 +70,44 @@ export default {
       adminInfoTableData: ['', '', ''],
       sysInfoTableData: ['', '', '', '', ''],
       ipv6InfoTableData: ['', '', ''],
-      netFeaturesTableData: ['', '']
+      netFeaturesTableData: ['', ''],
+      loading: {}
     }
   },
   created() {
-    this.$http.get('url_get_statusSysinfo').then(resp => {
-      this.swInfoTableData.length = 0
-      this.hwInfoTableData.length = 0
-      this.adminInfoTableData.length = 0
-      this.sysInfoTableData.length = 0
-      this.ipv6InfoTableData.length = 0
-      this.netFeaturesTableData.length = 0
+    this.saveLoading()
+    // Simulated delay request
+    setTimeout(() => {
+      this.$http.get('url_get_statusSysinfo').then(resp => {
+        this.swInfoTableData.length = 0
+        this.hwInfoTableData.length = 0
+        this.adminInfoTableData.length = 0
+        this.sysInfoTableData.length = 0
+        this.ipv6InfoTableData.length = 0
+        this.netFeaturesTableData.length = 0
 
-      this.swInfoTableData.push(resp.data.sysUpTime, resp.data.fwVer, resp.data.loaderVer)
-      this.hwInfoTableData.push(resp.data.ramSize, resp.data.flashize)
-      this.adminInfoTableData.push(resp.data.hostname, resp.data.location, resp.data.contact)
-      this.sysInfoTableData.push(resp.data.snNo, resp.data.sysMac, resp.data.currIpv4, resp.data.currIpv4Mask, resp.data.currIpv4Gw)
-      this.ipv6InfoTableData.push(resp.data.currIpv6, resp.data.currIpv6Gw, resp.data.currIpv6LinkLocalAddr)
-      this.netFeaturesTableData.push(resp.data.ipv4DHCP, resp.data.ipv6DHCP)
-    },
-    err => {
-      console.log('dashboard get error: ', err)
-    })
+        this.swInfoTableData.push(resp.data.sysUpTime, resp.data.fwVer, resp.data.loaderVer)
+        this.hwInfoTableData.push(resp.data.ramSize, resp.data.flashize)
+        this.adminInfoTableData.push(resp.data.hostname, resp.data.location, resp.data.contact)
+        this.sysInfoTableData.push(resp.data.snNo, resp.data.sysMac, resp.data.currIpv4, resp.data.currIpv4Mask, resp.data.currIpv4Gw)
+        this.ipv6InfoTableData.push(resp.data.currIpv6, resp.data.currIpv6Gw, resp.data.currIpv6LinkLocalAddr)
+        this.netFeaturesTableData.push(resp.data.ipv4DHCP, resp.data.ipv6DHCP)
+        this.loading.close()
+      },
+      err => {
+        console.log('dashboard get error: ', err)
+      })
+    }, 2000)
+  },
+  methods: {
+    saveLoading() {
+      this.loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      })
+    }
   }
 }
 </script>

@@ -7,17 +7,17 @@
     >
       <template #0>
         <div style="display: inline-block; width: 50%;">
-          <input type="text" :value="username" disabled="disabled" maxlength="20" class="baseInput disabledStyle">
+          <input type="text" :value="userAccount.username" disabled="disabled" maxlength="20" class="baseInput disabledStyle">
         </div>
       </template>
       <template #1>
         <div style="display: inline-block; width: 50%;">
-          <input ref="psw" type="password" maxlength="20" autocomplete="new-password" class="baseInput">
+          <input ref="psw" v-model="password" type="password" maxlength="20" autocomplete="new-password" class="baseInput">
         </div> (Maximum length is 20)
       </template>
       <template #2>
         <div style="display: inline-block; width: 50%;">
-          <input ref="confirm_psw" type="password" maxlength="20" autocomplete="new-password" class="baseInput">
+          <input v-model="confirmPsw" type="password" maxlength="20" autocomplete="new-password" class="baseInput">
         </div>
       </template>
     </common-table>
@@ -32,6 +32,7 @@
 
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
+import { mapGetters } from 'vuex'
 
 export default
 {
@@ -40,8 +41,14 @@ export default
   },
   data() {
     return {
-      username: 'ffff'
+      password: '',
+      confirmPsw: ''
     }
+  },
+  computed: {
+    ...mapGetters([
+      'userAccount'
+    ])
   },
   methods:
   {
@@ -50,22 +57,35 @@ export default
     },
 
     next() {
-      if (this.$refs.psw.value === '' ||
-        this.$refs.confirm_psw.value === '' ||
-        this.$refs.psw.value !== this.$refs.confirm_psw.value) {
+      if (this.password === '') {
+        this.$msgbox({
+          type: 'warning',
+          title: 'Warning',
+          message: 'The length of Password is between 1 and 20!'
+        })
+
+        this.confirmPsw = ''
+        this.$refs.psw.focus()
+        return
+      }
+
+      if (this.confirmPsw === '' ||
+        this.password !== this.confirmPsw) {
         this.$msgbox({
           type: 'warning',
           title: 'Warning',
           message: 'The passwords do not match.'
         })
-
+        this.password = ''
+        this.confirmPsw = ''
+        this.$refs.psw.focus()
         return
       }
 
       // add username/password to store
       const account = {
-        username: this.username,
-        password: this.$refs.psw.value
+        username: this.userAccount.username,
+        password: this.password
       }
       this.$store.dispatch('wizard/userAccount', account)
       this.$router.push('/wizard/step2')
@@ -75,16 +95,5 @@ export default
       this.$router.push('/dashboard')
     }
   }
-  /**
-     * todo... get data
-     * this.username = resp...
-     */
-  // created() {
-  //   this.$http.get('url_get_xxx').then(resp => {
-  //   },
-  //   err => {
-  //     console.log('wizard get error: ', err)
-  //   })
-  // }
 }
 </script>

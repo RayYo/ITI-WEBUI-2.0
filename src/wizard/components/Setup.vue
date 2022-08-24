@@ -16,6 +16,9 @@
 <script>
 export default
 {
+  created() {
+    this.$store.dispatch('wizard/updateState')
+  },
   methods:
   {
     next() {
