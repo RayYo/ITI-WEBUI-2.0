@@ -200,3 +200,86 @@ div:focus {
   background-color: #47ACF0;
   border-color: #2CA4FF;
 }
+
+#pannel2 {
+  background-color: #fff;
+}
+#pannel3 {
+  position: relative;
+  background-color: #f2f8fd;
+}
+#pannel2, #pannel3 {
+  display: flex;
+  justify-content: space-between;
+}
+.cpuMemory2 {
+  font-size: 26px;
+  font-weight: 700;
+  height: 80px;
+  line-height: 80px;
+  padding-left: 30px;
+  margin: 0;
+}
+.cpuTable, .cpuTable2 {
+  margin-left: 30px;
+  margin-top: 20px;
+}
+.memory {
+  height: 150px;
+  line-height: 150px;
+}
+.cpu, .memory {
+  width: 107px;
+  background: #585f69;
+  color: #fff;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+.cpu {
+  height: 100px;
+  line-height: 100px;
+}
+.three {
+  width: 120px;
+  height: 50px;
+  background: #fff;
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid #ccc;
+}
+.lineChart_box {
+  position: relative;
+  margin: 0 auto;
+}
+select {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  height: 26px;
+  color: #606266;
+  padding-left: 7px;
+  padding-right: 20px;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAn0lEQVQ4T2NkoBAwUqifYZAY0N7erlBZWfmAFO/A9IC90NnZuYCRkfFAWVnZAmIM6erqSvj//79DeXl5AjwMiDUEWTPIMpRAJGQIumYMA/B5B5tmrAaABLu6uiYwMDAsKCsruwA1NICBgSEA5Gf0MMKZDmCGQDUklJWVFWALYLwJCRomH3BpxukFmE39/f0ChYWFH/BF7SBJysSkPlxqAD3tTxHFwpejAAAAAElFTkSuQmCC) no-repeat scroll 100% transparent;
+  background-color: #fff;
+  background-size: 15px;
+  background-position: 98%;
+  box-shadow: 0 none;
+  border: 1px solid #dbdee1;
+  border-radius: 0!important;
+}
+button, input, optgroup, select, textarea {
+  font-size: 14px;
+}
+button, select {
+  text-transform: none;
+}
+button, input, optgroup, select, textarea {
+  font-family: sans-serif;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+.das select {
+  width: 300px;
+}

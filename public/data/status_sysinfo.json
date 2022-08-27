@@ -18,6 +18,86 @@
     "currIpv6Gw":"",
     "currIpv6LinkLocalAddr":"",
     "ipv4DHCP":"Enabled",
-    "ipv6DHCP":"Disabled"
+    "ipv6DHCP":"Disabled",
+    "norminalPower": 220,
+    "consumedPower": 16,
+    "availPower":204,
+    "cpuUseage":"28",
+    "memTotal":"255572",
+    "memUsed":"100000",
+    "poeUsage":[
+      {
+        "value": "1"
+      },
+      {
+        "value": "19"
+      },
+      {
+        "value": "0"
+      },
+      {
+        "value": "16"
+      },
+      {
+        "value": "0"
+      },
+      {
+        "value": "11"
+      },
+      {
+        "value": "0"
+      },
+      {
+        "value": "0"
+      },
+      {
+        "value": "7"
+      },
+      {
+        "value": "0"
+      },
+      {
+        "value": "0"
+      },
+      {
+        "value": "5"
+      },
+      {
+        "value": "0"
+      },
+      {
+        "value": "30"
+      },
+      {
+        "value": "0"
+      },
+      {
+        "value": "0"
+      },
+      {
+        "value": "22"
+      },
+      {
+        "value": "0"
+      },
+      {
+        "value": "16"
+      },
+      {
+        "value": "8"
+      },
+      {
+        "value": "4"
+      },
+      {
+        "value": "20"
+      },
+      {
+        "value": "10"
+      },
+      {
+        "value": "27"
+      }
+    ]
   }
 }

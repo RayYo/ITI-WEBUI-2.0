@@ -1,5 +1,5 @@
 <template>
-  <div class="main_body" style="position: relative;">
+  <div class="main_body ds" style="position: relative;">
     <div style="position: absolute; right: 25px; top: 12px;">
       <span>{{ getCurrentTime }}</span>
     </div>
@@ -9,7 +9,11 @@
           <first-view />
         </div>
       </el-tab-pane>
-      <el-tab-pane label="Switch View" name="second">Switch View</el-tab-pane>
+      <el-tab-pane label="Switch View" name="second">
+        <div>
+          <second-view />
+        </div>
+      </el-tab-pane>
       <el-tab-pane label="Real-time Statistics" name="third">Real-time Statistics</el-tab-pane>
     </el-tabs>
   </div>
@@ -17,10 +21,12 @@
 <script>
 import { parseTime } from '@/utils'
 import firstView from '@/views/dashboard/components/first.vue'
+import secondView from '@/views/dashboard/components/second.vue'
 
 export default {
   components: {
-    firstView
+    firstView,
+    secondView
   },
   data() {
     return {
