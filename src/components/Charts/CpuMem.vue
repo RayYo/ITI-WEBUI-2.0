@@ -43,15 +43,21 @@ export default {
   watch: {
     cpuChartData: function(newV, oldV) {
       if (this.chart) {
-        this.chart.setOption({
-          series: [{
-            name: 'cpu',
-            data: this.cpuChartData
-          }, {
-            name: 'mem',
-            data: this.memChartData
-          }]
-        })
+        const cpu = this.cpuChartData
+        const mem = this.memChartData
+
+        this.cpuCurrData = cpu[cpu.length-1].value[1]
+        this.memCurrData = mem[mem.length-1].value[1]
+        this.initChart()
+        // this.chart.setOption({
+        //   series: [{
+        //     name: 'cpu',
+        //     data: this.cpuChartData
+        //   }, {
+        //     name: 'mem',
+        //     data: this.memChartData
+        //   }]
+        // })
       }
     }
   },
@@ -68,6 +74,9 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(document.getElementById(this.id))
+      const currC = this.cpuCurrData
+      const currM = this.memCurrData
+      
       this.chart.setOption({
         xAxis: {
           type: 'time',
@@ -106,7 +115,7 @@ export default {
             }]
           }
         },
-        color: ['#FF8302', '#29DD2F'],
+        color: ['#FF8302', 'rgb(0,255,0)'],
         legend: {
           itemWidth: 15,
           itemHeight: 10,
@@ -119,7 +128,16 @@ export default {
           textStyle: {
             fontSize: 12,
             color: '#000'
-          }
+          },
+          formatter: function(name){
+            let res = ''
+            if (name === 'cpu')
+              res += 'CPU:'+currC + '%'
+            else
+              res += 'Memory:'+currM + '%'
+            return res
+          },
+          backgroundColor: 'rgb(243,249,251)'
         },
         series: [
           {
@@ -139,7 +157,7 @@ export default {
             showSymbol: false,
             hoverAnimation: false,
             lineStyle: {
-              color: '#29DD2F',
+              color: 'rgb(0,255,0)',
               width: 2
             },
             data: this.memChartData

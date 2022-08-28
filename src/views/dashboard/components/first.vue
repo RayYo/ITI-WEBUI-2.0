@@ -103,18 +103,6 @@
 
       <div style="padding-top: 65px;width: 100%;">
         <div class="lineChart_box" style="height: 360px; width: 99.5%;">
-          <!-- <div class="myLegend el-row" style="left: 12%;">
-            <div span="4" class="legendItem" style="white-space: nowrap;">
-              <div class="el-row">
-                <div class="legendicon el-col el-col-24" style="background-color: rgb(255, 131, 2);" />
-                <div class="el-col el-col-15">CPU:80%</div></div>
-            </div>
-            <div span="4" class="legendItem" style="white-space: nowrap;">
-              <div class="el-row">
-                <div class="legendicon el-col el-col-24" style="background-color: rgb(0, 255, 0);" />
-                <div class="el-col el-col-15">Memory:64%</div></div>
-            </div>
-          </div> -->
           <cpuMemChart
             id="cpuMem"
             :cpu-chart-data="cpuChartData"
@@ -159,7 +147,9 @@ export default {
       memTableInfo: [{ Total: '255572 KB' }, { Free: '255572 KB' }, { Used: '0 KB' }],
       cpuChartData: [],
       memChartData: [],
-      timer: null
+      utilizationInterval: 5000, // 5s
+      timer: null,
+      cpuMemChartTimer: null
     }
   },
   created() {
@@ -185,6 +175,7 @@ export default {
         this.updateCpuMemData(resp)
 
         this.timer = setInterval(this.polling, 5000)
+        this.cpuMemChartTimer = setInterval(this.updateCpuMemChartData, this.utilizationInterval)
       },
       err => {
         console.log('dashboard get error: ', err)
@@ -233,10 +224,11 @@ export default {
         Used: resp.data.memUsed + ' KB'
       }]
     },
-    updateCpuMemChartData(resp) {
+    updateCpuMemChartData() {
+      this.$http.get('url_get_statusSysinfo').then(resp => {
       const now = new Date()
 
-      if (this.cpuChartData.length >= 60) {
+      if (this.cpuChartData.length >= 70) {
         this.memChartData.shift()
         this.cpuChartData.shift()
       }
@@ -249,6 +241,10 @@ export default {
       this.cpuChartData.push({
         name: now.toString(),
         value: [now, Math.round(Math.random() * (99)) + 1]
+      })
+      },
+      err => {
+        console.log('dashboard get error: ', err)
       })
     },
     cpuMemChartDataInit() {
@@ -284,24 +280,11 @@ export default {
     polling() {
       this.$http.get('url_get_statusSysinfo').then(resp => {
         this.updateCpuMemData(resp)
-        this.updateCpuMemChartData(resp)
       },
       err => {
         console.log('dashboard get error: ', err)
       })
     },
-    // formatDate(time) {
-    //   const date = new Date(time)
-
-    //   const YY = date.getFullYear()
-    //   const MM = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-    //   const DD = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
-    //   const hh = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
-    //   const mm = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-    //   const ss = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
-
-    //   return YY + '-' + MM + '-' + DD + ' ' + hh + ':' + mm + ':' + ss
-    // },
     randomData() {
       const t = new Date()
       const timeStr = this.formatDate(t)
