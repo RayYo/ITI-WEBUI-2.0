@@ -117,7 +117,8 @@
           </div> -->
           <cpuMemChart
             id="cpuMem"
-            :cpu-mem-data="cpuMemChartData"
+            :cpu-chart-data="cpuChartData"
+            :mem-chart-data="memChartData"
             width="100%"
             height="100%"
           />
@@ -156,7 +157,8 @@ export default {
       poeTableInfo: [''],
       cpuTableInfo: [{ Used: '0 %' }, { Idel: '100 %' }],
       memTableInfo: [{ Total: '255572 KB' }, { Free: '255572 KB' }, { Used: '0 KB' }],
-      cpuMemChartData: [],
+      cpuChartData: [],
+      memChartData: [],
       timer: null
     }
   },
@@ -182,7 +184,6 @@ export default {
         this.loading.close()
         this.updateCpuMemData(resp)
 
-        console.log(this.cpuMemChartData)
         this.timer = setInterval(this.polling, 5000)
       },
       err => {
@@ -233,39 +234,52 @@ export default {
       }]
     },
     updateCpuMemChartData(resp) {
-      // if (this.cpuMemChartData.length > 10) {
-      //   // this.cpuMemChartData.shift()
-      //   for (var i = 0; i < 5; i++) {
-      //     this.cpuMemChartData.shift()
-      //   }
-      //   this.cpuMemChartData.push(this.randomData())
-      // } else {
-      this.cpuMemChartData.push(this.randomData())
-      // }
+      const now = new Date()
+
+      if (this.cpuChartData.length >= 60) {
+        this.memChartData.shift()
+        this.cpuChartData.shift()
+      }
+
+      this.memChartData.push({
+        name: now.toString(),
+        value: [now, Math.round(Math.random() * (99)) + 1]
+      })
+
+      this.cpuChartData.push({
+        name: now.toString(),
+        value: [now, Math.round(Math.random() * (99)) + 1]
+      })
     },
     cpuMemChartDataInit() {
-      const currT = new Date()
-      let tmpDataArr = []
+      const now = new Date()
 
-      currT.setTime(currT.getTime() - 2000 * 60)
-      tmpDataArr = [this.formatDate(currT), 0]
-      this.cpuMemChartData.push(tmpDataArr)
+      this.cpuChartData.push({
+        name: (now - 1000 * 60).toString(),
+        value: [now - 1000 * 60, 0]
+      })
+      this.memChartData.push({
+        name: (now - 1000 * 60).toString(),
+        value: [now - 1000 * 60, 0]
+      })
 
-      currT.setTime(currT.getTime() + 500 * 60)
-      tmpDataArr = [this.formatDate(currT), 0]
-      this.cpuMemChartData.push(tmpDataArr)
+      this.cpuChartData.push({
+        name: (now - 500 * 60).toString(),
+        value: [now - 500 * 60, 0]
+      })
+      this.memChartData.push({
+        name: (now - 500 * 60).toString(),
+        value: [now - 500 * 60, 0]
+      })
 
-      currT.setTime(currT.getTime() + 500 * 60)
-      tmpDataArr = [this.formatDate(currT), 0]
-      this.cpuMemChartData.push(tmpDataArr)
-
-      currT.setTime(currT.getTime() + 500 * 60)
-      tmpDataArr = [this.formatDate(currT), 0]
-      this.cpuMemChartData.push(tmpDataArr)
-
-      currT.setTime(currT.getTime() + 500 * 60)
-      tmpDataArr = [this.formatDate(currT), 0]
-      this.cpuMemChartData.push(tmpDataArr)
+      this.cpuChartData.push({
+        name: now.toString(),
+        value: [now, 0]
+      })
+      this.memChartData.push({
+        name: now.toString(),
+        value: [now, 0]
+      })
     },
     polling() {
       this.$http.get('url_get_statusSysinfo').then(resp => {
@@ -276,18 +290,18 @@ export default {
         console.log('dashboard get error: ', err)
       })
     },
-    formatDate(time) {
-      const date = new Date(time)
+    // formatDate(time) {
+    //   const date = new Date(time)
 
-      const YY = date.getFullYear()
-      const MM = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
-      const DD = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
-      const hh = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
-      const mm = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
-      const ss = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
+    //   const YY = date.getFullYear()
+    //   const MM = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+    //   const DD = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+    //   const hh = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+    //   const mm = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+    //   const ss = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
 
-      return YY + '-' + MM + '-' + DD + ' ' + hh + ':' + mm + ':' + ss
-    },
+    //   return YY + '-' + MM + '-' + DD + ' ' + hh + ':' + mm + ':' + ss
+    // },
     randomData() {
       const t = new Date()
       const timeStr = this.formatDate(t)

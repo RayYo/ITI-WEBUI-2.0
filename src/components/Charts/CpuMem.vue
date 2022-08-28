@@ -21,7 +21,12 @@ export default {
       type: String,
       default: '100%'
     },
-    cpuMemData: {
+    cpuChartData: {
+      type: Array,
+      required: false,
+      default: () => []
+    },
+    memChartData: {
       type: Array,
       required: false,
       default: () => []
@@ -30,16 +35,21 @@ export default {
   },
   data() {
     return {
+      cpuCurrData: 0,
+      memCurrData: 0,
       chart: null
     }
   },
   watch: {
-    cpuMemData: function(newV, oldV) {
-      console.log(this.cpuMemData)
+    cpuChartData: function(newV, oldV) {
       if (this.chart) {
         this.chart.setOption({
           series: [{
-            data: this.cpuMemData
+            name: 'cpu',
+            data: this.cpuChartData
+          }, {
+            name: 'mem',
+            data: this.memChartData
           }]
         })
       }
@@ -59,18 +69,8 @@ export default {
     initChart() {
       this.chart = echarts.init(document.getElementById(this.id))
       this.chart.setOption({
-        title: {
-          text: 'TITLE',
-          left: 'center',
-          textStyle: {
-            color: '#37A7EF',
-            fontWeight: 400,
-            fontSize: 16
-          }
-        },
         xAxis: {
           type: 'time',
-          // interval: 2000 * 60,
           splitLine: {
             show: true
           }
@@ -106,6 +106,21 @@ export default {
             }]
           }
         },
+        color: ['#FF8302', '#29DD2F'],
+        legend: {
+          itemWidth: 15,
+          itemHeight: 10,
+          itemGap: 15,
+          data: [{ name: 'cpu', icon: 'rect' },
+            { name: 'mem', icon: 'rect' }
+          ],
+          left: '10%',
+          bottom: '85%',
+          textStyle: {
+            fontSize: 12,
+            color: '#000'
+          }
+        },
         series: [
           {
             name: 'cpu',
@@ -116,7 +131,18 @@ export default {
               color: '#FF8302',
               width: 2
             },
-            data: this.cpuMemData
+            data: this.cpuChartData
+          },
+          {
+            name: 'mem',
+            type: 'line',
+            showSymbol: false,
+            hoverAnimation: false,
+            lineStyle: {
+              color: '#29DD2F',
+              width: 2
+            },
+            data: this.memChartData
           }
         ]
       })
