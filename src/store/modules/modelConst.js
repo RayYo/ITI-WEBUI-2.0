@@ -3,6 +3,7 @@ import request from '@/utils/request'
 const state = {
   modelName: '',
   portNum: 0,
+  copperPortNum: 0,
   lagNum: 0,
   fiberNum: 0,
   poeNum: 0,
