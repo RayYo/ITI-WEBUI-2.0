@@ -24,7 +24,7 @@
     "availPower":204,
     "cpuUseage":"28",
     "memTotal":"255572",
-    "memUsed":"100000",
+    "memUsed":"200000",
     "poeUsage":[
       {
         "value": "1"

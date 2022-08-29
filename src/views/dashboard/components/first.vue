@@ -80,11 +80,9 @@
         <p class="cpuMemory2">CPU &amp; Memory Utilization</p>
         <div class="cpuTable2">
           <span>Table: &nbsp;</span>
-          <select style="width: 299px">
-            <option value="0">Utilization 5 Sec Usage</option>
-            <option value="1">Utilization 1 Min Usage</option>
-            <option value="2">Utilization 5 Min Usage</option>
-            <option value="3">Utilization 5 Min Max Usage</option></select>
+          <select v-model="selected" style="width: 299px" @change="getSelectedInterval">
+            <option v-for="(item, idx) in selectList" :key="idx" :value="item.id">{{ item.name }}</option>
+          </select>
         </div>
         <div class="cpuTable2">
           <cpuMemTable
@@ -148,6 +146,13 @@ export default {
       cpuChartData: [],
       memChartData: [],
       utilizationInterval: 5000, // 5s
+      selectList: [
+        { id: 5, name: 'Utilization 5 Sec Usage' },
+        { id: 60, name: 'Utilization 1 Min Usage' },
+        { id: 300, name: 'Utilization 5 Min Usage' },
+        { id: 301, name: 'Utilization 5 Min Max Usage' }
+      ],
+      selected: '',
       timer: null,
       cpuMemChartTimer: null
     }
@@ -172,10 +177,11 @@ export default {
         this.ipv6InfoTableData.push(resp.data.currIpv6, resp.data.currIpv6Gw, resp.data.currIpv6LinkLocalAddr)
         this.netFeaturesTableData.push(resp.data.ipv4DHCP, resp.data.ipv6DHCP)
         this.loading.close()
-        this.updateCpuMemData(resp)
+        this.updatePoEData(resp)
 
-        this.timer = setInterval(this.polling, 5000)
-        this.cpuMemChartTimer = setInterval(this.updateCpuMemChartData, this.utilizationInterval)
+        this.selected = this.selectList[0].id
+        this.timer = setInterval(this.polling, 3000)
+        this.cpuMemChartTimer = setInterval(this.updateCpuMemData, this.utilizationInterval)
       },
       err => {
         console.log('dashboard get error: ', err)
@@ -184,6 +190,7 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.timer)
+    clearInterval(this.cpuMemChartTimer)
   },
   methods: {
     saveLoading() {
@@ -194,7 +201,19 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       })
     },
-    updateCpuMemData(resp) {
+    getSelectedInterval() {
+      if (this.utilizationInterval !== (this.selected * 1000)) {
+        // handle Max Usage option
+        if (this.utilizationInterval === 300 * 1000 && this.selected === 301) {
+          this.utilizationInterval = 300 * 1000
+        } else {
+          this.utilizationInterval = this.selected * 1000
+        }
+        clearInterval(this.cpuMemChartTimer)
+        this.cpuMemChartTimer = setInterval(this.updateCpuMemData, this.utilizationInterval)
+      }
+    },
+    updatePoEData(resp) {
       // poe data
       if (resp.data.poeUsage) {
         this.currPoeData = {
@@ -209,39 +228,46 @@ export default {
           Available: resp.data.availPower + ' W'
         }]
       }
-      // cpu & mem data
-      this.cpuTableInfo = [{
-        Used: resp.data.cpuUseage + ' %'
-      }, {
-        Idle: (100 - resp.data.cpuUseage) + ' %'
-      }]
-
-      this.memTableInfo = [{
-        Total: resp.data.memTotal + ' KB'
-      }, {
-        Free: (resp.data.memTotal - resp.data.memUsed) + ' KB'
-      }, {
-        Used: resp.data.memUsed + ' KB'
-      }]
     },
-    updateCpuMemChartData() {
+    updateCpuMemData() {
       this.$http.get('url_get_statusSysinfo').then(resp => {
-      const now = new Date()
+        // Simulated data
+        if (process.env.NODE_ENV !== 'production') {
+          resp.data.cpuUseage = Math.round(Math.random() * (99)) + 1
+        }
 
-      if (this.cpuChartData.length >= 70) {
-        this.memChartData.shift()
-        this.cpuChartData.shift()
-      }
+        // cpu & mem data
+        this.cpuTableInfo = [{
+          Used: resp.data.cpuUseage + ' %'
+        }, {
+          Idle: (100 - resp.data.cpuUseage) + ' %'
+        }]
 
-      this.memChartData.push({
-        name: now.toString(),
-        value: [now, Math.round(Math.random() * (99)) + 1]
-      })
+        this.memTableInfo = [{
+          Total: resp.data.memTotal + ' KB'
+        }, {
+          Free: (resp.data.memTotal - resp.data.memUsed) + ' KB'
+        }, {
+          Used: resp.data.memUsed + ' KB'
+        }]
 
-      this.cpuChartData.push({
-        name: now.toString(),
-        value: [now, Math.round(Math.random() * (99)) + 1]
-      })
+        const now = new Date()
+        const memUsage = parseInt(resp.data.memUsed * 100 / resp.data.memTotal)
+
+        if (this.cpuChartData.length >= 70) {
+          this.memChartData.shift()
+          this.cpuChartData.shift()
+        }
+
+        this.memChartData.push({
+          name: now.toString(),
+          value: [now, memUsage]
+        })
+
+        this.cpuChartData.push({
+          name: now.toString(),
+          value: [now, resp.data.cpuUseage]
+        })
       },
       err => {
         console.log('dashboard get error: ', err)
@@ -249,6 +275,24 @@ export default {
     },
     cpuMemChartDataInit() {
       const now = new Date()
+
+      this.cpuChartData.push({
+        name: (now - 2000 * 60).toString(),
+        value: [now - 2000 * 60, 0]
+      })
+      this.memChartData.push({
+        name: (now - 2000 * 60).toString(),
+        value: [now - 2000 * 60, 0]
+      })
+
+      this.cpuChartData.push({
+        name: (now - 1500 * 60).toString(),
+        value: [now - 1500 * 60, 0]
+      })
+      this.memChartData.push({
+        name: (now - 1500 * 60).toString(),
+        value: [now - 1500 * 60, 0]
+      })
 
       this.cpuChartData.push({
         name: (now - 1000 * 60).toString(),
@@ -279,7 +323,7 @@ export default {
     },
     polling() {
       this.$http.get('url_get_statusSysinfo').then(resp => {
-        this.updateCpuMemData(resp)
+        this.updatePoEData(resp)
       },
       err => {
         console.log('dashboard get error: ', err)

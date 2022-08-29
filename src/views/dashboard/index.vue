@@ -6,15 +6,19 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="Dashboard" name="first">
         <div>
-          <first-view />
+          <first-view v-if="isFirst" />
         </div>
       </el-tab-pane>
       <el-tab-pane label="Switch View" name="second">
         <div>
-          <second-view />
+          <second-view v-if="isSecond" />
         </div>
       </el-tab-pane>
-      <el-tab-pane label="Real-time Statistics" name="third">Real-time Statistics</el-tab-pane>
+      <el-tab-pane label="Real-time Statistics" name="third">
+        <div>
+          <third-view v-if="isThird" />
+        </div>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -22,15 +26,20 @@
 import { parseTime } from '@/utils'
 import firstView from '@/views/dashboard/components/first.vue'
 import secondView from '@/views/dashboard/components/second.vue'
+import thirdView from '@/views/dashboard/components/third.vue'
 
 export default {
   components: {
     firstView,
-    secondView
+    secondView,
+    thirdView
   },
   data() {
     return {
       activeName: 'first',
+      isFirst: true,
+      isSecond: false,
+      isThird: false,
       getCurrentTime: parseTime(new Date(), '{d} {m} {y} {h}:{i}:{s}'),
       timerId: 0
     }
@@ -47,7 +56,19 @@ export default {
   },
   methods: {
     handleClick(tabVc, event) {
-      // console.log(tabVc, event) 01 Jan 2021 0:19:57 {y}-{m}-{d} {h}:{i}:{s}
+      if (tabVc.name === 'first') {
+        this.isFirst = true
+        this.isSecond = false
+        this.isThird = false
+      } else if (tabVc.name === 'second') {
+        this.isFirst = false
+        this.isSecond = true
+        this.isThird = false
+      } else if (tabVc.name === 'third') {
+        this.isFirst = false
+        this.isSecond = false
+        this.isThird = true
+      }
     }
   }
 }

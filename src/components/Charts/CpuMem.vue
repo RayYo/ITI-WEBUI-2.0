@@ -46,8 +46,8 @@ export default {
         const cpu = this.cpuChartData
         const mem = this.memChartData
 
-        this.cpuCurrData = cpu[cpu.length-1].value[1]
-        this.memCurrData = mem[mem.length-1].value[1]
+        this.cpuCurrData = cpu[cpu.length - 1].value[1]
+        this.memCurrData = mem[mem.length - 1].value[1]
         this.initChart()
         // this.chart.setOption({
         //   series: [{
@@ -76,7 +76,7 @@ export default {
       this.chart = echarts.init(document.getElementById(this.id))
       const currC = this.cpuCurrData
       const currM = this.memCurrData
-      
+
       this.chart.setOption({
         xAxis: {
           type: 'time',
@@ -89,7 +89,7 @@ export default {
           boundaryGap: [0, '100%'],
           min: '0',
           max: '100',
-          splitNumber: 14,
+          splitNumber: 10,
           axisLabel: {
             show: true,
             interval: 'auto',
@@ -129,12 +129,9 @@ export default {
             fontSize: 12,
             color: '#000'
           },
-          formatter: function(name){
+          formatter: function(name) {
             let res = ''
-            if (name === 'cpu')
-              res += 'CPU:'+currC + '%'
-            else
-              res += 'Memory:'+currM + '%'
+            if (name === 'cpu') { res += 'CPU:' + currC + '%' } else { res += 'Memory:' + currM + '%' }
             return res
           },
           backgroundColor: 'rgb(243,249,251)'
