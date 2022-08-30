@@ -40,7 +40,7 @@
         "poeConsumption": 5,
         "linkup": true,
         "speed": "1000",
-        "dupFull": true
+        "dupFull": false
       },
       {
         "port": "4",
@@ -65,7 +65,7 @@
         "poeStandard": "PoE",
         "poeConsumption": 5,
         "linkup": true,
-        "speed": "1000",
+        "speed": "100",
         "dupFull": true
       },
       {
@@ -105,7 +105,7 @@
         "poeConsumption": 5,
         "linkup": true,
         "speed": "1000",
-        "dupFull": true
+        "dupFull": false
       },
       {
         "port": "9",
@@ -130,8 +130,8 @@
         "poeStandard": "PoE",
         "poeConsumption": 5,
         "linkup": true,
-        "speed": "1000",
-        "dupFull": true
+        "speed": "100",
+        "dupFull": false
       },
       {
         "port": "11",
@@ -156,8 +156,8 @@
         "poeStandard": "PoE",
         "poeConsumption": 5,
         "linkup": true,
-        "speed": "1000",
-        "dupFull": true
+        "speed": "10",
+        "dupFull": false
       },
       {
         "port": "13",
@@ -182,7 +182,7 @@
         "poeStandard": "PoE",
         "poeConsumption": 5,
         "linkup": true,
-        "speed": "1000",
+        "speed": "100",
         "dupFull": true
       },
       {
@@ -221,8 +221,8 @@
         "poeStandard": "PoE",
         "poeConsumption": 5,
         "linkup": true,
-        "speed": "1000",
-        "dupFull": true
+        "speed": "100",
+        "dupFull": false
       },
       {
         "port": "18",
@@ -286,7 +286,7 @@
         "poeStandard": "PoE",
         "poeConsumption": 5,
         "linkup": true,
-        "speed": "1000",
+        "speed": "100",
         "dupFull": true
       },
       {
@@ -337,8 +337,8 @@
         "poeStatus": "-",
         "poeStandard": "-",
         "poeConsumption": "-",
-        "linkup": true,
-        "speed": "1000",
+        "linkup": false,
+        "speed": "",
         "dupFull": true
       },
       {
@@ -350,8 +350,8 @@
         "poeStatus": "-",
         "poeStandard": "-",
         "poeConsumption": "-",
-        "linkup": true,
-        "speed": "1000",
+        "linkup": false,
+        "speed": "",
         "dupFull": true
       },
       {
@@ -389,8 +389,8 @@
         "poeStatus": "-",
         "poeStandard": "-",
         "poeConsumption": "-",
-        "linkup": true,
-        "speed": "1000",
+        "linkup": false,
+        "speed": "",
         "dupFull": true
       },
       {
@@ -402,8 +402,8 @@
         "poeStatus": "-",
         "poeStandard": "-",
         "poeConsumption": "-",
-        "linkup": true,
-        "speed": "1000",
+        "linkup": false,
+        "speed": "",
         "dupFull": true
       },
       {
@@ -416,8 +416,8 @@
         "poeStandard": "-",
         "poeConsumption": "-",
         "linkup": true,
-        "speed": "1000",
-        "dupFull": true
+        "speed": "100",
+        "dupFull": false
       }
     ]
   }

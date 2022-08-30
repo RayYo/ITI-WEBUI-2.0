@@ -5,6 +5,7 @@
       :port-link-change="portLinkData"
     />
     <el-table
+      v-loading="loading"
       :data="tableData"
       :stripe="true"
       :border="true"
@@ -48,6 +49,8 @@
             <el-switch
               v-if="scope.row.poeEnable!=='-'"
               v-model="scope.row.poeEnable"
+              active-color="#2AB4A7"
+              inactive-color="#BEC1C8"
               active-text="ON"
               inactive-text="OFF"
               @change="poeEnableSet($event, scope.row.port)"
@@ -68,7 +71,8 @@
         </el-table-column>
         <el-table-column label="Power Consumption">
           <template slot-scope="scope">
-            <span>{{ scope.row.poeConsumption+' W' }}</span>
+            <span v-if="scope.row.poeConsumption !== '-'">{{ scope.row.poeConsumption+' W' }}</span>
+            <span v-else>{{ scope.row.poeConsumption }}</span>
           </template>
         </el-table-column>
       </template>
@@ -86,12 +90,10 @@ export default {
   data() {
     return {
       copperGroupNum: 0,
-      portLinkData: {
-        portRef: '',
-        linkColor: ''
-      },
+      portLinkData: [],
       tableData: [],
       isPoe: false,
+      loading: false,
       timer: null
     }
   },
@@ -103,25 +105,49 @@ export default {
   created() {
     this.copperGroupNum = this.modelInfo('copperPortNum') / 8
     if (this.modelInfo('poeNum') > 0) { this.isPoe = true }
-    this.$http.get('url_get_panelInfo').then(resp => {
-      for (const i in resp.data.ports) {
-        this.tableData.push(resp.data.ports[i])
-      }
-    },
-    err => {
-      console.log('panelInfo get error: ', err)
-    })
-    this.timer = setInterval(this.updateData, 30000)
+    this.updateData()
+    this.timer = setInterval(this.updateData, 10000)
   },
   beforeDestroy() {
     clearInterval(this.timer)
   },
   methods: {
     updateData() {
-      this.portLinkData = {
-        portRef: 'port3',
-        linkColor: 'green'
-      }
+      this.loading = true
+      this.tableData = []
+      this.portLinkData = []
+      setTimeout(() => {
+        this.$http.get('url_get_panelInfo').then(resp => {
+          for (const i in resp.data.ports) {
+            const obj = resp.data.ports[i]
+            this.tableData.push(obj)
+            // port link
+            if (obj.linkup) {
+              let pRef = ''
+              let pColor = ''
+              if (obj.port.indexOf('F') !== -1) {
+                pRef = 'portf' + obj.port.substr(0, obj.port.length - 1)
+              } else {
+                pRef = 'port' + obj.port
+              }
+              if (obj.speed === '1000') {
+                pColor = 'green'
+              } else {
+                pColor = 'orange'
+              }
+              this.portLinkData.push({
+                portRef: pRef,
+                linkColor: pColor
+              })
+            }
+          }
+          this.loading = false
+        },
+        err => {
+          console.log('panelInfo get error: ', err)
+          this.loading = false
+        })
+      }, 1000)
     },
     poeEnableSet(v, port) {
       console.log(port, v)

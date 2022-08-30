@@ -22,10 +22,7 @@ export default {
   data() {
     return {
       copperGroupNum: 0,
-      portLinkData: {
-        portRef: '',
-        linkColor: ''
-      },
+      portLinkData: [],
       radio: 1,
       radioArr: [],
       timer: null
@@ -49,10 +46,13 @@ export default {
   },
   methods: {
     updateData() {
-      this.portLinkData = {
-        portRef: 'portf27',
+      this.portLinkData.push({
+        portRef: 'portf25',
         linkColor: 'orange'
-      }
+      }, {
+        portRef: 'portf27',
+        linkColor: 'green'
+      })
     },
     radioChange(v) {
       console.log('Radio change ', v)

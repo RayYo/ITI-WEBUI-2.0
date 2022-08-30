@@ -45,7 +45,7 @@
             </div>
             <div>
               <div v-for="port in 2" :key="port" :ref="`port${copperGroupNum*8+(port*2)}`" class="port default_port">
-                {{ copperGroupNum*8+(port*2-1) }}
+                {{ copperGroupNum*8+(port*2) }}
               </div>
               <div class="clear_both" />
             </div>
@@ -94,24 +94,24 @@ export default {
       default: 3
     },
     portLinkChange: {
-      type: Object,
+      type: Array,
       required: false,
       default: () => {
-        return {
+        return [{
           portRef: 'port1',
           linkColor: 'black'
-        }
+        }]
       }
     }
   },
   watch: {
     portLinkChange: function(newV, oldV) {
-      const portRef = newV.portRef
-
-      if (portRef.indexOf('f') !== -1) { // fiber port
-        this.$refs[`${portRef}`].style.background = newV.linkColor
-      } else { // copper port
-        this.$refs[`${portRef}`][0].style.background = newV.linkColor
+      for (const i in newV) {
+        if (newV[i].portRef.indexOf('f') !== -1) { // fiber port
+          this.$refs[`${newV[i].portRef}`].style.background = newV[i].linkColor
+        } else { // copper port
+          this.$refs[`${newV[i].portRef}`][0].style.background = newV[i].linkColor
+        }
       }
     }
   }
