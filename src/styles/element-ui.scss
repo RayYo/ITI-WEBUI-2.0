@@ -51,3 +51,14 @@
 .el-range-separator {
   box-sizing: content-box;
 }
+
+// table
+.el-table th {
+  padding: 9.5px 0!important;
+}
+.el-table__body .el-table__row td {
+  height: 40px;
+}
+.el-table .el-table__cell {
+  padding: 0px 0;
+}

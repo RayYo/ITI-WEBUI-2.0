@@ -35,6 +35,10 @@ const urlMapping = {
   url_set_wizard: {
     mockData: 'status_ok.json',
     realRequest: 'cgi/set.cgi?cmd=home_wizard'
+  },
+  url_get_panelInfo: {
+    mockData: 'status_panel.json',
+    realRequest: 'cgi/get.cgi?cmd=panel_info'
   }
 }
 
