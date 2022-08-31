@@ -122,24 +122,25 @@ export default {
             const obj = resp.data.ports[i]
             this.tableData.push(obj)
             // port link
-            if (obj.linkup) {
-              let pRef = ''
-              let pColor = ''
-              if (obj.port.indexOf('F') !== -1) {
-                pRef = 'portf' + obj.port.substr(0, obj.port.length - 1)
-              } else {
-                pRef = 'port' + obj.port
-              }
-              if (obj.speed === '1000') {
-                pColor = 'green'
-              } else {
-                pColor = 'orange'
-              }
-              this.portLinkData.push({
-                portRef: pRef,
-                linkColor: pColor
-              })
+            let pRef = ''
+            let pColor = ''
+            if (obj.port.indexOf('F') !== -1) {
+              pRef = 'portf' + obj.port.substr(0, obj.port.length - 1)
+            } else {
+              pRef = 'port' + obj.port
             }
+            if (obj.speed === '1000') {
+              pColor = 'green'
+            } else {
+              pColor = 'orange'
+            }
+            if (!obj.linkup) {
+              pColor = 'black'
+            }
+            this.portLinkData.push({
+              portRef: pRef,
+              linkColor: pColor
+            })
           }
           this.loading = false
         },
