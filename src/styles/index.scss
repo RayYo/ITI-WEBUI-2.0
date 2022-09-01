@@ -200,7 +200,9 @@ div:focus {
   background-color: #47ACF0;
   border-color: #2CA4FF;
 }
-
+.btnDisabled {
+  opacity: .35;
+}
 #pannel2 {
   background-color: #fff;
 }

@@ -6,6 +6,8 @@
     "loaderVer":"1.0.0.41234",
     "ramSize": "256MB",
     "flashize": "32MB",
+    "sysObjID":	"1.3.6.1.4.1.27282.3.2.10",
+    "title":"TPE-2840WS",
 		"hostname":	"Switch",
 		"location":	"Default",
 		"contact":	"Default",
