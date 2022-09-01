@@ -186,7 +186,7 @@ export default {
       err => {
         console.log('dashboard get error: ', err)
       })
-    }, 2000)
+    }, 1000)
   },
   beforeDestroy() {
     clearInterval(this.timer)

@@ -13,7 +13,9 @@
     <div class="chart" style="height: 489px; min-height: 549px; overflow: auto;">
       <div class="dasChart">
         <div class="chartBorder" />
-        <select class="chartSelect"><option value="1">Port1</option><option value="2">Port2</option><option value="3">Port3</option><option value="4">Port4</option><option value="5">Port5</option><option value="6">Port6</option><option value="7">Port7</option><option value="8">Port8</option><option value="9">Port9</option><option value="10">Port10</option><option value="11">Port11</option><option value="12">Port12</option><option value="13">Port13</option><option value="14">Port14</option><option value="15">Port15</option><option value="16">Port16</option><option value="17">Port17</option><option value="18">Port18</option><option value="19">Port19</option><option value="20">Port20</option><option value="21">Port21</option><option value="22">Port22</option><option value="23">Port23</option><option value="24">Port24</option><option value="25">Port25</option><option value="26">Port26</option><option value="27">Port27</option><option value="28">Port28</option></select>
+        <select v-model="selected" class="chartSelect" @change="portSelectChange">
+          <option v-for="(item, idx) in portList" :key="idx" :value="item.v">{{ item.n }}</option>
+        </select>
         <div class="lineChart_box" style="height: 450px; width: 100%;">
           <statisticsChart
             id="statistics"
@@ -22,10 +24,7 @@
             height="100%"
           />
         </div>
-        <div class="note">
-          <p>Note:</p>
-          <span> UC(Rx):Unicast received&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MC(Rx):Multicast received&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BC(Rx):Broadcast received <br> UC(Tx):Unicast transmitted&nbsp;&nbsp;MC(Tx):Multicast transmitted&nbsp;&nbsp;BC(Tx):Broadcast transmitted </span>
-        </div>
+        <div class="note" v-html="noteDescription" />
       </div>
     </div>
   </div>
@@ -56,6 +55,9 @@ export default {
         mcTx: [],
         bcTx: []
       },
+      selected: 1, // default port1
+      portList: [],
+      noteDescription: '<p>Note:</p><span>UC(Rx):Unicast received&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MC(Rx):Multicast received&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BC(Rx):Broadcast received<br>UC(Tx):Unicast transmitted&nbsp;&nbsp;MC(Tx):Multicast transmitted&nbsp;&nbsp;BC(Tx):Broadcast transmitted</span>',
       timer: null,
       statsTimer: null
     }
@@ -73,13 +75,17 @@ export default {
     }
     this.statsDataInit()
     this.updatePanel()
+    this.portListInit()
 
     this.timer = setInterval(this.updatePanel, 10000)
-    this.statsTimer = setInterval(this.updateStatsData, 3000)
   },
   beforeDestroy() {
-    clearInterval(this.timer)
-    clearInterval(this.statsTimer)
+    if (this.timer) {
+      clearInterval(this.timer)
+    }
+    if (this.statsTimer) {
+      clearInterval(this.statsTimer)
+    }
   },
   methods: {
     updatePanel() {
@@ -139,38 +145,78 @@ export default {
         console.log('panelInfo get error: ', err)
       })
     },
+    portListInit() {
+      this.$http.get('url_get_portStatistics').then(resp => {
+        resp.data.ports.forEach(o => {
+          this.portList.push({
+            v: o.port,
+            n: 'Port' + o.port
+          })
+        })
+      },
+      err => {
+        console.log('portList get error: ', err)
+      })
+    },
+    portSelectChange() {
+      // clear db
+      for (const k in this.statsData) {
+        if (Object.hasOwnProperty.call(this.statsData, k)) {
+          this.statsData[k] = []
+        }
+      }
+      // init db
+      this.statsDataInit()
+    },
     statsDataInit() {
+      if (this.statsTimer) {
+        clearInterval(this.statsTimer)
+      }
       const now = new Date()
       for (const k in this.statsData) {
         if (Object.hasOwnProperty.call(this.statsData, k)) {
           for (let i = 0; i < 50; i++) {
             const o = {
-              name: (new Date(now - (49 - i) * 3000)).toString(),
               value: [(new Date(now - (49 - i) * 3000)), 0]
             }
             this.statsData[k].push(o)
           }
         }
       }
-      // console.log(this.statsData)
+      this.statsTimer = setInterval(this.updateStatsData, 3000)
     },
     updateStatsData() {
-      const n = new Date()
-      // const tmp = [211233, 9489, 777, 100021, 34567, 2345, 9765, 2089]
-      for (const k in this.statsData) {
-        if (Object.hasOwnProperty.call(this.statsData, k)) {
-          // console.log(this.statsData[k])
-          this.statsData[k].shift()
-          // console.log('  shift: ', t)
-          // console.log(this.statsData[k])
-          this.statsData[k].push({
-            name: n.toString(),
-            value: [n, 9999]
-          })
+      this.$http.get('url_get_portStatistics').then(resp => {
+        let v
+        for (let i = 0; i < resp.data.ports.length; i++) {
+          const o = resp.data.ports[i]
+          if (o.port === this.selected) {
+            v = {
+              totalRx: o.totalRx,
+              totalTx: o.totalTx,
+              ucRx: o.unicastRx,
+              mcRx: o.multiCastRx,
+              bcRx: o.broadCastRx,
+              ucTx: o.unicastTx,
+              mcTx: o.multiCastTx,
+              bcTx: o.broadCastTx
+            }
+            break
+          }
         }
-      }
-
-      // console.log('update', this.statsData)
+        const n = new Date()
+        for (const k in this.statsData) {
+          if (Object.hasOwnProperty.call(this.statsData, k)) {
+            this.statsData[k].shift()
+            this.statsData[k].push({
+              value: [n, v[k]]
+            })
+          }
+        }
+      },
+      err => {
+        console.log('portStatistics get error: ', err)
+      })
     },
     radioChange(v) {
       this.updatePanel()
@@ -209,7 +255,7 @@ export default {
   right: 15px;
   top: 59px;
   width: 72px;
-  z-index: 10;
+  z-index: 8;
   padding-left: 0;
 }
 .note {

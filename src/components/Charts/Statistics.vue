@@ -5,6 +5,11 @@
 <script>
 import echarts from 'echarts'
 import resize from './mixins/resize'
+// var echarts = require('echarts/lib/echarts');
+// require('echarts/lib/chart/line');
+// require('echarts/lib/component/title');
+// require('echarts/lib/component/tooltip');
+// require('echarts/lib/component/legend');
 
 export default {
   mixins: [resize],
@@ -23,19 +28,8 @@ export default {
     },
     statisticsData: {
       type: Object,
-      required: false,
-      default: () => {
-        return {
-          totalRx: [],
-          totalTx: [],
-          ucRx: [],
-          mcRx: [],
-          bcRx: [],
-          ucTx: [],
-          mcTx: [],
-          bcTx: []
-        }
-      }
+      required: true,
+      default: () => {}
     }
   },
   data() {
@@ -43,8 +37,18 @@ export default {
       chart: null
     }
   },
+  watch: {
+    statisticsData: {
+      deep: true,
+      handler(val) {
+        this.setOptions(val)
+      }
+    }
+  },
   mounted() {
-    this.initChart()
+    this.$nextTick(() => {
+      this.initChart()
+    })
   },
   beforeDestroy() {
     if (!this.chart) {
@@ -56,7 +60,9 @@ export default {
   methods: {
     initChart() {
       this.chart = echarts.init(document.getElementById(this.id))
-
+      this.setOptions(this.statisticsData)
+    },
+    setOptions({ totalRx, totalTx, ucRx, mcRx, bcRx, ucTx, mcTx, bcTx } = {}) {
       this.chart.setOption({
         title: {
           text: 'Packets',
@@ -109,7 +115,7 @@ export default {
           nameTextStyle: {
             color: '#37A7EF',
             fontSize: 16,
-            padding: [13, 0, 0, 0]
+            padding: [15, 0, 0, 0]
           },
           splitLine: {
             show: true
@@ -136,7 +142,7 @@ export default {
               color: 'Lime'
             },
             symbol: 'rect',
-            data: this.statisticsData.totalRx
+            data: totalRx
           },
           {
             name: 'Total(Tx)',
@@ -145,7 +151,7 @@ export default {
               color: '#0044FF'
             },
             symbol: 'rect',
-            data: this.statisticsData.totalTx
+            data: totalTx
           },
           {
             name: 'UC(Rx)',
@@ -154,7 +160,7 @@ export default {
               color: 'red'
             },
             symbol: 'rect',
-            data: this.statisticsData.ucRx
+            data: ucRx
           },
           {
             name: 'MC(Rx)',
@@ -163,7 +169,7 @@ export default {
               color: 'black'
             },
             symbol: 'rect',
-            data: this.statisticsData.mcRx
+            data: mcRx
           },
           {
             name: 'BC(Rx)',
@@ -172,7 +178,7 @@ export default {
               color: 'yellow'
             },
             symbol: 'rect',
-            data: this.statisticsData.bcRx
+            data: bcRx
           },
           {
             name: 'UC(Tx)',
@@ -181,7 +187,7 @@ export default {
               color: 'blueviolet'
             },
             symbol: 'rect',
-            data: this.statisticsData.ucTx
+            data: ucTx
           },
           {
             name: 'MC(Tx)',
@@ -190,7 +196,7 @@ export default {
               color: 'SkyBlue'
             },
             symbol: 'rect',
-            data: this.statisticsData.mcTx
+            data: mcTx
           },
           {
             name: 'BC(Tx)',
@@ -199,7 +205,7 @@ export default {
               color: '#7FFFAA'
             },
             symbol: 'rect',
-            data: this.statisticsData.bcTx
+            data: bcTx
           }
         ]
       })

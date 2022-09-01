@@ -39,6 +39,10 @@ const urlMapping = {
   url_get_panelInfo: {
     mockData: 'status_panel.json',
     realRequest: 'cgi/get.cgi?cmd=panel_info'
+  },
+  url_get_portStatistics: {
+    mockData: 'port_statistics.json',
+    realRequest: 'cgi/get.cgi?cmd=port_statistics'
   }
 }
 
