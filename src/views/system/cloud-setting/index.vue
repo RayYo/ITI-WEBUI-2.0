@@ -1,31 +1,52 @@
 <template>
   <div class="main_body">
-    <div class="styleTest">{{ placeholderString }}</div>
+    <div id="basetitle">Cloud Settings</div>
+    <common-table
+      header-title="Cloud Settings"
+      :first-column="['Cloud Mode','Status', 'Registration']"
+    >
+      <template #0>
+        <select>
+          <option title="Enabled" value="1"><span>Enabled</span></option>
+          <option title="Disabled" value="2"><span>Disabled</span></option>
+        </select>
+      </template>
+      <template #1>Disconnect</template>
+      <template #2>
+        <select class="disabledStyle" disabled="disabled">
+          <option title="Enabled" value="1"><span>Enabled</span></option>
+          <option title="Disabled" value="2"><span>Disabled</span></option>
+        </select>
+      </template>
+    </common-table>
+
+    <div class="margin1015">
+      <input type="button" class="btnOutTable" value="Apply" @click="apply">
+    </div>
   </div>
 </template>
 
 <script>
+import commonTable from '@/components/CustomTable/common-table.vue'
+
 export default {
+  components: {
+    commonTable
+  },
   data() {
     return {
-      todo: 'TODO...'
-    }
-  },
-  computed: {
-    placeholderString() {
-      const tmpStr = this.$route.meta.title + ' need ' + this.todo
-      return tmpStr
     }
   },
   created() {
-    // console.log('send request...')
+  },
+  methods: {
+    apply() {
+      this.$message.success({
+        showClose: true,
+        message: 'Success.'
+      })
+    }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.styleTest {
-font-size: 35px;
-    color: rgb(14, 153, 245);
-}
-</style>
