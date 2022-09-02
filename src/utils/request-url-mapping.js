@@ -47,6 +47,10 @@ const urlMapping = {
   url_get_portStatistics: {
     mockData: 'port_statistics.json',
     realRequest: 'cgi/get.cgi?cmd=port_statistics'
+  },
+  url_get_ipv4ArpTable: {
+    mockData: 'ipv4_arp_table.json',
+    realRequest: 'cgi/get.cgi?cmd=xxx'
   }
 }
 
