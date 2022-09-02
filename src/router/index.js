@@ -151,6 +151,12 @@ export const constantRoutes = [
             name: 'IPv6-Interface',
             component: () => import('@/views/system/l3-feature/ipv6-interface'),
             meta: { title: 'IPv6 Interface', icon: 'submenu' }
+          },
+          {
+            path: 'ipv4-intf-edit',
+            name: 'IPv4-Intf-Edit',
+            hidden: true,
+            component: () => import('@/views/system/l3-feature/ipv4-intf-edit')
           }
         ]
       },

@@ -37,31 +37,32 @@
     >
       <el-table-column label="Interface" min-width="12%">
         <template slot-scope="scope">
-          <span>{{ scope.row.interface }}</span>
+          <span>{{ scope.row.intf }}</span>
         </template>
       </el-table-column>
 
       <el-table-column label="State" min-width="12%">
         <template slot-scope="scope">
-          <span>{{ scope.row.state }}</span>
+          <span>{{ scope.row.state?'Enabeld':'Disabled' }}</span>
         </template>
       </el-table-column>
 
       <el-table-column label="IP Address" min-width="35%">
         <template slot-scope="scope">
-          <span>{{ scope.row.ip }}</span>
+          <span>{{ (scope.row.ipAddr==='0.0.0.0')?'-/-':(scope.row.ipAddr+'/'+scope.row.ipMask+' Manual') }}</span>
         </template>
       </el-table-column>
 
       <el-table-column label="Link Status" min-width="14%">
         <template slot-scope="scope">
-          <span>{{ scope.row.linkStatus }}</span>
+          <span>{{ scope.row.linkStatus?'Up':'Down' }}</span>
         </template>
       </el-table-column>
 
       <el-table-column label="Action" min-width="26%">
         <template slot-scope="scope">
-          <input type="button" class="btnInTable" value="Edit" @click="edit(scope.row.interface)">
+          <input type="button" class="btnInTable" value="Edit" @click="edit(scope.row)">
+          <input v-if="scope.$index>0" type="button" class="btnInTable" value="Delete" @click="del(scope.row)">
         </template>
       </el-table-column>
     </el-table>
@@ -84,19 +85,37 @@ export default {
       totalEntry: 1,
       loading: false,
       tableData: [{
-        interface: 'vlan1',
-        state: 'Enabled',
-        ip: '192.168.105.20/255.255.255.0 Manual',
-        linkStatus: 'Up'
+        intf: 'vlan1',
+        state: true,
+        ipType: 'static',
+        ipAddr: '192.168.1.1',
+        ipMask: '255.255.255.0',
+        linkStatus: true
       }, {
-        interface: 'vlan2',
-        state: 'Enabled',
-        ip: '192.168.10.30/255.255.255.0 Manual',
-        linkStatus: 'Up'
+        intf: 'vlan2',
+        state: false,
+        ipType: 'static',
+        ipAddr: '192.168.1.1',
+        ipMask: '255.255.255.0',
+        linkStatus: true
+      },
+      {
+        intf: 'vlan3',
+        state: false,
+        ipType: 'static',
+        ipAddr: '0.0.0.0',
+        ipMask: '255.255.255.0',
+        linkStatus: false
       }]
     }
   },
   created() {
+    // this.$http.get('url_get_xxxx').then(resp => {
+    //   this.tableData = resp.data....
+    // },
+    // err => {
+    //   console.log('ipv4Intf-get err:', err)
+    // })
     this.totalEntry = this.tableData.length
   },
   methods: {
@@ -106,8 +125,29 @@ export default {
     find() {
       console.log('find..')
     },
-    edit(intf) {
-      console.log(intf)
+    edit(rowData) {
+      this.$router.push({
+        path: 'ipv4-intf-edit',
+        query: rowData
+      })
+    },
+    del(v) {
+      // this.loading = true
+      // this.$http.post('url_set_xxx', data).then(resp => {
+      //   this.$message.success({
+      //     showClose: true,
+      //     message: 'Success.'
+      //   })
+      //   this.loading = false
+      //   row.edit = true
+      // },
+      // err => {
+      //   console.log('ipv4IntfDel-post error: ', err)
+      // })
+      this.$message.success({
+        showClose: true,
+        message: v.intf + ' Delete Success.'
+      })
     },
     check() {
       this.vid = this.vid.replace(/[^0-9]/g, '')

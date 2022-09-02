@@ -1,5 +1,5 @@
 <template>
-  <div style="display: inline-block; width: 50%;">
+  <div :class="divClass" style="display: inline-block; width: 50%;">
     <input
       :value="value"
       :type="type"
@@ -7,6 +7,7 @@
       :autocomplete="autocomplete"
       :placeholder="placeholder"
       :class="css"
+      :disabled="disabled"
       @input="inputChange"
       @keyup="check"
     >
@@ -44,6 +45,16 @@ export default {
       type: String,
       required: false,
       default: 'baseInput'
+    },
+    disabled: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    divClass: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data() {

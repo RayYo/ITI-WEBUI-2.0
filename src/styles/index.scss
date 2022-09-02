@@ -107,7 +107,9 @@ div:focus {
     word-wrap: break-word;
   }
 }
-
+.from_table tr td select {
+  width: 50% !important;
+}
 .table_title {
   background-color: #585f69;
   color: #fff;
@@ -309,4 +311,7 @@ button, input, optgroup, select, textarea {
   color: #fff;
   display: inline;
   margin-left: 5px;
+}
+.InputInTable {
+  width: 100% !important;
 }
