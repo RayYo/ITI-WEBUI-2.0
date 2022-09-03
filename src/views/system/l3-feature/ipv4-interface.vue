@@ -23,6 +23,7 @@
     <el-table
       v-loading="loading"
       :data="tableData"
+      empty-text="< < Table is empty > >"
       style="width: 100%"
       :stripe="true"
       :border="true"

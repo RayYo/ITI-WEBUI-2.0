@@ -7,6 +7,7 @@
     <el-table
       v-loading="loading"
       :data="tableData"
+      empty-text="< < Table is empty > >"
       :stripe="true"
       :border="true"
       :header-cell-style="{
