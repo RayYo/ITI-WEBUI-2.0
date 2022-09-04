@@ -171,6 +171,54 @@ export const constantRoutes = [
         name: 'IP-Access-List',
         component: () => import('@/views/system/ip-access-list'),
         meta: { title: 'IP Access List', icon: 'submenu' }
+      },
+      {
+        path: 'administration',
+        name: 'Administration',
+        component: () => import('@/views/system/administration'),
+        meta: { title: 'Administration', icon: 'submenu' }
+      },
+      {
+        path: 'user-account-modify',
+        name: 'User-Account-Modify',
+        hidden: true,
+        component: () => import('@/views/system/administration/user-account-modify')
+      },
+      {
+        path: 'timeout',
+        name: 'Timeout',
+        component: () => import('@/views/system/timeout'),
+        meta: { title: 'Timeout', icon: 'submenu' }
+      },
+      {
+        path: 'system-time',
+        name: 'System-Time',
+        component: () => import('@/views/system/system-time'),
+        meta: { title: 'System Time', icon: 'submenu' }
+      },
+      {
+        path: 'ssl',
+        name: 'SSL',
+        component: () => import('@/views/system/ssl'),
+        meta: { title: 'SSL', icon: 'submenu' }
+      },
+      {
+        path: 'ssh',
+        name: 'SSH',
+        component: () => import('@/views/system/ssh'),
+        meta: { title: 'SSH', icon: 'submenu' }
+      },
+      {
+        path: 'telnet',
+        name: 'Telnet',
+        component: () => import('@/views/system/telnet'),
+        meta: { title: 'Telnet', icon: 'submenu' }
+      },
+      {
+        path: 'dhcp-auto-config ',
+        name: 'DHCP-Auto_Config',
+        component: () => import('@/views/system/dhcp-auto-config'),
+        meta: { title: 'DHCP Auto Configuration', icon: 'submenu' }
       }
     ]
   },

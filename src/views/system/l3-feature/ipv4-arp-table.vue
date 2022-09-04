@@ -66,6 +66,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import { applyCheck } from '@/utils'
 export default {
   components: {
     commonTable,
@@ -110,12 +111,12 @@ export default {
       if (type === 'ip') {
         this.ipAddr = this.ipAddr.replace(/[^0-9\.]/g, '')
       } else {
-        this.macAddr = this.macAddr.replace(/[^0-9\a-\z\A-\Z\-]/g, '')
+        this.macAddr = this.macAddr.replace(/[^\a-f\A-F\0-9\-\:]/g, '')
       }
     },
     apply() {
-      const reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
-      if (reg.test(this.ipAddr) === false) {
+      if (applyCheck('ipv4', this.ipAddr) === false ||
+          applyCheck('mac', this.macAddr) === false) {
         this.$msgbox({
           type: 'warning',
           title: 'Warning',

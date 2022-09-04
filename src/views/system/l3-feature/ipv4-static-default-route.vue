@@ -78,6 +78,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import { applyCheck } from '@/utils'
 export default {
   components: {
     commonTable,
@@ -144,7 +145,30 @@ export default {
       this.currentPage = val
     },
     apply() {
-      this.applyCheck()
+      // check
+      if ((!this.checkboxValue && applyCheck('ipv4', this.ipAddr) === false) ||
+          (!this.checkboxValue && applyCheck('ipv4', this.ipMask) === false) ||
+          applyCheck('ipv4', this.nextHopIp) === false) {
+        this.$msgbox({
+          type: 'warning',
+          title: 'Warning',
+          message: 'Please input a valid value.'
+        })
+        return
+      }
+      if (this.backupSelect < 0) {
+        this.$msgbox({
+          type: 'warning',
+          title: 'Warning',
+          message: 'Please select Backup Status.'
+        })
+        return
+      }
+      // post
+      this.$message.success({
+        showClose: true,
+        message: 'Success.'
+      })
     },
     delRow(row) {
       this.$message.success({
@@ -176,32 +200,6 @@ export default {
         default:
           break
       }
-    },
-    applyCheck() {
-      const reg = /^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$/
-      if ((!this.checkboxValue && reg.test(this.ipAddr) === false) ||
-          (!this.checkboxValue && reg.test(this.ipMask) === false) ||
-          reg.test(this.nextHopIp) === false) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please input a valid value.'
-        })
-        return
-      }
-      if (this.backupSelect < 0) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please select Backup Status.'
-        })
-        return
-      }
-      // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
     }
   }
 }

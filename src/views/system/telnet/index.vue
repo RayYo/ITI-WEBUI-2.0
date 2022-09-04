@@ -1,16 +1,19 @@
 <template>
   <div class="main_body">
-    <div id="basetitle">DNS Server Settings</div>
+    <div id="basetitle">Telnet Settings</div>
     <div>
       <common-table
-        header-title="DNS Server Settings"
-        :first-column="['DNS IPv4 Server','DNS IPv6 Server']"
+        header-title="Telnet Settings"
+        :first-column="['Telnet Status','Port (1-65535)']"
       >
         <template #0>
-          <base-input v-model="ipv4DnsServer" max-len="15" @check="check('v4DNS')" />
+          <select v-model="select">
+            <option value="1"><span>Enabled</span></option>
+            <option value="2"><span>Disabled</span></option>
+          </select>
         </template>
         <template #1>
-          <base-input v-model="ipv6DnsServer" max-len="43" @check="check('v6DNS')" />
+          <base-input v-model="port" max-len="5" @check="check()" />
         </template>
       </common-table>
     </div>
@@ -19,12 +22,9 @@
     </div>
   </div>
 </template>
-
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
-import { applyCheck } from '@/utils'
-
 export default {
   components: {
     commonTable,
@@ -33,18 +33,29 @@ export default {
   data() {
     return {
       btnClass: 'btnOutTable',
-      ipv4DnsServer: '',
-      ipv6DnsServer: ''
+      select: '',
+      port: ''
     }
+  },
+  created() {
+    this.select = 1
+    this.port = '23'
+    // get ssl enabled
+    // this.$http.get('url_get_xxx').then(resp=>{
+    //     this.timeout = resp.data.timeout
+    // },
+    // err=>{
+    //     console.log('get ssl fail..');
+    // })
   },
   methods: {
     apply() {
-      if (applyCheck('ipv4', this.ipv4DnsServer) === false ||
-          applyCheck('ipv6', this.ipv6DnsServer) === false) {
+      // check
+      if (this.port < 1 || this.port > 65535) {
         this.$msgbox({
           type: 'warning',
           title: 'Warning',
-          message: 'Please input a valid value.'
+          message: 'Please enter an integer between 1 ~ 65535'
         })
         return
       }
@@ -54,12 +65,8 @@ export default {
         message: 'Success.'
       })
     },
-    check(type) {
-      if (type === 'v4DNS') {
-        this.ipv4DnsServer = this.ipv4DnsServer.replace(/[^0-9\.]/g, '')
-      } else {
-        this.ipv6DnsServer = this.ipv6DnsServer.replace(/[^\a-f\0-9\:]/g, '')
-      }
+    check() {
+      this.port = this.port.replace(/[^0-9]/g, '')
     }
   }
 }
