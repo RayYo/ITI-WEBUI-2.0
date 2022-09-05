@@ -56,9 +56,9 @@ export default {
     },
     check(type) {
       if (type === 'v4DNS') {
-        this.ipv4DnsServer = this.ipv4DnsServer.replace(/[^0-9\.]/g, '')
+        this.ipv4DnsServer = this.ipv4DnsServer.replace(/[^0-9.]/g, '')
       } else {
-        this.ipv6DnsServer = this.ipv6DnsServer.replace(/[^\a-f\0-9\:]/g, '')
+        this.ipv6DnsServer = this.ipv6DnsServer.replace(/[^a-fA-F0-9:]/g, '')
       }
     }
   }

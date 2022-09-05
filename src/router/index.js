@@ -147,16 +147,22 @@ export const constantRoutes = [
             meta: { title: 'IPv4 Static/Default Route', icon: 'submenu' }
           },
           {
+            path: 'ipv4-intf-edit',
+            name: 'IPv4-Intf-Edit',
+            hidden: true,
+            component: () => import('@/views/system/l3-feature/ipv4-intf-edit')
+          },
+          {
             path: 'ipv6-interface',
             name: 'IPv6-Interface',
             component: () => import('@/views/system/l3-feature/ipv6-interface'),
             meta: { title: 'IPv6 Interface', icon: 'submenu' }
           },
           {
-            path: 'ipv4-intf-edit',
-            name: 'IPv4-Intf-Edit',
+            path: 'ipv6-intf-detail',
+            name: 'IPv6-Intf-Detail',
             hidden: true,
-            component: () => import('@/views/system/l3-feature/ipv4-intf-edit')
+            component: () => import('@/views/system/l3-feature/ipv6-intf-detail')
           }
         ]
       },

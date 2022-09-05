@@ -22,7 +22,7 @@
     </div>
     <el-table
       v-loading="loading"
-      :data="tableData"
+      :data="tableData.slice(findBegin, findEnd)"
       empty-text="< < Table is empty > >"
       style="width: 100%"
       :stripe="true"
@@ -85,29 +85,9 @@ export default {
       vid: '',
       totalEntry: 1,
       loading: false,
-      tableData: [{
-        intf: 'vlan1',
-        state: true,
-        ipType: 'static',
-        ipAddr: '192.168.1.1',
-        ipMask: '255.255.255.0',
-        linkStatus: true
-      }, {
-        intf: 'vlan2',
-        state: false,
-        ipType: 'static',
-        ipAddr: '192.168.1.1',
-        ipMask: '255.255.255.0',
-        linkStatus: true
-      },
-      {
-        intf: 'vlan3',
-        state: false,
-        ipType: 'static',
-        ipAddr: '0.0.0.0',
-        ipMask: '255.255.255.0',
-        linkStatus: false
-      }]
+      tableData: [],
+      findBegin: 0,
+      findEnd: this.totalEntry
     }
   },
   created() {
@@ -117,6 +97,36 @@ export default {
     // err => {
     //   console.log('ipv4Intf-get err:', err)
     // })
+    const mockData = [{
+      intf: 'vlan1',
+      state: true,
+      ipType: 'static',
+      ipAddr: '192.168.1.1',
+      ipMask: '255.255.255.0',
+      linkStatus: true
+    }, {
+      intf: 'vlan2',
+      state: false,
+      ipType: 'static',
+      ipAddr: '192.168.1.1',
+      ipMask: '255.255.255.0',
+      linkStatus: true
+    },
+    {
+      intf: 'vlan3',
+      state: false,
+      ipType: 'static',
+      ipAddr: '0.0.0.0',
+      ipMask: '255.255.255.0',
+      linkStatus: false
+    }
+    ]
+    for (const k in mockData) {
+      if (Object.hasOwnProperty.call(mockData, k)) {
+        const element = mockData[k]
+        this.tableData.push(element)
+      }
+    }
     this.totalEntry = this.tableData.length
   },
   methods: {
@@ -124,7 +134,23 @@ export default {
       console.log('add..')
     },
     find() {
-      console.log('find..')
+      let isFind = false
+      for (let i = 0; i < this.tableData.length; i++) {
+        const element = this.tableData[i]
+        if (element.intf.indexOf(this.vid) !== -1) {
+          this.findBegin = i
+          this.findEnd = i + 1
+          this.totalEntry = 1
+          isFind = true
+          break
+        }
+      }
+      if (!isFind || !this.vid) {
+        this.findBegin = 0
+        this.findEnd = 0
+        this.totalEntry = 0
+      }
+      this.vid = ''
     },
     edit(rowData) {
       this.$router.push({
