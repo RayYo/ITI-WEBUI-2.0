@@ -120,7 +120,7 @@ export default {
       { accessibleIp: '1.1.1.1' },
       { accessibleIp: '2.1.1.1' },
       { accessibleIp: '3.1.1.1' },
-      { accessibleIp: '4.1.1.1' },
+      { accessibleIp: '2002::3' },
       { accessibleIp: '5.1.1.1' },
       { accessibleIp: '6.1.1.1' }
     ]
@@ -164,10 +164,15 @@ export default {
       })
     },
     delRow(row) {
-      // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
+      this.$confirm(`Do you want to delete the IP address ${row.accessibleIp} ?`, 'Please confirm', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(() => {
+        // post
+        // console.log('post')
+      }).catch(() => {
+        // console.log('cancel')
       })
     },
     delAll() {

@@ -163,6 +163,18 @@ export const constantRoutes = [
             name: 'IPv6-Intf-Detail',
             hidden: true,
             component: () => import('@/views/system/l3-feature/ipv6-intf-detail')
+          },
+          {
+            path: 'ipv6-neighbor',
+            name: 'IPV6-Neighbor',
+            component: () => import('@/views/system/l3-feature/ipv6-neighbor'),
+            meta: { title: 'IPv6 Neighbor', icon: 'submenu' }
+          },
+          {
+            path: 'ipv6-static-default-route',
+            name: 'IPv6-Static-Default-Route',
+            component: () => import('@/views/system/l3-feature/ipv6-static-default-route'),
+            meta: { title: 'IPv6 Static/Default Route', icon: 'submenu' }
           }
         ]
       },
