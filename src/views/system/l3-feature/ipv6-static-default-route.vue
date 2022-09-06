@@ -30,6 +30,48 @@
     <div class="margin1015">
       <input type="button" :class="btnClass" value="Apply" @click="apply">
     </div>
+
+    <div class="table_title"> Route Table
+      <span class="tipInTableTitle">{{ '(Total Entries: '+totalEntry+')' }}</span>
+    </div>
+    <el-table
+      v-loading="loading"
+      :data="tableData.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
+      empty-text="< < Table is empty > >"
+      style="width: 100%"
+      :stripe="true"
+      :border="true"
+      :header-cell-style="{
+        'color': 'rgb(88, 95, 105)',
+        'font-weight': '700',
+        'text-align': 'center',
+      }"
+      :cell-style="{
+        'text-align': 'center'
+      }"
+    >
+      <el-table-column prop="ipv6" label="IPv6 Address/Prefix Length" min-width="38%" />
+      <el-table-column prop="nextHop" label="Next Hop" min-width="20%" />
+      <el-table-column prop="backup" label="Backup Status" min-width="16%" />
+      <el-table-column prop="intfName" label="Interface Name" min-width="14%" />
+      <el-table-column label="Action" min-width="12%">
+        <template slot-scope="scope">
+          <input type="button" class="btnInTable" value="Delete" @click="delRow(scope.row)">
+        </template>
+      </el-table-column>
+    </el-table>
+    <div>
+      <el-pagination
+        :current-page="currentPage"
+        :page-sizes="[5, 10, 20, 40]"
+        :page-size="pageSize"
+        background
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="tableData.length"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -49,8 +91,12 @@ export default {
       checkboxValue: true,
       vlan: '',
       nextHopIpv6: '',
-      backupSelect: '-1'
-
+      backupSelect: '-1',
+      totalEntry: '',
+      loading: false,
+      tableData: [],
+      currentPage: 1,
+      pageSize: 5
     }
   },
   computed: {
@@ -60,8 +106,46 @@ export default {
   },
   created() {
     // get data
+    const mockData = [
+      {
+        ipv6: '2022::3/64',
+        nextHop: '2::1',
+        backup: 'P',
+        vid: '1'
+      },
+      {
+        ipv6: '2021::3/64',
+        nextHop: '3::1',
+        backup: 'P',
+        vid: '2'
+      },
+      {
+        ipv6: '2020::3/64',
+        nextHop: '4::1',
+        backup: 'B',
+        vid: '3'
+      }
+    ]
+    for (const k in mockData) {
+      if (Object.hasOwnProperty.call(mockData, k)) {
+        const element = mockData[k]
+        this.tableData.push({
+          ipv6: element.ipv6,
+          nextHop: element.nextHop,
+          backup: element.backup,
+          intfName: 'vlan' + element.vid
+        })
+      }
+    }
+    this.totalEntry = this.tableData.length
   },
   methods: {
+    handleSizeChange(val) {
+      this.pageSize = val
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+    },
     apply() {
       // check
       if (!this.checkboxValue && applyCheck('ipv6CIDR', this.ipv6Addr) === false) {
@@ -82,6 +166,18 @@ export default {
       }
       // post
       message.success()
+    },
+    delRow(row) {
+      message.success()
+      // this.$http.post('url_set_xxx', data).then(resp => {
+      //   this.$message.success({
+      //     showClose: true,
+      //     message: 'Success.'
+      //   })
+      // },
+      // err => {
+      //   console.log('xxx-post error: ', err)
+      // })
     },
     inputCheck(t) {
       switch (t) {
