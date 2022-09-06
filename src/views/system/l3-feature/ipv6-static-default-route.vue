@@ -35,6 +35,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 import { applyCheck } from '@/utils'
 export default {
   components: {
@@ -64,42 +65,23 @@ export default {
     apply() {
       // check
       if (!this.checkboxValue && applyCheck('ipv6CIDR', this.ipv6Addr) === false) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please input ipv6 address/prefix.'
-        })
+        message.warnBox('Please input ipv6 address/prefix.')
         return
       }
       if (this.vlan < 1 || this.vlan > 4094) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please enter an integer between 1 ~ 4094'
-        })
+        message.warnBox('Please enter an integer between 1 ~ 4094')
         return
       }
       if (applyCheck('ipv6', this.nextHopIpv6) === false) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Invalid IPv6 address.'
-        })
+        message.warnBox('Invalid IPv6 address.')
         return
       }
       if (this.backupSelect < 0) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please select Backup Status.'
-        })
+        message.warnBox('Please select Backup Status.')
         return
       }
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     inputCheck(t) {
       switch (t) {

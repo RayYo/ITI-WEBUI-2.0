@@ -78,6 +78,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 import { applyCheck } from '@/utils'
 export default {
   components: {
@@ -149,32 +150,18 @@ export default {
       if ((!this.checkboxValue && applyCheck('ipv4', this.ipAddr) === false) ||
           (!this.checkboxValue && applyCheck('ipv4', this.ipMask) === false) ||
           applyCheck('ipv4', this.nextHopIp) === false) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please input a valid value.'
-        })
+        message.warnBox('Please input a valid value.')
         return
       }
       if (this.backupSelect < 0) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please select Backup Status.'
-        })
+        message.warnBox('Please select Backup Status.')
         return
       }
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     delRow(row) {
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
       // this.$http.post('url_set_xxx', data).then(resp => {
       //   this.$message.success({
       //     showClose: true,

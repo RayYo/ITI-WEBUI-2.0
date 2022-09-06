@@ -30,6 +30,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 
 export default {
   components: {
@@ -56,18 +57,11 @@ export default {
     },
     apply() {
       if (!this.password || !this.confirmPsw || this.password !== this.confirmPsw) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please input a valid value.'
-        })
+        message.warnBox('Please input a valid value.')
         return
       }
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     }
   }
 }

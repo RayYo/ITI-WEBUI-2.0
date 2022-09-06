@@ -25,6 +25,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 import { applyCheck } from '@/utils'
 
 export default {
@@ -46,27 +47,16 @@ export default {
   methods: {
     add() {
       // check
-      if (applyCheck('ipv6', this.neighborIpv6) === false) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Invalid IPv6 address.'
-        })
+      if (!applyCheck('ipv6', this.neighborIpv6)) {
+        message.warnBox('Invalid IPv6 address.')
         return
       }
-      if (applyCheck('mac', this.macAddr) === false) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Invalid MAC address.'
-        })
+      if (!applyCheck('mac', this.macAddr)) {
+        message.warnBox('Invalid MAC address.')
         return
       }
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     inputCheck(type) {
       if (type === 'ipv6') {

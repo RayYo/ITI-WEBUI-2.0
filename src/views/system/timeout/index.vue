@@ -21,6 +21,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 export default {
   components: {
     commonTable,
@@ -46,18 +47,11 @@ export default {
     apply() {
       // check
       if (this.timeout < 3 || this.timeout > 60) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please enter an integer between 3 ~ 60'
-        })
+        message.warnBox('Please enter an integer between 3 ~ 60')
         return
       }
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     }
   }
 }

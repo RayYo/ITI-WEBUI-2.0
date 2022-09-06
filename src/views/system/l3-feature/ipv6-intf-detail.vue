@@ -97,6 +97,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 import { applyCheck } from '@/utils'
 
 export default {
@@ -155,52 +156,32 @@ export default {
     },
     stateApply() {
       // todo: post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     ipApply() {
       // check ipv6 CIDR
       if (this.dhcpV6State === 2) {
         if (applyCheck('ipv6CIDR', this.ipv6Addr) === false) {
-          this.$msgbox({
-            type: 'warning',
-            title: 'Warning',
-            message: 'Please input ipv6 address/prefix.'
-          })
+          message.warnBox('Please input ipv6 address/prefix.')
           return
         }
         this.ipv6Addr = ''
       }
       // todo: post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     timeApply() {
       // check
       if (this.nsTime < 1 || this.nsTime > 3600) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please enter an integer between 1 ~ 3600'
-        })
+        message.warnBox('Please enter an integer between 1 ~ 3600')
         this.nsTime = ''
         return
       }
       // todo: post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     delRow(row) {
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
       // this.$http.post('url_set_xxx', data).then(resp => {
       //   this.$message.success({
       //     showClose: true,

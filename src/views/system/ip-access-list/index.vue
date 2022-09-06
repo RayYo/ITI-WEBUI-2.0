@@ -62,7 +62,7 @@
     <div class="table_title">
       <span>IP Access List Table</span>
       <div style="display: inline; float: right;">
-        <input id="deleteAll" type="button" value="Delete All" class="btnInTitle" @click="delAll()">
+        <input id="deleteAll" type="button" value="Delete All" :disabled="inputDisabled" :class="inputClass" @click="delAll()">
       </div>
     </div>
 
@@ -96,6 +96,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 import { applyCheck } from '@/utils'
 export default {
   components: {
@@ -111,6 +112,14 @@ export default {
       ipv6Addr: '',
       loading: false,
       tableData: []
+    }
+  },
+  computed: {
+    inputClass() {
+      return this.tableData.length < 1 ? 'btnInTitle btnDisabled' : 'btnInTitle'
+    },
+    inputDisabled() {
+      return this.tableData.length < 1
     }
   },
   created() {
@@ -135,62 +144,33 @@ export default {
   methods: {
     apply() {
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     add() {
-      let flag = false
       // check
       if (this.racal === '1' && applyCheck('ipv4', this.ipv4Addr) === false) {
-        flag = true
+        message.warnBox('Invalid IPv4 address.')
+        return
       }
       if (this.racal === '2' && applyCheck('ipv6', this.ipv6Addr) === false) {
-        flag = true
-      }
-      if (flag) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please input a valid value.'
-        })
+        message.warnBox('Invalid IPv6 address.')
         return
       }
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     delRow(row) {
-      this.$confirm(`Do you want to delete the IP address ${row.accessibleIp} ?`, 'Please confirm', {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
-        type: 'warning'
-      }).then(() => {
+      message.confirmWarnBox(`Do you want to delete the IP address ${row.accessibleIp} ?`, 'Please confirm').then(() => {
         // post
-        // console.log('post')
       }).catch(() => {
         // console.log('cancel')
       })
     },
     delAll() {
-      if (this.tableData.length < 1) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please input a valid value.'
-        })
-        return
-      }
-      this.$confirm('Do you want to delete all the IP address ?', 'Please confirm', {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
-        type: 'warning'
-      }).then(() => {
+      message.confirmWarnBox(`Do you want to delete all the IP address ?`, 'Please confirm').then(() => {
         // post
       }).catch(() => {
+        // console.log('cancel')
       })
     },
     check(type) {

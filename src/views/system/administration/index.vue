@@ -57,6 +57,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 
 export default {
   components: {
@@ -108,27 +109,15 @@ export default {
     add() {
       // check
       if (!this.userName) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'The length of User Name is between 1 and 20 characters!'
-        })
+        message.warnBox('The length of User Name is between 1 and 20 characters!')
         return
       }
-      if (this.psw !== this.confirmPsw) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'The passwords do not match.'
-        })
+      if (!this.psw || (this.psw !== this.confirmPsw)) {
+        message.warnBox('The passwords do not match.')
         return
       }
-
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     tModify(row) {
       this.$router.push({

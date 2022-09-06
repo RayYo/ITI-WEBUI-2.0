@@ -23,6 +23,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 import { applyCheck } from '@/utils'
 
 export default {
@@ -39,20 +40,16 @@ export default {
   },
   methods: {
     apply() {
-      if (applyCheck('ipv4', this.ipv4DnsServer) === false ||
-          applyCheck('ipv6', this.ipv6DnsServer) === false) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please input a valid value.'
-        })
+      if (!applyCheck('ipv4', this.ipv4DnsServer)) {
+        message.warnBox('Invalid IPv4 address.')
+        return
+      }
+      if (!applyCheck('ipv6', this.ipv6DnsServer)) {
+        message.warnBox('Invalid IPv6 address.')
         return
       }
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     check(type) {
       if (type === 'v4DNS') {

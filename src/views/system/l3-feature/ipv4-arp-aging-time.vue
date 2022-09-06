@@ -45,6 +45,7 @@
 
 <script>
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 export default {
   components: {
     baseInput
@@ -109,10 +110,7 @@ export default {
       // err => {
       //   console.log('ipv4ArpAgingTime-post error: ', err)
       // })
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
       row.edit = true
     },
     check(row) {

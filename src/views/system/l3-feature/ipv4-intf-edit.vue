@@ -42,6 +42,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 import { applyCheck } from '@/utils'
 
 export default {
@@ -73,29 +74,19 @@ export default {
   methods: {
     stateApply() {
       // todo: post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     ipApply() {
       // static
       if (this.ipTypeSelected === 1) {
         if (applyCheck('ipv4', this.staticIp) === false ||
             applyCheck('ipv4', this.staticIpMask) === false) {
-          this.$msgbox({
-            type: 'warning',
-            title: 'Warning',
-            message: 'Please input a valid value.'
-          })
+          message.warnBox('Please input a valid value.')
           return
         }
       }
       // todo: post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     back() {
       this.$router.go(-1)

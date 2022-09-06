@@ -25,6 +25,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 export default {
   components: {
     commonTable,
@@ -52,18 +53,11 @@ export default {
     apply() {
       // check
       if (this.port < 1 || this.port > 65535) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please enter an integer between 1 ~ 65535'
-        })
+        message.warnBox('Please enter an integer between 1 ~ 65535')
         return
       }
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     },
     check() {
       this.port = this.port.replace(/[^0-9]/g, '')

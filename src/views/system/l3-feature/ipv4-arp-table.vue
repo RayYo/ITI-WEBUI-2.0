@@ -66,6 +66,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
 import { applyCheck } from '@/utils'
 export default {
   components: {
@@ -115,19 +116,15 @@ export default {
       }
     },
     apply() {
-      if (applyCheck('ipv4', this.ipAddr) === false ||
-          applyCheck('mac', this.macAddr) === false) {
-        this.$msgbox({
-          type: 'warning',
-          title: 'Warning',
-          message: 'Please input a valid value.'
-        })
+      if (!applyCheck('ipv4', this.ipAddr)) {
+        message.warnBox('Invalid IPV4 Address.')
         return
       }
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      if (!applyCheck('mac', this.macAddr)) {
+        message.warnBox('Invalid MAC address.')
+        return
+      }
+      message.success()
       // this.$http.post('url_set_xxx', data).then(resp => {
       //   this.$message.success({
       //     showClose: true,
@@ -139,10 +136,7 @@ export default {
       // })
     },
     delRow(row) {
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
       // this.$http.post('url_set_xxx', data).then(resp => {
       //   this.$message.success({
       //     showClose: true,

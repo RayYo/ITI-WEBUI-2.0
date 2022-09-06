@@ -21,6 +21,7 @@
 </template>
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
+import message from '@/utils/message'
 export default {
   components: {
     commonTable
@@ -44,10 +45,7 @@ export default {
   methods: {
     apply() {
       // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      message.success()
     }
   }
 }
