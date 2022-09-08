@@ -332,3 +332,13 @@ button, input, optgroup, select, textarea {
 .InputOutTable150 {
   width: 150px!important;
 }
+.input150 {
+  width: 150px;
+  height: 26px;
+  padding: 0 7px;
+  color: #606266;
+  transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+  outline: none;
+  border: 1px solid #dcdfe6;
+  box-sizing: border-box;
+}
