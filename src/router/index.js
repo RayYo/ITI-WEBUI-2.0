@@ -233,10 +233,16 @@ export const constantRoutes = [
         meta: { title: 'Telnet', icon: 'submenu' }
       },
       {
-        path: 'dhcp-auto-config ',
+        path: 'dhcp-auto-config',
         name: 'DHCP-Auto_Config',
         component: () => import('@/views/system/dhcp-auto-config'),
         meta: { title: 'DHCP Auto Configuration', icon: 'submenu' }
+      },
+      {
+        path: 'system-log',
+        name: 'System-Log',
+        component: () => import('@/views/system/system-log'),
+        meta: { title: 'System Log', icon: 'submenu' }
       }
     ]
   },
