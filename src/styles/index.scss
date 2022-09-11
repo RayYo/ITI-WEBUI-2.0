@@ -342,3 +342,33 @@ button, input, optgroup, select, textarea {
   border: 1px solid #dcdfe6;
   box-sizing: border-box;
 }
+.SystemlogSettingsTextarea {
+  width: 100%;
+  -webkit-writing-mode: horizontal-tb!important;
+  writing-mode: horizontal-tb;
+  text-rendering: auto;
+  color: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  -webkit-appearance: textarea;
+  background-color: #fff;
+  -webkit-rtl-ordering: logical;
+  flex-direction: column;
+  resize: auto;
+  cursor: text;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  margin: 0;
+  margin-bottom: -4px;
+  font: 400 13.3333px Arial;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #a9a9a9;
+  border-image: initial;
+  padding: 2px;
+}

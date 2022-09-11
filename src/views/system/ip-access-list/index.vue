@@ -177,7 +177,7 @@ export default {
       if (type === 'ipv4') {
         this.ipv4Addr = this.ipv4Addr.replace(/[^0-9\.]/g, '')
       } else {
-        this.ipv6Addr = this.ipv6Addr.replace(/[^\a-f\0-9\:]/g, '')
+        this.ipv6Addr = this.ipv6Addr.replace(/[^a-fA-F0-9:]/g, '')
       }
     }
   }
