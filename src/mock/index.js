@@ -91,24 +91,33 @@ const getHandlers = {
     return { data: { ports }}
   },
 
-  /* 前面板实时状态:按 devinfo 端口表生成(Switch View / Real-time Statistics 共用) */
+  /* 前面板实时状态:按 devinfo 端口表生成(Switch View / Real-time Statistics 共用)。
+   * 模拟数据尽量丰富:多个端口 link up、不同速率/双工、部分 PoE 供电(仅样式需复刻原版,数据不必)。 */
   panel_info: async() => {
     const dev = await getDevinfo()
+    const LINKED = [1, 2, 3, 5, 7, 9, 10, 14, 18, 25, 26] // link up 的端口
+    const HALF = [3, 9] // 半双工
+    const SLOW = [5, 14] // 百兆口
     const ports = dev.ports.map(p => {
-      const linked = p.port === 1
-      const speed = linked ? 1000 : 0
+      const linked = LINKED.indexOf(p.port) !== -1
+      let speed = 0
+      if (linked) {
+        if (p.type === 'fiber') speed = p.maxSpeed || 10000
+        else speed = SLOW.indexOf(p.port) !== -1 ? 100 : 1000
+      }
       const on = state.poeOn[p.port] !== undefined ? state.poeOn[p.port] : true
       const powering = p.poe && linked && on
       return {
         port: p.port,
         link: linked,
         speed,
-        duplex: linked ? 'full' : '',
-        throughputMbps: linked ? rand(0, 12) : 0,
+        duplex: linked ? (HALF.indexOf(p.port) !== -1 ? 'half' : 'full') : '',
+        throughputMbps: linked ? rand(0, Math.max(12, speed / 100)) : 0,
         loopback: 'normal',
         distance: null,
         poe: p.poe
-          ? { on, powering, powerMw: powering ? 4500 : 0, standard: 'PoE' }
+          // 每端口固定基值 + 小抖动,避免轮询时整表大幅跳变
+          ? { on, powering, powerMw: powering ? 2000 + (p.port * 937) % 9000 + rand(-200, 200) : 0, standard: 'PoE' }
           : null
       }
     })

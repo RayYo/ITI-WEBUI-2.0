@@ -46,6 +46,9 @@
 ## 风格铁律(用户多次强调)
 
 - **每个样式先从 emulator 抓 computed 值再照抄**,禁止凭组件库默认值近似
+- **1:1 复刻只针对样式/布局/交互;mock 模拟数据不必贴 emulator**,要尽量丰富
+  (多端口 link up、不同速率/双工、PoE 供电分布),便于演示与联调
+- Login 页维持现状(用户确认与原版一致),不要改
 - 功能页标准结构:`.main_body > #basetitle + .table_title + .from_table(原生控件)
   + .note + .margin1015 > .btnOutTable`;数据表格 el-table `.tableBox` 白底表头
   `#585f69` bold 居中,空表 `< < Table is empty > >`

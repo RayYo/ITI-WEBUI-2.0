@@ -8,7 +8,8 @@
           <tr>
             <td>Config File</td>
             <td>
-              <select v-model="configFile" disabled class="disabledStyle">
+              <!-- 勾选 Startup-Config 时不可选 Config;取消勾选才能选 Config 1/2 -->
+              <select v-model="configFile" :disabled="startup" :class="{ disabledStyle: startup }">
                 <option value="1">Config 1</option>
                 <option value="2">Config 2</option>
               </select>
@@ -18,7 +19,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="note">
+      <div class="note" style="margin-top: 12px;">
         <span>Note: The switch will stop responding while saving the current configuration to flash.</span>
       </div>
       <div class="margin1015">
