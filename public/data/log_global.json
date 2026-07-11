@@ -1,0 +1,12 @@
+{
+  "data": {
+    "timeStamp": true,
+    "bufferSize": 50,
+    "syslogEnabled": false,
+    "serverIpVer": 1,
+    "serverIpv4": "0.0.0.0",
+    "serverIpv6": "",
+    "facility": 128,
+    "level": 2
+  }
+}

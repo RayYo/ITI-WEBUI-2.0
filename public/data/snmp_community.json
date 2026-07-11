@@ -1,0 +1,9 @@
+{
+  "data": {
+    "max": 10,
+    "entries": [
+      { "name": "private", "policy": "ReadWrite" },
+      { "name": "public", "policy": "ReadOnly" }
+    ]
+  }
+}

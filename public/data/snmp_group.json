@@ -1,0 +1,9 @@
+{
+  "data": {
+    "max": 10,
+    "entries": [
+      { "name": "ReadOnly", "readView": "ReadOnly", "writeView": "", "notifyView": "ReadOnly", "model": "v1", "level": "NoAuthNoPriv" },
+      { "name": "ReadWrite", "readView": "ReadWrite", "writeView": "ReadWrite", "notifyView": "ReadWrite", "model": "v1", "level": "NoAuthNoPriv" }
+    ]
+  }
+}

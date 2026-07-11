@@ -33,6 +33,7 @@
 import switchPanel from '@/components/Panel'
 import { mapGetters } from 'vuex'
 import statisticsChart from '@/components/Charts/Statistics.vue'
+import { cgiGet } from '@/api/cgi'
 
 export default {
   components: {
@@ -88,75 +89,46 @@ export default {
     }
   },
   methods: {
+    /** devinfo 端口类型 → 面板 ref(fiber 走 portf<n>) */
+    portRefOf(port) {
+      const meta = this.modelInfo('ports').find(p => p.port === port)
+      return (meta && meta.type === 'fiber') ? `portf${port}` : `port${port}`
+    },
     updatePanel() {
       const type = this.radio
-      this.portLinkData = []
-      this.$http.get('url_get_panelInfo').then(resp => {
-        for (const i in resp.data.ports) {
-          const obj = resp.data.ports[i]
-          // port link
-          let pRef = ''
-          let pColor = ''
-          if (obj.port.indexOf('F') !== -1) {
-            pRef = 'portf' + obj.port.substr(0, obj.port.length - 1)
-          } else {
-            pRef = 'port' + obj.port
-          }
+      cgiGet('panel_info').then(d => {
+        const links = []
+        for (const p of d.ports || []) {
+          let pColor = 'black'
           switch (type) {
-            case 1:
-            case 3:
-              if (obj.speed === '1000') {
-                pColor = 'green'
-              } else {
-                pColor = 'orange'
-              }
-              if (!obj.linkup) {
-                pColor = 'black'
-              }
+            case 1: // Status
+              pColor = !p.link ? 'black' : (p.speed >= 1000 ? 'green' : 'orange')
               break
-            case 2:
-              if (obj.dupFull) {
-                pColor = 'green'
-              } else {
-                pColor = 'orange'
-              }
-              if (!obj.linkup) {
-                pColor = 'black'
-              }
+            case 2: // Duplex
+              pColor = !p.link ? 'black' : (p.duplex === 'full' ? 'green' : 'orange')
               break
-            case 4:
-              if (obj.poeStatus === 'ON') {
-                pColor = 'green'
-              } else {
-                pColor = 'black'
-              }
+            case 3: // Speed(10G 蓝色)
+              if (!p.link) pColor = 'black'
+              else if (p.speed >= 10000) pColor = '#0077c5'
+              else if (p.speed >= 1000) pColor = 'green'
+              else pColor = 'orange'
               break
-            default:
-              pColor = 'black'
+            case 4: // PoE
+              pColor = (p.poe && p.poe.powering) ? 'green' : 'black'
               break
           }
-          this.portLinkData.push({
-            portRef: pRef,
-            linkColor: pColor
-          })
+          links.push({ portRef: this.portRefOf(p.port), linkColor: pColor })
         }
-      },
-      err => {
+        this.portLinkData = links
+      }, err => {
         console.log('panelInfo get error: ', err)
       })
     },
     portListInit() {
-      this.$http.get('url_get_portStatistics').then(resp => {
-        resp.data.ports.forEach(o => {
-          this.portList.push({
-            v: o.port,
-            n: 'Port' + o.port
-          })
-        })
-      },
-      err => {
-        console.log('portList get error: ', err)
-      })
+      this.portList = this.modelInfo('ports').map(p => ({
+        v: p.port,
+        n: 'Port' + p.port
+      }))
     },
     portSelectChange() {
       // clear db
@@ -186,24 +158,8 @@ export default {
       this.statsTimer = setInterval(this.updateStatsData, 3000)
     },
     updateStatsData() {
-      this.$http.get('url_get_portStatistics').then(resp => {
-        let v
-        for (let i = 0; i < resp.data.ports.length; i++) {
-          const o = resp.data.ports[i]
-          if (o.port === this.selected) {
-            v = {
-              totalRx: o.totalRx,
-              totalTx: o.totalTx,
-              ucRx: o.unicastRx,
-              mcRx: o.multiCastRx,
-              bcRx: o.broadCastRx,
-              ucTx: o.unicastTx,
-              mcTx: o.multiCastTx,
-              bcTx: o.broadCastTx
-            }
-            break
-          }
-        }
+      // 单端口实时包计数(3s 轮询,切端口后重置曲线)
+      cgiGet('port_rtstat', { port: this.selected }).then(v => {
         const n = new Date()
         for (const k in this.statsData) {
           if (Object.hasOwnProperty.call(this.statsData, k)) {
@@ -213,9 +169,8 @@ export default {
             })
           }
         }
-      },
-      err => {
-        console.log('portStatistics get error: ', err)
+      }, err => {
+        console.log('port_rtstat get error: ', err)
       })
     },
     radioChange(v) {
@@ -238,6 +193,7 @@ export default {
 .dasChart {
   position: relative;
   width: 900px;
+  max-width: 100%;
   height: 450px;
   margin: 0 auto;
 }

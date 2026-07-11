@@ -22,6 +22,7 @@
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
+import { cgiGet, cgiSet } from '@/api/cgi'
 export default {
   components: {
     commonTable,
@@ -34,14 +35,9 @@ export default {
     }
   },
   created() {
-    this.timeout = 20
-    // get timeout
-    // this.$http.get('url_get_xxx').then(resp=>{
-    //     this.timeout = resp.data.timeout
-    // },
-    // err=>{
-    //     console.log('get timeout fail..');
-    // })
+    cgiGet('sys_timeout').then(d => {
+      this.timeout = String(d.webIdleMin)
+    })
   },
   methods: {
     apply() {
@@ -50,8 +46,7 @@ export default {
         message.warnBox('Please enter an integer between 3 ~ 60')
         return
       }
-      // post
-      message.success()
+      cgiSet('sys_timeout', { webIdleMin: this.timeout })
     }
   }
 }

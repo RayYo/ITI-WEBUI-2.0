@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="margin-bottom: 25px; overflow: auto;">
-      <div style="display: flex; margin-bottom: 20px;">
+      <div class="das-flex-row" style="display: flex; margin-bottom: 20px;">
         <from-table
           header-title="Switch Information"
           :extra-style="{flex: '14 1 0%', background: 'white'}"
@@ -26,7 +26,7 @@
           :table-data="adminInfoTableData"
         />
       </div>
-      <div style="display: flex;">
+      <div class="das-flex-row" style="display: flex;">
         <from-table
           header-title="System Information"
           :extra-class="{das_form: true}"
@@ -119,6 +119,8 @@ import fromTable from '@/components/CustomTable/from-table.vue'
 import cpuMemTable from '@/components/CustomTable/cpu-mem-table.vue'
 import poeChart from '@/components/Charts/PoE.vue'
 import cpuMemChart from '@/components/Charts/CpuMem.vue'
+import { cgiGet } from '@/api/cgi'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -157,36 +159,39 @@ export default {
       cpuMemChartTimer: null
     }
   },
+  computed: {
+    ...mapGetters([
+      'modelInfo'
+    ])
+  },
   created() {
     this.cpuMemChartDataInit()
     this.saveLoading()
-    // Simulated delay request
-    setTimeout(() => {
-      this.$http.get('url_get_statusSysinfo').then(resp => {
-        this.swInfoTableData.length = 0
-        this.hwInfoTableData.length = 0
-        this.adminInfoTableData.length = 0
-        this.sysInfoTableData.length = 0
-        this.ipv6InfoTableData.length = 0
-        this.netFeaturesTableData.length = 0
+    cgiGet('sys_sysinfo').then(d => {
+      this.swInfoTableData = [this.formatUptime(d.uptimeSec), d.runtimeImage, d.bootLoader]
+      this.hwInfoTableData = [d.dramMB + ' MB', d.flashMB + ' MB']
+      this.adminInfoTableData = [d.hostname, d.location, d.contact]
+      this.sysInfoTableData = [d.serialNum, d.macAddr, d.ipv4.ip, d.ipv4.mask, d.ipv4.gateway]
+      this.ipv6InfoTableData = [d.ipv6.unicast, d.ipv6.gateway, d.ipv6.linkLocal]
+      this.netFeaturesTableData = [
+        d.ipv4DhcpEnabled ? 'Enabled' : 'Disabled',
+        d.ipv6DhcpEnabled ? 'Enabled' : 'Disabled'
+      ]
+      this.loading.close()
 
-        this.swInfoTableData.push(resp.data.sysUpTime, resp.data.fwVer, resp.data.loaderVer)
-        this.hwInfoTableData.push(resp.data.ramSize, resp.data.flashize)
-        this.adminInfoTableData.push(resp.data.hostname, resp.data.location, resp.data.contact)
-        this.sysInfoTableData.push(resp.data.snNo, resp.data.sysMac, resp.data.currIpv4, resp.data.currIpv4Mask, resp.data.currIpv4Gw)
-        this.ipv6InfoTableData.push(resp.data.currIpv6, resp.data.currIpv6Gw, resp.data.currIpv6LinkLocalAddr)
-        this.netFeaturesTableData.push(resp.data.ipv4DHCP, resp.data.ipv6DHCP)
-        this.loading.close()
-        this.updatePoEData(resp)
+      // PoE 面板(仅带 PoE 机型):30s 轮询 panel_info
+      if (this.modelInfo('poeNum') > 0) {
+        this.updatePoEData()
+        this.timer = setInterval(this.updatePoEData, 30000)
+      }
 
-        this.selected = this.selectList[0].id
-        this.timer = setInterval(this.polling, 3000)
-        this.cpuMemChartTimer = setInterval(this.updateCpuMemData, this.utilizationInterval)
-      },
-      err => {
-        console.log('dashboard get error: ', err)
-      })
-    }, 1000)
+      this.selected = this.selectList[0].id
+      this.updateCpuMemData()
+      this.cpuMemChartTimer = setInterval(this.updateCpuMemData, this.utilizationInterval)
+    }, err => {
+      this.loading.close()
+      console.log('dashboard get error: ', err)
+    })
   },
   beforeDestroy() {
     clearInterval(this.timer)
@@ -213,46 +218,57 @@ export default {
         this.cpuMemChartTimer = setInterval(this.updateCpuMemData, this.utilizationInterval)
       }
     },
-    updatePoEData(resp) {
-      // poe data
-      if (resp.data.poeUsage) {
+    formatUptime(sec) {
+      const s = Number(sec) || 0
+      const d = Math.floor(s / 86400)
+      const h = Math.floor((s % 86400) / 3600)
+      const m = Math.floor((s % 3600) / 60)
+      return `${d} days, ${h} hrs, ${m} mins, ${s % 60} secs`
+    },
+    updatePoEData() {
+      // PoE 每口功耗(W)来自 panel_info,总预算来自 sys_devinfo
+      cgiGet('panel_info').then(d => {
+        const poePorts = (d.ports || []).filter(p => p.poe)
+        if (!poePorts.length) return
+        const usage = poePorts.map(p => (p.poe.powerMw || 0) / 1000)
+        const consumed = usage.reduce((a, b) => a + b, 0)
+        const budget = this.modelInfo('poeBudget')
         this.currPoeData = {
-          poeData: resp.data.poeUsage,
-          xData: Array.from(new Array(resp.data.poeUsage.length + 1).keys()).slice(1)
+          poeData: usage,
+          xData: poePorts.map(p => p.port)
         }
         this.poeTableInfo = [{
-          Total: resp.data.norminalPower + ' W MAX'
+          Total: budget + ' W MAX'
         }, {
-          Used: resp.data.consumedPower + ' W'
+          Used: consumed.toFixed(1).replace('.0', '') + ' W'
         }, {
-          Available: resp.data.availPower + ' W'
+          Available: (budget - consumed).toFixed(1).replace('.0', '') + ' W'
         }]
-      }
+      }, err => {
+        console.log('panel_info get error: ', err)
+      })
     },
     updateCpuMemData() {
-      this.$http.get('url_get_statusSysinfo').then(resp => {
-        // Simulated data
-        if (process.env.NODE_ENV !== 'production') {
-          resp.data.cpuUseage = Math.round(Math.random() * (99)) + 1
-        }
+      cgiGet('sys_cpumem').then(d => {
+        const memUsed = d.memTotalKB - d.memFreeKB
 
         // cpu & mem data
         this.cpuTableInfo = [{
-          Used: resp.data.cpuUseage + ' %'
+          Used: d.cpu + ' %'
         }, {
-          Idle: (100 - resp.data.cpuUseage) + ' %'
+          Idle: (100 - d.cpu) + ' %'
         }]
 
         this.memTableInfo = [{
-          Total: resp.data.memTotal + ' KB'
+          Total: d.memTotalKB + ' KB'
         }, {
-          Free: (resp.data.memTotal - resp.data.memUsed) + ' KB'
+          Free: d.memFreeKB + ' KB'
         }, {
-          Used: resp.data.memUsed + ' KB'
+          Used: memUsed + ' KB'
         }]
 
         const now = new Date()
-        const memUsage = parseInt(resp.data.memUsed * 100 / resp.data.memTotal)
+        const memUsage = parseInt(memUsed * 100 / d.memTotalKB)
 
         if (this.cpuChartData.length >= 70) {
           this.memChartData.shift()
@@ -266,11 +282,11 @@ export default {
 
         this.cpuChartData.push({
           name: now.toString(),
-          value: [now, resp.data.cpuUseage]
+          value: [now, d.cpu]
         })
       },
       err => {
-        console.log('dashboard get error: ', err)
+        console.log('sys_cpumem get error: ', err)
       })
     },
     cpuMemChartDataInit() {
@@ -320,20 +336,6 @@ export default {
         name: now.toString(),
         value: [now, 0]
       })
-    },
-    polling() {
-      this.$http.get('url_get_statusSysinfo').then(resp => {
-        this.updatePoEData(resp)
-      },
-      err => {
-        console.log('dashboard get error: ', err)
-      })
-    },
-    randomData() {
-      const t = new Date()
-      const timeStr = this.formatDate(t)
-      const value = Math.round(Math.random() * (99)) + 1
-      return [timeStr, value]
     }
   }
 }

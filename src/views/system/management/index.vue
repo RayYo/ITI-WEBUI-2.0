@@ -27,6 +27,7 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import { cgiGet, cgiSet } from '@/api/cgi'
 
 export default {
   components: {
@@ -44,14 +45,13 @@ export default {
     }
   },
   created() {
-    this.$http.get('url_get_statusSysinfo').then(resp => {
-      this.sysDesc = resp.data.title
-      this.sysOID = resp.data.sysObjID
-      this.sysName = resp.data.hostname
-      this.sysLocation = resp.data.location
-      this.sysContact = resp.data.contact
-    },
-    err => {
+    cgiGet('sys_sysinfo').then(d => {
+      this.sysDesc = d.description
+      this.sysOID = d.sysObjId
+      this.sysName = d.hostname
+      this.sysLocation = d.location
+      this.sysContact = d.contact
+    }, err => {
       console.log('system-management-get err:', err)
     })
   },
@@ -63,15 +63,10 @@ export default {
         location: this.sysLocation,
         contact: this.sysContact
       }
-      this.$http.post('url_set_statusSysinfo', data).then(resp => {
-        this.$message.success({
-          showClose: true,
-          message: 'Success.'
-        })
-
+      cgiSet('sys_sysinfoEdit', data).then(() => {
         this.btnClass = 'btnOutTable'
-      },
-      err => {
+      }, err => {
+        this.btnClass = 'btnOutTable'
         console.log('system-management-post error: ', err)
       })
     },

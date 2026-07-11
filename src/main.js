@@ -12,15 +12,15 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
-import request from '@/utils/request'
+// 开发模式:挂 cgi mock 适配器(页面代码与生产完全一致)
+if (process.env.VUE_APP_MOCK === 'true') {
+  require('@/mock').setupMock()
+}
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
-
-// set axios request property for global components
-Vue.prototype.$http = request
 
 new Vue({
   el: '#app',

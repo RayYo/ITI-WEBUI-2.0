@@ -21,6 +21,7 @@
 </template>
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
+import { cgiGet, cgiSet } from '@/api/cgi'
 export default {
   components: {
     commonTable
@@ -28,26 +29,17 @@ export default {
   data() {
     return {
       btnClass: 'btnOutTable',
-      select: ''
+      select: '2'
     }
   },
   created() {
-    this.select = 2
-    // get ssl enabled
-    // this.$http.get('url_get_xxx').then(resp=>{
-    //     this.timeout = resp.data.timeout
-    // },
-    // err=>{
-    //     console.log('get ssl fail..');
-    // })
+    cgiGet('sys_ssl').then(d => {
+      this.select = d.enabled ? '1' : '2'
+    })
   },
   methods: {
     apply() {
-      // post
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      cgiSet('sys_ssl', { enabled: this.select === '1' ? 1 : 0 })
     }
   }
 }

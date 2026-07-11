@@ -342,6 +342,58 @@ button, input, optgroup, select, textarea {
   border: 1px solid #dcdfe6;
   box-sizing: border-box;
 }
+// ---------- 移动端适配(<768px):仅窄屏生效,桌面 1:1 版式不受影响 ----------
+// 部分组件模板内是行内样式,此处用 !important 在窄屏覆盖
+@media (max-width: 768px) {
+  .main_body {
+    padding: 0 10px 20px;
+  }
+  .from_table tr > td:first-child {
+    width: 38%;
+  }
+  .from_table tr td select {
+    width: 100% !important;
+  }
+  .baseInputBox {
+    width: 100% !important;
+  }
+  // Dashboard 信息表:三列 flex → 单列堆叠
+  .das-flex-row {
+    display: block !important;
+    > div {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  // PoE / CPU 图表面板:绝对定位布局 → 纵向流式
+  #pannel2 {
+    display: block !important;
+    min-height: 0 !important;
+    > div {
+      position: static !important;
+      padding-left: 0 !important;
+      margin-top: 0 !important;
+      width: 100% !important;
+      height: auto !important;
+      top: auto !important;
+    }
+  }
+  .cpuMemory2 {
+    padding-left: 10px;
+  }
+  .cpuTable, .cpuTable2 {
+    margin-left: 10px;
+  }
+  .lineChart_box {
+    width: 100% !important;
+  }
+  // 前面板(固定 1122px)横向滚动
+  .panel_box {
+    width: 100% !important;
+    overflow-x: auto !important;
+  }
+}
+
 .SystemlogSettingsTextarea {
   width: 100%;
   -webkit-writing-mode: horizontal-tb!important;

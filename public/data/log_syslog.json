@@ -1,0 +1,13 @@
+{
+  "data": {
+    "entries": [
+      { "idx": 1, "severity": "info", "time": "01/01/2018 00:12:00", "msg": "Successful login through web (User: admin)", "raw": "1 local0/Info      01/01/2018 00:12:00 Successful login through web (User: admin)" },
+      { "idx": 2, "severity": "critical", "time": "01/01/2018 00:11:47", "msg": "Loop detected on Port gi5", "raw": "2 local0/Critical  01/01/2018 00:11:47 Loop detected on Port gi5" },
+      { "idx": 3, "severity": "info", "time": "01/01/2018 00:10:02", "msg": "SNTP first synchronization", "raw": "3 local0/Info      01/01/2018 00:10:02 SNTP first synchronization" },
+      { "idx": 4, "severity": "info", "time": "01/01/2018 00:06:30", "msg": "Configuration saved to flash", "raw": "4 local0/Info      01/01/2018 00:06:30 Configuration saved to flash" },
+      { "idx": 5, "severity": "warning", "time": "01/01/2018 00:05:12", "msg": "Failed login through web (IP: 192.168.105.99)", "raw": "5 local0/Warning   01/01/2018 00:05:12 Failed login through web (IP: 192.168.105.99)" },
+      { "idx": 6, "severity": "info", "time": "01/01/2018 00:02:01", "msg": "Port gi1 link up, 1000Mbps FULL duplex", "raw": "6 local0/Info      01/01/2018 00:02:01 Port gi1 link up, 1000Mbps FULL duplex" },
+      { "idx": 7, "severity": "info", "time": "01/01/2018 00:01:59", "msg": "System started up", "raw": "7 local0/Info      01/01/2018 00:01:59 System started up" }
+    ]
+  }
+}

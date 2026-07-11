@@ -1,0 +1,46 @@
+{
+  "data": {
+    "model": "TPE-2840WS",
+    "fwVer": "1.0.1",
+    "macAddr": "00:E0:4C:00:00:00",
+    "portCount": 28,
+    "ports": [
+      { "port": 1, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 2, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 3, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 4, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 5, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 6, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 7, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 8, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 9, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 10, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 11, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 12, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 13, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 14, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 15, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 16, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 17, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 18, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 19, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 20, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 21, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 22, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 23, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 24, "type": "copper", "maxSpeed": 1000, "poe": true },
+      { "port": 25, "type": "fiber", "maxSpeed": 10000, "poe": false, "combo": true },
+      { "port": 26, "type": "fiber", "maxSpeed": 10000, "poe": false, "combo": true },
+      { "port": 27, "type": "fiber", "maxSpeed": 10000, "poe": false, "combo": true },
+      { "port": 28, "type": "fiber", "maxSpeed": 10000, "poe": false, "combo": true }
+    ],
+    "lagCount": 8,
+    "capability": {
+      "poe": true,
+      "poeBudget": 185,
+      "l3": true,
+      "cloud": false
+    },
+    "cloudEnabled": false
+  }
+}

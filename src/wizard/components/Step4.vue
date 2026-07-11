@@ -35,6 +35,7 @@
 import commonTable from '@/components/CustomTable/common-table.vue'
 import { mapGetters } from 'vuex'
 import { parseTime } from '@/utils'
+import { cgiSet } from '@/api/cgi'
 
 export default
 {
@@ -79,16 +80,15 @@ export default
       const data = {
         time: this.currentTime,
         username: this.userAccount.username,
-        passwor: this.userAccount.passwor,
+        password: this.userAccount.password,
         ip: this.ipInfo.ip,
         mask: this.ipInfo.mask,
         gw: this.ipInfo.gw,
         dns: this.ipInfo.dns
       }
-      this.$http.post('url_set_wizard', data).then(resp => {
+      cgiSet('home_wizard', data).then(() => {
         this.$router.push('/dashboard')
-      },
-      err => {
+      }, err => {
         console.log('wizard post error: ', err)
       })
     },

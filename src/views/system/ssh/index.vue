@@ -26,6 +26,7 @@
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
+import { cgiGet, cgiSet } from '@/api/cgi'
 export default {
   components: {
     commonTable,
@@ -34,20 +35,15 @@ export default {
   data() {
     return {
       btnClass: 'btnOutTable',
-      select: '',
-      port: ''
+      select: '2',
+      port: '22'
     }
   },
   created() {
-    this.select = 2
-    this.port = '22'
-    // get ssl enabled
-    // this.$http.get('url_get_xxx').then(resp=>{
-    //     this.timeout = resp.data.timeout
-    // },
-    // err=>{
-    //     console.log('get ssl fail..');
-    // })
+    cgiGet('sys_ssh').then(d => {
+      this.select = d.enabled ? '1' : '2'
+      this.port = String(d.port)
+    })
   },
   methods: {
     apply() {
@@ -56,8 +52,7 @@ export default {
         message.warnBox('Please enter an integer between 1 ~ 65535')
         return
       }
-      // post
-      message.success()
+      cgiSet('sys_ssh', { enabled: this.select === '1' ? 1 : 0, port: this.port })
     },
     check() {
       this.port = this.port.replace(/[^0-9]/g, '')

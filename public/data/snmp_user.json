@@ -1,0 +1,11 @@
+{
+  "data": {
+    "max": 10,
+    "entries": [
+      { "name": "ReadOnly", "group": "ReadOnly", "version": "v1", "auth": "None", "priv": "None" },
+      { "name": "ReadOnly", "group": "ReadOnly", "version": "v2c", "auth": "None", "priv": "None" },
+      { "name": "ReadWrite", "group": "ReadWrite", "version": "v1", "auth": "None", "priv": "None" },
+      { "name": "ReadWrite", "group": "ReadWrite", "version": "v2c", "auth": "None", "priv": "None" }
+    ]
+  }
+}

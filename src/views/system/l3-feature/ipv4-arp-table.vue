@@ -68,6 +68,7 @@ import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
 import { applyCheck } from '@/utils'
+import { cgiGet, cgiSet } from '@/api/cgi'
 export default {
   components: {
     commonTable,
@@ -86,22 +87,20 @@ export default {
     }
   },
   created() {
-    this.loading = true
-    this.$http.get('url_get_ipv4ArpTable').then(resp => {
-      for (const k in resp.data.table) {
-        if (Object.hasOwnProperty.call(resp.data.table, k)) {
-          const element = resp.data.table[k]
-          this.tableData.push(element)
-        }
-      }
-      this.loading = false
-      this.totalEntry = this.tableData.length
-    },
-    err => {
-      console.log('url_get_ipv4ArpTable error!', err)
-    })
+    this.load()
   },
   methods: {
+    load() {
+      this.loading = true
+      cgiGet('l3_arpTable').then(d => {
+        this.tableData = d.entries || []
+        this.totalEntry = this.tableData.length
+        this.loading = false
+      }, err => {
+        this.loading = false
+        console.log('l3_arpTable error!', err)
+      })
+    },
     handleSizeChange(val) {
       this.pageSize = val
     },
@@ -124,28 +123,16 @@ export default {
         message.warnBox('Invalid MAC address.')
         return
       }
-      message.success()
-      // this.$http.post('url_set_xxx', data).then(resp => {
-      //   this.$message.success({
-      //     showClose: true,
-      //     message: 'Success.'
-      //   })
-      // },
-      // err => {
-      //   console.log('xxx-post error: ', err)
-      // })
+      cgiSet('l3_arpAdd', { ip: this.ipAddr, mac: this.macAddr }).then(() => {
+        this.ipAddr = ''
+        this.macAddr = ''
+        this.load()
+      })
     },
     delRow(row) {
-      message.success()
-      // this.$http.post('url_set_xxx', data).then(resp => {
-      //   this.$message.success({
-      //     showClose: true,
-      //     message: 'Success.'
-      //   })
-      // },
-      // err => {
-      //   console.log('xxx-post error: ', err)
-      // })
+      cgiSet('l3_arpDel', { ip: row.ip }).then(() => {
+        this.load()
+      })
     }
   }
 }

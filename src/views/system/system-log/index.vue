@@ -5,6 +5,7 @@
       <common-table
         header-title="System log Settings"
         :first-column="['Time Stamp','Messages Buffered Size', 'Syslog Status', 'Syslog Server IP','Facility','Logging Level']"
+        :double-rows="[3]"
       >
         <template #0>
           <select v-model="timeStampEnabled">

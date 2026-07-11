@@ -1,4 +1,4 @@
-import request from '@/utils/request'
+import { cgiGet } from '@/api/cgi'
 
 const state = {
   account: {
@@ -38,16 +38,10 @@ const mutations = {
 }
 
 const actions = {
-  updateState({ commit }) {
-    return new Promise((resolve, reject) => {
-      request.get('url_get_wizard').then(resp => {
-        commit('UPDATE', resp.data)
-        resolve(resp.data)
-      }).catch(err => {
-        console.log('actions request err ', err)
-        reject(err)
-      })
-    })
+  async updateState({ commit }) {
+    const d = await cgiGet('home_wizard')
+    commit('UPDATE', d)
+    return d
   },
   userAccount({ commit }, accountObj) {
     commit('ACCOUNT', accountObj)

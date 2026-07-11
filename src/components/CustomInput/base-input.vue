@@ -1,5 +1,5 @@
 <template>
-  <div :class="divClass" style="display: inline-block; width: 50%;">
+  <div class="baseInputBox" :class="divClass" style="display: inline-block; width: 50%;">
     <input
       :value="value"
       :type="type"

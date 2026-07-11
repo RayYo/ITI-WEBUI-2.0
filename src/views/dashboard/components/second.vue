@@ -83,6 +83,7 @@
 <script>
 import switchPanel from '@/components/Panel'
 import { mapGetters } from 'vuex'
+import { cgiGet, cgiSet } from '@/api/cgi'
 
 export default {
   components: {
@@ -106,6 +107,7 @@ export default {
   created() {
     this.copperGroupNum = this.modelInfo('copperPortNum') / 8
     if (this.modelInfo('poeNum') > 0) { this.isPoe = true }
+    this.loading = true
     this.updateData()
     this.timer = setInterval(this.updateData, 10000)
   },
@@ -113,46 +115,45 @@ export default {
     clearInterval(this.timer)
   },
   methods: {
+    /** devinfo 端口类型 → 面板 ref(fiber 走 portf<n>) */
+    portRefOf(port) {
+      const meta = this.modelInfo('ports').find(p => p.port === port)
+      return (meta && meta.type === 'fiber') ? `portf${port}` : `port${port}`
+    },
     updateData() {
-      this.loading = true
-      this.tableData = []
-      this.portLinkData = []
-      setTimeout(() => {
-        this.$http.get('url_get_panelInfo').then(resp => {
-          for (const i in resp.data.ports) {
-            const obj = resp.data.ports[i]
-            this.tableData.push(obj)
-            // port link
-            let pRef = ''
-            let pColor = ''
-            if (obj.port.indexOf('F') !== -1) {
-              pRef = 'portf' + obj.port.substr(0, obj.port.length - 1)
-            } else {
-              pRef = 'port' + obj.port
-            }
-            if (obj.speed === '1000') {
-              pColor = 'green'
-            } else {
-              pColor = 'orange'
-            }
-            if (!obj.linkup) {
-              pColor = 'black'
-            }
-            this.portLinkData.push({
-              portRef: pRef,
-              linkColor: pColor
-            })
-          }
-          this.loading = false
-        },
-        err => {
-          console.log('panelInfo get error: ', err)
-          this.loading = false
-        })
-      }, 1000)
+      cgiGet('panel_info').then(d => {
+        const rows = []
+        const links = []
+        for (const p of d.ports || []) {
+          rows.push({
+            port: p.port,
+            throughput: p.throughputMbps || 0,
+            loopStatus: p.loopback === 'looped' ? 'Looped' : 'Normal',
+            distance: p.distance == null ? '-' : p.distance,
+            poeEnable: p.poe ? p.poe.on : '-',
+            poeStatus: p.poe ? (p.poe.powering ? 'ON' : 'OFF') : '-',
+            poeStandard: p.poe ? p.poe.standard : '-',
+            poeConsumption: p.poe ? (p.poe.powerMw || 0) / 1000 : '-'
+          })
+          links.push({
+            portRef: this.portRefOf(p.port),
+            linkColor: !p.link ? 'black' : (p.speed >= 1000 ? 'green' : 'orange')
+          })
+        }
+        this.tableData = rows
+        this.portLinkData = links
+        this.loading = false
+      }, err => {
+        console.log('panelInfo get error: ', err)
+        this.loading = false
+      })
     },
     poeEnableSet(v, port) {
-      console.log(port, v)
+      cgiSet('poe_portEdit', { port, enable: v ? 1 : 0 }, { successMsg: false }).catch(() => {
+        // 失败回滚开关状态
+        const row = this.tableData.find(r => r.port === port)
+        if (row) row.poeEnable = !v
+      })
     }
   }
 }
