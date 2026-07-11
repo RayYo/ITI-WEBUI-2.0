@@ -119,12 +119,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    // 面板必须保持整条水平结构:任何窗口宽度下都不许换行分层,
+    // 窄窗口由外层容器(overflow:auto)横向滚动
     .panel_box {
         width: 100%;
+        min-width: 1122px;
     }
     .blue, .green {
         padding: 20px 15px;
         float: left;
+        white-space: nowrap;
     }
     .port_box {
         background: #fff;

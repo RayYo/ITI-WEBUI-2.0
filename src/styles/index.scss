@@ -387,11 +387,7 @@ button, input, optgroup, select, textarea {
   .lineChart_box {
     width: 100% !important;
   }
-  // 前面板(固定 1122px)横向滚动
-  .panel_box {
-    width: 100% !important;
-    overflow-x: auto !important;
-  }
+  // 前面板保持固定 1122px 整条水平结构,窄屏由外层容器横向滚动,严禁换行分层
 }
 
 .SystemlogSettingsTextarea {
