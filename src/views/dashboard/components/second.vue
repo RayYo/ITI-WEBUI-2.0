@@ -4,80 +4,84 @@
       :copper-group-num="copperGroupNum"
       :port-link-change="portLinkData"
     />
-    <el-table
-      v-loading="loading"
-      :data="tableData"
-      empty-text="< < Table is empty > >"
-      :stripe="true"
-      :border="true"
-      :header-cell-style="{
-        'background': 'rgb(88, 95, 105)',
-        'color': 'rgb(255, 255, 255)',
-        'font-weight': '700',
-        'text-align': 'center',
-      }"
-      :cell-style="{
-        'text-align': 'center'
-      }"
-    >
-      <el-table-column label="Port">
-        <template slot-scope="scope">
-          <span>{{ scope.row.port }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="Throughput">
-        <template slot-scope="scope">
-          <span>{{ scope.row.throughput+' Mbps' }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="Loopback Detection">
-        <template slot-scope="scope">
-          <span>{{ scope.row.loopStatus }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="Distance">
-        <template slot-scope="scope">
-          <span>{{ scope.row.distance }}</span>
-        </template>
-      </el-table-column>
-
-      <template v-if="isPoe">
-        <el-table-column label="PoE On/Off">
+    <!-- 窄窗口时表格横向滚动而非压缩列宽,保证数据与格式完整 -->
+    <div class="table-scroll">
+      <el-table
+        v-loading="loading"
+        :data="tableData"
+        :style="{ minWidth: isPoe ? '1050px' : '620px' }"
+        empty-text="< < Table is empty > >"
+        :stripe="true"
+        :border="true"
+        :header-cell-style="{
+          'background': 'rgb(88, 95, 105)',
+          'color': 'rgb(255, 255, 255)',
+          'font-weight': '700',
+          'text-align': 'center',
+        }"
+        :cell-style="{
+          'text-align': 'center'
+        }"
+      >
+        <el-table-column label="Port">
           <template slot-scope="scope">
-            <el-switch
-              v-if="scope.row.poeEnable!=='-'"
-              v-model="scope.row.poeEnable"
-              active-color="#2AB4A7"
-              inactive-color="#BEC1C8"
-              active-text="ON"
-              inactive-text="OFF"
-              @change="poeEnableSet($event, scope.row.port)"
-            />
-            <span v-else>{{ scope.row.poeEnable }}</span>
+            <span>{{ scope.row.port }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="PoE Status">
+
+        <el-table-column label="Throughput">
           <template slot-scope="scope">
-            <span v-if="scope.row.poeStatus !== '-'">{{ 'POWER '+scope.row.poeStatus }}</span>
-            <span v-else>{{ scope.row.poeStatus }}</span>
+            <span>{{ scope.row.throughput+' Mbps' }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="PoE Standard">
+
+        <el-table-column label="Loopback Detection">
           <template slot-scope="scope">
-            <span>{{ scope.row.poeStandard }}</span>
+            <span>{{ scope.row.loopStatus }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="Power Consumption">
+
+        <el-table-column label="Distance">
           <template slot-scope="scope">
-            <span v-if="scope.row.poeConsumption !== '-'">{{ scope.row.poeConsumption+' W' }}</span>
-            <span v-else>{{ scope.row.poeConsumption }}</span>
+            <span>{{ scope.row.distance }}</span>
           </template>
         </el-table-column>
-      </template>
-    </el-table>
+
+        <template v-if="isPoe">
+          <el-table-column label="PoE On/Off">
+            <template slot-scope="scope">
+              <el-switch
+                v-if="scope.row.poeEnable!=='-'"
+                v-model="scope.row.poeEnable"
+                active-color="#2AB4A7"
+                inactive-color="#BEC1C8"
+                active-text="ON"
+                inactive-text="OFF"
+                @change="poeEnableSet($event, scope.row.port)"
+              />
+              <span v-else>{{ scope.row.poeEnable }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="PoE Status">
+            <template slot-scope="scope">
+              <span v-if="scope.row.poeStatus !== '-'">{{ 'POWER '+scope.row.poeStatus }}</span>
+              <span v-else>{{ scope.row.poeStatus }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="PoE Standard">
+            <template slot-scope="scope">
+              <span>{{ scope.row.poeStandard }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="Power Consumption">
+            <template slot-scope="scope">
+              <span v-if="scope.row.poeConsumption !== '-'">{{ scope.row.poeConsumption+' W' }}</span>
+              <span v-else>{{ scope.row.poeConsumption }}</span>
+            </template>
+          </el-table-column>
+        </template>
+      </el-table>
+    </div>
   </div>
 </template>
 <script>
@@ -159,4 +163,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.table-scroll {
+  overflow-x: auto;
+}
 </style>

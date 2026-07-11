@@ -190,10 +190,10 @@ export default {
 .chart {
   margin-top: 20px;
 }
+// 固定 900px:窄窗口时由外层 .chart(overflow:auto)横向滚动,不压缩图表
 .dasChart {
   position: relative;
   width: 900px;
-  max-width: 100%;
   height: 450px;
   margin: 0 auto;
 }

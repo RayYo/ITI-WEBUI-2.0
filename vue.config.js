@@ -1,4 +1,12 @@
 'use strict'
+// Node 17+(OpenSSL 3)移除了 md4,webpack4 会报 ERR_OSSL_EVP_UNSUPPORTED。
+// 这里全局把 md4 替换为 sha256,免去 NODE_OPTIONS=--openssl-legacy-provider
+// (Windows cmd/PowerShell 无法内联设置环境变量,cross-env 又依赖重新 npm install)
+const crypto = require('crypto')
+const origCreateHash = crypto.createHash.bind(crypto)
+crypto.createHash = (algorithm, options) =>
+  origCreateHash(algorithm === 'md4' ? 'sha256' : algorithm, options)
+
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 
