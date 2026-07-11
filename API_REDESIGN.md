@@ -81,6 +81,24 @@
 | `l3_ipv6Neighbor`(+Add/Del) | get/set | 🆕 | `{entries:[{ipv6,mac,type:'Static'/'Dynamic'}]}` |
 | `l3_ipv6Route`(+Add/Del) | get/set | 🆕 | R2 接线时定稿字段 |
 
+## R2 第一批:SNMP/RMON/Statistics/EEE(2026-07-11)
+
+| cmd | 方向 | 状态 | 说明 |
+|---|---|---|---|
+| `snmp_view`(+Add/Del) | get/set | 🆕 | `{max,entries:[{name,oid,mask,type:'included'/'excluded'}]}`;Del `{name}` 或 `{all:1}` |
+| `snmp_community`(+Add/Del) | get/set | 🆕 | `{max,entries:[{name,policy}]}` |
+| `snmp_group`(+Add/Del) | get/set | 🆕 | `{max,entries:[{name,readView,writeView,notifyView,model:'v1'/'v2c'/'v3',level}]}` |
+| `snmp_user`(+Add/Del) | get/set | 🆕 | `{max,entries:[{name,group,version,auth:'None'/'MD5'/'SHA',priv:'None'/'DES'}]}`;Add 另带 encrypted/authPwd/privPwd |
+| `snmp_trapEvent` | get/set | 🆕 | `{enabled}`(Trap Status) |
+| `snmp_notify`(+Add/Del) | get/set | 🆕 | Trap 主机表 `{max,entries:[{idx,host,version,name}]}`;Del `{idx}` 或 `{all:1}` |
+| `rmon_global` | get/set | 🆕 | `{enabled}` |
+| `rmon_statistics`(+Add/Del) | get/set | 🆕 | `{entries:[{idx,port,dropEvents,octets,packets,broadcast,multicast,owner}]}` |
+| `rmon_history`(+Add/Del) | get/set | 🆕 | `{entries:[{idx,port,bucketsReq,bucketsGranted,interval,owner}]}` |
+| `rmon_event`(+Add/Del) | get/set | 🆕 | `{entries:[{idx,desc,type,community,owner,lastSent}]}` |
+| `rmon_alarm`(+Add/Del) | get/set | 🆕 | `{entries:[{idx,interval,variable,sample,rising,falling,risingEvent,fallingEvent,owner}]}` |
+| `port_statistics` | get | ♻️ | Statistics Traffic/Error 共用:`{ports:[{port,inOctets,inUcast,inNUcast,inDiscards,outOctets,outUcast,outNUcast,outDiscards,inErrors,outErrors,dropEvents,crcAlign,undersize,oversize,fragments,collisions}]}` |
+| `port_cntClear` | set | 🆕 | 清端口计数:`{port:<n>}` 或 `{all:1}` |
+
 ## 待登记(随 R2/R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

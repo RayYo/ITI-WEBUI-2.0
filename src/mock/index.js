@@ -42,6 +42,9 @@ async function getDevinfo() {
 const ok = { status: 'ok', msgType: 'save_success', msg: '' }
 const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
+/* link up 的模拟端口(panel_info / port_statistics 共用) */
+const LINKED = [1, 2, 3, 5, 7, 9, 10, 14, 18, 25, 26]
+
 /* ---------- get handlers(默认走 /data/<cmd>.json,这里只放动态数据) ---------- */
 const getHandlers = {
   home_login: async() => {
@@ -95,7 +98,6 @@ const getHandlers = {
    * 模拟数据尽量丰富:多个端口 link up、不同速率/双工、部分 PoE 供电(仅样式需复刻原版,数据不必)。 */
   panel_info: async() => {
     const dev = await getDevinfo()
-    const LINKED = [1, 2, 3, 5, 7, 9, 10, 14, 18, 25, 26] // link up 的端口
     const HALF = [3, 9] // 半双工
     const SLOW = [5, 14] // 百兆口
     const ports = dev.ports.map(p => {
@@ -125,8 +127,50 @@ const getHandlers = {
   }
 }
 
+/* Statistics Traffic/Error:计数随时间累积,port_cntClear 记录清零快照 */
+const CNT_FIELDS = {
+  inOctets: 5, inUcast: 1.2, inNUcast: 0.6, inDiscards: 0.01,
+  outOctets: 4.2, outUcast: 1.0, outNUcast: 0.5, outDiscards: 0.008,
+  inErrors: 0.005, outErrors: 0.003, dropEvents: 0.004, crcAlign: 0.002,
+  undersize: 0.001, oversize: 0.001, fragments: 0.002, collisions: 0.003
+}
+const cntCleared = {} // port -> {field: 清零时的原始值}
+function cntRaw(port, field, factor) {
+  const seed = 0.3 + ((port * 37) % 17) / 10
+  const base = Math.floor(Date.now() / 1000) % 100000
+  return Math.floor(base * factor * seed * 100)
+}
+getHandlers.port_statistics = async() => {
+  const dev = await getDevinfo()
+  const ports = dev.ports.map(p => {
+    const linked = LINKED.indexOf(p.port) !== -1
+    const row = { port: p.port }
+    Object.keys(CNT_FIELDS).forEach(f => {
+      if (!linked) {
+        row[f] = 0
+      } else {
+        const cleared = (cntCleared[p.port] && cntCleared[p.port][f]) || 0
+        row[f] = Math.max(0, cntRaw(p.port, f, CNT_FIELDS[f]) - cleared)
+      }
+    })
+    return row
+  })
+  return { data: { ports }}
+}
+
 /* ---------- set handlers ---------- */
 const setHandlers = {
+  port_cntClear: async params => {
+    const dev = await getDevinfo()
+    const targets = params.all ? dev.ports.map(p => p.port) : [Number(params.port)]
+    targets.forEach(port => {
+      cntCleared[port] = {}
+      Object.keys(CNT_FIELDS).forEach(f => {
+        cntCleared[port][f] = cntRaw(port, f, CNT_FIELDS[f])
+      })
+    })
+    return ok
+  },
   home_loginAuth: async params => {
     if (params.username === 'admin' && params.password === 'admin') {
       state.loggedIn = true

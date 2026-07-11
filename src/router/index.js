@@ -243,6 +243,117 @@ export const constantRoutes = [
         name: 'System-Log',
         component: () => import('@/views/system/system-log'),
         meta: { title: 'System Log', icon: 'submenu' }
+      },
+      {
+        path: 'snmp',
+        name: 'SNMP',
+        component: () => import('@/components/RouterView'),
+        meta: { title: 'SNMP', icon: 'submenu' },
+        redirect: '/system/snmp/settings',
+        children: [
+          {
+            path: 'settings',
+            name: 'SNMP-Settings',
+            component: () => import('@/views/system/snmp/settings'),
+            meta: { title: 'Settings', icon: 'submenu' }
+          },
+          {
+            path: 'view',
+            name: 'SNMP-View',
+            component: () => import('@/views/system/snmp/view'),
+            meta: { title: 'View', icon: 'submenu' }
+          },
+          {
+            path: 'group',
+            name: 'SNMP-Group',
+            component: () => import('@/views/system/snmp/group'),
+            meta: { title: 'Group', icon: 'submenu' }
+          },
+          {
+            path: 'user',
+            name: 'SNMP-User',
+            component: () => import('@/views/system/snmp/user'),
+            meta: { title: 'User', icon: 'submenu' }
+          },
+          {
+            path: 'community',
+            name: 'SNMP-Community',
+            component: () => import('@/views/system/snmp/community'),
+            meta: { title: 'Community', icon: 'submenu' }
+          },
+          {
+            path: 'trap',
+            name: 'SNMP-Trap',
+            component: () => import('@/views/system/snmp/trap'),
+            meta: { title: 'Trap', icon: 'submenu' }
+          }
+        ]
+      },
+      {
+        path: 'rmon',
+        name: 'RMON',
+        component: () => import('@/components/RouterView'),
+        meta: { title: 'RMON', icon: 'submenu' },
+        redirect: '/system/rmon/settings',
+        children: [
+          {
+            path: 'settings',
+            name: 'RMON-Settings',
+            component: () => import('@/views/system/rmon/settings'),
+            meta: { title: 'Settings', icon: 'submenu' }
+          },
+          {
+            path: 'statistics',
+            name: 'RMON-Statistics',
+            component: () => import('@/views/system/rmon/statistics'),
+            meta: { title: 'Statistics', icon: 'submenu' }
+          },
+          {
+            path: 'history',
+            name: 'RMON-History',
+            component: () => import('@/views/system/rmon/history'),
+            meta: { title: 'History', icon: 'submenu' }
+          },
+          {
+            path: 'alarm',
+            name: 'RMON-Alarm',
+            component: () => import('@/views/system/rmon/alarm'),
+            meta: { title: 'Alarm', icon: 'submenu' }
+          },
+          {
+            path: 'event',
+            name: 'RMON-Event',
+            component: () => import('@/views/system/rmon/event'),
+            meta: { title: 'Event', icon: 'submenu' }
+          }
+        ]
+      },
+      {
+        path: 'statistics',
+        name: 'Statistics',
+        component: () => import('@/components/RouterView'),
+        meta: { title: 'Statistics', icon: 'submenu' },
+        redirect: '/system/statistics/traffic',
+        children: [
+          {
+            path: 'traffic',
+            name: 'Statistics-Traffic',
+            component: () => import('@/views/system/statistics/traffic'),
+            meta: { title: 'Traffic', icon: 'submenu' }
+          },
+          {
+            path: 'error',
+            name: 'Statistics-Error',
+            component: () => import('@/views/system/statistics/error'),
+            meta: { title: 'Error', icon: 'submenu' }
+          }
+        ]
+      },
+      {
+        path: 'eee',
+        name: 'EEE',
+        component: () => import('@/views/system/eee'),
+        meta: { title: 'IEEE 802.3az EEE', icon: 'submenu' }
       }
     ]
   },

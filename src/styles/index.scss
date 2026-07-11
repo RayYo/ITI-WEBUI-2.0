@@ -177,6 +177,26 @@ div:focus {
   margin-top: 10px;
   margin-bottom: 15px;
 }
+.marginbutton {
+  margin-top: 13px;
+  margin-bottom: 13px;
+}
+.note {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+// 文本输入外层容器(原版内联 display:inline-block;width:50%)
+.inputBox {
+  display: inline-block;
+  width: 50%;
+}
+// 功能页数据表格(原版 .tableBox:th 9.5px、td 6px)
+.tableBox th.el-table__cell {
+  padding: 9.5px 0 !important;
+}
+.tableBox td.el-table__cell {
+  padding: 6px 0 !important;
+}
 
 .btnInTitle, .btnOutTable {
   height: 35px!important;
@@ -354,7 +374,8 @@ button, input, optgroup, select, textarea {
   .from_table tr td select {
     width: 100% !important;
   }
-  .baseInputBox {
+  .baseInputBox,
+  .inputBox {
     width: 100% !important;
   }
   // Dashboard 信息表:三列 flex → 单列堆叠
