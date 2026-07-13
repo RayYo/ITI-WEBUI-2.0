@@ -372,6 +372,45 @@ export const constantRoutes = [
         meta: { title: 'Physical Interface', icon: 'submenu' }
       },
       {
+        path: 'vlan',
+        name: 'VLAN',
+        component: () => import('@/views/network/vlan/index'),
+        meta: { title: 'VLAN', icon: 'submenu' },
+        redirect: '/network/vlan/tagged',
+        children: [
+          {
+            path: 'tagged',
+            name: 'VLAN-Tagged',
+            component: () => import('@/views/network/vlan/tagged'),
+            meta: { title: 'Tagged', icon: 'submenu' }
+          },
+          {
+            path: 'forwarding',
+            name: 'VLAN-Forwarding',
+            component: () => import('@/views/network/vlan/forwarding'),
+            meta: { title: 'Forwarding', icon: 'submenu' }
+          },
+          {
+            path: 'dynamic',
+            name: 'VLAN-Dynamic',
+            component: () => import('@/views/network/vlan/dynamic'),
+            meta: { title: 'Dynamic', icon: 'submenu' }
+          },
+          {
+            path: 'private',
+            name: 'VLAN-Private',
+            component: () => import('@/views/network/vlan/private'),
+            meta: { title: 'Private', icon: 'submenu' }
+          },
+          {
+            path: 'current',
+            name: 'VLAN-Current',
+            component: () => import('@/views/network/vlan/current'),
+            meta: { title: 'Current', icon: 'submenu' }
+          }
+        ]
+      },
+      {
         path: 'spanning-tree',
         name: 'Spanning-Tree',
         component: () => import('@/views/network/spanning-tree/index'),

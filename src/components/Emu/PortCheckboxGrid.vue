@@ -1,4 +1,5 @@
 <template>
+  <!-- 原版:.port_table(端口号在上/分割线/勾选在下),标题栏含 All 切换 -->
   <div>
     <div class="table_title">
       <span>{{ title }}</span>
@@ -7,23 +8,29 @@
       </div>
     </div>
     <div class="table-scroll">
-      <table class="port-grid" border cellspacing="0">
-        <tbody>
-          <tr class="port-grid-head">
-            <td v-for="p in ports" :key="'h' + p">{{ p }}</td>
-          </tr>
-          <tr>
-            <td v-for="p in ports" :key="'c' + p">
-              <input
-                type="checkbox"
-                :checked="value.indexOf(p) !== -1"
-                :disabled="disabled"
-                @change="toggle(p, $event)"
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div style="margin: -2px">
+        <table border cellspacing="0" cellpadding="2" class="port_table">
+          <tbody>
+            <tr>
+              <td v-for="p in ports" :key="p">
+                <div class="pt-cell"><span>{{ p }}</span></div>
+                <div class="pt-divider" />
+                <div class="pt-cell">
+                  <span>
+                    <input
+                      type="checkbox"
+                      :class="{ disabledStyle: disabled }"
+                      :checked="value.indexOf(p) !== -1"
+                      :disabled="disabled"
+                      @change="toggle(p, $event)"
+                    >
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -61,20 +68,7 @@ export default {
 .table-scroll {
   overflow-x: auto;
 }
-.port-grid {
-  width: 100%;
+.port_table {
   min-width: 1200px;
-  border-collapse: collapse;
-  table-layout: fixed;
-  background-color: #fff;
-  td {
-    border: 1px solid #ccc;
-    text-align: center;
-    padding: 8px 0;
-  }
-  .port-grid-head td {
-    font-weight: 700;
-    color: #585f69;
-  }
 }
 </style>

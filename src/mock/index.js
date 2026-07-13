@@ -370,6 +370,69 @@ setHandlers.net_loopbackPort = async params => {
   return ok
 }
 
+/* ---------- Network R3 第二批:VLAN(Forwarding/Current/Dynamic/Tagged/Private) ---------- */
+// Forwarding Table Mode
+getHandlers.net_vlanFwdMode = async() => ({ data: await netData('net_vlanFwdMode') })
+setHandlers.net_vlanFwdMode = async params => {
+  const d = await netData('net_vlanFwdMode')
+  if (params.mode !== undefined) d.mode = params.mode
+  return ok
+}
+
+// Current VLAN Database(只读)
+getHandlers.net_vlanCurrent = async() => ({ data: await netData('net_vlanCurrent') })
+
+// Dynamic Forwarding Table(可按 port 过滤,0=All)
+getHandlers.net_vlanDynamic = async query => {
+  const d = await netData('net_vlanDynamic')
+  const port = Number(query.port) || 0
+  const list = port ? d.list.filter(r => r.port === port) : d.list
+  return { data: { list } }
+}
+
+// Tagged VLAN(表 + 每 VLAN 端口成员归属:1=Tagged 2=Untagged 3=NotMember)
+getHandlers.net_vlanTagged = async() => ({ data: await netData('net_vlanTagged') })
+setHandlers.net_vlanTaggedEdit = async params => {
+  const d = await netData('net_vlanTagged')
+  const id = Number(params.id)
+  const members = parseList(params.members) // 逗号分隔的每端口状态
+  const row = d.list.find(v => v.id === id)
+  if (row) { // Modify
+    if (params.name !== undefined) row.name = params.name
+    if (members.length) row.members = members
+  } else { // Add
+    d.list.push({ id, name: params.name || '', type: 'Static', members: members.length ? members : new Array(28).fill(3) })
+    d.list.sort((a, b) => a.id - b.id)
+  }
+  return ok
+}
+setHandlers.net_vlanTaggedDel = async params => {
+  const d = await netData('net_vlanTagged')
+  const id = Number(params.id)
+  const i = d.list.findIndex(v => v.id === id)
+  if (i !== -1) d.list.splice(i, 1)
+  return ok
+}
+
+// Private VLAN
+getHandlers.net_vlanPrivate = async() => ({ data: await netData('net_vlanPrivate') })
+setHandlers.net_vlanPrivateGlobal = async params => {
+  const d = await netData('net_vlanPrivate')
+  d.status = toBool(params.status)
+  return ok
+}
+setHandlers.net_vlanPrivatePort = async params => {
+  const d = await netData('net_vlanPrivate')
+  const src = Number(params.sourcePort)
+  const fwd = parseList(params.forwardingPorts)
+  d.sourcePort = src
+  d.forwardingPorts = fwd
+  const rangeStr = fwd.length ? fwd.join(',') : '-'
+  const row = d.portList.find(r => r.port === src)
+  if (row) row.portMap = rangeStr
+  return ok
+}
+
 function respond(config, data) {
   return {
     data,

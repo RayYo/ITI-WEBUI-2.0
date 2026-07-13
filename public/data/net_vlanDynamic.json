@@ -1,0 +1,90 @@
+{
+  "data": {
+    "list": [
+      {
+        "index": 1,
+        "vid": 1,
+        "port": 1,
+        "mac": "00:11:22:33:44:55",
+        "type": "Dynamic"
+      },
+      {
+        "index": 2,
+        "vid": 1,
+        "port": 2,
+        "mac": "A4:BB:6D:1F:0C:22",
+        "type": "Dynamic"
+      },
+      {
+        "index": 3,
+        "vid": 10,
+        "port": 3,
+        "mac": "00:1E:C9:AB:CD:EF",
+        "type": "Dynamic"
+      },
+      {
+        "index": 4,
+        "vid": 20,
+        "port": 4,
+        "mac": "3C:52:82:11:22:33",
+        "type": "Dynamic"
+      },
+      {
+        "index": 5,
+        "vid": 20,
+        "port": 5,
+        "mac": "00:50:56:C0:00:08",
+        "type": "Dynamic"
+      },
+      {
+        "index": 6,
+        "vid": 30,
+        "port": 6,
+        "mac": "D8:CB:8A:77:11:04",
+        "type": "Dynamic"
+      },
+      {
+        "index": 7,
+        "vid": 30,
+        "port": 7,
+        "mac": "F0:9F:C2:AA:BB:CC",
+        "type": "Dynamic"
+      },
+      {
+        "index": 8,
+        "vid": 100,
+        "port": 8,
+        "mac": "00:0C:29:3D:4E:5F",
+        "type": "Dynamic"
+      },
+      {
+        "index": 9,
+        "vid": 100,
+        "port": 9,
+        "mac": "54:BF:64:12:34:56",
+        "type": "Dynamic"
+      },
+      {
+        "index": 10,
+        "vid": 1,
+        "port": 10,
+        "mac": "B8:27:EB:9A:BC:DE",
+        "type": "Dynamic"
+      },
+      {
+        "index": 11,
+        "vid": 10,
+        "port": 11,
+        "mac": "00:1A:2B:3C:4D:5E",
+        "type": "Dynamic"
+      },
+      {
+        "index": 12,
+        "vid": 20,
+        "port": 12,
+        "mac": "AC:DE:48:00:11:22",
+        "type": "Dynamic"
+      }
+    ]
+  }
+}

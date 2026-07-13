@@ -185,6 +185,33 @@ div:focus {
   margin-top: 12px;
   margin-bottom: 12px;
 }
+// 端口成员表(原版 .port_table:端口号在上、分割线、控件在下)
+.port_table {
+  border-collapse: collapse;
+  background-color: #fff;
+  width: 100%;
+  border: 0 none;
+  border-color: #ccc;
+  table-layout: fixed;
+  text-align: center;
+  tr {
+    border-bottom: 1px solid #ccc;
+  }
+  tr td {
+    border-color: #ccc;
+    word-wrap: break-word;
+  }
+  .pt-cell {
+    height: 40px;
+    margin: auto;
+    padding-top: 12px;
+  }
+  .pt-divider {
+    border-top: 1px solid #ccc;
+    height: 0;
+    margin: 0 -2px;
+  }
+}
 // 文本输入外层容器(原版内联 display:inline-block;width:50%)
 .inputBox {
   display: inline-block;

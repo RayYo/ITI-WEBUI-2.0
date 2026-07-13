@@ -127,10 +127,27 @@
 | `net_loopbackGlobal` | set | 🆕 | `{status:(1/0),interval,recoverTime}` |
 | `net_loopbackPort` | set | 🆕 | 单端口 `{port,state:(1/0)}` 或批量 `{all:1,state}` |
 
+## R3 第二批:VLAN(Tagged/Forwarding/Dynamic/Private/Current)(2026-07-13)
+
+> 端口集合一律语义化:成员归属用 1=Static Tagged / 2=Static Untagged / 3=Not Member;
+> Member/Untagged/Port Map 显示用 `"1-28"` 之类区间串。原设备用位掩码(`ff:ff:ff:f0:...`),转换在 cgi 层完成。
+
+| cmd | 方向 | 状态 | 说明 |
+|---|---|---|---|
+| `net_vlanFwdMode` | get/set | 🆕 | Forwarding Table Mode:`{mode:'IVL'/'SVL'}` |
+| `net_vlanCurrent` | get | 🆕 | Current VLAN DB(只读):`{list:[{id,name,fdbId,memberPorts:'1-28',untaggedPorts,status:'Permanent'/'Dynamic'}]}` |
+| `net_vlanDynamic` | get | 🆕 | Dynamic FDB:`{list:[{index,vid,port,mac,type}]}`,可传 `?port=(0=All/1..N)` 过滤 |
+| `net_vlanTagged` | get | 🆕 | Tagged VLAN 表:`{list:[{id,name,type:'Static',members:[28 项,每项 1/2/3]}]}` |
+| `net_vlanTaggedEdit` | set | 🆕 | 新增/修改:`{id,name,members:'2,2,3,...'}`(members 为逗号串,长度=端口数;id 已存在则改名+成员,否则新增) |
+| `net_vlanTaggedDel` | set | 🆕 | `{id}` 删除该 VLAN(默认 VLAN 1 不可删) |
+| `net_vlanPrivate` | get | 🆕 | Private VLAN:`{status:bool,sourcePort:int,forwardingPorts:[port..],portList:[{port,portMap:'1-28'}]}` |
+| `net_vlanPrivateGlobal` | set | 🆕 | `{status:(1/0)}` |
+| `net_vlanPrivatePort` | set | 🆕 | `{sourcePort,forwardingPorts:'1,2,3'}`(设定该源端口的转发端口集) |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->
-<!-- Network 剩余组:VLAN(Tagged/Forwarding/Dynamic/Private/Current)、MAC Address
+<!-- Network 剩余组:MAC Address
      (Static Unicast/Static Multicast)、Spanning Tree(Protocol/Port/TC Protect/MST/
      Instance/MST Port)、Trunk(Settings/Status/Port Priority)、IGMP/MLD Snooping、
      Multicast VLAN、Multicast Filtering、Bandwidth Control(Storm/Ingress/Egress)、

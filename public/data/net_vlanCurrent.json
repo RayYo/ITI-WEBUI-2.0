@@ -1,0 +1,46 @@
+{
+  "data": {
+    "list": [
+      {
+        "id": 1,
+        "name": "DefaultVLAN",
+        "fdbId": 1,
+        "memberPorts": "1-28",
+        "untaggedPorts": "1-28",
+        "status": "Permanent"
+      },
+      {
+        "id": 10,
+        "name": "Management",
+        "fdbId": 10,
+        "memberPorts": "1-4,25",
+        "untaggedPorts": "1-4",
+        "status": "Permanent"
+      },
+      {
+        "id": 20,
+        "name": "Voice",
+        "fdbId": 20,
+        "memberPorts": "5-8,25-26",
+        "untaggedPorts": "5-8",
+        "status": "Permanent"
+      },
+      {
+        "id": 30,
+        "name": "Servers",
+        "fdbId": 30,
+        "memberPorts": "9-16",
+        "untaggedPorts": "9-16",
+        "status": "Permanent"
+      },
+      {
+        "id": 100,
+        "name": "Guest",
+        "fdbId": 100,
+        "memberPorts": "17-24",
+        "untaggedPorts": "17-24",
+        "status": "Dynamic"
+      }
+    ]
+  }
+}
