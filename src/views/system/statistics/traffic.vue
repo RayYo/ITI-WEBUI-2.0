@@ -4,17 +4,17 @@
     <div>
       <!-- 原版:深灰表头端口计数表,首行 All(值为 -),Clear 列为行内 Apply 清零 -->
       <div class="table-scroll">
-        <el-table :data="rows" class="tableBox" style="min-width: 900px" stripe border :header-cell-style="darkTableHeader" :cell-style="pageTableCell">
-          <el-table-column prop="port" label="Port ID" />
-          <el-table-column prop="inOctets" label="In Octets" />
-          <el-table-column prop="inUcast" label="In Ucast Pkts" />
-          <el-table-column prop="inNUcast" label="In NUcast Pkts" />
-          <el-table-column prop="inDiscards" label="In Discards" />
-          <el-table-column prop="outOctets" label="Out Octets" />
-          <el-table-column prop="outUcast" label="Out Ucast Pkts" />
-          <el-table-column prop="outNUcast" label="Out NUcast Pkts" />
-          <el-table-column prop="outDiscards" label="Out Discards" />
-          <el-table-column label="Clear">
+        <el-table :data="rows" class="tableBox" stripe border :header-cell-style="darkTableHeader" :cell-style="pageTableCell">
+          <el-table-column prop="port" label="Port ID" min-width="80" />
+          <el-table-column prop="inOctets" label="In Octets" min-width="95" />
+          <el-table-column prop="inUcast" label="In Ucast Pkts" min-width="110" />
+          <el-table-column prop="inNUcast" label="In NUcast Pkts" min-width="115" />
+          <el-table-column prop="inDiscards" label="In Discards" min-width="100" />
+          <el-table-column prop="outOctets" label="Out Octets" min-width="100" />
+          <el-table-column prop="outUcast" label="Out Ucast Pkts" min-width="115" />
+          <el-table-column prop="outNUcast" label="Out NUcast Pkts" min-width="120" />
+          <el-table-column prop="outDiscards" label="Out Discards" min-width="105" />
+          <el-table-column label="Clear" min-width="90">
             <template slot-scope="scope">
               <input type="button" class="btnInTable" value="Apply" @click="onClear(scope.row)">
             </template>

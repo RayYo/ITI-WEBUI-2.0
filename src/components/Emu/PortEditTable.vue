@@ -5,7 +5,6 @@
       <el-table
         :data="rows"
         class="tableBox port-edit-table"
-        :style="{ minWidth: minWidth }"
         stripe
         border
         :header-cell-style="headerCellStyle || darkTableHeader"

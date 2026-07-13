@@ -4,17 +4,17 @@
     <div>
       <!-- 原版:深灰表头端口错误计数表,首行 All(值为 -),Clear 列为行内 Apply 清零 -->
       <div class="table-scroll">
-        <el-table :data="rows" class="tableBox" style="min-width: 900px" stripe border :header-cell-style="darkTableHeader" :cell-style="pageTableCell">
-          <el-table-column prop="port" label="Port ID" />
-          <el-table-column prop="inErrors" label="InErrors" />
-          <el-table-column prop="outErrors" label="OutErrors" />
-          <el-table-column prop="dropEvents" label="DropEvents" />
-          <el-table-column prop="crcAlign" label="CRCAlignErrors" />
-          <el-table-column prop="undersize" label="UndersizePkts" />
-          <el-table-column prop="oversize" label="OversizePkts" />
-          <el-table-column prop="fragments" label="Fragments" />
-          <el-table-column prop="collisions" label="Collisions" />
-          <el-table-column label="Clear">
+        <el-table :data="rows" class="tableBox" stripe border :header-cell-style="darkTableHeader" :cell-style="pageTableCell">
+          <el-table-column prop="port" label="Port ID" min-width="80" />
+          <el-table-column prop="inErrors" label="InErrors" min-width="95" />
+          <el-table-column prop="outErrors" label="OutErrors" min-width="95" />
+          <el-table-column prop="dropEvents" label="DropEvents" min-width="100" />
+          <el-table-column prop="crcAlign" label="CRCAlignErrors" min-width="120" />
+          <el-table-column prop="undersize" label="UndersizePkts" min-width="110" />
+          <el-table-column prop="oversize" label="OversizePkts" min-width="110" />
+          <el-table-column prop="fragments" label="Fragments" min-width="95" />
+          <el-table-column prop="collisions" label="Collisions" min-width="95" />
+          <el-table-column label="Clear" min-width="90">
             <template slot-scope="scope">
               <input type="button" class="btnInTable" value="Apply" @click="onClear(scope.row)">
             </template>
