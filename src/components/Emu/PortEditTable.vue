@@ -8,7 +8,7 @@
         :style="{ minWidth: minWidth }"
         stripe
         border
-        :header-cell-style="darkTableHeader"
+        :header-cell-style="headerCellStyle || darkTableHeader"
         :cell-style="pageTableCell"
       >
         <el-table-column
@@ -16,6 +16,7 @@
           :key="col.prop || col.label"
           :label="col.label"
           :width="col.width"
+          :min-width="col.minWidth"
         >
           <template slot-scope="scope">
             <!-- 行级 Apply -->
@@ -69,7 +70,9 @@ export default {
     rows: { type: Array, required: true, default: () => [] },
     minWidth: { type: String, default: '600px' },
     title: { type: String, default: '' },
-    disabled: { type: Boolean, default: false }
+    disabled: { type: Boolean, default: false },
+    // 表头样式:默认深灰底白字(darkTableHeader);可传 pageTableHeader 等覆盖
+    headerCellStyle: { type: Object, default: null }
   },
   data() {
     return { darkTableHeader, pageTableCell }

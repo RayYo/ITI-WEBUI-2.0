@@ -15,13 +15,14 @@
           </select>
         </template>
       </common-table>
-
+      <br>
       <port-checkbox-grid
         v-model="ingress"
         title="Mirroring Ingress Port Settings"
         :ports="portList"
         :disabled="status !== '1'"
       />
+      <br>
       <port-checkbox-grid
         v-model="egress"
         title="Mirroring Egress Port Settings"

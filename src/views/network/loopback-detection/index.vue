@@ -10,7 +10,7 @@
           </select>
         </template>
       </common-table>
-
+      <br>
       <common-table header-title="Loopback Detection Time Settings" :first-column="['Interval','Recover Time']">
         <template #0>
           <base-input v-model="interval" max-len="5" :disabled="status !== '1'" @check="onlyNum('interval')" />
@@ -32,6 +32,7 @@
         :columns="columns"
         :rows="rows"
         min-width="700px"
+        :header-cell-style="pageTableHeader"
         :disabled="status !== '1'"
         @apply="onApplyPort"
       />
@@ -45,11 +46,13 @@ import message from '@/utils/message'
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import PortEditTable from '@/components/Emu/PortEditTable.vue'
+import { pageTableHeader } from '@/utils/emu'
 
 export default {
   components: { commonTable, baseInput, PortEditTable },
   data() {
     return {
+      pageTableHeader,
       status: '2',
       interval: '2',
       recoverTime: '60',
