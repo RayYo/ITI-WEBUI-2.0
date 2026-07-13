@@ -43,10 +43,10 @@
         :header-cell-style="pageTableHeader"
         :cell-style="pageTableCell"
       >
-        <el-table-column prop="id" label="VLAN ID" min-width="248" />
-        <el-table-column prop="name" label="Name" min-width="642" />
-        <el-table-column prop="type" label="VLAN Type" min-width="370" />
-        <el-table-column label="Action" min-width="370">
+        <el-table-column prop="id" label="VLAN ID" min-width="100" />
+        <el-table-column prop="name" label="Name" min-width="260" />
+        <el-table-column prop="type" label="VLAN Type" min-width="150" />
+        <el-table-column label="Action" min-width="150">
           <template slot-scope="scope">
             <input type="button" class="btnInTable" value="Modify" @click="onModify(scope.row)">
             <input v-if="scope.row.id !== 1" type="button" class="btnInTable" value="Delete" @click="onDelete(scope.row)">

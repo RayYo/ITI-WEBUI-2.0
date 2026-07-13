@@ -25,10 +25,10 @@
           :cell-style="pageTableCell"
         >
           <el-table-column prop="index" label="Index" min-width="100" />
-          <el-table-column prop="vid" label="VID" min-width="270" />
-          <el-table-column prop="port" label="Port" min-width="270" />
-          <el-table-column prop="mac" label="MAC Address" min-width="630" />
-          <el-table-column prop="type" label="Type" min-width="360" />
+          <el-table-column prop="vid" label="VID" min-width="60" />
+          <el-table-column prop="port" label="Port" min-width="60" />
+          <el-table-column prop="mac" label="MAC Address" min-width="140" />
+          <el-table-column prop="type" label="Type" min-width="80" />
         </el-table>
         <el-pagination
           :current-page.sync="curPage"

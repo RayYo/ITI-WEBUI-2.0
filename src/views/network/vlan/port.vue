@@ -23,11 +23,11 @@ export default {
   data() {
     return {
       columns: [
-        { prop: 'port', label: 'Port', minWidth: 180, type: 'text' },
-        { prop: 'pvid', label: 'PVID', minWidth: 223, type: 'input', maxlength: 4 },
-        { prop: 'acceptFrame', label: 'Acceptable Frame Types', minWidth: 625, type: 'select', options: ACCEPT },
-        { prop: 'ingressFilter', label: 'Ingress Filtering', minWidth: 357, type: 'select', options: EN_DIS },
-        { label: 'Action', minWidth: 245, type: 'action' }
+        { prop: 'port', label: 'Port', minWidth: 80, type: 'text' },
+        { prop: 'pvid', label: 'PVID', minWidth: 100, type: 'input', maxlength: 4 },
+        { prop: 'acceptFrame', label: 'Acceptable Frame Types', minWidth: 280, type: 'select', options: ACCEPT },
+        { prop: 'ingressFilter', label: 'Ingress Filtering', minWidth: 160, type: 'select', options: EN_DIS },
+        { label: 'Action', minWidth: 110, type: 'action' }
       ],
       rows: []
     }

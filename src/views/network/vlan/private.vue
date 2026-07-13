@@ -40,8 +40,8 @@
         :header-cell-style="pageTableHeader"
         :cell-style="pageTableCell"
       >
-        <el-table-column prop="port" label="Port" min-width="815" />
-        <el-table-column prop="portMap" label="Port Map" min-width="815" />
+        <el-table-column prop="port" label="Port" min-width="170" />
+        <el-table-column prop="portMap" label="Port Map" min-width="170" />
       </el-table>
     </div>
   </div>

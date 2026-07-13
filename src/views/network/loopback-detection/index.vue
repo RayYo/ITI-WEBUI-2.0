@@ -57,14 +57,14 @@ export default {
       interval: '2',
       recoverTime: '60',
       columns: [
-        { prop: 'port', label: 'Port', minWidth: 253, type: 'text' },
+        { prop: 'port', label: 'Port', minWidth: 120, type: 'text' },
         {
-          prop: 'state', label: 'Loopback Detection State', minWidth: 459, type: 'select',
+          prop: 'state', label: 'Loopback Detection State', minWidth: 220, type: 'select',
           options: [{ value: '1', label: 'Enabled' }, { value: '2', label: 'Disabled' }],
           allExtra: { value: '0', label: 'Ignore' }
         },
-        { prop: 'loopStatus', label: 'Loop Status', minWidth: 459, type: 'text' },
-        { label: 'Action', minWidth: 459, type: 'action' }
+        { prop: 'loopStatus', label: 'Loop Status', minWidth: 220, type: 'text' },
+        { label: 'Action', minWidth: 220, type: 'action' }
       ],
       rows: []
     }

@@ -12,12 +12,12 @@
         :header-cell-style="pageTableHeader"
         :cell-style="pageTableCell"
       >
-        <el-table-column prop="id" label="VLAN ID" min-width="196" />
-        <el-table-column prop="name" label="VLAN Name" min-width="232" />
-        <el-table-column prop="fdbId" label="VLAN FDB ID" min-width="232" />
-        <el-table-column prop="memberPorts" label="Member Ports" min-width="388" />
-        <el-table-column prop="untaggedPorts" label="Untagged Ports" min-width="388" />
-        <el-table-column prop="status" label="Status" min-width="194" />
+        <el-table-column prop="id" label="VLAN ID" min-width="100" />
+        <el-table-column prop="name" label="VLAN Name" min-width="120" />
+        <el-table-column prop="fdbId" label="VLAN FDB ID" min-width="120" />
+        <el-table-column prop="memberPorts" label="Member Ports" min-width="200" />
+        <el-table-column prop="untaggedPorts" label="Untagged Ports" min-width="200" />
+        <el-table-column prop="status" label="Status" min-width="100" />
       </el-table>
       <el-pagination
         :current-page.sync="page"
