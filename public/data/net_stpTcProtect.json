@@ -1,0 +1,22 @@
+{
+  "data": {
+    "status": false,
+    "version": "rstp",
+    "bridgePriority": 32768,
+    "maxAge": 20,
+    "helloTime": 2,
+    "forwardDelay": 15,
+    "txHoldCount": 6,
+    "maxHopCount": 20,
+    "tcProtectStatus": false,
+    "tcProtectThreshold": 20,
+    "tcProtectCycle": 5,
+    "root": {
+      "bridge": "00:00:00:00:00:00:00:00",
+      "cost": 0,
+      "maxAge": 20,
+      "forwardDelay": 15,
+      "port": 0
+    }
+  }
+}

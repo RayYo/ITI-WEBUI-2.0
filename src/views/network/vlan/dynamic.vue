@@ -55,7 +55,7 @@ export default {
       pageTableHeader,
       pageTableCell,
       port: '0',
-      rows: [],
+      allRows: [],
       curPage: 1,
       pageSize: 20
     }
@@ -65,18 +65,26 @@ export default {
       const n = this.$store.getters.modelInfo('portNum') || 0
       return Array.from({ length: n }, (_, i) => i + 1)
     },
+    // 端口过滤在前端做(cgi 返回全量,mock/real 响应形状一致)
+    rows() {
+      const p = Number(this.port) || 0
+      return p ? this.allRows.filter(r => r.port === p) : this.allRows
+    },
     pageRows() {
       const start = (this.curPage - 1) * this.pageSize
       return this.rows.slice(start, start + this.pageSize)
     }
+  },
+  watch: {
+    port() { this.curPage = 1 }
   },
   created() {
     this.load()
   },
   methods: {
     load() {
-      cgiGet('net_vlanDynamic', { port: this.port }).then(d => {
-        this.rows = d.list || []
+      cgiGet('net_vlanDynamic').then(d => {
+        this.allRows = d.list || []
         this.curPage = 1
       })
     }

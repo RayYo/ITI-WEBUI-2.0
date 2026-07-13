@@ -12,10 +12,8 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
-// 开发模式:挂 cgi mock 适配器(页面代码与生产完全一致)
-if (process.env.VUE_APP_MOCK === 'true') {
-  require('@/mock').setupMock()
-}
+// mock 模式不再拦截 axios:cgiGet/cgiSet 直接把 URL 指向静态 /data/*.json(见 @/api/cgi)。
+// 这样每次都是真实可见的 HTTP 请求,且可打包成静态 emulator 部署。
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })

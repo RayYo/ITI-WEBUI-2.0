@@ -96,7 +96,7 @@ export default {
     },
     updatePanel() {
       const type = this.radio
-      cgiGet('panel_info').then(d => {
+      cgiGet('panel_info', {}, { loading: false }).then(d => {
         const links = []
         for (const p of d.ports || []) {
           let pColor = 'black'
@@ -159,7 +159,7 @@ export default {
     },
     updateStatsData() {
       // 单端口实时包计数(3s 轮询,切端口后重置曲线)
-      cgiGet('port_rtstat', { port: this.selected }).then(v => {
+      cgiGet('port_rtstat', { port: this.selected }, { loading: false }).then(v => {
         const n = new Date()
         for (const k in this.statsData) {
           if (Object.hasOwnProperty.call(this.statsData, k)) {

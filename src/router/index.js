@@ -417,18 +417,6 @@ export const constantRoutes = [
         ]
       },
       {
-        path: 'static-unicast',
-        name: 'Static-Unicast',
-        component: () => import('@/views/network/mac-address/static-unicast'),
-        meta: { title: 'Static Unicast', icon: 'submenu' }
-      },
-      {
-        path: 'static-multicast',
-        name: 'Static-Multicast',
-        component: () => import('@/views/network/mac-address/static-multicast'),
-        meta: { title: 'Static Multicast', icon: 'submenu' }
-      },
-      {
         path: 'spanning-tree',
         name: 'Spanning-Tree',
         component: () => import('@/views/network/spanning-tree/index'),
@@ -510,6 +498,18 @@ export const constantRoutes = [
         name: 'Loopback-Detection',
         component: () => import('@/views/network/loopback-detection'),
         meta: { title: 'Loopback Detection', icon: 'submenu' }
+      },
+      {
+        path: 'static-unicast',
+        name: 'Static-Unicast',
+        component: () => import('@/views/network/mac-address/static-unicast'),
+        meta: { title: 'Static Unicast', icon: 'submenu' }
+      },
+      {
+        path: 'static-multicast',
+        name: 'Static-Multicast',
+        component: () => import('@/views/network/mac-address/static-multicast'),
+        meta: { title: 'Static Multicast', icon: 'submenu' }
       }
     ]
   },

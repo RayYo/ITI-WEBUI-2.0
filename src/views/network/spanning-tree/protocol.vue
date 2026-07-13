@@ -90,6 +90,7 @@
 
 <script>
 import { cgiGet, cgiSet } from '@/api/cgi'
+import message from '@/utils/message'
 import baseInput from '@/components/CustomInput/base-input.vue'
 
 const PRIORITIES = Array.from({ length: 16 }, (_, i) => i * 4096)
@@ -137,6 +138,27 @@ export default {
       return this.status === '1' ? v : ''
     },
     onApply() {
+      // 启用 STP 时校验各参数区间(与原版提示一致)
+      if (this.status === '1') {
+        const checks = [
+          ['Maximum Age', this.maxAge, 6, 40],
+          ['Hello Time', this.helloTime, 1, 10],
+          ['Forward Delay', this.forwardDelay, 4, 30],
+          ['Transmit Hold Count', this.txHoldCount, 1, 10],
+          ['Max Hop Count', this.maxHopCount, 6, 40]
+        ]
+        for (const [label, val, min, max] of checks) {
+          const n = Number(val)
+          if (!Number.isInteger(n) || n < min || n > max) {
+            message.warnBox(`${label} must be an integer within ${min}-${max}.`)
+            return
+          }
+        }
+        // 802.1D 定时器关系:2 x (Forward Delay - 1) >= Max Age >= 2 x (Hello Time + 1)
+        const fd = Number(this.forwardDelay); const ma = Number(this.maxAge); const ht = Number(this.helloTime)
+        if (ma > 2 * (fd - 1)) { message.warnBox('Max Age must be <= 2 x (Forward Delay - 1).'); return }
+        if (ma < 2 * (ht + 1)) { message.warnBox('Max Age must be >= 2 x (Hello Time + 1).'); return }
+      }
       cgiSet('net_stpProtocol', {
         status: this.status === '1' ? 1 : 0,
         version: this.version,

@@ -167,7 +167,7 @@ export default {
   created() {
     this.cpuMemChartDataInit()
     this.saveLoading()
-    cgiGet('sys_sysinfo').then(d => {
+    cgiGet('sys_sysinfo', {}, { loading: false }).then(d => {
       this.swInfoTableData = [this.formatUptime(d.uptimeSec), d.runtimeImage, d.bootLoader]
       this.hwInfoTableData = [d.dramMB + ' MB', d.flashMB + ' MB']
       this.adminInfoTableData = [d.hostname, d.location, d.contact]
@@ -227,7 +227,7 @@ export default {
     },
     updatePoEData() {
       // PoE 每口功耗(W)来自 panel_info,总预算来自 sys_devinfo
-      cgiGet('panel_info').then(d => {
+      cgiGet('panel_info', {}, { loading: false }).then(d => {
         const poePorts = (d.ports || []).filter(p => p.poe)
         if (!poePorts.length) return
         const usage = poePorts.map(p => (p.poe.powerMw || 0) / 1000)
@@ -249,7 +249,7 @@ export default {
       })
     },
     updateCpuMemData() {
-      cgiGet('sys_cpumem').then(d => {
+      cgiGet('sys_cpumem', {}, { loading: false }).then(d => {
         const memUsed = d.memTotalKB - d.memFreeKB
 
         // cpu & mem data

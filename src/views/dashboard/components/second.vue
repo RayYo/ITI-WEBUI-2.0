@@ -125,7 +125,7 @@ export default {
       return (meta && meta.type === 'fiber') ? `portf${port}` : `port${port}`
     },
     updateData() {
-      cgiGet('panel_info').then(d => {
+      cgiGet('panel_info', {}, { loading: false }).then(d => {
         const rows = []
         const links = []
         for (const p of d.ports || []) {

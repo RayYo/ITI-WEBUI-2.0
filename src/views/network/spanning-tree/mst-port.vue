@@ -8,7 +8,7 @@
           <tr>
             <td class="textTh">Select MST Port</td>
             <td>
-              <select v-model="port" @change="load">
+              <select v-model="port" @change="applyPort">
                 <option v-for="p in portList" :key="p" :value="p">{{ p }}</option>
               </select>
             </td>
@@ -66,6 +66,7 @@ export default {
       pageTableHeader,
       pageTableCell,
       port: 1,
+      info: {},
       rows: []
     }
   },
@@ -80,9 +81,14 @@ export default {
   },
   methods: {
     load() {
-      cgiGet('net_stpMstPort', { port: this.port }).then(d => {
-        this.rows = (d.list || []).map(r => ({ ...r }))
+      // cgi 返回全端口 info,前端按选中端口取行(mock/real 响应形状一致)
+      cgiGet('net_stpMstPort').then(d => {
+        this.info = d.info || {}
+        this.applyPort()
       })
+    },
+    applyPort() {
+      this.rows = (this.info[this.port] || []).map(r => ({ ...r }))
     },
     onApply(row) {
       cgiSet('net_stpMstPortEdit', {

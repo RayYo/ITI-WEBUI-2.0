@@ -1,5 +1,11 @@
 # CGI 接口重设计清单(新 web ↔ web server 对照)
 
+> **请求架构(2026-07-13 定稿,方案 A / 静态可部署)**:请求区分全部收敛在 `src/api/cgi.js`。
+> - **mock**(`VUE_APP_MOCK=true`):GET → `${BASE}data/<cmd>.json`(静态文件);SET → `${BASE}data/_ok.json`(GET 一个固定 ok)。都是真实可见的 HTTP,`npm run build` 出的包可当静态 emulator 部署到任意网站。
+> - **real**(`VUE_APP_MOCK=false`):GET → `/cgi/get.cgi?cmd=<cmd>[&k=v]`;SET → `POST /cgi/set.cgi?cmd=<cmd>` 载荷 `{"_ds=1&k=v&_de=1":{}}`。上机只需 web server 把 `/cgi/*.cgi` 接后端,前端零改动。
+> - **静态方案的固有限制(mock 下)**:增删改不持久(GET 恒返回 json 原值)、SET 只回 ok、图表无动画、登录一律成功——与参考的原版 emulator 行为一致。带参 GET(如 `net_vlanDynamic`/`net_stpMstPort`)在页面内客户端过滤,保证 mock/real 响应形状一致。
+> - **loading**:封装层统一。普通页盖 `.app-main`(`Loading.service` target),Dashboard 用 fullscreen($loading);spinner `el-icon-loading`、文字 "Loading"、背景 `rgba(0,0,0,0.7)`;轮询请求传 `{loading:false}` 跳过;mock 下加 300ms 延时让 loading 可见。
+>
 > 约定不变:GET `/cgi/get.cgi?cmd=<cmd>` 返回 `{"data":{...}}`;
 > SET `/cgi/set.cgi?cmd=<cmd>` 载荷 `{"_ds=1&k=v&_de=1":{}}`,
 > 成功返回 `{"status":"ok","msgType":"save_success","msg":""}`,失败 `status` 非 ok + `msg`。
