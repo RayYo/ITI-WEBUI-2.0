@@ -2,7 +2,7 @@
   <div>
     <div class="table_title">
       <span>{{ title }}</span>
-      <div style="display: inline; float: right;">
+      <div style="display: inline; float: right; margin-top: 4px">
         <input type="button" class="btnInTitle" :class="{ btnDisabled: disabled }" value="All" :disabled="disabled" @click="toggleAll">
       </div>
     </div>

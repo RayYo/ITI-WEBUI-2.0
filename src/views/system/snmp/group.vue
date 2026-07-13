@@ -63,7 +63,7 @@
       <div class="table_title">
         SNMP Group Access Table
         <span class="tipInTableTitle">( Free Entries: {{ max - entries.length }}, Total Entries: {{ entries.length }} )</span>
-        <div style="display: inline; float: right;">
+        <div style="display: inline; float: right; margin-top: 4px">
           <input type="button" value="Delete All" class="btnInTitle" @click="onDeleteAll">
         </div>
       </div>

@@ -10,7 +10,7 @@
           </select>
         </template>
         <template #1>
-          <select v-model="targetPort" :disabled="status !== '1'">
+          <select v-model="targetPort" :class="{ disabledStyle: status !== '1' }" :disabled="status !== '1'">
             <option v-for="p in portList" :key="p" :value="p">{{ p }}</option>
           </select>
         </template>
