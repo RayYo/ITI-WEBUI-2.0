@@ -4,6 +4,7 @@
     <div>
       <div class="table_title">802.1Q Tagged VLAN</div>
       <el-table
+        v-loading="loading"
         :data="pageRows"
         class="tableBox"
         stripe
@@ -38,6 +39,7 @@ import { pageTableHeader, pageTableCell } from '@/utils/emu'
 export default {
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       rows: [],
@@ -56,7 +58,8 @@ export default {
   },
   methods: {
     load() {
-      cgiGet('net_vlanCurrent').then(d => { this.rows = d.list || [] })
+      this.loading = true
+      cgiGet('net_vlanCurrent').then(d => { this.rows = d.list || [] }).finally(() => { this.loading = false })
     }
   }
 }

@@ -18,6 +18,7 @@
       <br>
       <div class="table_title">MST Port Info</div>
       <el-table
+        v-loading="loading"
         :data="rows"
         class="tableBox"
         stripe
@@ -62,6 +63,7 @@ const PRIORITIES = Array.from({ length: 16 }, (_, i) => i * 16)
 export default {
   data() {
     return {
+      loading: false,
       PRIORITIES,
       pageTableHeader,
       pageTableCell,
@@ -81,11 +83,12 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       // cgi 返回全端口 info,前端按选中端口取行(mock/real 响应形状一致)
       cgiGet('net_stpMstPort').then(d => {
         this.info = d.info || {}
         this.applyPort()
-      })
+      }).finally(() => { this.loading = false })
     },
     applyPort() {
       this.rows = (this.info[this.port] || []).map(r => ({ ...r }))

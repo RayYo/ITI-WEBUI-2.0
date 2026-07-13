@@ -37,6 +37,7 @@
       </div>
     </div>
     <el-table
+      v-loading="loading"
       :data="pageRows"
       class="tableBox"
       stripe
@@ -77,6 +78,7 @@ export default {
   components: { baseInput, PortRadioGrid },
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       vlan: '',
@@ -103,10 +105,11 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('mac_staticUnicast').then(d => {
         this.max = d.max || 256
         this.rows = d.list || []
-      })
+      }).finally(() => { this.loading = false })
     },
     onCheckVlan() {
       this.vlan = this.vlan.replace(/[^0-9]/g, '')

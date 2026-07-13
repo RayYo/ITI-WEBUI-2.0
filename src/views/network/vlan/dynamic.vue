@@ -16,6 +16,7 @@
       <div class="form">
         <div class="table_title">Dynamic Forwarding Table</div>
         <el-table
+          v-loading="loading"
           :data="pageRows"
           class="tableBox"
           stripe
@@ -52,6 +53,7 @@ export default {
   components: { commonTable },
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       port: '0',
@@ -83,10 +85,11 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('net_vlanDynamic').then(d => {
         this.allRows = d.list || []
         this.curPage = 1
-      })
+      }).finally(() => { this.loading = false })
     }
   }
 }

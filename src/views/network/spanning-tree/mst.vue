@@ -54,6 +54,7 @@
 
       <div class="table_title">MST Table</div>
       <el-table
+        v-loading="loading"
         :data="table"
         class="tableBox"
         stripe
@@ -98,6 +99,7 @@ export default {
   components: { baseInput },
   data() {
     return {
+      loading: false,
       PRIORITIES,
       pageTableHeader,
       pageTableCell,
@@ -117,11 +119,12 @@ export default {
       return row.mstiId === 'CIST'
     },
     load() {
+      this.loading = true
       cgiGet('net_stpMst').then(d => {
         this.configName = d.configName || ''
         this.revisionLevel = String(d.revisionLevel)
         this.table = (d.table || []).map(r => ({ ...r }))
-      })
+      }).finally(() => { this.loading = false })
     },
     onApplyConfig() {
       cgiSet('net_stpMstConfig', {

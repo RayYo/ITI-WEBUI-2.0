@@ -35,6 +35,7 @@
     <div id="vlantable">
       <div class="table_title">Tagged VLAN Table</div>
       <el-table
+        v-loading="loading"
         :data="pageRows"
         class="tableBox"
         stripe
@@ -84,6 +85,7 @@ export default {
   components: { baseInput, PortMemberRadioGrid },
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       STATES,
@@ -112,7 +114,8 @@ export default {
   },
   methods: {
     load() {
-      cgiGet('net_vlanTagged').then(d => { this.rows = d.list || [] })
+      this.loading = true
+      cgiGet('net_vlanTagged').then(d => { this.rows = d.list || [] }).finally(() => { this.loading = false })
     },
     onCheckId() {
       this.vlanId = this.vlanId.replace(/[^0-9]/g, '')
@@ -120,7 +123,7 @@ export default {
     onApply() {
       if (!this.editing) {
         const id = Number(this.vlanId)
-        if (!id || id < 2 || id > 4094) { message.warnBox('VLAN ID must be within 2-4094.') ; return }
+        if (!id || id < 2 || id > 4094) { message.warnBox('VLAN ID must be within 2-4094.'); return }
       }
       cgiSet('net_vlanTaggedEdit', {
         id: this.vlanId,

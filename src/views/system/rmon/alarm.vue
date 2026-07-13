@@ -84,7 +84,7 @@
         <input type="button" value="Delete All" class="btnInTitle" :disabled="deleteAllDisabled" :class="{ btnDisabled: deleteAllDisabled }" @click="onDeleteAll">
       </div>
     </div>
-    <el-table :data="entries" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
+    <el-table v-loading="loading" :data="entries" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
       <el-table-column prop="idx" label="Index" />
       <el-table-column prop="interval" label="Interval" />
       <el-table-column prop="variable" label="Variable" />
@@ -112,6 +112,7 @@ const MAX31 = Math.pow(2, 31) - 1
 export default {
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       index: '',
@@ -136,9 +137,10 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('rmon_alarm').then(d => {
         this.entries = d.entries || []
-      })
+      }).finally(() => { this.loading = false })
     },
     onReset() {
       this.index = ''

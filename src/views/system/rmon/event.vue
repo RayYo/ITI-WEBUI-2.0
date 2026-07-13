@@ -59,7 +59,7 @@
         <input type="button" value="Delete All" class="btnInTitle" :disabled="deleteAllDisabled" :class="{ btnDisabled: deleteAllDisabled }" @click="onDeleteAll">
       </div>
     </div>
-    <el-table :data="entries" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
+    <el-table v-loading="loading" :data="entries" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
       <el-table-column prop="idx" label="Index" />
       <el-table-column prop="desc" label="Description" />
       <el-table-column prop="type" label="Type" />
@@ -84,6 +84,7 @@ const TYPES = { 1: 'None', 2: 'Log', 3: 'SNMP Trap', 4: 'Log and Trap' }
 export default {
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       index: '',
@@ -108,9 +109,10 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('rmon_event').then(d => {
         this.entries = d.entries || []
-      })
+      }).finally(() => { this.loading = false })
     },
     onReset() {
       this.index = ''

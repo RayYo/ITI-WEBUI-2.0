@@ -75,7 +75,7 @@
           <input type="button" value="Delete All" class="btnInTitle" :disabled="deleteAllDisabled" :class="{ btnDisabled: deleteAllDisabled }" @click="onDeleteAll">
         </div>
       </div>
-      <el-table :data="pageRows" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
+      <el-table v-loading="loading" :data="pageRows" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
         <el-table-column prop="host" label="Host IP Address" />
         <el-table-column prop="version" label="SNMP Version" width="280" />
         <el-table-column prop="name" label="Community Name/User Name" width="470" />
@@ -107,6 +107,7 @@ const VERSIONS = { 1: 'v1', 2: 'v2c', 3: 'v3-NoAuthNoPriv', 4: 'v3-AuthNoPriv', 
 export default {
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       trapStatus: '1',
@@ -134,13 +135,14 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('snmp_trapEvent').then(t => {
         this.trapStatus = t.enabled ? '1' : '2'
       })
       cgiGet('snmp_notify').then(n => {
         this.max = n.max || 0
         this.entries = n.entries || []
-      })
+      }).finally(() => { this.loading = false })
     },
     onApply() {
       cgiSet('snmp_trapEvent', { enabled: this.trapStatus === '1' ? 1 : 0 })

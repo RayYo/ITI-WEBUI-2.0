@@ -4,7 +4,7 @@
     <div>
       <!-- 原版:深灰表头端口错误计数表,首行 All(值为 -),Clear 列为行内 Apply 清零 -->
       <div class="table-scroll">
-        <el-table :data="rows" class="tableBox" stripe border :header-cell-style="darkTableHeader" :cell-style="pageTableCell">
+        <el-table v-loading="loading" :data="rows" class="tableBox" stripe border :header-cell-style="darkTableHeader" :cell-style="pageTableCell">
           <el-table-column prop="port" label="Port ID" min-width="80" />
           <el-table-column prop="inErrors" label="InErrors" min-width="95" />
           <el-table-column prop="outErrors" label="OutErrors" min-width="95" />
@@ -37,6 +37,7 @@ const FIELDS = ['inErrors', 'outErrors', 'dropEvents', 'crcAlign', 'undersize', 
 export default {
   data() {
     return {
+      loading: false,
       darkTableHeader,
       pageTableCell,
       rows: []
@@ -47,6 +48,7 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('port_statistics').then(d => {
         const all = { port: 'All' }
         FIELDS.forEach(f => { all[f] = '-' })
@@ -55,7 +57,7 @@ export default {
           FIELDS.forEach(f => { r[f] = p[f] })
           return r
         }))
-      })
+      }).finally(() => { this.loading = false })
     },
     async onClear(row) {
       const payload = row.port === 'All' ? { all: 1 } : { port: row.port }

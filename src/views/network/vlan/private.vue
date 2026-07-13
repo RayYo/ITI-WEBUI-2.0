@@ -33,6 +33,7 @@
     <div>
       <div class="table_title">Port List</div>
       <el-table
+        v-loading="loading"
         :data="portList2"
         class="tableBox"
         stripe
@@ -57,6 +58,7 @@ export default {
   components: { commonTable, PortCheckboxGrid },
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       status: '2',
@@ -79,12 +81,13 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('net_vlanPrivate').then(d => {
         this.status = d.status ? '1' : '2'
         this.sourcePort = d.sourcePort || 1
         this.forwardingPorts = (d.forwardingPorts || []).slice()
         this.portList2 = d.portList || []
-      })
+      }).finally(() => { this.loading = false })
     },
     loadPortForwarding() {
       // 切换 Source Port 时,从 Port List 回填该端口当前 Port Map

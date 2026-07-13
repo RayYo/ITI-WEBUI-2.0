@@ -67,7 +67,7 @@
           <input type="button" value="Delete All" class="btnInTitle" @click="onDeleteAll">
         </div>
       </div>
-      <el-table :data="pageRows" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
+      <el-table v-loading="loading" :data="pageRows" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
         <el-table-column prop="name" label="Group Name" />
         <el-table-column prop="readView" label="Read View" />
         <el-table-column prop="writeView" label="Write View" />
@@ -102,6 +102,7 @@ const LEVEL = { 1: 'NoAuthNoPriv', 2: 'AuthNoPriv', 3: 'AuthPriv' }
 export default {
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       name: '',
@@ -130,10 +131,11 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('snmp_group').then(d => {
         this.max = d.max || 0
         this.entries = d.entries || []
-      })
+      }).finally(() => { this.loading = false })
     },
     onReset() {
       this.name = ''

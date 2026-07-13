@@ -48,7 +48,7 @@
         <input type="button" value="Delete All" class="btnInTitle" @click="onDeleteAll">
       </div>
     </div>
-    <el-table :data="pageRows" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
+    <el-table v-loading="loading" :data="pageRows" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
       <el-table-column prop="name" label="View Name" />
       <el-table-column prop="oid" label="Subtree OID" />
       <el-table-column prop="mask" label="OID Mask" />
@@ -77,6 +77,7 @@ import { pageTableHeader, pageTableCell } from '@/utils/emu'
 export default {
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       name: '',
@@ -99,10 +100,11 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('snmp_view').then(d => {
         this.max = d.max || 0
         this.entries = d.entries || []
-      })
+      }).finally(() => { this.loading = false })
     },
     onReset() {
       this.name = ''

@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 import { buildDs } from '@/utils/payload'
-import { Message, Loading } from 'element-ui'
+import { Message } from 'element-ui'
 
 /**
  * cgi 请求封装 —— 唯一区分 mock / real 的地方。
@@ -12,54 +12,29 @@ import { Message, Loading } from 'element-ui'
  *     GET → `/cgi/get.cgi?cmd=<cmd>[&k=v...]`
  *     SET → `POST /cgi/set.cgi?cmd=<cmd>`,载荷 `{"_ds=1&k=v&_de=1":{}}`
  *
- * 两种模式都发真实 HTTP(Network 可见、loading 生效、数据到达才渲染)。
+ * 两种模式都发真实 HTTP(Network 可见、数据到达才渲染)。
  * 上机时把 /cgi/*.cgi 接到后端即可,前端零改动(real 构建)。
  *
- * loading(封装层统一):
- *  - 默认在内容区 `.app-main` 盖遮罩(与原版普通页一致)
- *  - opts.fullscreen=true 整页遮罩(Dashboard 用)
- *  - opts.loading=false 跳过(轮询/后台请求用)
+ * loading(与原版一致):由页面自己在数据表格上用 `v-loading` 表现
+ *  —— 只有含数据表格(el-table)的页才有 loading,遮罩仅盖表格、无文字。
+ *  纯表单页(仅 from_table 设置项)不显示 loading。
+ *  Dashboard 为整屏 loading,自行用 $loading 管理。
+ *  cgi 封装层不再统一盖遮罩;旧的 opts.loading / fullscreen 参数保留但已无副作用。
  */
 const MOCK = process.env.VUE_APP_MOCK === 'true'
 const BASE = process.env.BASE_URL || '/'
 const delay = ms => new Promise(r => setTimeout(r, ms))
 
-let pending = 0
-let loadingInstance = null
-function openLoading(fullscreen) {
-  if (pending === 0) {
-    const el = fullscreen ? null : document.querySelector('.app-main')
-    loadingInstance = Loading.service({
-      target: el || undefined,
-      fullscreen: fullscreen || !el,
-      lock: true,
-      text: 'Loading',
-      spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.7)'
-    })
-  }
-  pending++
-}
-function closeLoading() {
-  pending = Math.max(0, pending - 1)
-  if (pending === 0 && loadingInstance) {
-    loadingInstance.close()
-    loadingInstance = null
-  }
-}
-
 /**
  * GET
  * @param {string} cmd
  * @param {object} params real 模式拼进 query;mock 忽略(静态文件),需过滤请在页面内做
- * @param {object} opts { loading?:boolean=true, fullscreen?:boolean=false }
+ * @param {object} opts 兼容旧签名,当前无副作用
  * 返回 response.data.data
  */
 export async function cgiGet(cmd, params = {}, opts = {}) {
-  const { loading = true, fullscreen = false } = opts
-  if (loading) openLoading(fullscreen)
   try {
-    if (MOCK) await delay(300) // 让 loading 可见
+    if (MOCK) await delay(300) // 让表格 loading 可见
     let url
     if (MOCK) {
       url = `${BASE}data/${cmd}.json`
@@ -72,8 +47,6 @@ export async function cgiGet(cmd, params = {}, opts = {}) {
   } catch (e) {
     if (MOCK) { console.warn(`[mock] GET ${cmd} failed:`, e.message); return {} }
     throw e
-  } finally {
-    if (loading) closeLoading()
   }
 }
 
@@ -81,40 +54,34 @@ export async function cgiGet(cmd, params = {}, opts = {}) {
  * SET
  * options:
  *  - successMsg: false 关闭成功提示 | string 自定义文案
- *  - loading: boolean=true
- *  - fullscreen: boolean=false
+ *  (loading 由调用页在表格上用 v-loading 管理,这里不盖遮罩)
  */
 export async function cgiSet(cmd, payload = {}, options = {}) {
-  const { successMsg = true, loading = true, fullscreen = false } = options
-  if (loading) openLoading(fullscreen)
-  try {
-    if (MOCK) await delay(300)
-    let resp
-    if (MOCK) {
-      resp = await request.get(`${BASE}data/_ok.json`)
-    } else {
-      resp = await request.post(`/cgi/set.cgi?cmd=${cmd}`, buildDs(payload))
-    }
-    const data = resp.data || {}
-    if (data.status !== 'ok') {
-      Message({
-        showClose: true,
-        message: data.msg || 'Save failed.',
-        type: 'error',
-        duration: 5 * 1000
-      })
-      const err = new Error(data.msg || 'cgi set failed')
-      err.cgi = data
-      throw err
-    }
-    if (successMsg) {
-      Message.success({
-        showClose: true,
-        message: typeof successMsg === 'string' ? successMsg : 'Success.'
-      })
-    }
-    return data
-  } finally {
-    if (loading) closeLoading()
+  const { successMsg = true } = options
+  if (MOCK) await delay(300)
+  let resp
+  if (MOCK) {
+    resp = await request.get(`${BASE}data/_ok.json`)
+  } else {
+    resp = await request.post(`/cgi/set.cgi?cmd=${cmd}`, buildDs(payload))
   }
+  const data = resp.data || {}
+  if (data.status !== 'ok') {
+    Message({
+      showClose: true,
+      message: data.msg || 'Save failed.',
+      type: 'error',
+      duration: 5 * 1000
+    })
+    const err = new Error(data.msg || 'cgi set failed')
+    err.cgi = data
+    throw err
+  }
+  if (successMsg) {
+    Message.success({
+      showClose: true,
+      message: typeof successMsg === 'string' ? successMsg : 'Success.'
+    })
+  }
+  return data
 }

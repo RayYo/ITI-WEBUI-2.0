@@ -40,7 +40,7 @@
         <input type="button" value="Delete All" class="btnInTitle" :disabled="deleteAllDisabled" :class="{ btnDisabled: deleteAllDisabled }" @click="onDeleteAll">
       </div>
     </div>
-    <el-table :data="entries" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
+    <el-table v-loading="loading" :data="entries" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
       <el-table-column prop="idx" label="Index" />
       <el-table-column prop="port" label="Port" />
       <el-table-column prop="dropEvents" label="Drop Events" />
@@ -65,6 +65,7 @@ import { pageTableHeader, pageTableCell } from '@/utils/emu'
 export default {
   data() {
     return {
+      loading: false,
       pageTableHeader,
       pageTableCell,
       index: '',
@@ -83,9 +84,10 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('rmon_statistics').then(d => {
         this.entries = d.entries || []
-      })
+      }).finally(() => { this.loading = false })
     },
     onReset() {
       this.index = ''

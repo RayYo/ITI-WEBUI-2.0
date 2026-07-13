@@ -3,6 +3,7 @@
     <div id="basetitle">Instance Information</div>
     <div>
       <el-table
+        v-loading="loading"
         :data="rows"
         class="tableBox"
         stripe
@@ -28,14 +29,15 @@ import { darkTableHeader, pageTableCell } from '@/utils/emu'
 
 export default {
   data() {
-    return { darkTableHeader, pageTableCell, rows: [] }
+    return { loading: false, darkTableHeader, pageTableCell, rows: [] }
   },
   created() {
     this.load()
   },
   methods: {
     load() {
-      cgiGet('net_stpInstance').then(d => { this.rows = d.list || [] })
+      this.loading = true
+      cgiGet('net_stpInstance').then(d => { this.rows = d.list || [] }).finally(() => { this.loading = false })
     }
   }
 }

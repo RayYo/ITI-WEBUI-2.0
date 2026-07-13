@@ -3,6 +3,7 @@
     <div id="basetitle">Port Settings</div>
     <div>
       <el-table
+        v-loading="loading"
         :data="rows"
         class="tableBox stp-port-table"
         stripe
@@ -92,6 +93,7 @@ const EDGE = [
 export default {
   data() {
     return {
+      loading: false,
       PORT_PRI,
       EDGE,
       darkTableHeader,
@@ -110,22 +112,27 @@ export default {
   },
   methods: {
     async load() {
-      const g = await cgiGet('net_stpProtocol')
-      this.stpEnabled = !!g.status
-      const d = await cgiGet('net_stpPort')
-      const all = { port: 'All', stpStatus: '1', priority: 128, adminCost: '0', externalCost: '-', state: '-', edge: 'auto', p2p: 'auto', restrictedRole: '2', restrictedTCN: '2' }
-      this.rows = [all].concat((d.ports || []).map(p => ({
-        port: p.port,
-        stpStatus: p.stpStatus ? '1' : '2',
-        priority: p.priority,
-        adminCost: String(p.adminCost),
-        externalCost: p.externalCost,
-        state: p.state,
-        edge: p.edge || 'auto',
-        p2p: p.p2p || 'auto',
-        restrictedRole: p.restrictedRole ? '1' : '2',
-        restrictedTCN: p.restrictedTCN ? '1' : '2'
-      })))
+      this.loading = true
+      try {
+        const g = await cgiGet('net_stpProtocol')
+        this.stpEnabled = !!g.status
+        const d = await cgiGet('net_stpPort')
+        const all = { port: 'All', stpStatus: '1', priority: 128, adminCost: '0', externalCost: '-', state: '-', edge: 'auto', p2p: 'auto', restrictedRole: '2', restrictedTCN: '2' }
+        this.rows = [all].concat((d.ports || []).map(p => ({
+          port: p.port,
+          stpStatus: p.stpStatus ? '1' : '2',
+          priority: p.priority,
+          adminCost: String(p.adminCost),
+          externalCost: p.externalCost,
+          state: p.state,
+          edge: p.edge || 'auto',
+          p2p: p.p2p || 'auto',
+          restrictedRole: p.restrictedRole ? '1' : '2',
+          restrictedTCN: p.restrictedTCN ? '1' : '2'
+        })))
+      } finally {
+        this.loading = false
+      }
     },
     onApply(row) {
       const isAll = row.port === 'All'
