@@ -1,0 +1,406 @@
+{
+  "data": {
+    "ports": [
+      {
+        "port": 1,
+        "link": true,
+        "speed": 1000,
+        "duplex": "full",
+        "throughputMbps": 7,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": true,
+          "powerMw": 2937,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 2,
+        "link": true,
+        "speed": 1000,
+        "duplex": "full",
+        "throughputMbps": 2,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": true,
+          "powerMw": 3874,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 3,
+        "link": true,
+        "speed": 1000,
+        "duplex": "half",
+        "throughputMbps": 9,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": true,
+          "powerMw": 4811,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 4,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 5,
+        "link": true,
+        "speed": 100,
+        "duplex": "full",
+        "throughputMbps": 11,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": true,
+          "powerMw": 6685,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 6,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 7,
+        "link": true,
+        "speed": 1000,
+        "duplex": "full",
+        "throughputMbps": 1,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": true,
+          "powerMw": 8559,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 8,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 9,
+        "link": true,
+        "speed": 1000,
+        "duplex": "half",
+        "throughputMbps": 3,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": true,
+          "powerMw": 10433,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 10,
+        "link": true,
+        "speed": 1000,
+        "duplex": "full",
+        "throughputMbps": 10,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": true,
+          "powerMw": 2370,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 11,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 12,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 13,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 14,
+        "link": true,
+        "speed": 100,
+        "duplex": "full",
+        "throughputMbps": 2,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": true,
+          "powerMw": 6118,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 15,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 16,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 17,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 18,
+        "link": true,
+        "speed": 1000,
+        "duplex": "full",
+        "throughputMbps": 6,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": true,
+          "powerMw": 9866,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 19,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 20,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 21,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 22,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 23,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 24,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": {
+          "on": true,
+          "powering": false,
+          "powerMw": 0,
+          "standard": "PoE"
+        }
+      },
+      {
+        "port": 25,
+        "link": true,
+        "speed": 10000,
+        "duplex": "full",
+        "throughputMbps": 75,
+        "loopback": "normal",
+        "distance": null,
+        "poe": null
+      },
+      {
+        "port": 26,
+        "link": true,
+        "speed": 10000,
+        "duplex": "full",
+        "throughputMbps": 82,
+        "loopback": "normal",
+        "distance": null,
+        "poe": null
+      },
+      {
+        "port": 27,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": null
+      },
+      {
+        "port": 28,
+        "link": false,
+        "speed": 0,
+        "duplex": "",
+        "throughputMbps": 0,
+        "loopback": "normal",
+        "distance": null,
+        "poe": null
+      }
+    ]
+  }
+}

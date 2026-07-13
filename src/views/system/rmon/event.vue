@@ -55,7 +55,7 @@
 
     <div class="table_title">
       RMON Event Table
-      <div style="display: inline; float: right; margin-top: 4px">
+      <div style="display: inline; float: right;">
         <input type="button" value="Delete All" class="btnInTitle" :disabled="deleteAllDisabled" :class="{ btnDisabled: deleteAllDisabled }" @click="onDeleteAll">
       </div>
     </div>

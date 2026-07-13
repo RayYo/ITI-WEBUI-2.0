@@ -17,7 +17,7 @@
           <div class="warning_box">
             <div class="warning_top">
               <p class="new_warning">{{ sysLogNum }} NEW MESSAGES</p>
-              <a href="#/system/management" class="warning_link">View All</a>
+              <a href="#/system/system-log" class="warning_link">View All</a>
             </div>
             <div class="warning_content">
               <div class="warning_item">
@@ -49,6 +49,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import Hamburger from '@/components/Hamburger'
+import { cgiGet } from '@/api/cgi'
 
 export default {
   components: {
@@ -56,7 +57,7 @@ export default {
   },
   data() {
     return {
-      sysLogNum: 9,
+      sysLogNum: 0,
       sysStartUpTime: '01/01/2018 00:01:59'
     }
   },
@@ -69,7 +70,21 @@ export default {
       return this.$store.state.app.device === 'mobile'
     }
   },
+  created() {
+    this.loadSysLogNum()
+  },
   methods: {
+    async loadSysLogNum() {
+      // navbar warning 徽标数量 = System Log 表条数
+      try {
+        const data = await cgiGet('log_syslog')
+        const entries = (data && data.entries) || []
+        this.sysLogNum = entries.length
+        if (entries.length) this.sysStartUpTime = entries[entries.length - 1].time || this.sysStartUpTime
+      } catch (e) {
+        this.sysLogNum = 0
+      }
+    },
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },

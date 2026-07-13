@@ -1,0 +1,18 @@
+{
+  "data": {
+    "entries": [
+      {
+        "idx": 1,
+        "username": "admin"
+      },
+      {
+        "idx": 2,
+        "username": "operator"
+      },
+      {
+        "idx": 3,
+        "username": "guest"
+      }
+    ]
+  }
+}

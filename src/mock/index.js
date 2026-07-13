@@ -23,8 +23,8 @@ const state = {
   lastLoginFail: '', // ''=ok, 其他为 failReason
   firstBoot: localStorage.getItem('mock_firstboot') === '1',
   poeOn: {}, // port → bool,poe_portEdit 写入,panel_info 读取(避免轮询覆盖开关)
-  users: [{ idx: 1, username: 'admin' }], // Administration 用户表
-  ipAccess: { enabled: false, entries: [] } // IP Access List
+  users: null, // Administration 用户表(懒加载自 aaa_login.json)
+  ipAccess: null // IP Access List(懒加载自 sys_ipAccess.json)
 }
 
 let devinfoCache = null
@@ -198,39 +198,55 @@ const setHandlers = {
     return ok
   },
   aaa_loginAdd: async params => {
-    if (state.users.some(u => u.username === params.username)) {
+    const users = await ensureUsers()
+    if (users.some(u => u.username === params.username)) {
       return { status: 'fail', msgType: 'dup', msg: 'User already exists.' }
     }
-    const idx = Math.max.apply(null, [0].concat(state.users.map(u => u.idx))) + 1
-    state.users.push({ idx, username: params.username })
+    const idx = Math.max.apply(null, [0].concat(users.map(u => u.idx))) + 1
+    users.push({ idx, username: params.username })
     return ok
   },
   aaa_loginDel: async params => {
-    state.users = state.users.filter(u => u.idx !== Number(params.idx))
+    const users = await ensureUsers()
+    state.users = users.filter(u => u.idx !== Number(params.idx))
     return ok
   },
   aaa_loginEdit: async() => ok,
   sys_ipAccess: async params => {
-    state.ipAccess.enabled = params.enabled === '1' || params.enabled === 1
+    const ip = await ensureIpAccess()
+    ip.enabled = params.enabled === '1' || params.enabled === 1
     return ok
   },
   sys_ipAccessAdd: async params => {
-    const idx = Math.max.apply(null, [0].concat(state.ipAccess.entries.map(e => e.idx))) + 1
-    state.ipAccess.entries.push({ idx, ip: params.ip })
+    const ip = await ensureIpAccess()
+    const idx = Math.max.apply(null, [0].concat(ip.entries.map(e => e.idx))) + 1
+    ip.entries.push({ idx, ip: params.ip })
     return ok
   },
   sys_ipAccessDel: async params => {
-    if (params.all) state.ipAccess.entries = []
-    else state.ipAccess.entries = state.ipAccess.entries.filter(e => e.idx !== Number(params.idx))
+    const ip = await ensureIpAccess()
+    if (params.all) ip.entries = []
+    else ip.entries = ip.entries.filter(e => e.idx !== Number(params.idx))
     return ok
   }
 }
 
-/* Administration / IP Access List:内存状态,支持增删演示 */
-getHandlers.aaa_login = async() => ({ data: { entries: state.users }})
-getHandlers.sys_ipAccess = async() => ({
-  data: { enabled: state.ipAccess.enabled, entries: state.ipAccess.entries }
-})
+/* Administration / IP Access List:初始数据来自 json,增删改在内存生效 */
+async function ensureUsers() {
+  // eslint-disable-next-line require-atomic-updates
+  if (!state.users) state.users = (await loadJson('aaa_login')).data.entries.slice()
+  return state.users
+}
+async function ensureIpAccess() {
+  // eslint-disable-next-line require-atomic-updates
+  if (!state.ipAccess) state.ipAccess = (await loadJson('sys_ipAccess')).data
+  return state.ipAccess
+}
+getHandlers.aaa_login = async() => ({ data: { entries: await ensureUsers() }})
+getHandlers.sys_ipAccess = async() => {
+  const ip = await ensureIpAccess()
+  return { data: { enabled: ip.enabled, entries: ip.entries }}
+}
 
 /**
  * 通用表格 CRUD:初始数据来自 /data/<cmd>.json,增删改在内存生效(刷新丢失)。
