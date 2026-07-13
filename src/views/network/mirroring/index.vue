@@ -2,50 +2,32 @@
   <div class="main_body">
     <div id="basetitle">Mirroring</div>
     <div>
-      <div class="table_title">Mirroring Settings</div>
-      <table class="from_table" border="" cellspacing="0">
-        <tbody>
-          <tr>
-            <td>Mirroring Status</td>
-            <td>
-              <select v-model="status">
-                <option value="1">Enabled</option>
-                <option value="2">Disabled</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Mirror Target Port</td>
-            <td>
-              <select v-model="targetPort" :disabled="status !== '1'">
-                <option v-for="p in portList" :key="p" :value="p">{{ p }}</option>
-              </select>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <common-table header-title="Mirroring Settings" :first-column="['Mirroring Status','Mirror Target Port']">
+        <template #0>
+          <select v-model="status">
+            <option value="1">Enabled</option>
+            <option value="2">Disabled</option>
+          </select>
+        </template>
+        <template #1>
+          <select v-model="targetPort" :disabled="status !== '1'">
+            <option v-for="p in portList" :key="p" :value="p">{{ p }}</option>
+          </select>
+        </template>
+      </common-table>
 
-      <div class="table_title">Ingress Port Settings</div>
-      <div class="port-check-box">
-        <label v-for="p in portList" :key="'in' + p" class="port-check">
-          <input v-model="ingress" type="checkbox" :value="p" :disabled="status !== '1'"> {{ p }}
-        </label>
-        <div class="margin1015">
-          <input type="button" class="btnOutTable" value="All" @click="ingress = portList.slice()">
-          <input type="button" class="btnOutTable" value="Clear" @click="ingress = []">
-        </div>
-      </div>
-
-      <div class="table_title">Egress Port Settings</div>
-      <div class="port-check-box">
-        <label v-for="p in portList" :key="'eg' + p" class="port-check">
-          <input v-model="egress" type="checkbox" :value="p" :disabled="status !== '1'"> {{ p }}
-        </label>
-        <div class="margin1015">
-          <input type="button" class="btnOutTable" value="All" @click="egress = portList.slice()">
-          <input type="button" class="btnOutTable" value="Clear" @click="egress = []">
-        </div>
-      </div>
+      <port-checkbox-grid
+        v-model="ingress"
+        title="Mirroring Ingress Port Settings"
+        :ports="portList"
+        :disabled="status !== '1'"
+      />
+      <port-checkbox-grid
+        v-model="egress"
+        title="Mirroring Egress Port Settings"
+        :ports="portList"
+        :disabled="status !== '1'"
+      />
 
       <div class="margin1015">
         <input type="button" class="btnOutTable" value="Apply" @click="onApply">
@@ -57,12 +39,15 @@
 <script>
 import { cgiGet, cgiSet } from '@/api/cgi'
 import message from '@/utils/message'
+import commonTable from '@/components/CustomTable/common-table.vue'
+import PortCheckboxGrid from '@/components/Emu/PortCheckboxGrid.vue'
 
 export default {
+  components: { commonTable, PortCheckboxGrid },
   data() {
     return {
       status: '2',
-      targetPort: '1',
+      targetPort: 1,
       ingress: [],
       egress: []
     }
@@ -80,7 +65,7 @@ export default {
     load() {
       cgiGet('net_mirror').then(d => {
         this.status = d.status ? '1' : '2'
-        this.targetPort = String(d.targetPort || 1)
+        this.targetPort = d.targetPort || 1
         this.ingress = (d.ingress || []).slice()
         this.egress = (d.egress || []).slice()
       })
@@ -100,15 +85,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.port-check-box {
-  padding: 10px 15px;
-}
-.port-check {
-  display: inline-block;
-  width: 60px;
-  margin: 4px 0;
-  white-space: nowrap;
-}
-</style>

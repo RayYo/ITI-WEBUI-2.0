@@ -2,97 +2,44 @@
   <div class="main_body">
     <div id="basetitle">Physical Interface</div>
     <div>
-      <div class="table-scroll">
-        <el-table :data="rows" class="tableBox" style="min-width: 1400px" stripe border :header-cell-style="darkTableHeader" :cell-style="pageTableCell">
-          <el-table-column prop="port" label="Port" width="70" />
-          <el-table-column prop="trunk" label="Trunk" width="80" />
-          <el-table-column prop="type" label="Type" width="90" />
-          <el-table-column label="Link Status" width="110">
-            <template slot-scope="scope">{{ scope.row.linkStatus }}</template>
-          </el-table-column>
-          <el-table-column label="Admin Status" width="130">
-            <template slot-scope="scope">
-              <select v-model="scope.row.adminStatus">
-                <option v-if="scope.row.port === 'All'" value="0">Ignore</option>
-                <option value="1">Enabled</option>
-                <option value="2">Disabled</option>
-              </select>
-            </template>
-          </el-table-column>
-          <el-table-column label="Mode" width="150">
-            <template slot-scope="scope">
-              <select v-model="scope.row.mode">
-                <option v-if="scope.row.port === 'All'" value="ignore">Ignore</option>
-                <option value="auto">Auto</option>
-                <option value="1000full">1000/Full</option>
-                <option value="100full">100/Full</option>
-                <option value="10full">10/Full</option>
-                <option value="100half">100/Half</option>
-                <option value="10half">10/Half</option>
-              </select>
-            </template>
-          </el-table-column>
-          <el-table-column label="Jumbo" width="120">
-            <template slot-scope="scope">
-              <select v-model="scope.row.jumbo">
-                <option v-if="scope.row.port === 'All'" value="0">Ignore</option>
-                <option value="1">Enabled</option>
-                <option value="2">Disabled</option>
-              </select>
-            </template>
-          </el-table-column>
-          <el-table-column label="Flow Ctrl" width="120">
-            <template slot-scope="scope">
-              <select v-model="scope.row.flowCtrl">
-                <option v-if="scope.row.port === 'All'" value="0">Ignore</option>
-                <option value="1">Enabled</option>
-                <option value="2">Disabled</option>
-              </select>
-            </template>
-          </el-table-column>
-          <el-table-column label="EAP PassThrough" width="150">
-            <template slot-scope="scope">
-              <select v-model="scope.row.eapPassThrough">
-                <option v-if="scope.row.port === 'All'" value="0">Ignore</option>
-                <option value="1">Enabled</option>
-                <option value="2">Disabled</option>
-              </select>
-            </template>
-          </el-table-column>
-          <el-table-column label="BPDU PassThrough" width="160">
-            <template slot-scope="scope">
-              <select v-model="scope.row.bpduPassThrough">
-                <option v-if="scope.row.port === 'All'" value="0">Ignore</option>
-                <option value="1">Enabled</option>
-                <option value="2">Disabled</option>
-              </select>
-            </template>
-          </el-table-column>
-          <el-table-column label="Port Description" width="180">
-            <template slot-scope="scope">
-              <input v-model="scope.row.description" type="text" maxlength="32">
-            </template>
-          </el-table-column>
-          <el-table-column label="Action" width="90">
-            <template slot-scope="scope">
-              <input type="button" class="btnInTable" value="Apply" @click="onApply(scope.row)">
-            </template>
-          </el-table-column>
-        </el-table>
-      </div>
+      <port-edit-table :columns="columns" :rows="rows" min-width="1400px" @apply="onApply" />
     </div>
   </div>
 </template>
 
 <script>
 import { cgiGet, cgiSet } from '@/api/cgi'
-import { darkTableHeader, pageTableCell } from '@/utils/emu'
+import PortEditTable from '@/components/Emu/PortEditTable.vue'
+
+const EN_DIS = [{ value: '1', label: 'Enabled' }, { value: '2', label: 'Disabled' }]
+const IGNORE = { value: '0', label: 'Ignore' }
+const MODES = [
+  { value: 'auto', label: 'Auto' },
+  { value: '1000full', label: '1000/Full' },
+  { value: '100full', label: '100/Full' },
+  { value: '10full', label: '10/Full' },
+  { value: '100half', label: '100/Half' },
+  { value: '10half', label: '10/Half' }
+]
 
 export default {
+  components: { PortEditTable },
   data() {
     return {
-      darkTableHeader,
-      pageTableCell,
+      columns: [
+        { prop: 'port', label: 'Port', width: 70, type: 'text' },
+        { prop: 'trunk', label: 'Trunk', width: 80, type: 'text' },
+        { prop: 'type', label: 'Type', width: 90, type: 'text' },
+        { prop: 'linkStatus', label: 'Link Status', width: 110, type: 'text' },
+        { prop: 'adminStatus', label: 'Admin Status', width: 130, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'mode', label: 'Mode', width: 150, type: 'select', options: MODES, allExtra: { value: 'ignore', label: 'Ignore' }},
+        { prop: 'jumbo', label: 'Jumbo', width: 120, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'flowCtrl', label: 'Flow Ctrl', width: 120, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'eapPassThrough', label: 'EAP PassThrough', width: 150, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'bpduPassThrough', label: 'BPDU PassThrough', width: 160, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'description', label: 'Port Description', width: 180, type: 'input', maxlength: 32 },
+        { label: 'Action', width: 90, type: 'action' }
+      ],
       rows: []
     }
   },
@@ -125,9 +72,8 @@ export default {
     async onApply(row) {
       const isAll = row.port === 'All'
       const payload = isAll ? { all: 1 } : { port: row.port }
-      // All 行:值为 Ignore(0/'ignore')的字段不提交
       const boolField = (key, val) => {
-        if (isAll && val === '0') return
+        if (isAll && val === '0') return // All 行 Ignore 不提交
         payload[key] = val === '1' ? 1 : 0
       }
       boolField('adminEnabled', row.adminStatus)
@@ -143,9 +89,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.table-scroll {
-  overflow-x: auto;
-}
-</style>
