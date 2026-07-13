@@ -1,0 +1,22 @@
+{
+  "data": {
+    "sntpStatus": "2",
+    "time": 1609459957,
+    "timezone": 480,
+    "srv1Type": "3",
+    "srv1Host": "pool.ntp.org",
+    "srv2Type": "1",
+    "srv2Host": "210.72.145.44",
+    "dlsStatus": false,
+    "sntpPollInterval": "3",
+    "dlsRecMonthS": 3,
+    "dlsRecDayS": 8,
+    "dlsRecHourS": 2,
+    "dlsRecMinS": 0,
+    "dlsRecMonthE": 11,
+    "dlsRecDayE": 1,
+    "dlsRecHourE": 2,
+    "dlsRecMinE": 0,
+    "dlsOffset": 60
+  }
+}

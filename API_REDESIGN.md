@@ -99,6 +99,18 @@
 | `port_statistics` | get | ♻️ | Statistics Traffic/Error 共用:`{ports:[{port,inOctets,inUcast,inNUcast,inDiscards,outOctets,outUcast,outNUcast,outDiscards,inErrors,outErrors,dropEvents,crcAlign,undersize,oversize,fragments,collisions}]}` |
 | `port_cntClear` | set | 🆕 | 清端口计数:`{port:<n>}` 或 `{all:1}` |
 
-## 待登记(随 R2/R3 实现逐步补充)
+## R2 第二/三批:System 页接线 + L3 + System Time(2026-07-11)
+
+| cmd | 方向 | 状态 | 说明 |
+|---|---|---|---|
+| `l3_arpAging`(+Edit) | get/set | 🆕 | `{entries:[{interface,timeout}]}`;Edit `{interface,timeout:1-65535}` |
+| `l3_ipv4Intf`(+Add/Del/Edit) | get/set | 🆕 | `{max,entries:[{intf,state,ipType,ipAddr,ipMask,linkStatus}]}` |
+| `l3_ipv4Route`(+Add/Del) | get/set | 🆕 | `{entries:[{idx,ip,mask,nextHop,backup:'P'/'B',intfName}]}` |
+| `l3_ipv6Intf`(+Add/Del) | get/set | 🆕 | `{entries:[{intf,state,linkStatus}]}` |
+| `l3_ipv6Neighbor`(+Add/Del) | get/set | 🆕 | `{entries:[{ipv6,mac,type:'Static'/'Dynamic'}]}` |
+| `l3_ipv6Route`(+Add/Del) | get/set | 🆕 | `{entries:[{idx,ipv6,nextHop,backup,intfName}]}` |
+| `sys_time` | get/set | 🆕 | System Time:get `{sntpStatus:'1'/'2'/'3',time(epoch),timezone(min),srv1Type,srv1Host,srv2Type,srv2Host,dlsStatus,sntpPollInterval,dlsRecMonth/Day/Hour/Min S/E,dlsOffset}`;set 按 clockMode(1 SNTP / 2 Local / 3 Cloud)分别提交,DST 单独 Apply |
+
+## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

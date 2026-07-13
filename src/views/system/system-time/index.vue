@@ -171,6 +171,7 @@ import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
 import { parseTime, applyCheck } from '@/utils'
+import { cgiGet, cgiSet } from '@/api/cgi'
 
 export default {
   components: {
@@ -215,125 +216,119 @@ export default {
     }
   },
   created() {
-    const mockData = {
-      sntpStatus: '2', // 1: sntp 2: local 3: cloud
-      time: 1662497886,
-      timezone: -60,
-      srv1Type: '3', // 1: ipv4 2: ipv6 3: domain / ''
-      srv1Host: 'ntp.aliyun.com', // 'ipv4'/'ipv6'/'domain'/'' string
-      srv2Type: '1', // 1: ipv4 2: ipv6 3: domain / ''
-      srv2Host: '210.72.145.44', // 'ipv4'/'ipv6'/'domain'/'' string
-      dlsStatus: true, // dls enable, false: disable
-      sntpPollInterval: '3', // 1~60 / ''
-      dlsRecMonthS: '', // start
-      dlsRecDayS: '',
-      dlsRecHourS: '',
-      dlsRecMinS: '',
-      dlsRecMonthE: 4, // end
-      dlsRecDayE: 1,
-      dlsRecHourE: 13,
-      dlsRecMinE: 26,
-      dlsOffset: 60 // 30/60/''
-    }
     // init timezone string array
     this.timezoneStrArrInit()
-    // init data
-    this.currentTime = parseTime(mockData.time, '{d} {m} {y} {h}:{i}:{s}')
-    this.selClockMode = mockData.sntpStatus
-    if (this.selClockMode === '1') {
-      this.clockMode = 'SNTP'
-    } else if (this.selClockMode === '2') {
-      this.clockMode = 'Local Time'
-    } else {
-      this.clockMode = 'Cloud Sync Time'
-    }
-    for (let i = 0; i < this.timezoneStrArr.length; i++) {
-      const element = this.timezoneStrArr[i]
-      if (element.value === mockData.timezone) {
-        this.timezoneStr = element.str
-        break
-      }
-    }
-    this.selTimezone = mockData.timezone
-    // this.timezoneStr = '(GMT+08:00) Beijing,Chongqing, Hong Kong,Urumqi'
-    // init local date
-    const date = new Date(mockData.time * 1000)
-    this.dateY = date.getFullYear().toString()
-    this.dateM = (date.getMonth() + 1).toString().padStart(2, '0')
-    this.dateD = date.getDate().toString().padStart(2, '0')
-    this.dateH = date.getHours().toString().padStart(2, '0')
-    this.dateMin = date.getMinutes().toString().padStart(2, '0')
-    this.dateS = date.getSeconds().toString().padStart(2, '0')
-    // init SNTP Server
-    this.sntpServer1 = mockData.srv1Host
-    this.sntpServer2 = mockData.srv2Host
-    this.selSntpServer1 = mockData.srv1Type
-    this.selSntpServer2 = mockData.srv2Type
-    if (this.selSntpServer1 === '') {
-      this.selSntpServer1 = '1'
-    }
-    if (this.selSntpServer2 === '') {
-      this.selSntpServer2 = '1'
-    }
-    if (mockData.sntpPollInterval) {
-      this.sntpPollInterval = mockData.sntpPollInterval
-    } else { this.sntpPollInterval = '1' }
-    // DLS
-    if (mockData.dlsStatus) {
-      this.dlsStatus = '1' // enable
-    } else {
-      this.dlsStatus = '2' // disable
-    }
-    // from date
-    if (mockData.dlsRecMonthS) {
-      this.selFromM = mockData.dlsRecMonthS
-    } else { this.selFromM = '1' }
-    if (mockData.dlsRecDayS) {
-      this.selFromD = mockData.dlsRecDayS
-    } else { this.selFromD = '1' }
-    if (mockData.dlsRecHourS) {
-      this.selFromH = mockData.dlsRecHourS
-    } else { this.selFromH = '0' }
-    if (mockData.dlsRecMinS) {
-      this.selFromMin = mockData.dlsRecMinS
-    } else { this.selFromMin = '0' }
-    // to date
-    if (mockData.dlsRecMonthE) {
-      this.selToM = mockData.dlsRecMonthE
-    } else { this.selToM = '1' }
-    if (mockData.dlsRecDayE) {
-      this.selToD = mockData.dlsRecDayE
-    } else { this.selToD = '1' }
-    if (mockData.dlsRecHourE) {
-      this.selToH = mockData.dlsRecHourE
-    } else { this.selToH = '0' }
-    if (mockData.dlsRecMinE) {
-      this.selToMin = mockData.dlsRecMinE
-    } else { this.selToMin = '0' }
-    // DST Offset
-    if (mockData.dlsOffset) {
-      this.dstOffset = mockData.dlsOffset
-    } else { this.dstOffset = '60' }
+    cgiGet('sys_time').then(d => this.applyData(d))
   },
   methods: {
+    applyData(mockData) {
+    // init data
+      this.currentTime = parseTime(mockData.time, '{d} {m} {y} {h}:{i}:{s}')
+      this.selClockMode = mockData.sntpStatus
+      if (this.selClockMode === '1') {
+        this.clockMode = 'SNTP'
+      } else if (this.selClockMode === '2') {
+        this.clockMode = 'Local Time'
+      } else {
+        this.clockMode = 'Cloud Sync Time'
+      }
+      for (let i = 0; i < this.timezoneStrArr.length; i++) {
+        const element = this.timezoneStrArr[i]
+        if (element.value === mockData.timezone) {
+          this.timezoneStr = element.str
+          break
+        }
+      }
+      this.selTimezone = mockData.timezone
+      // this.timezoneStr = '(GMT+08:00) Beijing,Chongqing, Hong Kong,Urumqi'
+      // init local date
+      const date = new Date(mockData.time * 1000)
+      this.dateY = date.getFullYear().toString()
+      this.dateM = (date.getMonth() + 1).toString().padStart(2, '0')
+      this.dateD = date.getDate().toString().padStart(2, '0')
+      this.dateH = date.getHours().toString().padStart(2, '0')
+      this.dateMin = date.getMinutes().toString().padStart(2, '0')
+      this.dateS = date.getSeconds().toString().padStart(2, '0')
+      // init SNTP Server
+      this.sntpServer1 = mockData.srv1Host
+      this.sntpServer2 = mockData.srv2Host
+      this.selSntpServer1 = mockData.srv1Type
+      this.selSntpServer2 = mockData.srv2Type
+      if (this.selSntpServer1 === '') {
+        this.selSntpServer1 = '1'
+      }
+      if (this.selSntpServer2 === '') {
+        this.selSntpServer2 = '1'
+      }
+      if (mockData.sntpPollInterval) {
+        this.sntpPollInterval = mockData.sntpPollInterval
+      } else { this.sntpPollInterval = '1' }
+      // DLS
+      if (mockData.dlsStatus) {
+        this.dlsStatus = '1' // enable
+      } else {
+        this.dlsStatus = '2' // disable
+      }
+      // from date
+      if (mockData.dlsRecMonthS) {
+        this.selFromM = mockData.dlsRecMonthS
+      } else { this.selFromM = '1' }
+      if (mockData.dlsRecDayS) {
+        this.selFromD = mockData.dlsRecDayS
+      } else { this.selFromD = '1' }
+      if (mockData.dlsRecHourS) {
+        this.selFromH = mockData.dlsRecHourS
+      } else { this.selFromH = '0' }
+      if (mockData.dlsRecMinS) {
+        this.selFromMin = mockData.dlsRecMinS
+      } else { this.selFromMin = '0' }
+      // to date
+      if (mockData.dlsRecMonthE) {
+        this.selToM = mockData.dlsRecMonthE
+      } else { this.selToM = '1' }
+      if (mockData.dlsRecDayE) {
+        this.selToD = mockData.dlsRecDayE
+      } else { this.selToD = '1' }
+      if (mockData.dlsRecHourE) {
+        this.selToH = mockData.dlsRecHourE
+      } else { this.selToH = '0' }
+      if (mockData.dlsRecMinE) {
+        this.selToMin = mockData.dlsRecMinE
+      } else { this.selToMin = '0' }
+      // DST Offset
+      if (mockData.dlsOffset) {
+        this.dstOffset = mockData.dlsOffset
+      } else { this.dstOffset = '60' }
+    },
     timeSetting() {
       if (this.selClockMode === '2') { // local time
-        // check
-        if (this.dateTimeApplyCheck()) {
-          // post
-          message.success()
-        }
+        if (!this.dateTimeApplyCheck()) return
+        cgiSet('sys_time', {
+          clockMode: 2,
+          timezone: this.selTimezone,
+          year: this.dateY, month: this.dateM, day: this.dateD,
+          hour: this.dateH, min: this.dateMin, sec: this.dateS
+        })
       } else if (this.selClockMode === '1') { // sntp server
-        if (this.sntpApplyCheck()) {
-          message.success()
-        }
-      } else {
-        message.success()
+        if (!this.sntpApplyCheck()) return
+        cgiSet('sys_time', {
+          clockMode: 1,
+          timezone: this.selTimezone,
+          srv1Type: this.selSntpServer1, srv1Host: this.sntpServer1,
+          srv2Type: this.selSntpServer2, srv2Host: this.sntpServer2,
+          pollInterval: this.sntpPollInterval
+        })
+      } else { // cloud
+        cgiSet('sys_time', { clockMode: 3 })
       }
     },
     daylightSavingTimeSet() {
-      // post
-      message.success()
+      cgiSet('sys_time', {
+        dlsStatus: this.dlsStatus === '1' ? 1 : 0,
+        fromM: this.selFromM, fromD: this.selFromD, fromH: this.selFromH, fromMin: this.selFromMin,
+        toM: this.selToM, toD: this.selToD, toH: this.selToH, toMin: this.selToMin,
+        dstOffset: this.dstOffset
+      })
     },
     inputCheck(key) {
       if (key === 'sntpServer1') {
