@@ -3,7 +3,7 @@
     <div class="table_title">
       <span>{{ title }}</span>
       <div style="display: inline; float: right;">
-        <input type="button" class="btnInTitle allBtn" value="All" :disabled="disabled" @click="toggleAll">
+        <input type="button" class="btnInTitle" :class="{ btnDisabled: disabled }" value="All" :disabled="disabled" @click="toggleAll">
       </div>
     </div>
     <div class="table-scroll">
@@ -60,15 +60,6 @@ export default {
 <style lang="scss" scoped>
 .table-scroll {
   overflow-x: auto;
-}
-/* 原版标题栏 All 按钮尺寸 80x35;禁用时置灰不可点 */
-.allBtn {
-  width: 80px !important;
-}
-.allBtn:disabled {
-  background-color: #a0cfff;
-  border-color: #a0cfff;
-  cursor: not-allowed;
 }
 .port-grid {
   width: 100%;

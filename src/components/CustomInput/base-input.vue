@@ -6,7 +6,7 @@
       :maxlength="maxLen"
       :autocomplete="autocomplete"
       :placeholder="placeholder"
-      :class="css"
+      :class="[css, { disabledStyle: disabled }]"
       :disabled="disabled"
       @input="inputChange"
       @keyup="check"

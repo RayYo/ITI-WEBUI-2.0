@@ -27,18 +27,18 @@ export default {
   data() {
     return {
       columns: [
-        { prop: 'port', label: 'Port', width: 70, type: 'text' },
-        { prop: 'trunk', label: 'Trunk', width: 80, type: 'text' },
-        { prop: 'type', label: 'Type', width: 90, type: 'text' },
-        { prop: 'linkStatus', label: 'Link Status', width: 110, type: 'text' },
-        { prop: 'adminStatus', label: 'Admin Status', minWidth: 120, type: 'select', options: EN_DIS, allExtra: IGNORE },
-        { prop: 'mode', label: 'Mode', minWidth: 140, type: 'select', options: MODES, allExtra: { value: 'ignore', label: 'Ignore' }},
-        { prop: 'jumbo', label: 'Jumbo', minWidth: 100, type: 'select', options: EN_DIS, allExtra: IGNORE },
-        { prop: 'flowCtrl', label: 'Flow Ctrl', minWidth: 110, type: 'select', options: EN_DIS, allExtra: IGNORE },
-        { prop: 'eapPassThrough', label: 'EAP PassThrough', minWidth: 140, type: 'select', options: EN_DIS, allExtra: IGNORE },
-        { prop: 'bpduPassThrough', label: 'BPDU PassThrough', minWidth: 150, type: 'select', options: EN_DIS, allExtra: IGNORE },
-        { prop: 'description', label: 'Port Description', minWidth: 160, type: 'input', maxlength: 32 },
-        { label: 'Action', width: 90, type: 'action' }
+        { prop: 'port', label: 'Port', minWidth: 62, type: 'text' },
+        { prop: 'trunk', label: 'Trunk', minWidth: 73, type: 'text' },
+        { prop: 'type', label: 'Type', minWidth: 124, type: 'text' },
+        { prop: 'linkStatus', label: 'Link Status', minWidth: 112, type: 'text' },
+        { prop: 'adminStatus', label: 'Admin Status', minWidth: 146, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'mode', label: 'Mode', minWidth: 169, type: 'select', options: MODES, allExtra: { value: 'ignore', label: 'Ignore' }},
+        { prop: 'jumbo', label: 'Jumbo', minWidth: 146, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'flowCtrl', label: 'Flow Ctrl', minWidth: 146, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'eapPassThrough', label: 'EAP PassThrough', minWidth: 169, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'bpduPassThrough', label: 'BPDU PassThrough', minWidth: 180, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'description', label: 'Port Description', minWidth: 157, type: 'input', maxlength: 32 },
+        { label: 'Action', minWidth: 146, type: 'action' }
       ],
       rows: []
     }

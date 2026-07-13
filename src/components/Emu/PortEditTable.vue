@@ -19,19 +19,22 @@
           :min-width="col.minWidth"
         >
           <template slot-scope="scope">
-            <!-- 行级 Apply -->
+            <!-- 行级 Apply(禁用时保持 #3398dc 仅降透明度:btnDisabled) -->
             <input
               v-if="col.type === 'action'"
               type="button"
               class="btnInTable"
+              :class="{ btnDisabled: disabled }"
               value="Apply"
               :disabled="disabled"
               @click="$emit('apply', scope.row)"
             >
-            <!-- 下拉:All 行可带额外的 Ignore 项 -->
+            <!-- 下拉:整格宽(selectInTable);禁用底色 #e3e3e3(disabledStyle) -->
             <select
               v-else-if="col.type === 'select'"
               v-model="scope.row[col.prop]"
+              class="selectInTable"
+              :class="{ disabledStyle: disabled }"
               :disabled="disabled || (col.readonlyAll && scope.row.port === 'All')"
             >
               <option
@@ -40,11 +43,13 @@
               >{{ col.allExtra.label }}</option>
               <option v-for="o in col.options" :key="o.value" :value="o.value">{{ o.label }}</option>
             </select>
-            <!-- 文本输入 -->
+            <!-- 文本输入:baseInput;禁用底色 #e3e3e3(disabledStyle) -->
             <input
               v-else-if="col.type === 'input'"
               v-model="scope.row[col.prop]"
               type="text"
+              class="baseInput"
+              :class="{ disabledStyle: disabled }"
               :maxlength="col.maxlength || 32"
               :disabled="disabled"
             >
@@ -90,22 +95,8 @@ export default {
 .table-scroll {
   overflow-x: auto;
 }
-/* 表格单元格内的原生控件撑满(与原版一致:整格宽的下拉/输入) */
-.port-edit-table ::v-deep td select,
-.port-edit-table ::v-deep td input[type='text'] {
-  width: 90%;
-  max-width: 260px;
-  height: 26px;
-  box-sizing: border-box;
-  border: 1px solid #dcdfe6;
-  border-radius: 0;
-  color: #606266;
-  background-color: #fff;
-  font-size: 14px;
-}
-.port-edit-table ::v-deep td select:disabled,
-.port-edit-table ::v-deep td input[type='text']:disabled {
-  background-color: #f5f7fa;
-  color: #c0c4cc;
+/* 原版 .tableBox td 无内边距,由控件自身 26px 高度决定行高 */
+.port-edit-table ::v-deep td.el-table__cell {
+  padding: 0 !important;
 }
 </style>

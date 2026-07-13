@@ -212,6 +212,11 @@ div:focus {
   transition: .1s;
   line-height: 33px!important;
 }
+// 原版:标题栏内按钮(如 Mirroring 端口区块的 All)固定 80x35 且右浮
+.btnInTitle {
+  float: right;
+  width: 80px;
+}
 .btnOutTable {
   padding: 0 20px!important;
   text-align: center!important;
@@ -325,6 +330,10 @@ button, input, optgroup, select, textarea {
 }
 .das select {
   width: 300px;
+}
+// 原版:表格单元格内的 select 撑满整格
+.selectInTable {
+  width: 100%!important;
 }
 .tipInTableTitle {
   font-size: 14px;
