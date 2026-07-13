@@ -27,29 +27,28 @@ const state = {
   ipAccess: null // IP Access List(懒加载自 sys_ipAccess.json)
 }
 
-let devinfoCache = null
 async function loadJson(name) {
   const resp = await fetch(`${process.env.BASE_URL}data/${name}.json`)
   if (!resp.ok) throw new Error(`mock json not found: ${name}.json`)
   return resp.json()
 }
-async function getDevinfo() {
-  // eslint-disable-next-line require-atomic-updates
-  if (!devinfoCache) devinfoCache = (await loadJson('sys_devinfo')).data
-  return devinfoCache
-}
 
 const ok = { status: 'ok', msgType: 'save_success', msg: '' }
 const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
-/* link up 的模拟端口(panel_info / port_statistics 共用) */
-const LINKED = [1, 2, 3, 5, 7, 9, 10, 14, 18, 25, 26]
+/* 轮询/动态页说明:这些 cmd 的 JSON 格式契约同样存在于 public/data/<cmd>.json,
+ * 真机由 web server 按该格式返回。为了让 mock 里 JSON 真正被加载(格式被验证)
+ * 又保留 emulator 般的实时动画,统一做法是:
+ *   先 loadJson 拿到「结构 + 基值」(唯一数据源),再仅对数值字段叠加时间动态。
+ * 这样 dev 渲染的就是 JSON 派生结构,真机按同格式返回必然显示正确。 */
+const timeTick = () => Math.floor(Date.now() / 1000) % 100000 // 0..99999 的时间基
+const growthFactor = () => 1 + timeTick() / 100000 // 1.0..2.0 的累积增长
 
 /* ---------- get handlers(默认走 /data/<cmd>.json,这里只放动态数据) ---------- */
 const getHandlers = {
   home_login: async() => {
-    const dev = await getDevinfo()
-    return { data: { FIRSTBOOT: state.firstBoot, model: dev.model }}
+    const base = (await loadJson('home_login')).data
+    return { data: { ...base, FIRSTBOOT: state.firstBoot }}
   },
 
   home_loginStatus: async() => ({
@@ -58,100 +57,82 @@ const getHandlers = {
       : { status: 'ok', failReason: '' }
   }),
 
-  /* CPU / 内存:每次轮询返回随机波动值 */
+  /* CPU / 内存:结构/总内存取自 json,cpu 与空闲内存每次轮询波动 */
   sys_cpumem: async() => {
-    const total = 255572
+    const base = (await loadJson('sys_cpumem')).data
     const used = rand(140000, 170000)
-    return { data: { cpu: rand(6, 38), memTotalKB: total, memFreeKB: total - used }}
+    return { data: { ...base, cpu: rand(6, 38), memFreeKB: base.memTotalKB - used }}
   },
 
-  /* Real-time Statistics:单端口包计数(随时间累积的随机增量,不同端口数据不同) */
+  /* Real-time Statistics:字段集与基值取自 json,按端口系数 + 时间累积生成计数 */
   port_rtstat: async query => {
+    const base = (await loadJson('port_rtstat')).data
     const port = Number(query && query.port) || 1
     const seed = 0.3 + ((port * 37) % 17) / 10 // 每端口固定系数
-    const base = Math.floor(Date.now() / 1000) % 100000
-    const mk = f => Math.floor(base * f * seed) + rand(0, 50)
-    return {
-      data: {
-        totalRx: mk(3), totalTx: mk(2.2),
-        ucRx: mk(2), mcRx: mk(0.5), bcRx: mk(0.3),
-        ucTx: mk(1.6), mcTx: mk(0.4), bcTx: mk(0.2)
-      }
-    }
+    const g = growthFactor()
+    const out = {}
+    Object.keys(base).forEach(k => { out[k] = Math.floor(base[k] * seed * g) + rand(0, 50) })
+    return { data: out }
   },
 
-  /* 端口带宽利用率:link up 的口返回随机利用率 */
+  /* 端口带宽利用率:结构取自 json,link up 的口叠加抖动 */
   port_bwutilz: async() => {
-    const dev = await getDevinfo()
-    const ports = dev.ports.map(p => {
-      const linked = (p.port % 3 !== 0 && p.port <= 10) || p.port === dev.ports.length
-      return {
-        port: p.port,
-        txUtil: linked ? rand(2, 65) : 0,
-        rxUtil: linked ? rand(2, 80) : 0
-      }
-    })
+    const base = (await loadJson('port_bwutilz')).data
+    const ports = base.ports.map(p => ({
+      port: p.port,
+      txUtil: p.txUtil ? Math.min(100, p.txUtil + rand(-3, 3)) : 0,
+      rxUtil: p.rxUtil ? Math.min(100, p.rxUtil + rand(-3, 3)) : 0
+    }))
     return { data: { ports }}
   },
 
-  /* 前面板实时状态:按 devinfo 端口表生成(Switch View / Real-time Statistics 共用)。
-   * 模拟数据尽量丰富:多个端口 link up、不同速率/双工、部分 PoE 供电(仅样式需复刻原版,数据不必)。 */
+  /* 前面板实时状态(Switch View / Real-time Statistics 共用):
+   * link/speed/duplex/poe 结构全部取自 panel_info.json(丰富的多端口 link up);
+   * 仅 throughput、PoE 功率叠加小抖动;PoE 开关叠加 poe_portEdit 的内存态。 */
   panel_info: async() => {
-    const dev = await getDevinfo()
-    const HALF = [3, 9] // 半双工
-    const SLOW = [5, 14] // 百兆口
-    const ports = dev.ports.map(p => {
-      const linked = LINKED.indexOf(p.port) !== -1
-      let speed = 0
-      if (linked) {
-        if (p.type === 'fiber') speed = p.maxSpeed || 10000
-        else speed = SLOW.indexOf(p.port) !== -1 ? 100 : 1000
+    const base = (await loadJson('panel_info')).data
+    const ports = base.ports.map(p => {
+      let poe = p.poe
+      if (poe) {
+        const on = state.poeOn[p.port] !== undefined ? state.poeOn[p.port] : poe.on
+        const powering = p.link && on
+        poe = { ...poe, on, powering, powerMw: powering ? Math.max(0, poe.powerMw + rand(-200, 200)) : 0 }
       }
-      const on = state.poeOn[p.port] !== undefined ? state.poeOn[p.port] : true
-      const powering = p.poe && linked && on
       return {
-        port: p.port,
-        link: linked,
-        speed,
-        duplex: linked ? (HALF.indexOf(p.port) !== -1 ? 'half' : 'full') : '',
-        throughputMbps: linked ? rand(0, Math.max(12, speed / 100)) : 0,
-        loopback: 'normal',
-        distance: null,
-        poe: p.poe
-          // 每端口固定基值 + 小抖动,避免轮询时整表大幅跳变
-          ? { on, powering, powerMw: powering ? 2000 + (p.port * 937) % 9000 + rand(-200, 200) : 0, standard: 'PoE' }
-          : null
+        ...p,
+        throughputMbps: p.link ? rand(0, Math.max(12, Math.floor(p.speed / 100) || 12)) : 0,
+        poe
       }
     })
     return { data: { ports }}
   }
 }
 
-/* Statistics Traffic/Error:计数随时间累积,port_cntClear 记录清零快照 */
-const CNT_FIELDS = {
-  inOctets: 5, inUcast: 1.2, inNUcast: 0.6, inDiscards: 0.01,
-  outOctets: 4.2, outUcast: 1.0, outNUcast: 0.5, outDiscards: 0.008,
-  inErrors: 0.005, outErrors: 0.003, dropEvents: 0.004, crcAlign: 0.002,
-  undersize: 0.001, oversize: 0.001, fragments: 0.002, collisions: 0.003
-}
-const cntCleared = {} // port -> {field: 清零时的原始值}
-function cntRaw(port, field, factor) {
-  const seed = 0.3 + ((port * 37) % 17) / 10
-  const base = Math.floor(Date.now() / 1000) % 100000
-  return Math.floor(base * factor * seed * 100)
+/* Statistics Traffic/Error:每端口计数基值取自 port_statistics.json,按时间累积增长;
+ * port_cntClear 记录清零时的快照后续做差。 */
+const CNT_FIELDS = [
+  'inOctets', 'inUcast', 'inNUcast', 'inDiscards', 'outOctets', 'outUcast', 'outNUcast', 'outDiscards',
+  'inErrors', 'outErrors', 'dropEvents', 'crcAlign', 'undersize', 'oversize', 'fragments', 'collisions'
+]
+const cntCleared = {} // port -> {field: 清零时的累计值}
+/* 当前各端口累计值(json 基值 × 时间增长因子) */
+async function statCurrent() {
+  const base = (await loadJson('port_statistics')).data
+  const g = growthFactor()
+  const map = {}
+  base.ports.forEach(p => {
+    map[p.port] = {}
+    CNT_FIELDS.forEach(f => { map[p.port][f] = Math.floor((p[f] || 0) * g) })
+  })
+  return map
 }
 getHandlers.port_statistics = async() => {
-  const dev = await getDevinfo()
-  const ports = dev.ports.map(p => {
-    const linked = LINKED.indexOf(p.port) !== -1
-    const row = { port: p.port }
-    Object.keys(CNT_FIELDS).forEach(f => {
-      if (!linked) {
-        row[f] = 0
-      } else {
-        const cleared = (cntCleared[p.port] && cntCleared[p.port][f]) || 0
-        row[f] = Math.max(0, cntRaw(p.port, f, CNT_FIELDS[f]) - cleared)
-      }
+  const cur = await statCurrent()
+  const ports = Object.keys(cur).map(port => {
+    const row = { port: Number(port) }
+    CNT_FIELDS.forEach(f => {
+      const cleared = (cntCleared[port] && cntCleared[port][f]) || 0
+      row[f] = Math.max(0, cur[port][f] - cleared)
     })
     return row
   })
@@ -161,13 +142,10 @@ getHandlers.port_statistics = async() => {
 /* ---------- set handlers ---------- */
 const setHandlers = {
   port_cntClear: async params => {
-    const dev = await getDevinfo()
-    const targets = params.all ? dev.ports.map(p => p.port) : [Number(params.port)]
+    const cur = await statCurrent()
+    const targets = params.all ? Object.keys(cur).map(Number) : [Number(params.port)]
     targets.forEach(port => {
-      cntCleared[port] = {}
-      Object.keys(CNT_FIELDS).forEach(f => {
-        cntCleared[port][f] = cntRaw(port, f, CNT_FIELDS[f])
-      })
+      cntCleared[port] = Object.assign({}, cur[port])
     })
     return ok
   },
