@@ -1,0 +1,818 @@
+{
+  "data": {
+    "info": {
+      "1": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "2": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "3": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "4": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "5": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "6": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "7": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "8": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "9": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "10": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "11": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "12": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "13": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "14": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "15": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "16": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "17": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "18": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "19": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "20": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "21": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "22": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "23": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "24": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "25": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "26": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "27": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ],
+      "28": [
+        {
+          "mstiId": "CIST",
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 1,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        },
+        {
+          "mstiId": 2,
+          "designatedBridge": "00:00:00:00:00:00:00:00",
+          "internalPathCost": 200000,
+          "adminPathCost": 0,
+          "priority": 128,
+          "status": "Disabled",
+          "role": "Disabled"
+        }
+      ]
+    }
+  }
+}

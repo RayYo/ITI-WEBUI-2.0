@@ -486,6 +486,88 @@ setHandlers.mac_staticMulticastDel = async params => {
   return ok
 }
 
+/* ---------- Network R3 第四批:Spanning Tree(Protocol/Port/TC Protect/MST/Instance/MST Port) ---------- */
+// 全局 STP(Protocol + TC Protect + Root 共用一份数据)
+getHandlers.net_stpProtocol = async() => ({ data: await netData('net_stp') })
+getHandlers.net_stpTcProtect = async() => ({ data: await netData('net_stp') })
+setHandlers.net_stpProtocol = async params => {
+  const d = await netData('net_stp')
+  d.status = toBool(params.status)
+  if (params.version !== undefined) d.version = params.version
+  const numFields = ['bridgePriority', 'maxAge', 'helloTime', 'forwardDelay', 'txHoldCount', 'maxHopCount']
+  numFields.forEach(k => { if (params[k] !== undefined) d[k] = Number(params[k]) })
+  return ok
+}
+setHandlers.net_stpTcProtect = async params => {
+  const d = await netData('net_stp')
+  d.tcProtectStatus = toBool(params.tcProtectStatus)
+  if (params.tcProtectThreshold !== undefined) d.tcProtectThreshold = Number(params.tcProtectThreshold)
+  if (params.tcProtectCycle !== undefined) d.tcProtectCycle = Number(params.tcProtectCycle)
+  return ok
+}
+
+// ST Port(每端口)
+getHandlers.net_stpPort = async() => ({ data: await netData('net_stpPort') })
+setHandlers.net_stpPortEdit = async params => {
+  const d = await netData('net_stpPort')
+  const apply = row => {
+    if (params.stpStatus !== undefined) row.stpStatus = toBool(params.stpStatus)
+    if (params.priority !== undefined) row.priority = Number(params.priority)
+    if (params.adminCost !== undefined) row.adminCost = Number(params.adminCost)
+    if (params.edge !== undefined) row.edge = params.edge
+    if (params.p2p !== undefined) row.p2p = params.p2p
+    if (params.restrictedRole !== undefined) row.restrictedRole = toBool(params.restrictedRole)
+    if (params.restrictedTCN !== undefined) row.restrictedTCN = toBool(params.restrictedTCN)
+  }
+  if (params.all) d.ports.forEach(apply)
+  else { const row = d.ports.find(p => String(p.port) === String(params.port)); if (row) apply(row) }
+  return ok
+}
+setHandlers.net_stpPortMigrate = async() => ok // Restart migration(mock 无副作用)
+
+// MST
+getHandlers.net_stpMst = async() => ({ data: await netData('net_stpMst') })
+setHandlers.net_stpMstConfig = async params => {
+  const d = await netData('net_stpMst')
+  if (params.configName !== undefined) d.configName = params.configName
+  if (params.revisionLevel !== undefined) d.revisionLevel = Number(params.revisionLevel)
+  return ok
+}
+setHandlers.net_stpMstAdd = async params => {
+  const d = await netData('net_stpMst')
+  const id = Number(params.mstiId)
+  const row = d.table.find(r => r.mstiId === id)
+  const entry = { mstiId: id, vidList: params.vidList || '', priority: Number(params.priority) || 32768 }
+  if (row) Object.assign(row, entry)
+  else { d.table.push(entry); d.table.sort((a, b) => (a.mstiId === 'CIST' ? -1 : b.mstiId === 'CIST' ? 1 : a.mstiId - b.mstiId)) }
+  return ok
+}
+setHandlers.net_stpMstDel = async params => {
+  const d = await netData('net_stpMst')
+  d.table = d.table.filter(r => r.mstiId === 'CIST' || String(r.mstiId) !== String(params.mstiId))
+  return ok
+}
+
+// Instance Information(只读)
+getHandlers.net_stpInstance = async() => ({ data: await netData('net_stpInstance') })
+
+// MST Port
+getHandlers.net_stpMstPort = async query => {
+  const d = await netData('net_stpMstPort')
+  const port = String(query.port || 1)
+  return { data: { list: d.info[port] || [] } }
+}
+setHandlers.net_stpMstPortEdit = async params => {
+  const d = await netData('net_stpMstPort')
+  const rows = d.info[String(params.port)] || []
+  const row = rows.find(r => String(r.mstiId) === String(params.mstiId))
+  if (row) {
+    if (params.adminPathCost !== undefined) row.adminPathCost = Number(params.adminPathCost)
+    if (params.priority !== undefined) row.priority = Number(params.priority)
+  }
+  return ok
+}
+
 function respond(config, data) {
   return {
     data,

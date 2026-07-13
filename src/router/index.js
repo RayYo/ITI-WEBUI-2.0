@@ -446,6 +446,30 @@ export const constantRoutes = [
             name: 'Port',
             component: () => import('@/views/network/spanning-tree/port'),
             meta: { title: 'Port', icon: 'submenu' }
+          },
+          {
+            path: 'tc-protect',
+            name: 'TC-Protect',
+            component: () => import('@/views/network/spanning-tree/tc-protect'),
+            meta: { title: 'TC Protect Settings', icon: 'submenu' }
+          },
+          {
+            path: 'mst',
+            name: 'MST',
+            component: () => import('@/views/network/spanning-tree/mst'),
+            meta: { title: 'MST', icon: 'submenu' }
+          },
+          {
+            path: 'instance',
+            name: 'ST-Instance',
+            component: () => import('@/views/network/spanning-tree/instance'),
+            meta: { title: 'Instance', icon: 'submenu' }
+          },
+          {
+            path: 'mst-port',
+            name: 'MST-Port',
+            component: () => import('@/views/network/spanning-tree/mst-port'),
+            meta: { title: 'MST Port', icon: 'submenu' }
           }
         ]
       },

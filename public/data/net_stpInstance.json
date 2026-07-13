@@ -1,0 +1,30 @@
+{
+  "data": {
+    "list": [
+      {
+        "mstiId": "CIST",
+        "internalRootCost": 0,
+        "rootPort": 0,
+        "regionalRootBridge": "00:00:00:00:00:00:00:00",
+        "designatedBridge": "00:00:00:00:00:00:00:00",
+        "priority": 32768
+      },
+      {
+        "mstiId": 1,
+        "internalRootCost": 0,
+        "rootPort": 0,
+        "regionalRootBridge": "80:00:00:11:22:33:44:bb",
+        "designatedBridge": "80:00:00:11:22:33:44:bb",
+        "priority": 32768
+      },
+      {
+        "mstiId": 2,
+        "internalRootCost": 0,
+        "rootPort": 0,
+        "regionalRootBridge": "70:00:00:11:22:33:44:bb",
+        "designatedBridge": "70:00:00:11:22:33:44:bb",
+        "priority": 28672
+      }
+    ]
+  }
+}

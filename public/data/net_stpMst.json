@@ -1,0 +1,23 @@
+{
+  "data": {
+    "configName": "0011223344bb",
+    "revisionLevel": 0,
+    "table": [
+      {
+        "mstiId": "CIST",
+        "vidList": "1-4094",
+        "priority": 32768
+      },
+      {
+        "mstiId": 1,
+        "vidList": "10,20",
+        "priority": 32768
+      },
+      {
+        "mstiId": 2,
+        "vidList": "30-40",
+        "priority": 28672
+      }
+    ]
+  }
+}

@@ -159,10 +159,29 @@
 | `mac_staticMulticastAdd` | set | 🆕 | `{vlan,mac,ports:'1,2,3'}` |
 | `mac_staticMulticastDel` | set | 🆕 | `{vlan,mac}` 或 `{all:1}` |
 
+## R3 第四批:Spanning Tree(Protocol/Port/TC Protect/MST/Instance/MST Port)(2026-07-13)
+
+> 全局 STP 关时,Protocol/TC/Port 页所有配置控件禁用(#e3e3e3 / btnDisabled)。version:stp/rstp/mstp。
+> Bridge/MST priority 0-61440 步 4096;Port priority 0-240 步 16;edge/p2p:auto/forcetrue/forcefalse;restricted:bool。
+
+| cmd | 方向 | 状态 | 说明 |
+|---|---|---|---|
+| `net_stpProtocol` | get/set | 🆕 | 全局:`{status:bool,version,bridgePriority,maxAge,helloTime,forwardDelay,txHoldCount,maxHopCount,root:{bridge,cost,maxAge,forwardDelay,port}}`(get 返回全量含 root + tc 字段) |
+| `net_stpTcProtect` | get/set | 🆕 | get 同上;set `{tcProtectStatus:(1/0),tcProtectThreshold,tcProtectCycle}` |
+| `net_stpPort` | get | 🆕 | `{ports:[{port,stpStatus:bool,priority,adminCost,externalCost,state,edge,p2p,restrictedRole:bool,restrictedTCN:bool}]}` |
+| `net_stpPortEdit` | set | 🆕 | 单端口/`{all:1}`:stpStatus/priority/adminCost/edge/p2p/restrictedRole/restrictedTCN |
+| `net_stpPortMigrate` | set | 🆕 | `{port}`或`{all:1}` 重启迁移(mock 无副作用) |
+| `net_stpMst` | get | 🆕 | `{configName,revisionLevel,table:[{mstiId('CIST'/int),vidList,priority}]}` |
+| `net_stpMstConfig` | set | 🆕 | `{configName,revisionLevel}` |
+| `net_stpMstAdd` | set | 🆕 | `{mstiId,vidList,priority}` 新增/修改(CIST 不可改) |
+| `net_stpMstDel` | set | 🆕 | `{mstiId}`(CIST 不可删) |
+| `net_stpInstance` | get | 🆕 | 只读 `{list:[{mstiId,internalRootCost,rootPort,regionalRootBridge,designatedBridge,priority}]}` |
+| `net_stpMstPort` | get | 🆕 | `?port=` 返回 `{list:[{mstiId,designatedBridge,internalPathCost,adminPathCost,priority,status,role}]}` |
+| `net_stpMstPortEdit` | set | 🆕 | `{port,mstiId,adminPathCost,priority}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->
-<!-- Network 剩余组:Spanning Tree(Protocol/Port/TC Protect/MST/
-     Instance/MST Port)、Trunk(Settings/Status/Port Priority)、IGMP/MLD Snooping、
+<!-- Network 剩余组:Trunk(Settings/Status/Port Priority)、IGMP/MLD Snooping、
      Multicast VLAN、Multicast Filtering、Bandwidth Control(Storm/Ingress/Egress)、
      GVRP、Voice VLAN、LLDP(8 页)、MAC VLAN、Protocol VLAN -->
