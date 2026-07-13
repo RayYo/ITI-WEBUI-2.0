@@ -320,6 +320,56 @@ crud('l3_ipv6Intf', { addCmd: 'l3_ipv6IntfAdd', delCmd: 'l3_ipv6IntfDel', editCm
 crud('l3_ipv6Neighbor', { addCmd: 'l3_ipv6NeighborAdd', delCmd: 'l3_ipv6NeighborDel', key: 'ipv6' })
 crud('l3_ipv6Route', { addCmd: 'l3_ipv6RouteAdd', delCmd: 'l3_ipv6RouteDel', key: 'idx' })
 
+/* ---------- Network R3 第一批:Physical Interface / Mirroring / Loopback Detection ---------- */
+const netCache = {}
+async function netData(cmd) {
+  // eslint-disable-next-line require-atomic-updates
+  if (!netCache[cmd]) netCache[cmd] = (await loadJson(cmd)).data
+  return netCache[cmd]
+}
+const toBool = v => v === '1' || v === 1 || v === true || v === 'true'
+const parseList = s => (s ? String(s).split(',').filter(Boolean).map(Number) : [])
+
+getHandlers.net_phyInterface = async() => ({ data: await netData('net_phyInterface') })
+setHandlers.net_phyInterfaceEdit = async params => {
+  const d = await netData('net_phyInterface')
+  const boolFields = ['adminEnabled', 'jumbo', 'flowCtrl', 'eapPassThrough', 'bpduPassThrough']
+  const apply = row => {
+    boolFields.forEach(f => { if (params[f] !== undefined) row[f] = toBool(params[f]) })
+    if (params.mode !== undefined) row.mode = params.mode
+    if (params.description !== undefined) row.description = params.description
+  }
+  if (params.all) d.ports.forEach(apply)
+  else { const row = d.ports.find(p => String(p.port) === String(params.port)); if (row) apply(row) }
+  return ok
+}
+
+getHandlers.net_mirror = async() => ({ data: await netData('net_mirror') })
+setHandlers.net_mirrorEdit = async params => {
+  const d = await netData('net_mirror')
+  d.status = toBool(params.status)
+  d.targetPort = Number(params.targetPort) || 0
+  d.ingress = parseList(params.ingress)
+  d.egress = parseList(params.egress)
+  return ok
+}
+
+getHandlers.net_loopback = async() => ({ data: await netData('net_loopback') })
+setHandlers.net_loopbackGlobal = async params => {
+  const d = await netData('net_loopback')
+  d.status = toBool(params.status)
+  if (params.interval !== undefined) d.interval = Number(params.interval)
+  if (params.recoverTime !== undefined) d.recoverTime = Number(params.recoverTime)
+  return ok
+}
+setHandlers.net_loopbackPort = async params => {
+  const d = await netData('net_loopback')
+  const apply = row => { if (params.state !== undefined) row.state = toBool(params.state) }
+  if (params.all) d.ports.forEach(apply)
+  else { const row = d.ports.find(p => String(p.port) === String(params.port)); if (row) apply(row) }
+  return ok
+}
+
 function respond(config, data) {
   return {
     data,

@@ -111,6 +111,27 @@
 | `l3_ipv6Route`(+Add/Del) | get/set | 🆕 | `{entries:[{idx,ipv6,nextHop,backup,intfName}]}` |
 | `sys_time` | get/set | 🆕 | System Time:get `{sntpStatus:'1'/'2'/'3',time(epoch),timezone(min),srv1Type,srv1Host,srv2Type,srv2Host,dlsStatus,sntpPollInterval,dlsRecMonth/Day/Hour/Min S/E,dlsOffset}`;set 按 clockMode(1 SNTP / 2 Local / 3 Cloud)分别提交,DST 单独 Apply |
 
+## R3 第一批:Network 基础三页(2026-07-13)
+
+> 说明:emulator 原始接口走 `/iss/specific/rpc.asp`,字段为 Realtek 原始数字码
+> (如 `phyInfSpeed:"3"`、`lbdStatus:"2"`、PortList hex 位掩码)。本项目沿用
+> 既定「数据与展示分离」规则,一律转为**语义枚举/布尔/端口数组**,不透传原始码。
+
+| cmd | 方向 | 状态 | 说明 |
+|---|---|---|---|
+| `net_phyInterface` | get | 🆕 | Physical Interface 每端口配置:`{ports:[{port,trunk,type,linkStatus:'up'/'down',adminEnabled:bool,mode:'auto'/'1000full'/'100full'/'10full'/'100half'/'10half',jumbo:bool,flowCtrl:bool,eapPassThrough:bool,bpduPassThrough:bool,description}]}` |
+| `net_phyInterfaceEdit` | set | 🆕 | 单端口 `{port,...}` 或批量 `{all:1,...}`;All 行 Ignore 的字段不提交;bool 用 1/0 |
+| `net_mirror` | get | 🆕 | Mirroring:`{status:bool,targetPort:int(0=none),ingress:[port..],egress:[port..]}` |
+| `net_mirrorEdit` | set | 🆕 | `{status:(1/0),targetPort,ingress:'1,2,3',egress:'7,9'}`(端口列表逗号串) |
+| `net_loopback` | get | 🆕 | Loopback Detection:`{status:bool,interval:1-32767,recoverTime:(0或60-1000000),ports:[{port,state:bool,loopStatus:'normal'/'loop'}]}` |
+| `net_loopbackGlobal` | set | 🆕 | `{status:(1/0),interval,recoverTime}` |
+| `net_loopbackPort` | set | 🆕 | 单端口 `{port,state:(1/0)}` 或批量 `{all:1,state}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->
+<!-- Network 剩余组:VLAN(Tagged/Forwarding/Dynamic/Private/Current)、MAC Address
+     (Static Unicast/Static Multicast)、Spanning Tree(Protocol/Port/TC Protect/MST/
+     Instance/MST Port)、Trunk(Settings/Status/Port Priority)、IGMP/MLD Snooping、
+     Multicast VLAN、Multicast Filtering、Bandwidth Control(Storm/Ingress/Egress)、
+     GVRP、Voice VLAN、LLDP(8 页)、MAC VLAN、Protocol VLAN -->

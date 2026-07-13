@@ -1,0 +1,149 @@
+{
+  "data": {
+    "status": true,
+    "interval": 2,
+    "recoverTime": 60,
+    "ports": [
+      {
+        "port": 1,
+        "state": true,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 2,
+        "state": true,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 3,
+        "state": true,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 4,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 5,
+        "state": true,
+        "loopStatus": "loop"
+      },
+      {
+        "port": 6,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 7,
+        "state": true,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 8,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 9,
+        "state": true,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 10,
+        "state": true,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 11,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 12,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 13,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 14,
+        "state": true,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 15,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 16,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 17,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 18,
+        "state": true,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 19,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 20,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 21,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 22,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 23,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 24,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 25,
+        "state": true,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 26,
+        "state": true,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 27,
+        "state": false,
+        "loopStatus": "normal"
+      },
+      {
+        "port": 28,
+        "state": false,
+        "loopStatus": "normal"
+      }
+    ]
+  }
+}

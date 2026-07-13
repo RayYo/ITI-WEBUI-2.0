@@ -1,0 +1,15 @@
+{
+  "data": {
+    "status": true,
+    "targetPort": 5,
+    "ingress": [
+      1,
+      2,
+      3
+    ],
+    "egress": [
+      7,
+      9
+    ]
+  }
+}

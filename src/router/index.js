@@ -423,6 +423,12 @@ export const constantRoutes = [
         name: 'Mirroring',
         component: () => import('@/views/network/mirroring'),
         meta: { title: 'Mirroring', icon: 'submenu' }
+      },
+      {
+        path: 'loopback-detection',
+        name: 'Loopback-Detection',
+        component: () => import('@/views/network/loopback-detection'),
+        meta: { title: 'Loopback Detection', icon: 'submenu' }
       }
     ]
   },
