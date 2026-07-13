@@ -1,0 +1,11 @@
+{
+  "data": {
+    "max": 32,
+    "entries": [
+      { "intf": "vlan1", "state": true, "ipType": "static", "ipAddr": "192.168.10.1", "ipMask": "255.255.255.0", "linkStatus": true },
+      { "intf": "vlan2", "state": true, "ipType": "static", "ipAddr": "192.168.20.1", "ipMask": "255.255.255.0", "linkStatus": true },
+      { "intf": "vlan3", "state": false, "ipType": "static", "ipAddr": "192.168.30.1", "ipMask": "255.255.255.0", "linkStatus": false },
+      { "intf": "vlan10", "state": true, "ipType": "dhcp", "ipAddr": "0.0.0.0", "ipMask": "255.255.255.0", "linkStatus": false }
+    ]
+  }
+}

@@ -46,72 +46,49 @@
 <script>
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
+import { cgiGet, cgiSet } from '@/api/cgi'
 export default {
   components: {
     baseInput
   },
   data() {
     return {
-      totalEntry: 3,
+      totalEntry: 0,
       loading: false,
-      timeout: '',
-      tableData: [{
-        intfName: '1',
-        timeout: '20'
-      },
-      {
-        intfName: '2',
-        timeout: '40'
-      },
-      {
-        intfName: '3',
-        timeout: '210'
-      },
-      {
-        intfName: '4',
-        timeout: '120'
-      },
-      {
-        intfName: '5',
-        timeout: '123'
-      }]
+      tableData: []
     }
   },
   created() {
-    // this.$http.get('url_get_xxxx').then(resp => {
-    //   this.tableData = resp.data....
-    //   // add edit prop
-    // },
-    // err => {
-    //   console.log('ipv4ArpAgingTime-get err:', err)
-    // })
-    for (const k in this.tableData) {
-      if (Object.hasOwnProperty.call(this.tableData, k)) {
-        const element = this.tableData[k]
-        this.$set(element, 'edit', true)
-      }
-    }
-    this.totalEntry = this.tableData.length
+    this.load()
   },
   methods: {
+    load() {
+      this.loading = true
+      cgiGet('l3_arpAging').then(d => {
+        this.tableData = (d.entries || []).map(e => ({
+          intfName: e.interface,
+          timeout: String(e.timeout),
+          edit: true // true=显示态,false=编辑态(行内 Edit→Apply)
+        }))
+        this.totalEntry = this.tableData.length
+        this.loading = false
+      }, err => {
+        this.loading = false
+        console.log('l3_arpAging get err:', err)
+      })
+    },
     edit(row) {
       row.edit = false
     },
     apply(row) {
-      // this.loading = true
-      // this.$http.post('url_set_xxx', data).then(resp => {
-      //   this.$message.success({
-      //     showClose: true,
-      //     message: 'Success.'
-      //   })
-      //   this.loading = false
-      //   row.edit = true
-      // },
-      // err => {
-      //   console.log('ipv4ArpAgingTime-post error: ', err)
-      // })
-      message.success()
-      row.edit = true
+      const t = Number(row.timeout)
+      if (!Number.isInteger(t) || t < 1 || t > 65535) {
+        message.warnBox('Timeout must be 1-65535.')
+        return
+      }
+      cgiSet('l3_arpAgingEdit', { interface: row.intfName, timeout: t }).then(() => {
+        row.edit = true
+      })
     },
     check(row) {
       row.timeout = row.timeout.replace(/[^0-9]/g, '')

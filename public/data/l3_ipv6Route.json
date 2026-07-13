@@ -1,0 +1,10 @@
+{
+  "data": {
+    "max": 32,
+    "entries": [
+      { "idx": 1, "ipv6": "2022::3/64", "nextHop": "2::1", "backup": "P", "intfName": "vlan1" },
+      { "idx": 2, "ipv6": "2021::3/64", "nextHop": "3::1", "backup": "P", "intfName": "vlan2" },
+      { "idx": 3, "ipv6": "2020::3/64", "nextHop": "4::1", "backup": "B", "intfName": "vlan3" }
+    ]
+  }
+}

@@ -80,6 +80,7 @@ import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
 import { applyCheck } from '@/utils'
+import { cgiGet, cgiSet } from '@/api/cgi'
 export default {
   components: {
     commonTable,
@@ -106,46 +107,27 @@ export default {
     }
   },
   created() {
-    const mockData = [
-      {
-        ip: '0.0.0.0',
-        mask: '0.0.0.0',
-        nextHop: '10.10.9.112',
-        backup: 'P',
-        intfName: 'vlan1'
-      },
-      {
-        ip: '1.0.0.0',
-        mask: '0.0.0.0',
-        nextHop: '10.10.9.112',
-        backup: 'B',
-        intfName: 'vlan2'
-      },
-      {
-        ip: '2.0.0.0',
-        mask: '0.0.0.0',
-        nextHop: '10.10.9.112',
-        backup: 'P',
-        intfName: 'vlan3'
-      }
-    ]
-
-    for (const k in mockData) {
-      if (Object.hasOwnProperty.call(mockData, k)) {
-        const element = mockData[k]
-        this.tableData.push(element)
-      }
-    }
-    this.totalEntry = this.tableData.length
+    this.load()
   },
   methods: {
+    load() {
+      this.loading = true
+      cgiGet('l3_ipv4Route').then(d => {
+        this.tableData = d.entries || []
+        this.totalEntry = this.tableData.length
+        this.loading = false
+      }, err => {
+        this.loading = false
+        console.log('l3_ipv4Route get err:', err)
+      })
+    },
     handleSizeChange(val) {
       this.pageSize = val
     },
     handleCurrentChange(val) {
       this.currentPage = val
     },
-    apply() {
+    async apply() {
       // check
       if ((!this.checkboxValue && applyCheck('ipv4', this.ipAddr) === false) ||
           (!this.checkboxValue && applyCheck('ipv4', this.ipMask) === false) ||
@@ -157,20 +139,23 @@ export default {
         message.warnBox('Please select Backup Status.')
         return
       }
-      // post
-      message.success()
+      await cgiSet('l3_ipv4RouteAdd', {
+        ip: this.checkboxValue ? '0.0.0.0' : this.ipAddr,
+        mask: this.checkboxValue ? '0.0.0.0' : this.ipMask,
+        nextHop: this.nextHopIp,
+        backup: this.backupSelect === '1' ? 'P' : 'B'
+      })
+      this.ipAddr = ''
+      this.ipMask = ''
+      this.nextHopIp = ''
+      this.backupSelect = '-1'
+      this.load()
     },
     delRow(row) {
-      message.success()
-      // this.$http.post('url_set_xxx', data).then(resp => {
-      //   this.$message.success({
-      //     showClose: true,
-      //     message: 'Success.'
-      //   })
-      // },
-      // err => {
-      //   console.log('xxx-post error: ', err)
-      // })
+      message.confirmWarnBox('Do you want to delete this route ?', 'Please confirm').then(async() => {
+        await cgiSet('l3_ipv4RouteDel', { idx: row.idx }, { successMsg: false })
+        this.load()
+      }).catch(() => {})
     },
     check(type) {
       switch (type) {

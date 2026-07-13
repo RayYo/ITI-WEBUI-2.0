@@ -1,0 +1,10 @@
+{
+  "data": {
+    "max": 32,
+    "entries": [
+      { "intf": "vlan1", "state": true, "linkStatus": true },
+      { "intf": "vlan2", "state": true, "linkStatus": true },
+      { "intf": "vlan3", "state": false, "linkStatus": false }
+    ]
+  }
+}

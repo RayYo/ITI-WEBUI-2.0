@@ -73,6 +73,8 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
+import { cgiGet, cgiSet } from '@/api/cgi'
 
 export default {
   components: {
@@ -83,55 +85,39 @@ export default {
     return {
       btnClass: 'btnOutTable',
       vid: '',
-      totalEntry: 1,
+      totalEntry: 0,
       loading: false,
       tableData: [],
       findBegin: 0,
-      findEnd: this.totalEntry
+      findEnd: 0
     }
   },
   created() {
-    // this.$http.get('url_get_xxxx').then(resp => {
-    //   this.tableData = resp.data....
-    // },
-    // err => {
-    //   console.log('ipv4Intf-get err:', err)
-    // })
-    const mockData = [{
-      intf: 'vlan1',
-      state: true,
-      ipType: 'static',
-      ipAddr: '192.168.1.1',
-      ipMask: '255.255.255.0',
-      linkStatus: true
-    }, {
-      intf: 'vlan2',
-      state: false,
-      ipType: 'static',
-      ipAddr: '192.168.1.1',
-      ipMask: '255.255.255.0',
-      linkStatus: true
-    },
-    {
-      intf: 'vlan3',
-      state: false,
-      ipType: 'static',
-      ipAddr: '0.0.0.0',
-      ipMask: '255.255.255.0',
-      linkStatus: false
-    }
-    ]
-    for (const k in mockData) {
-      if (Object.hasOwnProperty.call(mockData, k)) {
-        const element = mockData[k]
-        this.tableData.push(element)
-      }
-    }
-    this.totalEntry = this.tableData.length
+    this.load()
   },
   methods: {
+    load() {
+      this.loading = true
+      cgiGet('l3_ipv4Intf').then(d => {
+        this.tableData = d.entries || []
+        this.totalEntry = this.tableData.length
+        this.findBegin = 0
+        this.findEnd = this.tableData.length
+        this.loading = false
+      }, err => {
+        this.loading = false
+        console.log('l3_ipv4Intf get err:', err)
+      })
+    },
     add() {
-      console.log('add..')
+      if (this.vid < 1 || this.vid > 4094) {
+        message.warnBox('Please enter an integer between 1 ~ 4094')
+        return
+      }
+      cgiSet('l3_ipv4IntfAdd', { intf: 'vlan' + this.vid, state: 1, ipAddr: '0.0.0.0', ipMask: '255.255.255.0' }).then(() => {
+        this.vid = ''
+        this.load()
+      })
     },
     find() {
       let isFind = false
@@ -159,22 +145,10 @@ export default {
       })
     },
     del(v) {
-      // this.loading = true
-      // this.$http.post('url_set_xxx', data).then(resp => {
-      //   this.$message.success({
-      //     showClose: true,
-      //     message: 'Success.'
-      //   })
-      //   this.loading = false
-      //   row.edit = true
-      // },
-      // err => {
-      //   console.log('ipv4IntfDel-post error: ', err)
-      // })
-      this.$message.success({
-        showClose: true,
-        message: v.intf + ' Delete Success.'
-      })
+      message.confirmWarnBox(`Do you want to delete ${v.intf} ?`, 'Please confirm').then(async() => {
+        await cgiSet('l3_ipv4IntfDel', { intf: v.intf }, { successMsg: false })
+        this.load()
+      }).catch(() => {})
     },
     check() {
       this.vid = this.vid.replace(/[^0-9]/g, '')

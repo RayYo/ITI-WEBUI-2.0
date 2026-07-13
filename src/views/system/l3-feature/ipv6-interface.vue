@@ -51,6 +51,8 @@
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
+import message from '@/utils/message'
+import { cgiGet, cgiSet } from '@/api/cgi'
 
 export default {
   components: {
@@ -61,51 +63,43 @@ export default {
     return {
       btnClass: 'btnOutTable',
       vid: '',
-      totalEntry: 1,
+      totalEntry: 0,
       loading: false,
       tableData: [],
       findBegin: 0,
-      findEnd: this.totalEntry
+      findEnd: 0
     }
   },
   created() {
-    // this.$http.get('url_get_xxxx').then(resp => {
-    //   this.tableData = resp.data....
-    // },
-    // err => {
-    //   console.log('ipv4Intf-get err:', err)
-    // })
-    const mockData = [
-      {
-        vid: '1',
-        state: true,
-        linkStatus: true
-      }, {
-        vid: '2',
-        state: false,
-        linkStatus: true
-      },
-      {
-        vid: '3',
-        state: false,
-        linkStatus: false
-      }
-    ]
-    for (const k in mockData) {
-      if (Object.hasOwnProperty.call(mockData, k)) {
-        const element = mockData[k]
-        this.tableData.push({
-          intf: 'vlan' + element.vid,
-          state: element.state ? 'Enabled' : 'Disabled',
-          linkStatus: element.linkStatus ? 'Up' : 'Down'
-        })
-      }
-    }
-    this.totalEntry = this.tableData.length
+    this.load()
   },
   methods: {
+    load() {
+      this.loading = true
+      cgiGet('l3_ipv6Intf').then(d => {
+        this.tableData = (d.entries || []).map(e => ({
+          intf: e.intf,
+          state: e.state ? 'Enabled' : 'Disabled',
+          linkStatus: e.linkStatus ? 'Up' : 'Down'
+        }))
+        this.totalEntry = this.tableData.length
+        this.findBegin = 0
+        this.findEnd = this.tableData.length
+        this.loading = false
+      }, err => {
+        this.loading = false
+        console.log('l3_ipv6Intf get err:', err)
+      })
+    },
     add() {
-      console.log('add..')
+      if (this.vid < 1 || this.vid > 4094) {
+        message.warnBox('Please enter an integer between 1 ~ 4094')
+        return
+      }
+      cgiSet('l3_ipv6IntfAdd', { intf: 'vlan' + this.vid, state: 1 }).then(() => {
+        this.vid = ''
+        this.load()
+      })
     },
     find() {
       let isFind = false

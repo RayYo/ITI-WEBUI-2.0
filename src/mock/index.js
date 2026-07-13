@@ -313,6 +313,7 @@ setHandlers.log_clear = async() => {
 }
 
 /* L3 Feature 表 */
+crud('l3_arpAging', { editCmd: 'l3_arpAgingEdit', key: 'interface' })
 crud('l3_arpTable', {
   addCmd: 'l3_arpAdd',
   delCmd: 'l3_arpDel',

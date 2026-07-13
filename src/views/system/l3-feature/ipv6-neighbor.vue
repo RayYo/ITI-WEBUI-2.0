@@ -74,6 +74,7 @@ import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
 import { applyCheck } from '@/utils'
+import { cgiGet, cgiSet } from '@/api/cgi'
 
 export default {
   components: {
@@ -94,22 +95,20 @@ export default {
     }
   },
   created() {
-    // get data
-    const mockData = [
-      { ipv6: '2003::1', mac: '00:23:79:00:11:31', type: 'Static' },
-      { ipv6: '2003::2', mac: '00:23:79:00:11:32', type: 'Static' },
-      { ipv6: '2003::3', mac: '00:23:79:00:11:33', type: 'Static' },
-      { ipv6: '2003::4', mac: '00:23:79:00:11:34', type: 'Dynamic' },
-      { ipv6: '2003::5', mac: '00:23:79:00:11:35', type: 'Static' },
-      { ipv6: '2003::6', mac: '00:23:79:00:11:36', type: 'Static' }
-    ]
-    for (let i = 0; i < mockData.length; i++) {
-      const element = mockData[i]
-      this.tableData.push(element)
-    }
-    this.totalEntry = this.tableData.length
+    this.load()
   },
   methods: {
+    load() {
+      this.loading = true
+      cgiGet('l3_ipv6Neighbor').then(d => {
+        this.tableData = d.entries || []
+        this.totalEntry = this.tableData.length
+        this.loading = false
+      }, err => {
+        this.loading = false
+        console.log('l3_ipv6Neighbor get err:', err)
+      })
+    },
     handleSizeChange(val) {
       this.pageSize = val
     },
@@ -119,7 +118,7 @@ export default {
     filter(value, row) {
       return row.type === value
     },
-    add() {
+    async add() {
       // check
       if (!applyCheck('ipv6', this.neighborIpv6)) {
         message.warnBox('Invalid IPv6 address.')
@@ -129,20 +128,16 @@ export default {
         message.warnBox('Invalid MAC address.')
         return
       }
-      // post
-      message.success()
+      await cgiSet('l3_ipv6NeighborAdd', { ipv6: this.neighborIpv6, mac: this.macAddr, type: 'Static' })
+      this.neighborIpv6 = ''
+      this.macAddr = ''
+      this.load()
     },
     delRow(row) {
-      message.success()
-      // this.$http.post('url_set_xxx', data).then(resp => {
-      //   this.$message.success({
-      //     showClose: true,
-      //     message: 'Success.'
-      //   })
-      // },
-      // err => {
-      //   console.log('xxx-post error: ', err)
-      // })
+      message.confirmWarnBox(`Do you want to delete ${row.ipv6} ?`, 'Please confirm').then(async() => {
+        await cgiSet('l3_ipv6NeighborDel', { ipv6: row.ipv6 }, { successMsg: false })
+        this.load()
+      }).catch(() => {})
     },
     inputCheck(type) {
       if (type === 'ipv6') {

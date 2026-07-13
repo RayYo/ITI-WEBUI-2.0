@@ -1,0 +1,10 @@
+{
+  "data": {
+    "max": 32,
+    "entries": [
+      { "idx": 1, "ip": "0.0.0.0", "mask": "0.0.0.0", "nextHop": "192.168.10.254", "backup": "P", "intfName": "vlan1" },
+      { "idx": 2, "ip": "10.0.0.0", "mask": "255.0.0.0", "nextHop": "192.168.10.254", "backup": "B", "intfName": "vlan1" },
+      { "idx": 3, "ip": "172.16.0.0", "mask": "255.240.0.0", "nextHop": "192.168.20.254", "backup": "P", "intfName": "vlan2" }
+    ]
+  }
+}

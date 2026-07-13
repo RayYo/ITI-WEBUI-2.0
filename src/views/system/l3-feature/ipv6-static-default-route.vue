@@ -79,6 +79,7 @@ import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
 import { applyCheck } from '@/utils'
+import { cgiGet, cgiSet } from '@/api/cgi'
 export default {
   components: {
     commonTable,
@@ -105,48 +106,27 @@ export default {
     }
   },
   created() {
-    // get data
-    const mockData = [
-      {
-        ipv6: '2022::3/64',
-        nextHop: '2::1',
-        backup: 'P',
-        vid: '1'
-      },
-      {
-        ipv6: '2021::3/64',
-        nextHop: '3::1',
-        backup: 'P',
-        vid: '2'
-      },
-      {
-        ipv6: '2020::3/64',
-        nextHop: '4::1',
-        backup: 'B',
-        vid: '3'
-      }
-    ]
-    for (const k in mockData) {
-      if (Object.hasOwnProperty.call(mockData, k)) {
-        const element = mockData[k]
-        this.tableData.push({
-          ipv6: element.ipv6,
-          nextHop: element.nextHop,
-          backup: element.backup,
-          intfName: 'vlan' + element.vid
-        })
-      }
-    }
-    this.totalEntry = this.tableData.length
+    this.load()
   },
   methods: {
+    load() {
+      this.loading = true
+      cgiGet('l3_ipv6Route').then(d => {
+        this.tableData = d.entries || []
+        this.totalEntry = this.tableData.length
+        this.loading = false
+      }, err => {
+        this.loading = false
+        console.log('l3_ipv6Route get err:', err)
+      })
+    },
     handleSizeChange(val) {
       this.pageSize = val
     },
     handleCurrentChange(val) {
       this.currentPage = val
     },
-    apply() {
+    async apply() {
       // check
       if (!this.checkboxValue && applyCheck('ipv6CIDR', this.ipv6Addr) === false) {
         message.warnBox('Please input ipv6 address/prefix.')
@@ -164,20 +144,23 @@ export default {
         message.warnBox('Please select Backup Status.')
         return
       }
-      // post
-      message.success()
+      await cgiSet('l3_ipv6RouteAdd', {
+        ipv6: this.checkboxValue ? '::/0' : this.ipv6Addr,
+        nextHop: this.nextHopIpv6,
+        backup: this.backupSelect === '1' ? 'P' : 'B',
+        intfName: 'vlan' + this.vlan
+      })
+      this.ipv6Addr = ''
+      this.vlan = ''
+      this.nextHopIpv6 = ''
+      this.backupSelect = '-1'
+      this.load()
     },
     delRow(row) {
-      message.success()
-      // this.$http.post('url_set_xxx', data).then(resp => {
-      //   this.$message.success({
-      //     showClose: true,
-      //     message: 'Success.'
-      //   })
-      // },
-      // err => {
-      //   console.log('xxx-post error: ', err)
-      // })
+      message.confirmWarnBox('Do you want to delete this route ?', 'Please confirm').then(async() => {
+        await cgiSet('l3_ipv6RouteDel', { idx: row.idx }, { successMsg: false })
+        this.load()
+      }).catch(() => {})
     },
     inputCheck(t) {
       switch (t) {

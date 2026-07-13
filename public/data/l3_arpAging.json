@@ -1,7 +1,10 @@
 {
   "data": {
     "entries": [
-      { "interface": 1, "timeout": 20 }
+      { "interface": "vlan1", "timeout": 20 },
+      { "interface": "vlan2", "timeout": 40 },
+      { "interface": "vlan3", "timeout": 210 },
+      { "interface": "vlan10", "timeout": 120 }
     ]
   }
 }
