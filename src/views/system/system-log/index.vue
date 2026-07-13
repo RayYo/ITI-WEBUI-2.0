@@ -66,6 +66,7 @@ import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
 import { applyCheck } from '@/utils'
+import { cgiGet, cgiSet } from '@/api/cgi'
 export default {
   components: {
     commonTable,
@@ -100,41 +101,17 @@ export default {
     }
   },
   created() {
-    const mockData = {
-      timeStampEnabled: true,
-      syslogEnabled: true,
-      bufSize: '50',
-      logServerType: '1', // 1: ipv4 2: ipv6
-      logServerIP: '10.10.10.9', // 2022::3
-      facility: 1, // 0-7
-      level: '2', // 0: Alert 1: Critical 2: Warning 3: Info
-      logMsg: '1 local0/Info      01/01/2018 00:32:40 Successful login through web (User: admin)\n2 local0/Info      01/01/2018 00:32:39 Logout through Web(IP: )'
-    }
-    // get data
-    if (mockData.timeStampEnabled) {
-      this.timeStampEnabled = '1'
-    }
-    if (mockData.syslogEnabled) {
-      this.syslogStatus = '1'
-      // server ip init
-      if (mockData.logServerType === '1') {
-        this.selIp = '1'
-        this.logServerIpv4 = mockData.logServerIP
-      } else {
-        this.selIp = '2'
-        this.logServerIpv6 = mockData.logServerIP
-      }
-      this.facility = mockData.facility
-      this.logLevel = mockData.level
-    } else {
-      this.syslogStatus = '2'
-      this.selIp = '1'
-      this.logServerIpv4 = '0.0.0.0'
-      this.facility = '0'
-      this.logLevel = '2'
-    }
-    this.bufSize = mockData.bufSize
-    this.log = mockData.logMsg
+    cgiGet('log_global').then(d => {
+      this.timeStampEnabled = d.timeStamp ? '1' : '2'
+      this.bufSize = String(d.bufferSize)
+      this.syslogStatus = d.syslogEnabled ? '1' : '2'
+      this.selIp = d.serverIpVer === 6 ? '2' : '1'
+      this.logServerIpv4 = d.serverIpv4 || '0.0.0.0'
+      this.logServerIpv6 = d.serverIpv6 || ''
+      this.facility = d.facility
+      this.logLevel = String(d.level)
+    })
+    this.refresh()
   },
   methods: {
     apply() {
@@ -152,14 +129,31 @@ export default {
           }
         }
       }
-      // info set
-      message.success()
+      const b = Number(this.bufSize)
+      if (!Number.isInteger(b) || b < 1 || b > 512) {
+        message.warnBox('Messages Buffered Size must be 1-512.')
+        return
+      }
+      cgiSet('log_global', {
+        timeStamp: this.timeStampEnabled === '1' ? 1 : 0,
+        bufferSize: b,
+        syslogEnabled: this.syslogStatus === '1' ? 1 : 0,
+        serverIpVer: this.selIp === '2' ? 6 : 4,
+        serverIpv4: this.logServerIpv4,
+        serverIpv6: this.logServerIpv6,
+        facility: this.facility,
+        level: this.logLevel
+      })
     },
-    clear() {
-      this.log = ''
+    async clear() {
+      await cgiSet('log_clear', {}, { successMsg: false })
+      this.refresh()
     },
     refresh() {
-      console.log('Refresh...')
+      // raw 为原版格式整行("1 local0/Info  01/01/2018 ..."),最新在前
+      cgiGet('log_syslog').then(d => {
+        this.log = (d.entries || []).map(e => e.raw).join('\n')
+      })
     },
     inputCheck(k) {
       if (k === 'bufSize') {

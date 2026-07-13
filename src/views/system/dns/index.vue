@@ -25,6 +25,7 @@ import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
 import { applyCheck } from '@/utils'
+import { cgiGet, cgiSet } from '@/api/cgi'
 
 export default {
   components: {
@@ -38,18 +39,24 @@ export default {
       ipv6DnsServer: ''
     }
   },
+  created() {
+    cgiGet('sys_dns').then(d => {
+      this.ipv4DnsServer = d.ipv4 || ''
+      this.ipv6DnsServer = d.ipv6 || ''
+    })
+  },
   methods: {
     apply() {
-      if (!applyCheck('ipv4', this.ipv4DnsServer)) {
+      // 空值代表不设置,非空才校验
+      if (this.ipv4DnsServer && !applyCheck('ipv4', this.ipv4DnsServer)) {
         message.warnBox('Invalid IPv4 address.')
         return
       }
-      if (!applyCheck('ipv6', this.ipv6DnsServer)) {
+      if (this.ipv6DnsServer && !applyCheck('ipv6', this.ipv6DnsServer)) {
         message.warnBox('Invalid IPv6 address.')
         return
       }
-      // post
-      message.success()
+      cgiSet('sys_dns', { ipv4: this.ipv4DnsServer, ipv6: this.ipv6DnsServer })
     },
     check(type) {
       if (type === 'v4DNS') {

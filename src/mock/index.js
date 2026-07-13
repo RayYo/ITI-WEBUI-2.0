@@ -305,6 +305,13 @@ crud('rmon_event', {
 })
 crud('rmon_alarm', { addCmd: 'rmon_alarmAdd', delCmd: 'rmon_alarmDel' })
 
+/* System Log:日志表走 crud 缓存,log_clear 清空 */
+crud('log_syslog')
+setHandlers.log_clear = async() => {
+  if (crudCache.log_syslog) crudCache.log_syslog.entries = []
+  return ok
+}
+
 /* L3 Feature 表 */
 crud('l3_arpTable', {
   addCmd: 'l3_arpAdd',

@@ -98,6 +98,7 @@ import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
 import { applyCheck } from '@/utils'
+import { cgiGet, cgiSet } from '@/api/cgi'
 export default {
   components: {
     commonTable,
@@ -123,30 +124,27 @@ export default {
     }
   },
   created() {
-    this.select = 2
-    // get tableData
-    const mockData = [
-      { accessibleIp: '1.1.1.1' },
-      { accessibleIp: '2.1.1.1' },
-      { accessibleIp: '3.1.1.1' },
-      { accessibleIp: '2002::3' },
-      { accessibleIp: '5.1.1.1' },
-      { accessibleIp: '6.1.1.1' }
-    ]
-    for (let i = 0; i < mockData.length; i++) {
-      const element = mockData[i]
-      this.tableData.push({
-        index: i + 1,
-        accessibleIp: element.accessibleIp
-      })
-    }
+    this.load()
   },
   methods: {
-    apply() {
-      // post
-      message.success()
+    load() {
+      this.loading = true
+      cgiGet('sys_ipAccess').then(d => {
+        this.select = d.enabled ? '1' : '2'
+        this.tableData = (d.entries || []).map(e => ({
+          idx: e.idx,
+          index: e.idx,
+          accessibleIp: e.ip
+        }))
+        this.loading = false
+      }, () => {
+        this.loading = false
+      })
     },
-    add() {
+    apply() {
+      cgiSet('sys_ipAccess', { enabled: this.select === '1' ? 1 : 0 })
+    },
+    async add() {
       // check
       if (this.racal === '1' && applyCheck('ipv4', this.ipv4Addr) === false) {
         message.warnBox('Invalid IPv4 address.')
@@ -156,19 +154,24 @@ export default {
         message.warnBox('Invalid IPv6 address.')
         return
       }
-      // post
-      message.success()
+      const ip = this.racal === '1' ? this.ipv4Addr : this.ipv6Addr
+      await cgiSet('sys_ipAccessAdd', { ip })
+      this.ipv4Addr = ''
+      this.ipv6Addr = ''
+      this.load()
     },
     delRow(row) {
-      message.confirmWarnBox(`Do you want to delete the IP address ${row.accessibleIp} ?`, 'Please confirm').then(() => {
-        // post
+      message.confirmWarnBox(`Do you want to delete the IP address ${row.accessibleIp} ?`, 'Please confirm').then(async() => {
+        await cgiSet('sys_ipAccessDel', { idx: row.idx }, { successMsg: false })
+        this.load()
       }).catch(() => {
         // console.log('cancel')
       })
     },
     delAll() {
-      message.confirmWarnBox(`Do you want to delete all the IP address ?`, 'Please confirm').then(() => {
-        // post
+      message.confirmWarnBox(`Do you want to delete all the IP address ?`, 'Please confirm').then(async() => {
+        await cgiSet('sys_ipAccessDel', { all: 1 }, { successMsg: false })
+        this.load()
       }).catch(() => {
         // console.log('cancel')
       })

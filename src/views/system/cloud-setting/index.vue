@@ -6,14 +6,14 @@
       :first-column="['Cloud Mode','Status', 'Registration']"
     >
       <template #0>
-        <select>
+        <select v-model="mode">
           <option title="Enabled" value="1"><span>Enabled</span></option>
           <option title="Disabled" value="2"><span>Disabled</span></option>
         </select>
       </template>
-      <template #1>Disconnect</template>
+      <template #1>{{ connected ? 'Connect' : 'Disconnect' }}</template>
       <template #2>
-        <select class="disabledStyle" disabled="disabled">
+        <select v-model="registration" class="disabledStyle" disabled="disabled">
           <option title="Enabled" value="1"><span>Enabled</span></option>
           <option title="Disabled" value="2"><span>Disabled</span></option>
         </select>
@@ -28,6 +28,7 @@
 
 <script>
 import commonTable from '@/components/CustomTable/common-table.vue'
+import { cgiGet, cgiSet } from '@/api/cgi'
 
 export default {
   components: {
@@ -35,18 +36,22 @@ export default {
   },
   data() {
     return {
+      mode: '2',
+      connected: false,
+      registration: '2'
     }
   },
   created() {
+    cgiGet('sys_cloud').then(d => {
+      this.mode = d.enabled ? '1' : '2'
+      this.connected = !!d.connected
+      this.registration = d.registered ? '1' : '2'
+    })
   },
   methods: {
     apply() {
-      this.$message.success({
-        showClose: true,
-        message: 'Success.'
-      })
+      cgiSet('sys_cloud', { enabled: this.mode === '1' ? 1 : 0 })
     }
   }
 }
 </script>
-

@@ -58,6 +58,7 @@
 import commonTable from '@/components/CustomTable/common-table.vue'
 import baseInput from '@/components/CustomInput/base-input.vue'
 import message from '@/utils/message'
+import { cgiGet, cgiSet } from '@/api/cgi'
 
 export default {
   components: {
@@ -78,35 +79,23 @@ export default {
     }
   },
   created() {
-    // get data & init tableData
-    const mockData = [{
-      userName: 'aaa',
-      password: 'pp11p'
-    }, {
-
-      userName: 'bbb',
-      password: 'ppp'
-    }, {
-
-      userName: 'ccc',
-      password: 'ppps'
-    }, {
-
-      userName: 'ddd',
-      password: 'ppps'
-    }]
-
-    for (let i = 0; i < mockData.length; i++) {
-      const element = mockData[i]
-      this.tableData.push({
-        tIndex: i + 1,
-        tName: element.userName,
-        tPsw: element.password.replace(/[\s\S]/g, '*')
-      })
-    }
+    this.load()
   },
   methods: {
-    add() {
+    load() {
+      this.loading = true
+      cgiGet('aaa_login').then(d => {
+        this.tableData = (d.entries || []).map(e => ({
+          tIndex: e.idx,
+          tName: e.username,
+          tPsw: '********'
+        }))
+        this.loading = false
+      }, () => {
+        this.loading = false
+      })
+    },
+    async add() {
       // check
       if (!this.userName) {
         message.warnBox('The length of User Name is between 1 and 20 characters!')
@@ -116,8 +105,11 @@ export default {
         message.warnBox('The passwords do not match.')
         return
       }
-      // post
-      message.success()
+      await cgiSet('aaa_loginAdd', { username: this.userName, password: this.psw })
+      this.userName = ''
+      this.psw = ''
+      this.confirmPsw = ''
+      this.load()
     },
     tModify(row) {
       this.$router.push({
