@@ -61,7 +61,7 @@
 
     <div class="table_title">
       <span>IP Access List Table</span>
-      <div style="display: inline; float: right;">
+      <div style="display: inline; float: right; margin-top: 4px">
         <input id="deleteAll" type="button" value="Delete All" :disabled="inputDisabled" :class="inputClass" @click="delAll()">
       </div>
     </div>
