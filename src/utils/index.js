@@ -174,3 +174,21 @@ export function applyCheck(type, val) {
       break
   }
 }
+
+/**
+ * 端口号数组 → 区间显示串,如 [1,2,3,4,25] → "1-4,25"。空数组返回 "-"。
+ * 与原设备 Member/Group Members 列显示一致。
+ */
+export function portsToRange(ports) {
+  const arr = (ports || []).slice().sort((a, b) => a - b)
+  if (!arr.length) return '-'
+  const segs = []
+  let start = arr[0]
+  let prev = arr[0]
+  for (let i = 1; i <= arr.length; i++) {
+    if (i < arr.length && arr[i] === prev + 1) { prev = arr[i]; continue }
+    segs.push(start === prev ? `${start}` : `${start}-${prev}`)
+    if (i < arr.length) { start = arr[i]; prev = arr[i] }
+  }
+  return segs.join(',')
+}

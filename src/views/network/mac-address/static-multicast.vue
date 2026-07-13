@@ -1,0 +1,142 @@
+<template>
+  <div class="main_body">
+    <div id="basetitle">Static Multicast Address Table</div>
+    <div>
+      <div class="table_title">Static Multicast Address Settings</div>
+      <table border="" cellspacing="0" class="from_table">
+        <tbody>
+          <tr>
+            <td>802.1Q VLAN</td>
+            <td>
+              <base-input v-model="vlan" type="text" max-len="4" @check="onCheckVlan" />
+              <span class="tipAfterInputBox">(1-4094)</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Group MAC Address</td>
+            <td>
+              <base-input v-model="mac" type="text" max-len="17" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+    </div>
+
+    <port-checkbox-grid v-model="ports" title="Group Member" :ports="portList" />
+
+    <div class="margin1015">
+      <input type="button" class="btnOutTable" value="Apply" @click="onApply">
+    </div>
+
+    <div class="table_title">
+      Static Multicast Table
+      <span class="tipInTableTitle">( Free Entries: {{ max - rows.length }}, Total Entries: {{ rows.length }} )</span>
+      <div style="display: inline; float: right; margin-top: 4px">
+        <input type="button" value="Delete All" :disabled="!rows.length" :class="['btnInTitle', { btnDisabled: !rows.length }]" @click="onDeleteAll">
+      </div>
+    </div>
+    <el-table
+      :data="pageRows"
+      class="tableBox"
+      stripe
+      border
+      empty-text="< < Table is empty > >"
+      :header-cell-style="pageTableHeader"
+      :cell-style="pageTableCell"
+    >
+      <el-table-column prop="vlan" label="VLAN ID" min-width="80" />
+      <el-table-column prop="mac" label="MAC Address" min-width="150" />
+      <el-table-column prop="groupMembers" label="Group Members" min-width="150" />
+      <el-table-column label="Action" min-width="200">
+        <template slot-scope="scope">
+          <input type="button" class="btnInTable" value="Delete" @click="onDelete(scope.row)">
+        </template>
+      </el-table-column>
+    </el-table>
+    <el-pagination
+      :current-page.sync="page"
+      :page-size.sync="pageSize"
+      small
+      layout="total, sizes, prev, pager, next, jumper"
+      :page-sizes="[5, 10, 20, 40]"
+      :total="rows.length"
+    />
+  </div>
+</template>
+
+<script>
+import { cgiGet, cgiSet } from '@/api/cgi'
+import { pageTableHeader, pageTableCell } from '@/utils/emu'
+import { applyCheck, portsToRange } from '@/utils'
+import message from '@/utils/message'
+import baseInput from '@/components/CustomInput/base-input.vue'
+import PortCheckboxGrid from '@/components/Emu/PortCheckboxGrid.vue'
+
+export default {
+  components: { baseInput, PortCheckboxGrid },
+  data() {
+    return {
+      pageTableHeader,
+      pageTableCell,
+      vlan: '',
+      mac: '',
+      ports: [],
+      max: 256,
+      rows: [],
+      page: 1,
+      pageSize: 20
+    }
+  },
+  computed: {
+    portList() {
+      const n = this.$store.getters.modelInfo('portNum') || 0
+      return Array.from({ length: n }, (_, i) => i + 1)
+    },
+    pageRows() {
+      const start = (this.page - 1) * this.pageSize
+      return this.rows.slice(start, start + this.pageSize)
+    }
+  },
+  created() {
+    this.load()
+  },
+  methods: {
+    load() {
+      cgiGet('mac_staticMulticast').then(d => {
+        this.max = d.max || 256
+        this.rows = (d.list || []).map(e => ({
+          vlan: e.vlan,
+          mac: e.mac,
+          ports: e.ports || [],
+          groupMembers: portsToRange(e.ports || [])
+        }))
+      })
+    },
+    onCheckVlan() {
+      this.vlan = this.vlan.replace(/[^0-9]/g, '')
+    },
+    async onApply() {
+      const v = Number(this.vlan)
+      if (!v || v < 1 || v > 4094) { message.warnBox('802.1Q VLAN must be within 1-4094.'); return }
+      if (applyCheck('mac', this.mac.toLowerCase()) === false) { message.warnBox('Invalid MAC address.'); return }
+      if (!this.ports.length) { message.warnBox('Please select at least one group member.'); return }
+      await cgiSet('mac_staticMulticastAdd', { vlan: v, mac: this.mac, ports: this.ports.join(',') })
+      this.vlan = ''; this.mac = ''; this.ports = []
+      this.load()
+    },
+    onDelete(row) {
+      message.confirmWarnBox(`Do you want to delete MAC ${row.mac} ?`, 'Please confirm').then(async() => {
+        await cgiSet('mac_staticMulticastDel', { vlan: row.vlan, mac: row.mac }, { successMsg: false })
+        this.load()
+      }).catch(() => {})
+    },
+    onDeleteAll() {
+      message.confirmWarnBox('Do you want to delete all the entries ?', 'Please confirm').then(async() => {
+        await cgiSet('mac_staticMulticastDel', { all: 1 }, { successMsg: false })
+        this.load()
+      }).catch(() => {})
+    }
+  }
+}
+</script>

@@ -146,11 +146,23 @@
 | `net_vlanPrivateGlobal` | set | 🆕 | `{status:(1/0)}` |
 | `net_vlanPrivatePort` | set | 🆕 | `{sourcePort,forwardingPorts:'1,2,3'}`(设定该源端口的转发端口集) |
 
+## R3 第三批:MAC Address(Static Unicast / Static Multicast)(2026-07-13)
+
+> 端口语义化:Unicast 单端口 `port:int`;Multicast 端口数组 `ports:[..]`,表内 Group Members 列用 portsToRange 显示区间串。max=256。
+
+| cmd | 方向 | 状态 | 说明 |
+|---|---|---|---|
+| `mac_staticUnicast` | get | 🆕 | `{max:256,list:[{vlan,mac,port}]}` |
+| `mac_staticUnicastAdd` | set | 🆕 | `{vlan,mac,port}`(vlan+mac 为主键,存在则覆盖) |
+| `mac_staticUnicastDel` | set | 🆕 | `{vlan,mac}` 删单条,或 `{all:1}` 全删 |
+| `mac_staticMulticast` | get | 🆕 | `{max:256,list:[{vlan,mac,ports:[..]}]}` |
+| `mac_staticMulticastAdd` | set | 🆕 | `{vlan,mac,ports:'1,2,3'}` |
+| `mac_staticMulticastDel` | set | 🆕 | `{vlan,mac}` 或 `{all:1}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->
-<!-- Network 剩余组:MAC Address
-     (Static Unicast/Static Multicast)、Spanning Tree(Protocol/Port/TC Protect/MST/
+<!-- Network 剩余组:Spanning Tree(Protocol/Port/TC Protect/MST/
      Instance/MST Port)、Trunk(Settings/Status/Port Priority)、IGMP/MLD Snooping、
      Multicast VLAN、Multicast Filtering、Bandwidth Control(Storm/Ingress/Egress)、
      GVRP、Voice VLAN、LLDP(8 页)、MAC VLAN、Protocol VLAN -->

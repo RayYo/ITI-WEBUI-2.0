@@ -447,6 +447,45 @@ setHandlers.net_vlanPrivatePort = async params => {
   return ok
 }
 
+/* ---------- Network R3 第三批:MAC Address(Static Unicast / Static Multicast) ---------- */
+// Static Unicast(单端口成员)
+getHandlers.mac_staticUnicast = async() => ({ data: await netData('mac_staticUnicast') })
+setHandlers.mac_staticUnicastAdd = async params => {
+  const d = await netData('mac_staticUnicast')
+  const vlan = Number(params.vlan)
+  const mac = String(params.mac || '').toUpperCase()
+  const i = d.list.findIndex(e => e.vlan === vlan && e.mac.toUpperCase() === mac)
+  const entry = { vlan, mac, port: Number(params.port) || 0 }
+  if (i !== -1) d.list.splice(i, 1, entry)
+  else d.list.push(entry)
+  return ok
+}
+setHandlers.mac_staticUnicastDel = async params => {
+  const d = await netData('mac_staticUnicast')
+  if (params.all) d.list = []
+  else d.list = d.list.filter(e => !(e.vlan === Number(params.vlan) && e.mac.toUpperCase() === String(params.mac).toUpperCase()))
+  return ok
+}
+
+// Static Multicast(多端口组成员)
+getHandlers.mac_staticMulticast = async() => ({ data: await netData('mac_staticMulticast') })
+setHandlers.mac_staticMulticastAdd = async params => {
+  const d = await netData('mac_staticMulticast')
+  const vlan = Number(params.vlan)
+  const mac = String(params.mac || '').toUpperCase()
+  const i = d.list.findIndex(e => e.vlan === vlan && e.mac.toUpperCase() === mac)
+  const entry = { vlan, mac, ports: parseList(params.ports) }
+  if (i !== -1) d.list.splice(i, 1, entry)
+  else d.list.push(entry)
+  return ok
+}
+setHandlers.mac_staticMulticastDel = async params => {
+  const d = await netData('mac_staticMulticast')
+  if (params.all) d.list = []
+  else d.list = d.list.filter(e => !(e.vlan === Number(params.vlan) && e.mac.toUpperCase() === String(params.mac).toUpperCase()))
+  return ok
+}
+
 function respond(config, data) {
   return {
     data,
