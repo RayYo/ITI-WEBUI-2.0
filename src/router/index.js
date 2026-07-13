@@ -385,6 +385,12 @@ export const constantRoutes = [
             meta: { title: 'Tagged', icon: 'submenu' }
           },
           {
+            path: 'port',
+            name: 'VLAN-Port',
+            component: () => import('@/views/network/vlan/port'),
+            meta: { title: 'Port', icon: 'submenu' }
+          },
+          {
             path: 'forwarding',
             name: 'VLAN-Forwarding',
             component: () => import('@/views/network/vlan/forwarding'),

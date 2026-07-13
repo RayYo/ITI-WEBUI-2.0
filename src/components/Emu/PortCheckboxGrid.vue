@@ -1,5 +1,5 @@
 <template>
-  <!-- 原版:.port_table(端口号在上/分割线/勾选在下),标题栏含 All 切换 -->
+  <!-- 原版:.port_table(端口号在上/分割线/勾选在下),窄屏换行重排不滚动 -->
   <div>
     <div class="table_title">
       <span>{{ title }}</span>
@@ -7,12 +7,12 @@
         <input type="button" class="btnInTitle" :class="{ btnDisabled: disabled }" value="All" :disabled="disabled" @click="toggleAll">
       </div>
     </div>
-    <div class="table-scroll">
-      <div style="margin: -2px">
-        <table border cellspacing="0" cellpadding="2" class="port_table">
-          <tbody>
-            <tr>
-              <td v-for="p in ports" :key="p">
+    <div ref="gridBox" style="margin: -2px">
+      <table border cellspacing="0" cellpadding="2" class="port_table">
+        <tbody>
+          <tr v-for="(row, ri) in gridRows" :key="ri">
+            <td v-for="(p, ci) in row" :key="ci">
+              <template v-if="p !== null">
                 <div class="pt-cell"><span>{{ p }}</span></div>
                 <div class="pt-divider" />
                 <div class="pt-cell">
@@ -26,18 +26,21 @@
                     >
                   </span>
                 </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+              </template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
 
 <script>
+import portReflow from './portReflow'
+
 export default {
   name: 'PortCheckboxGrid',
+  mixins: [portReflow],
   props: {
     title: { type: String, default: '' },
     ports: { type: Array, required: true, default: () => [] },
@@ -63,12 +66,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.table-scroll {
-  overflow-x: auto;
-}
-.port_table {
-  min-width: 1200px;
-}
-</style>

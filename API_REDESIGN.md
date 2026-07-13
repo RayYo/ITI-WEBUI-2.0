@@ -127,13 +127,15 @@
 | `net_loopbackGlobal` | set | 🆕 | `{status:(1/0),interval,recoverTime}` |
 | `net_loopbackPort` | set | 🆕 | 单端口 `{port,state:(1/0)}` 或批量 `{all:1,state}` |
 
-## R3 第二批:VLAN(Tagged/Forwarding/Dynamic/Private/Current)(2026-07-13)
+## R3 第二批:VLAN(Tagged/Port/Forwarding/Dynamic/Private/Current)(2026-07-13)
 
 > 端口集合一律语义化:成员归属用 1=Static Tagged / 2=Static Untagged / 3=Not Member;
 > Member/Untagged/Port Map 显示用 `"1-28"` 之类区间串。原设备用位掩码(`ff:ff:ff:f0:...`),转换在 cgi 层完成。
 
 | cmd | 方向 | 状态 | 说明 |
 |---|---|---|---|
+| `net_vlanPort` | get | 🆕 | VLAN Port Settings:`{ports:[{port,pvid:int,acceptFrame:'all'/'tagged'/'untagged',ingressFilter:bool}]}` |
+| `net_vlanPortEdit` | set | 🆕 | 单端口 `{port,pvid,acceptFrame,ingressFilter:(1/0)}` 或批量 `{all:1,...}` |
 | `net_vlanFwdMode` | get/set | 🆕 | Forwarding Table Mode:`{mode:'IVL'/'SVL'}` |
 | `net_vlanCurrent` | get | 🆕 | Current VLAN DB(只读):`{list:[{id,name,fdbId,memberPorts:'1-28',untaggedPorts,status:'Permanent'/'Dynamic'}]}` |
 | `net_vlanDynamic` | get | 🆕 | Dynamic FDB:`{list:[{index,vid,port,mac,type}]}`,可传 `?port=(0=All/1..N)` 过滤 |

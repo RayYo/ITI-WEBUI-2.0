@@ -1,0 +1,174 @@
+{
+  "data": {
+    "ports": [
+      {
+        "port": 1,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 2,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 3,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 4,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 5,
+        "pvid": 20,
+        "acceptFrame": "untagged",
+        "ingressFilter": false
+      },
+      {
+        "port": 6,
+        "pvid": 20,
+        "acceptFrame": "untagged",
+        "ingressFilter": false
+      },
+      {
+        "port": 7,
+        "pvid": 20,
+        "acceptFrame": "untagged",
+        "ingressFilter": false
+      },
+      {
+        "port": 8,
+        "pvid": 20,
+        "acceptFrame": "untagged",
+        "ingressFilter": false
+      },
+      {
+        "port": 9,
+        "pvid": 30,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 10,
+        "pvid": 30,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 11,
+        "pvid": 30,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 12,
+        "pvid": 30,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 13,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 14,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 15,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 16,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 17,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 18,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 19,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 20,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 21,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 22,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 23,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 24,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 25,
+        "pvid": 1,
+        "acceptFrame": "tagged",
+        "ingressFilter": true
+      },
+      {
+        "port": 26,
+        "pvid": 1,
+        "acceptFrame": "tagged",
+        "ingressFilter": true
+      },
+      {
+        "port": 27,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      },
+      {
+        "port": 28,
+        "pvid": 1,
+        "acceptFrame": "all",
+        "ingressFilter": false
+      }
+    ]
+  }
+}

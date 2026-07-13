@@ -414,6 +414,20 @@ setHandlers.net_vlanTaggedDel = async params => {
   return ok
 }
 
+// VLAN Port Settings(PVID / Acceptable Frame Types / Ingress Filtering)
+getHandlers.net_vlanPort = async() => ({ data: await netData('net_vlanPort') })
+setHandlers.net_vlanPortEdit = async params => {
+  const d = await netData('net_vlanPort')
+  const apply = row => {
+    if (params.pvid !== undefined && params.pvid !== '') row.pvid = Number(params.pvid)
+    if (params.acceptFrame !== undefined) row.acceptFrame = params.acceptFrame
+    if (params.ingressFilter !== undefined) row.ingressFilter = toBool(params.ingressFilter)
+  }
+  if (params.all) d.ports.forEach(apply)
+  else { const row = d.ports.find(p => String(p.port) === String(params.port)); if (row) apply(row) }
+  return ok
+}
+
 // Private VLAN
 getHandlers.net_vlanPrivate = async() => ({ data: await netData('net_vlanPrivate') })
 setHandlers.net_vlanPrivateGlobal = async params => {
