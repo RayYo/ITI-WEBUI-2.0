@@ -49,7 +49,7 @@
       </div>
       <div class="margin1015">
         <input type="button" class="btnOutTable" :class="{ btnDisabled: off }" :disabled="off" value="Apply" @click="onApply">
-        <input type="button" class="btnOutTable" :class="{ btnDisabled: off }" :disabled="off" value="Reset to Default" @click="onReset">
+        <input type="button" class="btnOutTable" value="Reset to Default" @click="onReset">
       </div>
     </div>
   </div>
