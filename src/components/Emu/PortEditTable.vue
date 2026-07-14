@@ -43,16 +43,20 @@
               >{{ col.allExtra.label }}</option>
               <option v-for="o in col.options" :key="o.value" :value="o.value">{{ o.label }}</option>
             </select>
-            <!-- 文本输入:baseInput;禁用底色 #e3e3e3(disabledStyle) -->
-            <input
-              v-else-if="col.type === 'input'"
-              v-model="scope.row[col.prop]"
-              type="text"
-              class="baseInput"
-              :class="{ disabledStyle: disabled }"
-              :maxlength="col.maxlength || 32"
-              :disabled="disabled"
-            >
+            <!-- 文本输入:baseInput;可选 prefix/suffix 文字与 inputWidth(如 Threshold "64pps x [input] (1-4096)") -->
+            <template v-else-if="col.type === 'input'">
+              <span v-if="col.prefix">{{ col.prefix }} </span>
+              <input
+                v-model="scope.row[col.prop]"
+                type="text"
+                class="baseInput"
+                :class="{ disabledStyle: disabled }"
+                :style="col.inputWidth ? ('display: inline-block; width: ' + col.inputWidth + ' !important') : null"
+                :maxlength="col.maxlength || 32"
+                :disabled="disabled"
+              >
+              <span v-if="col.suffix"> {{ col.suffix }}</span>
+            </template>
             <!-- 纯展示;All 行无值时显示 '-' -->
             <span v-else>{{ displayText(scope.row, col) }}</span>
           </template>

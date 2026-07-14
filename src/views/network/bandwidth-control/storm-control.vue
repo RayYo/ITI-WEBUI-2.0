@@ -6,6 +6,7 @@
       :columns="columns"
       :rows="rows"
       min-width="1000px"
+      :header-cell-style="pageTableHeader"
       :loading="loading"
       @apply="onApply"
     />
@@ -15,6 +16,7 @@
 <script>
 import { cgiGet, cgiSet } from '@/api/cgi'
 import PortEditTable from '@/components/Emu/PortEditTable.vue'
+import { pageTableHeader } from '@/utils/emu'
 
 const EN_DIS = [{ value: '1', label: 'Enabled' }, { value: '2', label: 'Disabled' }]
 const IGNORE = { value: '0', label: 'Ignore' }
@@ -24,12 +26,13 @@ export default {
   data() {
     return {
       loading: false,
+      pageTableHeader,
       columns: [
-        { prop: 'port', label: 'Port', minWidth: 60, type: 'text' },
-        { prop: 'dlf', label: 'DLF', minWidth: 130, type: 'select', options: EN_DIS, allExtra: IGNORE },
-        { prop: 'broadcast', label: 'Broadcast', minWidth: 130, type: 'select', options: EN_DIS, allExtra: IGNORE },
-        { prop: 'multicast', label: 'Multicast', minWidth: 130, type: 'select', options: EN_DIS, allExtra: IGNORE },
-        { prop: 'threshold', label: 'Threshold', minWidth: 150, type: 'input', maxlength: 6 },
+        { prop: 'port', label: 'Port', minWidth: 70, type: 'text' },
+        { prop: 'dlf', label: 'DLF', minWidth: 120, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'broadcast', label: 'Broadcast', minWidth: 120, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'multicast', label: 'Multicast', minWidth: 120, type: 'select', options: EN_DIS, allExtra: IGNORE },
+        { prop: 'threshold', label: 'Threshold', minWidth: 220, type: 'input', maxlength: 6, prefix: '64pps x', suffix: '(1-4096)', inputWidth: '70px' },
         { label: 'Action', minWidth: 110, type: 'action' }
       ],
       rows: []
