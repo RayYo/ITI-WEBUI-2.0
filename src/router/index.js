@@ -754,6 +754,12 @@ export const constantRoutes = [
             meta: { title: 'Neighbors', icon: 'submenu' }
           }
         ]
+      },
+      {
+        path: 'mac-vlan',
+        name: 'MAC-VLAN',
+        component: () => import('@/views/network/mac-vlan/index'),
+        meta: { title: 'MAC VLAN', icon: 'submenu' }
       }
     ]
   },

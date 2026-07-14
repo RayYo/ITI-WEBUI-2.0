@@ -285,6 +285,13 @@
 | `net_lldpLocalPortDetail` | get | 🆕 | 单端口详情:`{entity,port,subtype,portId,desc,pvid,maxFrame,vlanEntries:[{port,vid,name}],protoEntries,macPhy{support,enabled,advertised,mauType},linkAgg{capability,status,portId},med{capabilities,networkPolicy,location,powerPse,powerPd,inventory}}`;from_table + VLAN Name/Protocol Identity 计数链接就地展开明细 + MAC-PHY/Link Aggregation/LLDP-MED Capabilities Show Detail 就地展开 + Previous Page(数据取自原版真实抓取) |
 | `net_lldpNeighbors` | get | 🆕 | `{list:[{entity,port,chassisSubtype,chassisId,portSubtype,portId,desc}]}`;只读深表头表 8 列,Show Detail→el-dialog |
 
+## R3 第十四批:MAC VLAN(单页)(2026-07-14)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_macVlan` | get | 🆕 | `{list:[{mac,desc,vlan}]}`;Create MAC VLAN(MAC Address/Description(8字符)/VLAN ID(1-4094))+ Add;MAC VLAN Table 白表头 4 列 + Total Entries + 行内 Delete |
+| `net_macVlanAdd` / `net_macVlanDel` | set | 🆕 | `{mac,desc,vlan}` / `{mac}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->
