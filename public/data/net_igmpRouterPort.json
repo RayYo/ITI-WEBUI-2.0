@@ -1,0 +1,9 @@
+{
+  "data": {
+    "status": true,
+    "rows": [
+      { "vlan": 1, "staticPorts": [25, 26], "dynamicPorts": [27] },
+      { "vlan": 10, "staticPorts": [], "dynamicPorts": [] }
+    ]
+  }
+}

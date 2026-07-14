@@ -372,51 +372,6 @@ export const constantRoutes = [
         meta: { title: 'Physical Interface', icon: 'submenu' }
       },
       {
-        path: 'vlan',
-        name: 'VLAN',
-        component: () => import('@/views/network/vlan/index'),
-        meta: { title: 'VLAN', icon: 'submenu' },
-        redirect: '/network/vlan/tagged',
-        children: [
-          {
-            path: 'tagged',
-            name: 'VLAN-Tagged',
-            component: () => import('@/views/network/vlan/tagged'),
-            meta: { title: 'Tagged', icon: 'submenu' }
-          },
-          {
-            path: 'port',
-            name: 'VLAN-Port',
-            component: () => import('@/views/network/vlan/port'),
-            meta: { title: 'Port', icon: 'submenu' }
-          },
-          {
-            path: 'forwarding',
-            name: 'VLAN-Forwarding',
-            component: () => import('@/views/network/vlan/forwarding'),
-            meta: { title: 'Forwarding', icon: 'submenu' }
-          },
-          {
-            path: 'dynamic',
-            name: 'VLAN-Dynamic',
-            component: () => import('@/views/network/vlan/dynamic'),
-            meta: { title: 'Dynamic', icon: 'submenu' }
-          },
-          {
-            path: 'private',
-            name: 'VLAN-Private',
-            component: () => import('@/views/network/vlan/private'),
-            meta: { title: 'Private', icon: 'submenu' }
-          },
-          {
-            path: 'current',
-            name: 'VLAN-Current',
-            component: () => import('@/views/network/vlan/current'),
-            meta: { title: 'Current', icon: 'submenu' }
-          }
-        ]
-      },
-      {
         path: 'spanning-tree',
         name: 'Spanning-Tree',
         component: () => import('@/views/network/spanning-tree/index'),
@@ -511,6 +466,72 @@ export const constantRoutes = [
         name: 'Static-Multicast',
         component: () => import('@/views/network/mac-address/static-multicast'),
         meta: { title: 'Static Multicast', icon: 'submenu' }
+      },
+      {
+        path: 'igmp-snooping',
+        name: 'IGMP-Snooping',
+        component: () => import('@/views/network/igmp-snooping/index'),
+        meta: { title: 'IGMP Snooping', icon: 'submenu' },
+        redirect: '/network/igmp-snooping/settings',
+        children: [
+          {
+            path: 'settings',
+            name: 'IGMP-Settings',
+            component: () => import('@/views/network/igmp-snooping/settings'),
+            meta: { title: 'Settings', icon: 'submenu' }
+          },
+          {
+            path: 'router-port',
+            name: 'IGMP-RouterPort',
+            component: () => import('@/views/network/igmp-snooping/router-port'),
+            meta: { title: 'Router Port', icon: 'submenu' }
+          }
+        ]
+      },
+      {
+        path: 'vlan',
+        name: 'VLAN',
+        component: () => import('@/views/network/vlan/index'),
+        meta: { title: 'VLAN', icon: 'submenu' },
+        redirect: '/network/vlan/tagged',
+        children: [
+          {
+            path: 'tagged',
+            name: 'VLAN-Tagged',
+            component: () => import('@/views/network/vlan/tagged'),
+            meta: { title: 'Tagged', icon: 'submenu' }
+          },
+          {
+            path: 'port',
+            name: 'VLAN-Port',
+            component: () => import('@/views/network/vlan/port'),
+            meta: { title: 'Port', icon: 'submenu' }
+          },
+          {
+            path: 'forwarding',
+            name: 'VLAN-Forwarding',
+            component: () => import('@/views/network/vlan/forwarding'),
+            meta: { title: 'Forwarding', icon: 'submenu' }
+          },
+          {
+            path: 'dynamic',
+            name: 'VLAN-Dynamic',
+            component: () => import('@/views/network/vlan/dynamic'),
+            meta: { title: 'Dynamic', icon: 'submenu' }
+          },
+          {
+            path: 'private',
+            name: 'VLAN-Private',
+            component: () => import('@/views/network/vlan/private'),
+            meta: { title: 'Private', icon: 'submenu' }
+          },
+          {
+            path: 'current',
+            name: 'VLAN-Current',
+            component: () => import('@/views/network/vlan/current'),
+            meta: { title: 'Current', icon: 'submenu' }
+          }
+        ]
       }
     ]
   },

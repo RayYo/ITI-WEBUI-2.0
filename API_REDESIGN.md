@@ -194,6 +194,14 @@
 | `net_trunkStatus` | get | 🆕 | LACP 只读:`{system:{priority,id},groups:[{id,exists,memberPorts,activePorts,standbyPorts}]}`;`exists=false` 时前端显示 "This group does not exist" |
 | `net_trunkPortPriority` | get/set | 🆕 | get:`{system:{priority,id},ports:[{port,priority}]}`(28 口,priority 0-65535);set:`{ports:[{port,priority}]}`(全表整体 Apply,前端校验 0-65535) |
 
+## R3 第六批:IGMP Snooping(Settings / Router Port)(2026-07-14)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_igmpSettings` | get/set | 🆕 | get:`{status,querierStatus,fastLeaveStatus:bool, agingTimeout,queryInterval,maxResponseTime,robustness,lastMemberQueryInterval,routerTimeout, free,total, groups:[{vlan,groupAddr,memberPorts}]}`;set 同名(前端校验各区间:Aging 130-153025/Query 60-600/MaxResp 10-25/Robust 2-255/LastMember 1-25/RouterTimeout 120-1200)。原始字段 igsStatus/igsCfgQuerierStatus/igsCfgFastLeaveStatus/igsHostPortPurgeInterval(=Aging)/igsQuerierQueryInterval/igsQueryMaxResponseTime/igsRobustnessValue/igsGrpQueryInterval(=LastMember)/igsRouterTimeout |
+| `net_igmpRouterPort` | get | 🆕 | `{status:bool, rows:[{vlan,staticPorts:[],dynamicPorts:[]}]}`;端口空显示 "N/A";行 Modify 按钮在 IGMP 全局关时禁用(btnDisabled) |
+| `net_igmpRouterPortEdit` | set | 🆕 | `{vlan,staticPorts:[...]}`。**⚠️ Modify 弹窗内容未从原版确证**(默认禁用、静态 emulator 无法启用后抓取),现按标准解释=编辑该 VLAN 的 Static Router Port(el-dialog + bare 端口勾选格);待真机/原版确认后可调整 |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

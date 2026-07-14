@@ -1,0 +1,20 @@
+{
+  "data": {
+    "status": true,
+    "querierStatus": true,
+    "fastLeaveStatus": false,
+    "agingTimeout": 260,
+    "queryInterval": 125,
+    "maxResponseTime": 10,
+    "robustness": 2,
+    "lastMemberQueryInterval": 1,
+    "routerTimeout": 250,
+    "free": 253,
+    "total": 3,
+    "groups": [
+      { "vlan": 1, "groupAddr": "239.255.255.250", "memberPorts": "1-4" },
+      { "vlan": 1, "groupAddr": "224.0.0.251", "memberPorts": "5-6" },
+      { "vlan": 10, "groupAddr": "239.1.1.1", "memberPorts": "9-12" }
+    ]
+  }
+}
