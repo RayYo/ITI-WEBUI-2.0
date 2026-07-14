@@ -23,9 +23,9 @@
             </td>
             <td colspan="2">To:Week</td>
             <td colspan="3">
-              <select v-model="toWeek" style="width: 40% !important">
+              <select v-model="toWeek" style="width: 40% !important" :class="{ disabledStyle: endWeekday }" :disabled="endWeekday">
                 <option v-for="w in WEEKS" :key="w.value" :value="w.value">{{ w.label }}</option>
-              </select>
+              </select>{{ ' ' }}
               <input v-model="endWeekday" type="checkbox">
               <span class="tipAfterInputBox">End Weekday</span>
             </td>
@@ -35,7 +35,7 @@
             <td colspan="2">
               <select v-model="fromHour" style="width: 40% !important">
                 <option v-for="h in HOURS" :key="h" :value="h">{{ h }}</option>
-              </select>
+              </select>{{ ' ' }}
               <select v-model="fromMin" style="width: 40% !important">
                 <option v-for="m in MINS" :key="m" :value="m">{{ m }}</option>
               </select>
@@ -44,7 +44,7 @@
             <td colspan="3">
               <select v-model="toHour" style="width: 40% !important">
                 <option v-for="h in HOURS" :key="h" :value="h">{{ h }}</option>
-              </select>
+              </select>{{ ' ' }}
               <select v-model="toMin" style="width: 40% !important">
                 <option v-for="m in MINS" :key="m" :value="m">{{ m }}</option>
               </select>
