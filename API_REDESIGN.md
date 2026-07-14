@@ -243,6 +243,17 @@
 | `net_ingressRate`/`net_egressRate` | get | 🆕 | `{ports:[{port,bandwidth:num,status:bool}]}`;PortEditTable:Port/Bandwidth(input)/Status(select,All=Ignore)/Action;标题带 span 注 "(Bandwidth = 64kbps x rate limit)" |
 | `net_ingressRateEdit`/`net_egressRateEdit` | set | 🆕 | `{port|all,bandwidth,status}` |
 
+## R3 第十一批:GVRP(Global Settings / Port Settings / Time Settings)(2026-07-14)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_gvrpGlobal` | get | 🆕 | `{status:bool}`;common-table「GVRP Global Settings」单行 GVRP Status(select En/Dis)+ btnOutTable Apply |
+| `net_gvrpGlobalEdit` | set | 🆕 | `{status}` |
+| `net_gvrpPort` | get | 🆕 | `{ports:[{port,dynamic:bool,restricted:bool}]}`;PortEditTable(深色表头):Port/Dynamic VLAN Status/Restricted VLAN Registration(select En/Dis,All=Ignore)/Action |
+| `net_gvrpPortEdit` | set | 🆕 | `{port|all,dynamic,restricted}`(Ignore 项不提交) |
+| `net_gvrpTime` | get | 🆕 | `{ports:[{port,joinTime,leaveTime,leaveAllTime:num}]}`;PortEditTable(深色表头):Port/JoinTime(10~2^30-14)/LeaveTime(30~2^31-18)/LeaveAllTime(40~2^31-8) csec(input maxlen12)/Action |
+| `net_gvrpTimeEdit` | set | 🆕 | `{port|all,joinTime,leaveTime,leaveAllTime}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

@@ -1,0 +1,146 @@
+{
+ "data": {
+  "ports": [
+   {
+    "port": 1,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 2,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 3,
+    "dynamic": false,
+    "restricted": false
+   },
+   {
+    "port": 4,
+    "dynamic": true,
+    "restricted": true
+   },
+   {
+    "port": 5,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 6,
+    "dynamic": false,
+    "restricted": false
+   },
+   {
+    "port": 7,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 8,
+    "dynamic": true,
+    "restricted": true
+   },
+   {
+    "port": 9,
+    "dynamic": false,
+    "restricted": false
+   },
+   {
+    "port": 10,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 11,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 12,
+    "dynamic": false,
+    "restricted": true
+   },
+   {
+    "port": 13,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 14,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 15,
+    "dynamic": false,
+    "restricted": false
+   },
+   {
+    "port": 16,
+    "dynamic": true,
+    "restricted": true
+   },
+   {
+    "port": 17,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 18,
+    "dynamic": false,
+    "restricted": false
+   },
+   {
+    "port": 19,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 20,
+    "dynamic": true,
+    "restricted": true
+   },
+   {
+    "port": 21,
+    "dynamic": false,
+    "restricted": false
+   },
+   {
+    "port": 22,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 23,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 24,
+    "dynamic": false,
+    "restricted": true
+   },
+   {
+    "port": 25,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 26,
+    "dynamic": true,
+    "restricted": false
+   },
+   {
+    "port": 27,
+    "dynamic": false,
+    "restricted": false
+   },
+   {
+    "port": 28,
+    "dynamic": true,
+    "restricted": true
+   }
+  ]
+ }
+}

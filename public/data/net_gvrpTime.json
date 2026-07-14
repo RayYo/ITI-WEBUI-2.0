@@ -1,0 +1,174 @@
+{
+ "data": {
+  "ports": [
+   {
+    "port": 1,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 2,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 3,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 4,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 5,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 6,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 7,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 8,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 9,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 10,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 11,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 12,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 13,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 14,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 15,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 16,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 17,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 18,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 19,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 20,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 21,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 22,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 23,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 24,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 25,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 26,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 27,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   },
+   {
+    "port": 28,
+    "joinTime": 200,
+    "leaveTime": 600,
+    "leaveAllTime": 10000
+   }
+  ]
+ }
+}

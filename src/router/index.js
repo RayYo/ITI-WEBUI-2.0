@@ -643,6 +643,33 @@ export const constantRoutes = [
             meta: { title: 'Current', icon: 'submenu' }
           }
         ]
+      },
+      {
+        path: 'gvrp',
+        name: 'GVRP',
+        component: () => import('@/views/network/gvrp/index'),
+        meta: { title: 'GVRP', icon: 'submenu' },
+        redirect: '/network/gvrp/global-settings',
+        children: [
+          {
+            path: 'global-settings',
+            name: 'GVRP-Global',
+            component: () => import('@/views/network/gvrp/global-settings'),
+            meta: { title: 'Global Settings', icon: 'submenu' }
+          },
+          {
+            path: 'port-settings',
+            name: 'GVRP-Port',
+            component: () => import('@/views/network/gvrp/port-settings'),
+            meta: { title: 'Port Settings', icon: 'submenu' }
+          },
+          {
+            path: 'time-settings',
+            name: 'GVRP-Time',
+            component: () => import('@/views/network/gvrp/time-settings'),
+            meta: { title: 'Time Settings', icon: 'submenu' }
+          }
+        ]
       }
     ]
   },
