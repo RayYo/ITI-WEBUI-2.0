@@ -227,6 +227,13 @@
 | `net_mcvlanAssoc` | get | 🆕 | `{list:[{vlan,profileName}]}` |
 | `net_mcvlanAssocAdd/Del` | set | 🆕 | `{vlan,profileName}` |
 
+## R3 第九批:Multicast Filtering(单页)(2026-07-14)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_mcfilter` | get | 🆕 | `{ports:[{port,filter:bool}]}`;PortEditTable(All 行 + 端口列 + Multicast Filter Mode select[Forward=0/Filter=1] + 行级 Apply,darkTableHeader,无标题) |
+| `net_mcfilterEdit` | set | 🆕 | `{port,filter}` 或 `{all:1,filter}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

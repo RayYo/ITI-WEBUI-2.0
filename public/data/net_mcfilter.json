@@ -1,0 +1,118 @@
+{
+  "data": {
+    "ports": [
+      {
+        "port": 1,
+        "filter": false
+      },
+      {
+        "port": 2,
+        "filter": false
+      },
+      {
+        "port": 3,
+        "filter": false
+      },
+      {
+        "port": 4,
+        "filter": false
+      },
+      {
+        "port": 5,
+        "filter": false
+      },
+      {
+        "port": 6,
+        "filter": false
+      },
+      {
+        "port": 7,
+        "filter": true
+      },
+      {
+        "port": 8,
+        "filter": true
+      },
+      {
+        "port": 9,
+        "filter": false
+      },
+      {
+        "port": 10,
+        "filter": false
+      },
+      {
+        "port": 11,
+        "filter": false
+      },
+      {
+        "port": 12,
+        "filter": false
+      },
+      {
+        "port": 13,
+        "filter": false
+      },
+      {
+        "port": 14,
+        "filter": false
+      },
+      {
+        "port": 15,
+        "filter": true
+      },
+      {
+        "port": 16,
+        "filter": false
+      },
+      {
+        "port": 17,
+        "filter": false
+      },
+      {
+        "port": 18,
+        "filter": false
+      },
+      {
+        "port": 19,
+        "filter": false
+      },
+      {
+        "port": 20,
+        "filter": false
+      },
+      {
+        "port": 21,
+        "filter": false
+      },
+      {
+        "port": 22,
+        "filter": false
+      },
+      {
+        "port": 23,
+        "filter": false
+      },
+      {
+        "port": 24,
+        "filter": false
+      },
+      {
+        "port": 25,
+        "filter": false
+      },
+      {
+        "port": 26,
+        "filter": false
+      },
+      {
+        "port": 27,
+        "filter": false
+      },
+      {
+        "port": 28,
+        "filter": false
+      }
+    ]
+  }
+}

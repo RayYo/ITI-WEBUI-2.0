@@ -561,6 +561,12 @@ export const constantRoutes = [
         ]
       },
       {
+        path: 'multicast-filtering',
+        name: 'Multicast-Filtering',
+        component: () => import('@/views/network/multicast-filtering/index'),
+        meta: { title: 'Multicast Filtering', icon: 'submenu' }
+      },
+      {
         path: 'vlan',
         name: 'VLAN',
         component: () => import('@/views/network/vlan/index'),
