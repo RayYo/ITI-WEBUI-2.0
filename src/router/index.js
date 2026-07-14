@@ -766,6 +766,27 @@ export const constantRoutes = [
         name: 'MAC-VLAN',
         component: () => import('@/views/network/mac-vlan/index'),
         meta: { title: 'MAC VLAN', icon: 'submenu' }
+      },
+      {
+        path: 'protocol-vlan',
+        name: 'Protocol-VLAN',
+        component: () => import('@/views/network/protocol-vlan/index'),
+        meta: { title: 'Protocol VLAN', icon: 'submenu' },
+        redirect: '/network/protocol-vlan/profile',
+        children: [
+          {
+            path: 'profile',
+            name: 'Protocol-VLAN-Profile',
+            component: () => import('@/views/network/protocol-vlan/profile'),
+            meta: { title: 'Profile', icon: 'submenu' }
+          },
+          {
+            path: 'profile-interface',
+            name: 'Protocol-VLAN-Profile-Interface',
+            component: () => import('@/views/network/protocol-vlan/profile-interface'),
+            meta: { title: 'Profile Interface', icon: 'submenu' }
+          }
+        ]
       }
     ]
   },

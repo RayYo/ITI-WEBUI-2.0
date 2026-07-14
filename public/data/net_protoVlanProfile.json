@@ -1,0 +1,21 @@
+{
+ "data": {
+  "list": [
+   {
+    "id": 1,
+    "frameType": 1,
+    "etherType": "0800"
+   },
+   {
+    "id": 2,
+    "frameType": 2,
+    "etherType": "86DD"
+   },
+   {
+    "id": 3,
+    "frameType": 3,
+    "etherType": "0806"
+   }
+  ]
+ }
+}

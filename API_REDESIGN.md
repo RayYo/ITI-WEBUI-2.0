@@ -292,6 +292,15 @@
 | `net_macVlan` | get | 🆕 | `{list:[{mac,desc,vlan}]}`;Create MAC VLAN(MAC Address/Description(8字符)/VLAN ID(1-4094))+ Add;MAC VLAN Table 白表头 4 列 + Total Entries + 行内 Delete |
 | `net_macVlanAdd` / `net_macVlanDel` | set | 🆕 | `{mac,desc,vlan}` / `{mac}` |
 
+## R3 第十五批:Protocol VLAN(Profile / Profile Interface)(2026-07-14)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_protoVlanProfile` | get | 🆕 | `{list:[{id,frameType,etherType}]}`;Add Profile(Profile ID(1-8)/Frame Type[Ethernet2=1/SNAP=2/LLC=3]/Ether Type(0000-FFFF 4hex))+ Profile Table 白表头 + Total Entries + Delete + 翻页 |
+| `net_protoVlanProfileAdd` / `net_protoVlanProfileDel` | set | 🆕 | `{id,frameType,etherType}` / `{id}` |
+| `net_protoVlanInterface` | get | 🆕 | `{profiles:[id],list:[{port,profileId,vid,priority}]}`;Add Interface(Port select/Profile ID select/VID(1-4094)/Priority 0-7)+ Interface Table 白表头 5 列 + Total Entries + Delete + 翻页 |
+| `net_protoVlanInterfaceAdd` / `net_protoVlanInterfaceDel` | set | 🆕 | `{port,profileId,vid,priority}` / `{port,profileId}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

@@ -1,0 +1,29 @@
+{
+ "data": {
+  "profiles": [
+   1,
+   2,
+   3
+  ],
+  "list": [
+   {
+    "port": 1,
+    "profileId": 1,
+    "vid": 10,
+    "priority": 0
+   },
+   {
+    "port": 5,
+    "profileId": 2,
+    "vid": 20,
+    "priority": 3
+   },
+   {
+    "port": 9,
+    "profileId": 3,
+    "vid": 100,
+    "priority": 5
+   }
+  ]
+ }
+}
