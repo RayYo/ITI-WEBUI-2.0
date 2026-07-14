@@ -105,6 +105,8 @@ div:focus {
       border-right-color: rgb(204, 204, 204);
       border-left-color: rgb(204, 204, 204);
     word-wrap: break-word;
+    /* 原版对所有 td 设 padding-left:10px(scoped 规则);中间格默认仅 1px 会导致内容贴左 */
+    padding-left: 10px;
   }
 }
 .from_table tr td select {
