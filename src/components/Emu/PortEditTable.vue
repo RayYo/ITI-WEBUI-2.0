@@ -50,10 +50,10 @@
                 v-model="scope.row[col.prop]"
                 type="text"
                 class="baseInput"
-                :class="{ disabledStyle: disabled }"
+                :class="{ disabledStyle: isInputDisabled(col, scope.row) }"
                 :style="col.inputWidth ? ('display: inline-block; width: ' + col.inputWidth + ' !important') : null"
                 :maxlength="col.maxlength || 32"
-                :disabled="disabled"
+                :disabled="isInputDisabled(col, scope.row)"
               >
               <span v-if="col.suffix"> {{ col.suffix }}</span>
             </template>
@@ -92,6 +92,12 @@ export default {
     displayText(row, col) {
       const v = row[col.prop]
       return v === '' || v === undefined || v === null ? '-' : v
+    },
+    // input 列禁用:全局 disabled 或列自带 disabledFn(row) 返回真时禁用(灰底 #e3e3e3)
+    isInputDisabled(col, row) {
+      if (this.disabled) return true
+      if (typeof col.disabledFn === 'function') return col.disabledFn(row)
+      return false
     }
   }
 }

@@ -8,6 +8,9 @@
       :loading="loading"
       @apply="onApply"
     />
+    <div style="margin-top: 10px; margin-bottom: 10px">
+      <span class="note">Note: Leave Timer must be greater than (Join Timer x 2 + 10) and Leave all Timer must be greater than (Leave Timer + 10). Use increments of 10.</span>
+    </div>
   </div>
 </template>
 

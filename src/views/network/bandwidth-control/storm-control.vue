@@ -32,7 +32,9 @@ export default {
         { prop: 'dlf', label: 'DLF', minWidth: 120, type: 'select', options: EN_DIS, allExtra: IGNORE },
         { prop: 'broadcast', label: 'Broadcast', minWidth: 120, type: 'select', options: EN_DIS, allExtra: IGNORE },
         { prop: 'multicast', label: 'Multicast', minWidth: 120, type: 'select', options: EN_DIS, allExtra: IGNORE },
-        { prop: 'threshold', label: 'Threshold', minWidth: 220, type: 'input', maxlength: 6, prefix: '64pps x', suffix: '(1-4096)', inputWidth: '70px' },
+        { prop: 'threshold', label: 'Threshold', minWidth: 220, type: 'input', maxlength: 6, prefix: '64pps x', suffix: '(1-4096)', inputWidth: '70px',
+          // DLF/Broadcast/Multicast 任一为 Enabled(1) 时可编辑,否则禁用(灰底)
+          disabledFn: row => !(row.dlf === '1' || row.broadcast === '1' || row.multicast === '1') },
         { label: 'Action', minWidth: 110, type: 'action' }
       ],
       rows: []
