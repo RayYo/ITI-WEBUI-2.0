@@ -4,7 +4,7 @@
     <div>
       <common-table header-title="Profile Create" :first-column="['Profile Name']">
         <template #0>
-          <base-input v-model="createName" max-len="32" css="baseInput InputOutTable150" />
+          <base-input v-model="createName" max-len="32" div-class="InputOutTable150" />
           <span class="tipAfterInputBox">(32 characters limit)</span>
         </template>
       </common-table>
@@ -14,7 +14,7 @@
 
       <common-table header-title="Group Profile Settings" :first-column="['Profile Name', 'IP Address Range']" :double-rows="[1]">
         <template #0>
-          <base-input v-model="rangeName" max-len="32" css="baseInput InputOutTable150" />
+          <base-input v-model="rangeName" max-len="32" div-class="InputOutTable150" />
           <span class="tipAfterInputBox">(32 characters limit)</span>
         </template>
         <template #1>
