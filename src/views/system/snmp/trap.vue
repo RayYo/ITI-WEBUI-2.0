@@ -88,7 +88,6 @@
       <el-pagination
         :current-page.sync="page"
         :page-size.sync="pageSize"
-        small
         layout="total, sizes, prev, pager, next, jumper"
         :page-sizes="[10, 20, 50]"
         :total="entries.length"
