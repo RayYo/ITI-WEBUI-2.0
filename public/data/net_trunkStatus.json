@@ -1,0 +1,15 @@
+{
+  "data": {
+    "system": { "priority": 32768, "id": "00-11-22-33-44-BB" },
+    "groups": [
+      { "id": 1, "exists": true, "memberPorts": "1-4", "activePorts": "1-4", "standbyPorts": "-" },
+      { "id": 2, "exists": true, "memberPorts": "5-6", "activePorts": "5", "standbyPorts": "6" },
+      { "id": 3, "exists": true, "memberPorts": "7-10", "activePorts": "7-10", "standbyPorts": "-" },
+      { "id": 4, "exists": false, "memberPorts": "", "activePorts": "", "standbyPorts": "" },
+      { "id": 5, "exists": false, "memberPorts": "", "activePorts": "", "standbyPorts": "" },
+      { "id": 6, "exists": false, "memberPorts": "", "activePorts": "", "standbyPorts": "" },
+      { "id": 7, "exists": false, "memberPorts": "", "activePorts": "", "standbyPorts": "" },
+      { "id": 8, "exists": false, "memberPorts": "", "activePorts": "", "standbyPorts": "" }
+    ]
+  }
+}

@@ -466,6 +466,7 @@ export const constantRoutes = [
         name: 'Trunk',
         component: () => import('@/views/network/trunk/index'),
         meta: { title: 'Trunk', icon: 'submenu' },
+        redirect: '/network/trunk/settings',
         children: [
           {
             path: 'settings',

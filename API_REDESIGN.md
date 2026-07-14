@@ -185,6 +185,15 @@
 | `net_stpMstPort` | get | 🆕 | `?port=` 返回 `{list:[{mstiId,designatedBridge,internalPathCost,adminPathCost,priority,status,role}]}` |
 | `net_stpMstPortEdit` | set | 🆕 | `{port,mstiId,adminPathCost,priority}` |
 
+## R3 第五批:Trunk(Settings / Status / Port Priority)(2026-07-13)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_trunkSettings` | get | 🆕 | `{trunks:[{id,ports:[成员口数组],mode}]}`,8 组 trunk(id 1-8);mode 枚举 `active/passive/manual/disabled`(原始 laPortChannelMode 1/2/3/4);ports 由 laPortChannelMemberList 位掩码转端口数组 |
+| `net_trunkSettingsEdit` | set | 🆕 | 单组:`{id,ports:[...],mode}` |
+| `net_trunkStatus` | get | 🆕 | LACP 只读:`{system:{priority,id},groups:[{id,exists,memberPorts,activePorts,standbyPorts}]}`;`exists=false` 时前端显示 "This group does not exist" |
+| `net_trunkPortPriority` | get/set | 🆕 | get:`{system:{priority,id},ports:[{port,priority}]}`(28 口,priority 0-65535);set:`{ports:[{port,priority}]}`(全表整体 Apply,前端校验 0-65535) |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

@@ -1,7 +1,8 @@
 <template>
   <!-- 原版:.port_table(端口号在上/分割线/勾选在下),窄屏换行重排不滚动 -->
+  <!-- bare=true:仅端口勾选格(无灰头 All,Trunk 每行内嵌用) -->
   <div>
-    <div class="table_title">
+    <div v-if="!bare" class="table_title">
       <span>{{ title }}</span>
       <div style="display: inline; float: right; margin-top: 4px">
         <input type="button" class="btnInTitle" :class="{ btnDisabled: disabled }" value="All" :disabled="disabled" @click="toggleAll">
@@ -43,6 +44,7 @@ export default {
   mixins: [portReflow],
   props: {
     title: { type: String, default: '' },
+    bare: { type: Boolean, default: false }, // 仅渲染勾选格,无灰头 All
     ports: { type: Array, required: true, default: () => [] },
     value: { type: Array, default: () => [] }, // v-model:已选端口号数组
     disabled: { type: Boolean, default: false }

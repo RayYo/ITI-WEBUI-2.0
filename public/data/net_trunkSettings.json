@@ -1,0 +1,14 @@
+{
+  "data": {
+    "trunks": [
+      { "id": 1, "ports": [1, 2, 3, 4], "mode": "active" },
+      { "id": 2, "ports": [5, 6], "mode": "passive" },
+      { "id": 3, "ports": [7, 8, 9, 10], "mode": "manual" },
+      { "id": 4, "ports": [], "mode": "disabled" },
+      { "id": 5, "ports": [], "mode": "disabled" },
+      { "id": 6, "ports": [], "mode": "disabled" },
+      { "id": 7, "ports": [], "mode": "disabled" },
+      { "id": 8, "ports": [], "mode": "disabled" }
+    ]
+  }
+}
