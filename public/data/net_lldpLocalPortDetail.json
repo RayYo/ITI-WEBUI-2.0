@@ -1,0 +1,38 @@
+{
+ "data": {
+  "entity": 1,
+  "port": 1,
+  "subtype": "Local",
+  "portId": 1,
+  "desc": "TPE-2840WS 3.01.007 Port 01",
+  "pvid": 1,
+  "maxFrame": 10000,
+  "vlanEntries": [
+   {
+    "port": 1,
+    "vid": 1,
+    "name": "DefaultVLAN"
+   }
+  ],
+  "protoEntries": [],
+  "macPhy": {
+   "support": "Supported",
+   "enabled": "Enabled",
+   "advertised": "1000BaseTFD, 100BaseTXFD, 100BaseTX, 10BaseTFD, 10BaseT",
+   "mauType": "1000_TFD"
+  },
+  "linkAgg": {
+   "capability": "Not Aggregated",
+   "status": "Not Currently In Aggregation",
+   "portId": 0
+  },
+  "med": {
+   "capabilities": "Supported",
+   "networkPolicy": "Not Supported",
+   "location": "Not Supported",
+   "powerPse": "Not Supported",
+   "powerPd": "Not Supported",
+   "inventory": "Supported"
+  }
+ }
+}

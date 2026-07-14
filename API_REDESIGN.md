@@ -281,7 +281,8 @@
 | `net_lldpMedEdit` | set | 🆕 | `{port|all,capabilities,inventory}` |
 | `net_lldpStatistics` | get | 🆕 | `{global{lastChange,inserts,deletes,drops,ageouts},ports:[{port,tx,discards,errors,rx,tlvDiscards,tlvUnknowns,ageouts}]}`;全局只读 from_table + Clear Counter;Ports 表(白表头 9 列,标题右 Clear All,每行 Clear Counter) |
 | `net_lldpStatisticsClear` | set | 🆕 | `{global|all|port}` |
-| `net_lldpLocalPort` | get | 🆕 | `{ports:[{port,subtype,portId,desc}]}`;只读深表头表(首列表头字面 "All"),Show Detail→el-dialog |
+| `net_lldpLocalPort` | get | 🆕 | `{ports:[{port,subtype,portId,desc}]}`;只读深表头列表,Show Detail→跳详情子页(hidden route local-port-detail) |
+| `net_lldpLocalPortDetail` | get | 🆕 | 单端口详情:`{entity,port,subtype,portId,desc,pvid,maxFrame,vlanEntries:[{port,vid,name}],protoEntries,macPhy{support,enabled,advertised,mauType},linkAgg{capability,status,portId},med{capabilities,networkPolicy,location,powerPse,powerPd,inventory}}`;from_table + VLAN Name/Protocol Identity 计数链接就地展开明细 + MAC-PHY/Link Aggregation/LLDP-MED Capabilities Show Detail 就地展开 + Previous Page(数据取自原版真实抓取) |
 | `net_lldpNeighbors` | get | 🆕 | `{list:[{entity,port,chassisSubtype,chassisId,portSubtype,portId,desc}]}`;只读深表头表 8 列,Show Detail→el-dialog |
 
 ## 待登记(随 R3 实现逐步补充)

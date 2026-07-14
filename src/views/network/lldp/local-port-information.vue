@@ -21,17 +21,6 @@
         </template>
       </el-table-column>
     </el-table>
-
-    <el-dialog title="LLDP Local Port Detail" :visible.sync="dialogVisible" width="600px">
-      <table border="" cellspacing="0" class="from_table">
-        <tbody>
-          <tr><td>Port</td><td>{{ detail.port }}</td></tr>
-          <tr><td>Port ID Subtype</td><td>{{ detail.subtype }}</td></tr>
-          <tr><td>Port ID</td><td>{{ detail.portId }}</td></tr>
-          <tr><td>Port Description</td><td>{{ detail.desc }}</td></tr>
-        </tbody>
-      </table>
-    </el-dialog>
   </div>
 </template>
 
@@ -45,9 +34,7 @@ export default {
       loading: false,
       darkTableHeader,
       pageTableCell,
-      rows: [],
-      dialogVisible: false,
-      detail: {}
+      rows: []
     }
   },
   created() {
@@ -65,9 +52,9 @@ export default {
         }))
       }).finally(() => { this.loading = false })
     },
+    // 原版:Show Detail 跳到详情子页(带 Previous Page 返回)
     onShowDetail(row) {
-      this.detail = row
-      this.dialogVisible = true
+      this.$router.push({ path: '/network/lldp/local-port-detail', query: { port: row.port }})
     }
   }
 }

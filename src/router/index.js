@@ -742,6 +742,12 @@ export const constantRoutes = [
             meta: { title: 'Local Port Information', icon: 'submenu' }
           },
           {
+            path: 'local-port-detail',
+            name: 'LLDP-Local-Port-Detail',
+            hidden: true,
+            component: () => import('@/views/network/lldp/local-port-detail')
+          },
+          {
             path: 'neighbors',
             name: 'LLDP-Neighbors',
             component: () => import('@/views/network/lldp/neighbors'),

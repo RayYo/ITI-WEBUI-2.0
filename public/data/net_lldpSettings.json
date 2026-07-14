@@ -1,6 +1,6 @@
 {
  "data": {
-  "status": true,
+  "status": false,
   "fastStart": 4,
   "txHold": 4,
   "txInterval": 30,

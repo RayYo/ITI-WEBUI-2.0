@@ -368,6 +368,12 @@ button, input, optgroup, select, textarea {
   display: inline;
   margin-left: 5px;
 }
+// 明细页可点链接(原版为浏览器默认链接色)
+.href {
+  color: rgb(0, 0, 238);
+  text-decoration: underline;
+  cursor: pointer;
+}
 .InputInTable {
   width: 100% !important;
 }
