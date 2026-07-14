@@ -567,6 +567,33 @@ export const constantRoutes = [
         meta: { title: 'Multicast Filtering', icon: 'submenu' }
       },
       {
+        path: 'bandwidth-control',
+        name: 'Bandwidth-Control',
+        component: () => import('@/views/network/bandwidth-control/index'),
+        meta: { title: 'Bandwidth Control', icon: 'submenu' },
+        redirect: '/network/bandwidth-control/storm-control',
+        children: [
+          {
+            path: 'storm-control',
+            name: 'Storm-Control',
+            component: () => import('@/views/network/bandwidth-control/storm-control'),
+            meta: { title: 'Storm Control', icon: 'submenu' }
+          },
+          {
+            path: 'ingress-rate-limiting',
+            name: 'Ingress-Rate-Limiting',
+            component: () => import('@/views/network/bandwidth-control/ingress-rate-limiting'),
+            meta: { title: 'Ingress Rate Limiting', icon: 'submenu' }
+          },
+          {
+            path: 'egress-rate-limiting',
+            name: 'Egress-Rate-Limiting',
+            component: () => import('@/views/network/bandwidth-control/egress-rate-limiting'),
+            meta: { title: 'Egress Rate Limiting', icon: 'submenu' }
+          }
+        ]
+      },
+      {
         path: 'vlan',
         name: 'VLAN',
         component: () => import('@/views/network/vlan/index'),

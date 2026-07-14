@@ -1,0 +1,202 @@
+{
+  "data": {
+    "ports": [
+      {
+        "port": 1,
+        "dlf": true,
+        "broadcast": true,
+        "multicast": false,
+        "threshold": 500
+      },
+      {
+        "port": 2,
+        "dlf": true,
+        "broadcast": true,
+        "multicast": false,
+        "threshold": 500
+      },
+      {
+        "port": 3,
+        "dlf": false,
+        "broadcast": true,
+        "multicast": true,
+        "threshold": 500
+      },
+      {
+        "port": 4,
+        "dlf": false,
+        "broadcast": true,
+        "multicast": true,
+        "threshold": 500
+      },
+      {
+        "port": 5,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 6,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 7,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 8,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 9,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 10,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 11,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 12,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 13,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 14,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 15,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 16,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 17,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 18,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 19,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 20,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 21,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 22,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 23,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 24,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 25,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 26,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 27,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      },
+      {
+        "port": 28,
+        "dlf": false,
+        "broadcast": false,
+        "multicast": false,
+        "threshold": 0
+      }
+    ]
+  }
+}
