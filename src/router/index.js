@@ -836,7 +836,7 @@ export const constantRoutes = [
     component: Layout,
     name: 'PoE',
     meta: { title: 'PoE', icon: 'PoE' },
-    redirect: '/poe/cos',
+    redirect: '/poe/power-over-ethernet',
     children: [
       {
         path: 'power-over-ethernet',

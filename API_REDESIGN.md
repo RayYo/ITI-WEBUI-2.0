@@ -316,6 +316,17 @@
 | `net_qosIpv6Tc` | get | 🆕 | `{state:bool,list:[{tc,priority}]}`;State select+Apply;Settings(IPv6 Traffic Class input/Priority 0-7)+Add;Table 白表头+Total Entries+Delete;**state Disabled 时 add 表单置灰** |
 | `net_qosIpv6TcStateEdit` / `net_qosIpv6TcAdd` / `net_qosIpv6TcDel` | set | 🆕 | `{state}` / `{tc,priority}` / `{tc}` |
 
+## R3 第十七批:PoE(Power over Ethernet / Time Range / PD Alive)(2026-07-14)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_poe` | get | 🆕 | `{budget,consumption,timeRanges:[name],ports:[{port,admin:bool,status,cls,priority,powerLimit,userDef,timeRange,power,voltage,current}]}`;只读预算表 + PortEditTable 白表头 12 列(Port/Admin(select,All=Ignore)/Status·Class 只读/Priority(Critical/High/Low)/Power Limit(Auto/Class0-4)/User Def input/Time Range(select N/A+ranges)/Power·Voltage·Current 只读/Action);24 PoE 端口 |
+| `net_poeEdit` | set | 🆕 | `{port|all,admin,priority,powerLimit,userDef,timeRange}`(All 行 Ignore 不提交) |
+| `net_poeTimeRange` | get | 🆕 | `{list:[{name,fromWeek,toWeek,fromTime,toTime}]}`;自定义双列 from_table(Range Name+Daily勾选 / From·To:Week select / From·To:Time 时+分 select + End Weekday勾选)+ 表(白表头 Range Name/Start·End Weekday/Start·End Time/**Delete Periodic**/Delete)+ Note |
+| `net_poeTimeRangeAdd` / `net_poeTimeRangeDel` / `net_poeTimeRangeDelPeriodic` | set | 🆕 | `{name,daily,fromWeek,toWeek,fromTime,toTime}` / `{name}` |
+| `net_poePdAlive` | get | 🆕 | `{state:bool,ports:[{port,pdState:bool,ip,pollInterval,retryCount,powerOffTime,startUpTime,actionSetting}]}`;State select+Apply;自定义表(白表头 Port/PD Alive State/PD IP Address/Poll Interval/Retry Count/Power Off Time/Start Up Time/Action Setting(Reset/Notify/Both)/Apply);**全局 State 关时 5 输入+Action Setting 禁用,而 PD Alive State/Apply 保持可用(由加载态决定)** |
+| `net_poePdAliveStateEdit` / `net_poePdAliveEdit` | set | 🆕 | `{state}` / `{port,pdState,ip,pollInterval,retryCount,powerOffTime,startUpTime,actionSetting}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

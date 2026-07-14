@@ -1,0 +1,247 @@
+{
+ "data": {
+  "state": false,
+  "ports": [
+   {
+    "port": 1,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 2
+   },
+   {
+    "port": 2,
+    "pdState": true,
+    "ip": "192.168.10.2",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 3
+   },
+   {
+    "port": 3,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 1
+   },
+   {
+    "port": 4,
+    "pdState": true,
+    "ip": "192.168.10.4",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 2
+   },
+   {
+    "port": 5,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 3
+   },
+   {
+    "port": 6,
+    "pdState": true,
+    "ip": "192.168.10.6",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 1
+   },
+   {
+    "port": 7,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 2
+   },
+   {
+    "port": 8,
+    "pdState": true,
+    "ip": "192.168.10.8",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 3
+   },
+   {
+    "port": 9,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 1
+   },
+   {
+    "port": 10,
+    "pdState": true,
+    "ip": "192.168.10.10",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 2
+   },
+   {
+    "port": 11,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 3
+   },
+   {
+    "port": 12,
+    "pdState": true,
+    "ip": "192.168.10.12",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 1
+   },
+   {
+    "port": 13,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 2
+   },
+   {
+    "port": 14,
+    "pdState": true,
+    "ip": "192.168.10.14",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 3
+   },
+   {
+    "port": 15,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 1
+   },
+   {
+    "port": 16,
+    "pdState": true,
+    "ip": "192.168.10.16",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 2
+   },
+   {
+    "port": 17,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 3
+   },
+   {
+    "port": 18,
+    "pdState": true,
+    "ip": "192.168.10.18",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 1
+   },
+   {
+    "port": 19,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 2
+   },
+   {
+    "port": 20,
+    "pdState": true,
+    "ip": "192.168.10.20",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 3
+   },
+   {
+    "port": 21,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 1
+   },
+   {
+    "port": 22,
+    "pdState": true,
+    "ip": "192.168.10.22",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 2
+   },
+   {
+    "port": 23,
+    "pdState": false,
+    "ip": "",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 3
+   },
+   {
+    "port": 24,
+    "pdState": true,
+    "ip": "192.168.10.24",
+    "pollInterval": 30,
+    "retryCount": 3,
+    "powerOffTime": 15,
+    "startUpTime": 60,
+    "actionSetting": 1
+   }
+  ]
+ }
+}

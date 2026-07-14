@@ -1,0 +1,20 @@
+{
+ "data": {
+  "list": [
+   {
+    "name": "Daily",
+    "fromWeek": 1,
+    "toWeek": 7,
+    "fromTime": "00:00",
+    "toTime": "23:59"
+   },
+   {
+    "name": "Office Hours",
+    "fromWeek": 2,
+    "toWeek": 6,
+    "fromTime": "08:00",
+    "toTime": "18:00"
+   }
+  ]
+ }
+}
