@@ -1,0 +1,158 @@
+{
+ "data": {
+  "status": true,
+  "vlanId": 2,
+  "vlanList": [
+   1,
+   2,
+   3,
+   10,
+   20,
+   100
+  ],
+  "agingTime": 30,
+  "cos": 5,
+  "ports": [
+   {
+    "port": 1,
+    "autoDetection": false,
+    "state": "OUI"
+   },
+   {
+    "port": 2,
+    "autoDetection": true,
+    "state": "Auto"
+   },
+   {
+    "port": 3,
+    "autoDetection": false,
+    "state": "None"
+   },
+   {
+    "port": 4,
+    "autoDetection": true,
+    "state": "OUI"
+   },
+   {
+    "port": 5,
+    "autoDetection": false,
+    "state": "Auto"
+   },
+   {
+    "port": 6,
+    "autoDetection": true,
+    "state": "None"
+   },
+   {
+    "port": 7,
+    "autoDetection": false,
+    "state": "OUI"
+   },
+   {
+    "port": 8,
+    "autoDetection": true,
+    "state": "Auto"
+   },
+   {
+    "port": 9,
+    "autoDetection": false,
+    "state": "None"
+   },
+   {
+    "port": 10,
+    "autoDetection": true,
+    "state": "OUI"
+   },
+   {
+    "port": 11,
+    "autoDetection": false,
+    "state": "Auto"
+   },
+   {
+    "port": 12,
+    "autoDetection": true,
+    "state": "None"
+   },
+   {
+    "port": 13,
+    "autoDetection": false,
+    "state": "OUI"
+   },
+   {
+    "port": 14,
+    "autoDetection": true,
+    "state": "Auto"
+   },
+   {
+    "port": 15,
+    "autoDetection": false,
+    "state": "None"
+   },
+   {
+    "port": 16,
+    "autoDetection": true,
+    "state": "OUI"
+   },
+   {
+    "port": 17,
+    "autoDetection": false,
+    "state": "Auto"
+   },
+   {
+    "port": 18,
+    "autoDetection": true,
+    "state": "None"
+   },
+   {
+    "port": 19,
+    "autoDetection": false,
+    "state": "OUI"
+   },
+   {
+    "port": 20,
+    "autoDetection": true,
+    "state": "Auto"
+   },
+   {
+    "port": 21,
+    "autoDetection": false,
+    "state": "None"
+   },
+   {
+    "port": 22,
+    "autoDetection": true,
+    "state": "OUI"
+   },
+   {
+    "port": 23,
+    "autoDetection": false,
+    "state": "Auto"
+   },
+   {
+    "port": 24,
+    "autoDetection": true,
+    "state": "None"
+   },
+   {
+    "port": 25,
+    "autoDetection": false,
+    "state": "OUI"
+   },
+   {
+    "port": 26,
+    "autoDetection": true,
+    "state": "Auto"
+   },
+   {
+    "port": 27,
+    "autoDetection": false,
+    "state": "None"
+   },
+   {
+    "port": 28,
+    "autoDetection": true,
+    "state": "OUI"
+   }
+  ]
+ }
+}

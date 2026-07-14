@@ -670,6 +670,27 @@ export const constantRoutes = [
             meta: { title: 'Time Settings', icon: 'submenu' }
           }
         ]
+      },
+      {
+        path: 'voice-vlan',
+        name: 'Voice-VLAN',
+        component: () => import('@/views/network/voice-vlan/index'),
+        meta: { title: 'Voice VLAN', icon: 'submenu' },
+        redirect: '/network/voice-vlan/settings',
+        children: [
+          {
+            path: 'settings',
+            name: 'Voice-VLAN-Settings',
+            component: () => import('@/views/network/voice-vlan/settings'),
+            meta: { title: 'Settings', icon: 'submenu' }
+          },
+          {
+            path: 'oui',
+            name: 'Voice-VLAN-OUI',
+            component: () => import('@/views/network/voice-vlan/oui'),
+            meta: { title: 'OUI', icon: 'submenu' }
+          }
+        ]
       }
     ]
   },

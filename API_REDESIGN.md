@@ -254,6 +254,17 @@
 | `net_gvrpTime` | get | 🆕 | `{ports:[{port,joinTime,leaveTime,leaveAllTime:num}]}`;PortEditTable(深色表头):Port/JoinTime(10~2^30-14)/LeaveTime(30~2^31-18)/LeaveAllTime(40~2^31-8) csec(input maxlen12)/Action |
 | `net_gvrpTimeEdit` | set | 🆕 | `{port|all,joinTime,leaveTime,leaveAllTime}` |
 
+## R3 第十二批:Voice VLAN(Settings / OUI)(2026-07-14)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_voiceVlanSettings` | get | 🆕 | `{status:bool,vlanId,vlanList:[],agingTime,cos,ports:[{port,autoDetection:bool,state}]}`;Status(from_table select)+Note+Global Settings(VLAN ID select/Aging Time input(1-120)/Cos select 0-7,Disabled 时置灰禁用)+Port Settings Table(PortEditTable 白表头:Port/Auto Detection(select,All=Ignore)/Status(只读)/Action) |
+| `net_voiceVlanSettingsEdit` | set | 🆕 | `{status,vlanId,agingTime,cos}` |
+| `net_voiceVlanPortEdit` | set | 🆕 | `{port|all,autoDetection}`(Ignore 项不提交) |
+| `net_voiceVlanOui` | get | 🆕 | `{status:bool,list:[{id,desc,mac,mask}]}`;OUI 增改表(白表头 ID/Description/Telephony OUI/OUI Mask/Action)+Total Entries;Voice VLAN 关时输入禁用 |
+| `net_voiceVlanOuiAdd` | set | 🆕 | `{desc,mac}`(上限 10 条) |
+| `net_voiceVlanOuiDel` | set | 🆕 | `{id}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

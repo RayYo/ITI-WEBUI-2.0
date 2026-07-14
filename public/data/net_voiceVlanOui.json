@@ -1,0 +1,31 @@
+{
+ "data": {
+  "status": true,
+  "list": [
+   {
+    "id": 1,
+    "desc": "Cisco",
+    "mac": "00:01:e3:00:00:00",
+    "mask": "ff:ff:ff:00:00:00"
+   },
+   {
+    "id": 2,
+    "desc": "Avaya",
+    "mac": "00:60:b9:00:00:00",
+    "mask": "ff:ff:ff:00:00:00"
+   },
+   {
+    "id": 3,
+    "desc": "Polycom",
+    "mac": "00:04:0d:00:00:00",
+    "mask": "ff:ff:ff:00:00:00"
+   },
+   {
+    "id": 4,
+    "desc": "Siemens",
+    "mac": "00:0b:82:00:00:00",
+    "mask": "ff:ff:ff:00:00:00"
+   }
+  ]
+ }
+}
