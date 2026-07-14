@@ -39,32 +39,32 @@
           </el-table-column>
           <el-table-column label="PD IP Address" min-width="203" align="center">
             <template slot-scope="scope">
-              <input v-model="scope.row.ip" type="text" maxlength="15" class="baseInput" :class="{ disabledStyle: off }" :disabled="off">
+              <input v-model="scope.row.ip" type="text" maxlength="15" class="baseInput" :class="{ disabledStyle: scope.row.pdState !== '1' }" :disabled="scope.row.pdState !== '1'">
             </template>
           </el-table-column>
           <el-table-column label="Poll Interval (10~300 sec)" min-width="237" align="center">
             <template slot-scope="scope">
-              <input v-model="scope.row.pollInterval" type="text" maxlength="3" class="baseInput" :class="{ disabledStyle: off }" :disabled="off">
+              <input v-model="scope.row.pollInterval" type="text" maxlength="3" class="baseInput" :class="{ disabledStyle: scope.row.pdState !== '1' }" :disabled="scope.row.pdState !== '1'">
             </template>
           </el-table-column>
           <el-table-column label="Retry Count (0~5)" min-width="169" align="center">
             <template slot-scope="scope">
-              <input v-model="scope.row.retryCount" type="text" maxlength="1" class="baseInput" :class="{ disabledStyle: off }" :disabled="off">
+              <input v-model="scope.row.retryCount" type="text" maxlength="1" class="baseInput" :class="{ disabledStyle: scope.row.pdState !== '1' }" :disabled="scope.row.pdState !== '1'">
             </template>
           </el-table-column>
           <el-table-column label="Power Off Time (3~120) (sec)" min-width="249" align="center">
             <template slot-scope="scope">
-              <input v-model="scope.row.powerOffTime" type="text" maxlength="3" class="baseInput" :class="{ disabledStyle: off }" :disabled="off">
+              <input v-model="scope.row.powerOffTime" type="text" maxlength="3" class="baseInput" :class="{ disabledStyle: scope.row.pdState !== '1' }" :disabled="scope.row.pdState !== '1'">
             </template>
           </el-table-column>
           <el-table-column label="Start Up Time (30~600) (sec)" min-width="249" align="center">
             <template slot-scope="scope">
-              <input v-model="scope.row.startUpTime" type="text" maxlength="3" class="baseInput" :class="{ disabledStyle: off }" :disabled="off">
+              <input v-model="scope.row.startUpTime" type="text" maxlength="3" class="baseInput" :class="{ disabledStyle: scope.row.pdState !== '1' }" :disabled="scope.row.pdState !== '1'">
             </template>
           </el-table-column>
           <el-table-column label="Action Setting" min-width="158" align="center">
             <template slot-scope="scope">
-              <select v-model="scope.row.actionSetting" class="selectInTable" :class="{ disabledStyle: off }" :disabled="off">
+              <select v-model="scope.row.actionSetting" class="selectInTable" :class="{ disabledStyle: scope.row.pdState !== '1' }" :disabled="scope.row.pdState !== '1'">
                 <option value="1">Reset</option>
                 <option value="2">Notify</option>
                 <option value="3">Both</option>
@@ -95,15 +95,10 @@ export default {
       pageTableHeader,
       pageTableCell,
       state: '2',
-      // 全局 State 由加载态决定;关时行内详细字段(IP/Poll/Retry/PowerOff/StartUp/Action Setting)禁用,
-      // 但每行 PD Alive State 与 Apply 保持可用(原版行为)
-      stateOn: false,
+      // 行内详细字段(IP/Poll/Retry/PowerOff/StartUp/Action Setting)是否可编辑,
+      // 由该行 PD Alive State select 前端控制(Enabled 可编辑,Disabled 置灰);
+      // PD Alive State select 与 Apply 始终可用。全局 State 为独立设置项(带自己的 Apply)
       rows: []
-    }
-  },
-  computed: {
-    off() {
-      return !this.stateOn
     }
   },
   created() {
@@ -114,7 +109,6 @@ export default {
       this.loading = true
       cgiGet('net_poePdAlive').then(d => {
         this.state = d.state ? '1' : '2'
-        this.stateOn = !!d.state
         this.rows = (d.ports || []).map(p => ({
           port: p.port,
           pdState: p.pdState ? '1' : '2',

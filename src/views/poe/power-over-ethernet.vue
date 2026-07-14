@@ -7,6 +7,7 @@
         <template #1><span>{{ consumption }}</span></template>
       </common-table>
     </div>
+    <br>
 
     <div class="table_title">Power Over Ethernet Table</div>
     <port-edit-table

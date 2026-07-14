@@ -26,7 +26,8 @@
               <select v-model="toWeek" style="width: 40% !important">
                 <option v-for="w in WEEKS" :key="w.value" :value="w.value">{{ w.label }}</option>
               </select>
-              <input v-model="endWeekday" type="checkbox"> End Weekday
+              <input v-model="endWeekday" type="checkbox">
+              <span class="tipAfterInputBox">End Weekday</span>
             </td>
           </tr>
           <tr>
