@@ -3,6 +3,7 @@
     <div v-if="title" class="table_title">{{ title }}</div>
     <div class="table-scroll">
       <el-table
+        v-loading="loading"
         :data="rows"
         class="tableBox port-edit-table"
         stripe
@@ -75,6 +76,8 @@ export default {
     minWidth: { type: String, default: '600px' },
     title: { type: String, default: '' },
     disabled: { type: Boolean, default: false },
+    // 数据请求期间表格内 loading(白底无文字,原生 el-table v-loading)
+    loading: { type: Boolean, default: false },
     // 表头样式:默认深灰底白字(darkTableHeader);可传 pageTableHeader 等覆盖
     headerCellStyle: { type: Object, default: null }
   },

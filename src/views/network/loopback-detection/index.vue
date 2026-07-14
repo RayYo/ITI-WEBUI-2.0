@@ -34,6 +34,7 @@
         min-width="700px"
         :header-cell-style="pageTableHeader"
         :disabled="status !== '1'"
+        :loading="loading"
         @apply="onApplyPort"
       />
     </div>
@@ -53,6 +54,7 @@ export default {
   data() {
     return {
       pageTableHeader,
+      loading: false,
       status: '2',
       interval: '2',
       recoverTime: '60',
@@ -74,6 +76,7 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('net_loopback').then(d => {
         this.status = d.status ? '1' : '2'
         this.interval = String(d.interval != null ? d.interval : 2)
@@ -84,7 +87,7 @@ export default {
           state: p.state ? '1' : '2',
           loopStatus: p.loopStatus === 'loop' ? 'Loop' : 'Normal'
         })))
-      })
+      }).finally(() => { this.loading = false })
     },
     onlyNum(key) {
       this[key] = this[key].replace(/[^0-9]/g, '')

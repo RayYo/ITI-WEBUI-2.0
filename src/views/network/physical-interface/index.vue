@@ -2,7 +2,7 @@
   <div class="main_body">
     <div id="basetitle">Physical Interface</div>
     <div>
-      <port-edit-table :columns="columns" :rows="rows" min-width="1400px" @apply="onApply" />
+      <port-edit-table :columns="columns" :rows="rows" min-width="1400px" :loading="loading" @apply="onApply" />
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@ export default {
   components: { PortEditTable },
   data() {
     return {
+      loading: false,
       columns: [
         { prop: 'port', label: 'Port', minWidth: 50, type: 'text' },
         { prop: 'trunk', label: 'Trunk', minWidth: 65, type: 'text' },
@@ -48,6 +49,7 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('net_phyInterface').then(d => {
         const all = {
           port: 'All', trunk: '-', type: '-', linkStatus: '-',
@@ -67,7 +69,7 @@ export default {
           bpduPassThrough: p.bpduPassThrough ? '1' : '2',
           description: p.description || ''
         })))
-      })
+      }).finally(() => { this.loading = false })
     },
     async onApply(row) {
       const isAll = row.port === 'All'

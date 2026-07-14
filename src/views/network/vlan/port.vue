@@ -2,7 +2,7 @@
   <div class="main_body">
     <div id="basetitle">Port Settings</div>
     <div>
-      <port-edit-table :columns="columns" :rows="rows" min-width="1630px" @apply="onApply" />
+      <port-edit-table :columns="columns" :rows="rows" min-width="1630px" :loading="loading" @apply="onApply" />
     </div>
   </div>
 </template>
@@ -22,6 +22,7 @@ export default {
   components: { PortEditTable },
   data() {
     return {
+      loading: false,
       columns: [
         { prop: 'port', label: 'Port', minWidth: 80, type: 'text' },
         { prop: 'pvid', label: 'PVID', minWidth: 100, type: 'input', maxlength: 4 },
@@ -37,6 +38,7 @@ export default {
   },
   methods: {
     load() {
+      this.loading = true
       cgiGet('net_vlanPort').then(d => {
         const all = { port: 'All', pvid: '', acceptFrame: 'all', ingressFilter: '2' }
         this.rows = [all].concat((d.ports || []).map(p => ({
@@ -45,7 +47,7 @@ export default {
           acceptFrame: p.acceptFrame || 'all',
           ingressFilter: p.ingressFilter ? '1' : '2'
         })))
-      })
+      }).finally(() => { this.loading = false })
     },
     async onApply(row) {
       const isAll = row.port === 'All'
