@@ -1,0 +1,202 @@
+{
+ "data": {
+  "ports": [
+   {
+    "port": 1,
+    "macPhy": false,
+    "linkAgg": false,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 2,
+    "macPhy": true,
+    "linkAgg": false,
+    "maxFrame": false,
+    "powerMdi": false
+   },
+   {
+    "port": 3,
+    "macPhy": false,
+    "linkAgg": true,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 4,
+    "macPhy": true,
+    "linkAgg": false,
+    "maxFrame": false,
+    "powerMdi": true
+   },
+   {
+    "port": 5,
+    "macPhy": false,
+    "linkAgg": false,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 6,
+    "macPhy": true,
+    "linkAgg": true,
+    "maxFrame": false,
+    "powerMdi": false
+   },
+   {
+    "port": 7,
+    "macPhy": false,
+    "linkAgg": false,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 8,
+    "macPhy": true,
+    "linkAgg": false,
+    "maxFrame": false,
+    "powerMdi": true
+   },
+   {
+    "port": 9,
+    "macPhy": false,
+    "linkAgg": true,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 10,
+    "macPhy": true,
+    "linkAgg": false,
+    "maxFrame": false,
+    "powerMdi": false
+   },
+   {
+    "port": 11,
+    "macPhy": false,
+    "linkAgg": false,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 12,
+    "macPhy": true,
+    "linkAgg": true,
+    "maxFrame": false,
+    "powerMdi": true
+   },
+   {
+    "port": 13,
+    "macPhy": false,
+    "linkAgg": false,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 14,
+    "macPhy": true,
+    "linkAgg": false,
+    "maxFrame": false,
+    "powerMdi": false
+   },
+   {
+    "port": 15,
+    "macPhy": false,
+    "linkAgg": true,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 16,
+    "macPhy": true,
+    "linkAgg": false,
+    "maxFrame": false,
+    "powerMdi": true
+   },
+   {
+    "port": 17,
+    "macPhy": false,
+    "linkAgg": false,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 18,
+    "macPhy": true,
+    "linkAgg": true,
+    "maxFrame": false,
+    "powerMdi": false
+   },
+   {
+    "port": 19,
+    "macPhy": false,
+    "linkAgg": false,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 20,
+    "macPhy": true,
+    "linkAgg": false,
+    "maxFrame": false,
+    "powerMdi": true
+   },
+   {
+    "port": 21,
+    "macPhy": false,
+    "linkAgg": true,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 22,
+    "macPhy": true,
+    "linkAgg": false,
+    "maxFrame": false,
+    "powerMdi": false
+   },
+   {
+    "port": 23,
+    "macPhy": false,
+    "linkAgg": false,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 24,
+    "macPhy": true,
+    "linkAgg": true,
+    "maxFrame": false,
+    "powerMdi": true
+   },
+   {
+    "port": 25,
+    "macPhy": false,
+    "linkAgg": false,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 26,
+    "macPhy": true,
+    "linkAgg": false,
+    "maxFrame": false,
+    "powerMdi": false
+   },
+   {
+    "port": 27,
+    "macPhy": false,
+    "linkAgg": true,
+    "maxFrame": true,
+    "powerMdi": false
+   },
+   {
+    "port": 28,
+    "macPhy": true,
+    "linkAgg": false,
+    "maxFrame": false,
+    "powerMdi": true
+   }
+  ]
+ }
+}

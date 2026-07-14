@@ -1,0 +1,174 @@
+{
+ "data": {
+  "ports": [
+   {
+    "port": 1,
+    "subtype": "Local",
+    "portId": "1",
+    "desc": "TPE-2840WS 3.01.007 Port 01"
+   },
+   {
+    "port": 2,
+    "subtype": "Local",
+    "portId": "2",
+    "desc": "TPE-2840WS 3.01.007 Port 02"
+   },
+   {
+    "port": 3,
+    "subtype": "Local",
+    "portId": "3",
+    "desc": "TPE-2840WS 3.01.007 Port 03"
+   },
+   {
+    "port": 4,
+    "subtype": "Local",
+    "portId": "4",
+    "desc": "TPE-2840WS 3.01.007 Port 04"
+   },
+   {
+    "port": 5,
+    "subtype": "Local",
+    "portId": "5",
+    "desc": "TPE-2840WS 3.01.007 Port 05"
+   },
+   {
+    "port": 6,
+    "subtype": "Local",
+    "portId": "6",
+    "desc": "TPE-2840WS 3.01.007 Port 06"
+   },
+   {
+    "port": 7,
+    "subtype": "Local",
+    "portId": "7",
+    "desc": "TPE-2840WS 3.01.007 Port 07"
+   },
+   {
+    "port": 8,
+    "subtype": "Local",
+    "portId": "8",
+    "desc": "TPE-2840WS 3.01.007 Port 08"
+   },
+   {
+    "port": 9,
+    "subtype": "Local",
+    "portId": "9",
+    "desc": "TPE-2840WS 3.01.007 Port 09"
+   },
+   {
+    "port": 10,
+    "subtype": "Local",
+    "portId": "10",
+    "desc": "TPE-2840WS 3.01.007 Port 10"
+   },
+   {
+    "port": 11,
+    "subtype": "Local",
+    "portId": "11",
+    "desc": "TPE-2840WS 3.01.007 Port 11"
+   },
+   {
+    "port": 12,
+    "subtype": "Local",
+    "portId": "12",
+    "desc": "TPE-2840WS 3.01.007 Port 12"
+   },
+   {
+    "port": 13,
+    "subtype": "Local",
+    "portId": "13",
+    "desc": "TPE-2840WS 3.01.007 Port 13"
+   },
+   {
+    "port": 14,
+    "subtype": "Local",
+    "portId": "14",
+    "desc": "TPE-2840WS 3.01.007 Port 14"
+   },
+   {
+    "port": 15,
+    "subtype": "Local",
+    "portId": "15",
+    "desc": "TPE-2840WS 3.01.007 Port 15"
+   },
+   {
+    "port": 16,
+    "subtype": "Local",
+    "portId": "16",
+    "desc": "TPE-2840WS 3.01.007 Port 16"
+   },
+   {
+    "port": 17,
+    "subtype": "Local",
+    "portId": "17",
+    "desc": "TPE-2840WS 3.01.007 Port 17"
+   },
+   {
+    "port": 18,
+    "subtype": "Local",
+    "portId": "18",
+    "desc": "TPE-2840WS 3.01.007 Port 18"
+   },
+   {
+    "port": 19,
+    "subtype": "Local",
+    "portId": "19",
+    "desc": "TPE-2840WS 3.01.007 Port 19"
+   },
+   {
+    "port": 20,
+    "subtype": "Local",
+    "portId": "20",
+    "desc": "TPE-2840WS 3.01.007 Port 20"
+   },
+   {
+    "port": 21,
+    "subtype": "Local",
+    "portId": "21",
+    "desc": "TPE-2840WS 3.01.007 Port 21"
+   },
+   {
+    "port": 22,
+    "subtype": "Local",
+    "portId": "22",
+    "desc": "TPE-2840WS 3.01.007 Port 22"
+   },
+   {
+    "port": 23,
+    "subtype": "Local",
+    "portId": "23",
+    "desc": "TPE-2840WS 3.01.007 Port 23"
+   },
+   {
+    "port": 24,
+    "subtype": "Local",
+    "portId": "24",
+    "desc": "TPE-2840WS 3.01.007 Port 24"
+   },
+   {
+    "port": 25,
+    "subtype": "Local",
+    "portId": "25",
+    "desc": "TPE-2840WS 3.01.007 Port 25"
+   },
+   {
+    "port": 26,
+    "subtype": "Local",
+    "portId": "26",
+    "desc": "TPE-2840WS 3.01.007 Port 26"
+   },
+   {
+    "port": 27,
+    "subtype": "Local",
+    "portId": "27",
+    "desc": "TPE-2840WS 3.01.007 Port 27"
+   },
+   {
+    "port": 28,
+    "subtype": "Local",
+    "portId": "28",
+    "desc": "TPE-2840WS 3.01.007 Port 28"
+   }
+  ]
+ }
+}

@@ -691,6 +691,63 @@ export const constantRoutes = [
             meta: { title: 'OUI', icon: 'submenu' }
           }
         ]
+      },
+      {
+        path: 'lldp',
+        name: 'LLDP',
+        component: () => import('@/views/network/lldp/index'),
+        meta: { title: 'LLDP', icon: 'submenu' },
+        redirect: '/network/lldp/settings',
+        children: [
+          {
+            path: 'settings',
+            name: 'LLDP-Settings',
+            component: () => import('@/views/network/lldp/settings'),
+            meta: { title: 'Settings', icon: 'submenu' }
+          },
+          {
+            path: 'basic-tlvs',
+            name: 'LLDP-Basic-TLVs',
+            component: () => import('@/views/network/lldp/basic-tlvs'),
+            meta: { title: 'Basic TLVs Settings', icon: 'submenu' }
+          },
+          {
+            path: 'dot1-tlvs',
+            name: 'LLDP-Dot1-TLVs',
+            component: () => import('@/views/network/lldp/dot1-tlvs'),
+            meta: { title: 'Dot1 TLVs Settings', icon: 'submenu' }
+          },
+          {
+            path: 'dot3-tlvs',
+            name: 'LLDP-Dot3-TLVs',
+            component: () => import('@/views/network/lldp/dot3-tlvs'),
+            meta: { title: 'Dot3 TLVs Settings', icon: 'submenu' }
+          },
+          {
+            path: 'med-port-settings',
+            name: 'LLDP-MED-Port',
+            component: () => import('@/views/network/lldp/med-port-settings'),
+            meta: { title: 'MED Port Settings', icon: 'submenu' }
+          },
+          {
+            path: 'statistics-information',
+            name: 'LLDP-Statistics',
+            component: () => import('@/views/network/lldp/statistics-information'),
+            meta: { title: 'Statistics Information', icon: 'submenu' }
+          },
+          {
+            path: 'local-port-information',
+            name: 'LLDP-Local-Port',
+            component: () => import('@/views/network/lldp/local-port-information'),
+            meta: { title: 'Local Port Information', icon: 'submenu' }
+          },
+          {
+            path: 'neighbors',
+            name: 'LLDP-Neighbors',
+            component: () => import('@/views/network/lldp/neighbors'),
+            meta: { title: 'Neighbors', icon: 'submenu' }
+          }
+        ]
       }
     ]
   },

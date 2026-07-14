@@ -1,0 +1,202 @@
+{
+ "data": {
+  "ports": [
+   {
+    "port": 1,
+    "portDesc": false,
+    "sysName": false,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 2,
+    "portDesc": true,
+    "sysName": false,
+    "sysDesc": false,
+    "sysCap": false
+   },
+   {
+    "port": 3,
+    "portDesc": false,
+    "sysName": true,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 4,
+    "portDesc": true,
+    "sysName": false,
+    "sysDesc": false,
+    "sysCap": true
+   },
+   {
+    "port": 5,
+    "portDesc": false,
+    "sysName": false,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 6,
+    "portDesc": true,
+    "sysName": true,
+    "sysDesc": false,
+    "sysCap": false
+   },
+   {
+    "port": 7,
+    "portDesc": false,
+    "sysName": false,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 8,
+    "portDesc": true,
+    "sysName": false,
+    "sysDesc": false,
+    "sysCap": true
+   },
+   {
+    "port": 9,
+    "portDesc": false,
+    "sysName": true,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 10,
+    "portDesc": true,
+    "sysName": false,
+    "sysDesc": false,
+    "sysCap": false
+   },
+   {
+    "port": 11,
+    "portDesc": false,
+    "sysName": false,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 12,
+    "portDesc": true,
+    "sysName": true,
+    "sysDesc": false,
+    "sysCap": true
+   },
+   {
+    "port": 13,
+    "portDesc": false,
+    "sysName": false,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 14,
+    "portDesc": true,
+    "sysName": false,
+    "sysDesc": false,
+    "sysCap": false
+   },
+   {
+    "port": 15,
+    "portDesc": false,
+    "sysName": true,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 16,
+    "portDesc": true,
+    "sysName": false,
+    "sysDesc": false,
+    "sysCap": true
+   },
+   {
+    "port": 17,
+    "portDesc": false,
+    "sysName": false,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 18,
+    "portDesc": true,
+    "sysName": true,
+    "sysDesc": false,
+    "sysCap": false
+   },
+   {
+    "port": 19,
+    "portDesc": false,
+    "sysName": false,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 20,
+    "portDesc": true,
+    "sysName": false,
+    "sysDesc": false,
+    "sysCap": true
+   },
+   {
+    "port": 21,
+    "portDesc": false,
+    "sysName": true,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 22,
+    "portDesc": true,
+    "sysName": false,
+    "sysDesc": false,
+    "sysCap": false
+   },
+   {
+    "port": 23,
+    "portDesc": false,
+    "sysName": false,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 24,
+    "portDesc": true,
+    "sysName": true,
+    "sysDesc": false,
+    "sysCap": true
+   },
+   {
+    "port": 25,
+    "portDesc": false,
+    "sysName": false,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 26,
+    "portDesc": true,
+    "sysName": false,
+    "sysDesc": false,
+    "sysCap": false
+   },
+   {
+    "port": 27,
+    "portDesc": false,
+    "sysName": true,
+    "sysDesc": true,
+    "sysCap": false
+   },
+   {
+    "port": 28,
+    "portDesc": true,
+    "sysName": false,
+    "sysDesc": false,
+    "sysCap": true
+   }
+  ]
+ }
+}

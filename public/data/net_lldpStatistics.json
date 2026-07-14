@@ -1,0 +1,293 @@
+{
+ "data": {
+  "global": {
+   "lastChange": "0 days 00h:00m:00s",
+   "inserts": 0,
+   "deletes": 0,
+   "drops": 0,
+   "ageouts": 0
+  },
+  "ports": [
+   {
+    "port": 1,
+    "tx": 10,
+    "discards": 0,
+    "errors": 0,
+    "rx": 8,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 2,
+    "tx": 20,
+    "discards": 0,
+    "errors": 0,
+    "rx": 16,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 3,
+    "tx": 30,
+    "discards": 0,
+    "errors": 0,
+    "rx": 24,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 4,
+    "tx": 40,
+    "discards": 0,
+    "errors": 0,
+    "rx": 32,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 5,
+    "tx": 50,
+    "discards": 0,
+    "errors": 0,
+    "rx": 40,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 6,
+    "tx": 60,
+    "discards": 0,
+    "errors": 0,
+    "rx": 48,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 7,
+    "tx": 70,
+    "discards": 0,
+    "errors": 0,
+    "rx": 56,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 8,
+    "tx": 80,
+    "discards": 0,
+    "errors": 0,
+    "rx": 64,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 9,
+    "tx": 90,
+    "discards": 0,
+    "errors": 0,
+    "rx": 72,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 10,
+    "tx": 100,
+    "discards": 0,
+    "errors": 0,
+    "rx": 80,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 11,
+    "tx": 110,
+    "discards": 0,
+    "errors": 0,
+    "rx": 88,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 12,
+    "tx": 120,
+    "discards": 0,
+    "errors": 0,
+    "rx": 96,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 13,
+    "tx": 130,
+    "discards": 0,
+    "errors": 0,
+    "rx": 104,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 14,
+    "tx": 140,
+    "discards": 0,
+    "errors": 0,
+    "rx": 112,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 15,
+    "tx": 150,
+    "discards": 0,
+    "errors": 0,
+    "rx": 120,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 16,
+    "tx": 160,
+    "discards": 0,
+    "errors": 0,
+    "rx": 128,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 17,
+    "tx": 170,
+    "discards": 0,
+    "errors": 0,
+    "rx": 136,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 18,
+    "tx": 180,
+    "discards": 0,
+    "errors": 0,
+    "rx": 144,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 19,
+    "tx": 190,
+    "discards": 0,
+    "errors": 0,
+    "rx": 152,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 20,
+    "tx": 200,
+    "discards": 0,
+    "errors": 0,
+    "rx": 160,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 21,
+    "tx": 210,
+    "discards": 0,
+    "errors": 0,
+    "rx": 168,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 22,
+    "tx": 220,
+    "discards": 0,
+    "errors": 0,
+    "rx": 176,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 23,
+    "tx": 230,
+    "discards": 0,
+    "errors": 0,
+    "rx": 184,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 24,
+    "tx": 240,
+    "discards": 0,
+    "errors": 0,
+    "rx": 192,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 25,
+    "tx": 250,
+    "discards": 0,
+    "errors": 0,
+    "rx": 200,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 26,
+    "tx": 260,
+    "discards": 0,
+    "errors": 0,
+    "rx": 208,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 27,
+    "tx": 270,
+    "discards": 0,
+    "errors": 0,
+    "rx": 216,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   },
+   {
+    "port": 28,
+    "tx": 280,
+    "discards": 0,
+    "errors": 0,
+    "rx": 224,
+    "tlvDiscards": 0,
+    "tlvUnknowns": 0,
+    "ageouts": 0
+   }
+  ]
+ }
+}

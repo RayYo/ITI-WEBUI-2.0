@@ -1,0 +1,146 @@
+{
+ "data": {
+  "ports": [
+   {
+    "port": 1,
+    "capabilities": false,
+    "inventory": false
+   },
+   {
+    "port": 2,
+    "capabilities": true,
+    "inventory": false
+   },
+   {
+    "port": 3,
+    "capabilities": false,
+    "inventory": true
+   },
+   {
+    "port": 4,
+    "capabilities": true,
+    "inventory": false
+   },
+   {
+    "port": 5,
+    "capabilities": false,
+    "inventory": false
+   },
+   {
+    "port": 6,
+    "capabilities": true,
+    "inventory": true
+   },
+   {
+    "port": 7,
+    "capabilities": false,
+    "inventory": false
+   },
+   {
+    "port": 8,
+    "capabilities": true,
+    "inventory": false
+   },
+   {
+    "port": 9,
+    "capabilities": false,
+    "inventory": true
+   },
+   {
+    "port": 10,
+    "capabilities": true,
+    "inventory": false
+   },
+   {
+    "port": 11,
+    "capabilities": false,
+    "inventory": false
+   },
+   {
+    "port": 12,
+    "capabilities": true,
+    "inventory": true
+   },
+   {
+    "port": 13,
+    "capabilities": false,
+    "inventory": false
+   },
+   {
+    "port": 14,
+    "capabilities": true,
+    "inventory": false
+   },
+   {
+    "port": 15,
+    "capabilities": false,
+    "inventory": true
+   },
+   {
+    "port": 16,
+    "capabilities": true,
+    "inventory": false
+   },
+   {
+    "port": 17,
+    "capabilities": false,
+    "inventory": false
+   },
+   {
+    "port": 18,
+    "capabilities": true,
+    "inventory": true
+   },
+   {
+    "port": 19,
+    "capabilities": false,
+    "inventory": false
+   },
+   {
+    "port": 20,
+    "capabilities": true,
+    "inventory": false
+   },
+   {
+    "port": 21,
+    "capabilities": false,
+    "inventory": true
+   },
+   {
+    "port": 22,
+    "capabilities": true,
+    "inventory": false
+   },
+   {
+    "port": 23,
+    "capabilities": false,
+    "inventory": false
+   },
+   {
+    "port": 24,
+    "capabilities": true,
+    "inventory": true
+   },
+   {
+    "port": 25,
+    "capabilities": false,
+    "inventory": false
+   },
+   {
+    "port": 26,
+    "capabilities": true,
+    "inventory": false
+   },
+   {
+    "port": 27,
+    "capabilities": false,
+    "inventory": true
+   },
+   {
+    "port": 28,
+    "capabilities": true,
+    "inventory": false
+   }
+  ]
+ }
+}

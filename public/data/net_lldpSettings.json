@@ -1,0 +1,140 @@
+{
+ "data": {
+  "status": true,
+  "fastStart": 4,
+  "txHold": 4,
+  "txInterval": 30,
+  "reinitDelay": 2,
+  "txDelay": 2,
+  "assetId": "",
+  "sys": {
+   "chassisSubtype": "MAC Address",
+   "chassisId": "00:11:22:33:44:BB",
+   "sysName": "",
+   "sysDesc": "TPE-2840WS"
+  },
+  "med": {
+   "deviceClass": "Network Connectivity",
+   "hwRev": "V2.1R",
+   "fwRev": "3.01.007",
+   "swRev": "1.00.014",
+   "serial": "",
+   "manufacturer": "TRENDnet Corporation",
+   "modeName": "TPE-2840WS"
+  },
+  "ports": [
+   {
+    "port": 1,
+    "state": 3
+   },
+   {
+    "port": 2,
+    "state": 3
+   },
+   {
+    "port": 3,
+    "state": 3
+   },
+   {
+    "port": 4,
+    "state": 3
+   },
+   {
+    "port": 5,
+    "state": 3
+   },
+   {
+    "port": 6,
+    "state": 3
+   },
+   {
+    "port": 7,
+    "state": 3
+   },
+   {
+    "port": 8,
+    "state": 3
+   },
+   {
+    "port": 9,
+    "state": 3
+   },
+   {
+    "port": 10,
+    "state": 3
+   },
+   {
+    "port": 11,
+    "state": 3
+   },
+   {
+    "port": 12,
+    "state": 3
+   },
+   {
+    "port": 13,
+    "state": 3
+   },
+   {
+    "port": 14,
+    "state": 3
+   },
+   {
+    "port": 15,
+    "state": 3
+   },
+   {
+    "port": 16,
+    "state": 3
+   },
+   {
+    "port": 17,
+    "state": 3
+   },
+   {
+    "port": 18,
+    "state": 3
+   },
+   {
+    "port": 19,
+    "state": 3
+   },
+   {
+    "port": 20,
+    "state": 3
+   },
+   {
+    "port": 21,
+    "state": 3
+   },
+   {
+    "port": 22,
+    "state": 3
+   },
+   {
+    "port": 23,
+    "state": 3
+   },
+   {
+    "port": 24,
+    "state": 3
+   },
+   {
+    "port": 25,
+    "state": 3
+   },
+   {
+    "port": 26,
+    "state": 3
+   },
+   {
+    "port": 27,
+    "state": 3
+   },
+   {
+    "port": 28,
+    "state": 3
+   }
+  ]
+ }
+}

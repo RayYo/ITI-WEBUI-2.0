@@ -265,6 +265,25 @@
 | `net_voiceVlanOuiAdd` | set | 🆕 | `{desc,mac}`(上限 10 条) |
 | `net_voiceVlanOuiDel` | set | 🆕 | `{id}` |
 
+## R3 第十三批:LLDP(8 页)(2026-07-14)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_lldpSettings` | get | 🆕 | `{status,fastStart,txHold,txInterval,reinitDelay,txDelay,assetId,sys{chassisSubtype,chassisId,sysName,sysDesc},med{deviceClass,hwRev,fwRev,swRev,serial,manufacturer,modeName},ports:[{port,state}]}`;4 段独立 Apply + 2 只读信息表 + Port State 表(白表头,State:Disabled4/RxTx3/RxOnly2/TxOnly1,LLDP 关时禁用) |
+| `net_lldpSettingsEdit` / `net_lldpPortStateEdit` | set | 🆕 | 分段提交 / `{port,state}` |
+| `net_lldpBasicTlv` | get | 🆕 | `{ports:[{port,portDesc,sysName,sysDesc,sysCap:bool}]}`;PortEditTable 深表头,4 select(Disabled0/Enabled1,无 Ignore) |
+| `net_lldpBasicTlvEdit` | set | 🆕 | `{port|all,portDesc,sysName,sysDesc,sysCap}` |
+| `net_lldpDot1Tlv` | get | 🆕 | `{ports:[{port,portVlan:bool,vlanList,proto{eapol,lacp,gvrp,stp}}]}`;自定义深表头表:Port VLAN ID(select,All=Ignore)/VLAN ID List(input+Ex:(1,2,4-6))/Protocol Identity(EAPOL/LACP/GVRP/STP 复选)/Apply |
+| `net_lldpDot1TlvEdit` | set | 🆕 | `{port|all,portVlan,vlanList,proto}` |
+| `net_lldpDot3Tlv` | get | 🆕 | `{ports:[{port,macPhy,linkAgg,maxFrame,powerMdi:bool}]}`;PortEditTable 深表头,4 select(All=Ignore -1) |
+| `net_lldpDot3TlvEdit` | set | 🆕 | `{port|all,...}`(Ignore 不提交) |
+| `net_lldpMed` | get | 🆕 | `{ports:[{port,capabilities,inventory:bool}]}`;PortEditTable 深表头,2 select(All=Ignore -1) |
+| `net_lldpMedEdit` | set | 🆕 | `{port|all,capabilities,inventory}` |
+| `net_lldpStatistics` | get | 🆕 | `{global{lastChange,inserts,deletes,drops,ageouts},ports:[{port,tx,discards,errors,rx,tlvDiscards,tlvUnknowns,ageouts}]}`;全局只读 from_table + Clear Counter;Ports 表(白表头 9 列,标题右 Clear All,每行 Clear Counter) |
+| `net_lldpStatisticsClear` | set | 🆕 | `{global|all|port}` |
+| `net_lldpLocalPort` | get | 🆕 | `{ports:[{port,subtype,portId,desc}]}`;只读深表头表(首列表头字面 "All"),Show Detail→el-dialog |
+| `net_lldpNeighbors` | get | 🆕 | `{list:[{entity,port,chassisSubtype,chassisId,portSubtype,portId,desc}]}`;只读深表头表 8 列,Show Detail→el-dialog |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

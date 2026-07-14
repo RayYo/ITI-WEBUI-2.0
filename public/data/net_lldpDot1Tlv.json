@@ -1,0 +1,314 @@
+{
+ "data": {
+  "ports": [
+   {
+    "port": 1,
+    "portVlan": false,
+    "vlanList": "",
+    "proto": {
+     "eapol": false,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 2,
+    "portVlan": true,
+    "vlanList": "",
+    "proto": {
+     "eapol": true,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 3,
+    "portVlan": false,
+    "vlanList": "1,2,4-6",
+    "proto": {
+     "eapol": false,
+     "lacp": true,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 4,
+    "portVlan": true,
+    "vlanList": "",
+    "proto": {
+     "eapol": true,
+     "lacp": false,
+     "gvrp": true,
+     "stp": false
+    }
+   },
+   {
+    "port": 5,
+    "portVlan": false,
+    "vlanList": "",
+    "proto": {
+     "eapol": false,
+     "lacp": false,
+     "gvrp": false,
+     "stp": true
+    }
+   },
+   {
+    "port": 6,
+    "portVlan": true,
+    "vlanList": "1,2,4-6",
+    "proto": {
+     "eapol": true,
+     "lacp": true,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 7,
+    "portVlan": false,
+    "vlanList": "",
+    "proto": {
+     "eapol": false,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 8,
+    "portVlan": true,
+    "vlanList": "",
+    "proto": {
+     "eapol": true,
+     "lacp": false,
+     "gvrp": true,
+     "stp": false
+    }
+   },
+   {
+    "port": 9,
+    "portVlan": false,
+    "vlanList": "1,2,4-6",
+    "proto": {
+     "eapol": false,
+     "lacp": true,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 10,
+    "portVlan": true,
+    "vlanList": "",
+    "proto": {
+     "eapol": true,
+     "lacp": false,
+     "gvrp": false,
+     "stp": true
+    }
+   },
+   {
+    "port": 11,
+    "portVlan": false,
+    "vlanList": "",
+    "proto": {
+     "eapol": false,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 12,
+    "portVlan": true,
+    "vlanList": "1,2,4-6",
+    "proto": {
+     "eapol": true,
+     "lacp": true,
+     "gvrp": true,
+     "stp": false
+    }
+   },
+   {
+    "port": 13,
+    "portVlan": false,
+    "vlanList": "",
+    "proto": {
+     "eapol": false,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 14,
+    "portVlan": true,
+    "vlanList": "",
+    "proto": {
+     "eapol": true,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 15,
+    "portVlan": false,
+    "vlanList": "1,2,4-6",
+    "proto": {
+     "eapol": false,
+     "lacp": true,
+     "gvrp": false,
+     "stp": true
+    }
+   },
+   {
+    "port": 16,
+    "portVlan": true,
+    "vlanList": "",
+    "proto": {
+     "eapol": true,
+     "lacp": false,
+     "gvrp": true,
+     "stp": false
+    }
+   },
+   {
+    "port": 17,
+    "portVlan": false,
+    "vlanList": "",
+    "proto": {
+     "eapol": false,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 18,
+    "portVlan": true,
+    "vlanList": "1,2,4-6",
+    "proto": {
+     "eapol": true,
+     "lacp": true,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 19,
+    "portVlan": false,
+    "vlanList": "",
+    "proto": {
+     "eapol": false,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 20,
+    "portVlan": true,
+    "vlanList": "",
+    "proto": {
+     "eapol": true,
+     "lacp": false,
+     "gvrp": true,
+     "stp": true
+    }
+   },
+   {
+    "port": 21,
+    "portVlan": false,
+    "vlanList": "1,2,4-6",
+    "proto": {
+     "eapol": false,
+     "lacp": true,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 22,
+    "portVlan": true,
+    "vlanList": "",
+    "proto": {
+     "eapol": true,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 23,
+    "portVlan": false,
+    "vlanList": "",
+    "proto": {
+     "eapol": false,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 24,
+    "portVlan": true,
+    "vlanList": "1,2,4-6",
+    "proto": {
+     "eapol": true,
+     "lacp": true,
+     "gvrp": true,
+     "stp": false
+    }
+   },
+   {
+    "port": 25,
+    "portVlan": false,
+    "vlanList": "",
+    "proto": {
+     "eapol": false,
+     "lacp": false,
+     "gvrp": false,
+     "stp": true
+    }
+   },
+   {
+    "port": 26,
+    "portVlan": true,
+    "vlanList": "",
+    "proto": {
+     "eapol": true,
+     "lacp": false,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 27,
+    "portVlan": false,
+    "vlanList": "1,2,4-6",
+    "proto": {
+     "eapol": false,
+     "lacp": true,
+     "gvrp": false,
+     "stp": false
+    }
+   },
+   {
+    "port": 28,
+    "portVlan": true,
+    "vlanList": "",
+    "proto": {
+     "eapol": true,
+     "lacp": false,
+     "gvrp": true,
+     "stp": false
+    }
+   }
+  ]
+ }
+}

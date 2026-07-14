@@ -1,0 +1,24 @@
+{
+ "data": {
+  "list": [
+   {
+    "entity": 1,
+    "port": 5,
+    "chassisSubtype": "MAC Address",
+    "chassisId": "00:aa:bb:cc:dd:01",
+    "portSubtype": "Local",
+    "portId": "12",
+    "desc": "Neighbor Switch A Port 12"
+   },
+   {
+    "entity": 2,
+    "port": 9,
+    "chassisSubtype": "MAC Address",
+    "chassisId": "00:aa:bb:cc:dd:02",
+    "portSubtype": "Local",
+    "portId": "3",
+    "desc": "IP Phone B Port 3"
+   }
+  ]
+ }
+}
