@@ -12,19 +12,19 @@
         <template #3><span>{{ info.portId }}</span></template>
         <template #4><span>{{ info.desc }}</span></template>
         <template #5><span>{{ info.pvid }}</span></template>
-        <template #6><a class="href" @click="showVlan = !showVlan">{{ vlanEntries.length }}</a></template>
-        <template #7><a class="href" @click="showProto = !showProto">{{ protoEntries.length }}</a></template>
-        <template #8><a class="href" @click="showMacPhy = !showMacPhy">Show Detail</a></template>
-        <template #9><a class="href" @click="showLinkAgg = !showLinkAgg">Show Detail</a></template>
+        <template #6><a class="href" @click="toggle('vlan')">{{ vlanEntries.length }}</a></template>
+        <template #7><a class="href" @click="toggle('proto')">{{ protoEntries.length }}</a></template>
+        <template #8><a class="href" @click="toggle('macPhy')">Show Detail</a></template>
+        <template #9><a class="href" @click="toggle('linkAgg')">Show Detail</a></template>
         <template #10><span>{{ info.maxFrame }}</span></template>
-        <template #11><a class="href" @click="showMed = !showMed">Show Detail</a></template>
+        <template #11><a class="href" @click="toggle('med')">Show Detail</a></template>
       </common-table>
       <div class="margin1015">
         <input type="button" class="btnOutTable" value="Previous Page" @click="$router.back()">
       </div>
 
       <!-- VLAN Name Entries 明细 -->
-      <template v-if="showVlan">
+      <template v-if="active === 'vlan'">
         <div class="table_title">LLDP Local Port VLAN Detail Table</div>
         <el-table
           :data="vlanEntries"
@@ -42,7 +42,7 @@
       </template>
 
       <!-- Protocol Identity Entries 明细 -->
-      <template v-if="showProto">
+      <template v-if="active === 'proto'">
         <div class="table_title">LLDP Local Protocol Identity Detail Table</div>
         <el-table
           :data="protoEntries"
@@ -61,7 +61,7 @@
       </template>
 
       <!-- MAC/PHY Configuration/Status 明细 -->
-      <template v-if="showMacPhy">
+      <template v-if="active === 'macPhy'">
         <common-table
           header-title="MAC/PHY Configuration/Status"
           :first-column="['Auto-Negotiation Support', 'Auto-Negotiation Enabled', 'Auto-Negotiation Advertised Capability', 'Auto-Negotiation Operational MAU Type']"
@@ -74,7 +74,7 @@
       </template>
 
       <!-- Link Aggregation 明细 -->
-      <template v-if="showLinkAgg">
+      <template v-if="active === 'linkAgg'">
         <common-table
           header-title="Link Aggregation"
           :first-column="['Aggregation Capability', 'Aggregation Status', 'Aggregation Port ID']"
@@ -86,7 +86,7 @@
       </template>
 
       <!-- LLDP-MED Capabilities 明细 -->
-      <template v-if="showMed">
+      <template v-if="active === 'med'">
         <common-table
           header-title="LLDP-MED Capabilities Support"
           :first-column="['LLDP-MED Capabilities Support', 'Network Policy', 'Location Identification', 'Extended Power Via MDI PSE', 'Extended Power Via MDI PD', 'Inventory']"
@@ -120,17 +120,17 @@ export default {
       macPhy: {},
       linkAgg: {},
       med: {},
-      showVlan: false,
-      showProto: false,
-      showMacPhy: false,
-      showLinkAgg: false,
-      showMed: false
+      // 同时只展开一个明细(再次点击同一项收起)
+      active: ''
     }
   },
   created() {
     this.load()
   },
   methods: {
+    toggle(name) {
+      this.active = this.active === name ? '' : name
+    },
     load() {
       cgiGet('net_lldpLocalPortDetail').then(d => {
         const port = this.$route.query.port

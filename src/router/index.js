@@ -752,6 +752,12 @@ export const constantRoutes = [
             name: 'LLDP-Neighbors',
             component: () => import('@/views/network/lldp/neighbors'),
             meta: { title: 'Neighbors', icon: 'submenu' }
+          },
+          {
+            path: 'neighbor-detail',
+            name: 'LLDP-Neighbor-Detail',
+            hidden: true,
+            component: () => import('@/views/network/lldp/neighbor-detail')
           }
         ]
       },

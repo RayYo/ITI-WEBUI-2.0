@@ -25,7 +25,7 @@
       </div>
       <el-table
         v-loading="loading"
-        :data="rows"
+        :data="pageRows"
         class="tableBox"
         stripe
         border
@@ -42,6 +42,13 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        :current-page.sync="page"
+        :page-size.sync="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :page-sizes="[5, 10, 20, 40]"
+        :total="rows.length"
+      />
     </div>
   </div>
 </template>
@@ -64,7 +71,15 @@ export default {
       mac: '',
       desc: '',
       vlan: '',
-      rows: []
+      rows: [],
+      page: 1,
+      pageSize: 20
+    }
+  },
+  computed: {
+    pageRows() {
+      const start = (this.page - 1) * this.pageSize
+      return this.rows.slice(start, start + this.pageSize)
     }
   },
   created() {
