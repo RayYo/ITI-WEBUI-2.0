@@ -522,6 +522,45 @@ export const constantRoutes = [
         ]
       },
       {
+        path: 'multicast-vlan',
+        name: 'Multicast-VLAN',
+        component: () => import('@/views/network/multicast-vlan/index'),
+        meta: { title: 'Multicast VLAN', icon: 'submenu' },
+        redirect: '/network/multicast-vlan/global-settings',
+        children: [
+          {
+            path: 'global-settings',
+            name: 'MCVLAN-Global',
+            component: () => import('@/views/network/multicast-vlan/global-settings'),
+            meta: { title: 'Global Settings', icon: 'submenu' }
+          },
+          {
+            path: 'vlan-table',
+            name: 'MCVLAN-Table',
+            component: () => import('@/views/network/multicast-vlan/vlan-table'),
+            meta: { title: 'VLAN Table', icon: 'submenu' }
+          },
+          {
+            path: 'group-setup',
+            name: 'MCVLAN-Group',
+            component: () => import('@/views/network/multicast-vlan/group-setup'),
+            meta: { title: 'Group Setup', icon: 'submenu' }
+          },
+          {
+            path: 'associate-group-setup',
+            name: 'MCVLAN-Assoc',
+            component: () => import('@/views/network/multicast-vlan/associate-group-setup'),
+            meta: { title: 'Associate Group Setup', icon: 'submenu' }
+          },
+          {
+            path: 'ports-settings',
+            name: 'MCVLAN-PortsSettings',
+            hidden: true,
+            component: () => import('@/views/network/multicast-vlan/ports-settings')
+          }
+        ]
+      },
+      {
         path: 'vlan',
         name: 'VLAN',
         component: () => import('@/views/network/vlan/index'),

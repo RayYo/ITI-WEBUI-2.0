@@ -212,6 +212,21 @@
 | `net_mldRouterPort` | get | 🆕 | 同 net_igmpRouterPort;Router Port 首列表头 "802.1Q VLAN"(IGMP 是 "VLAN ID") |
 | `net_mldRouterPortEdit` | set | 🆕 | `{vlan,staticPorts:[...]}`;Modify 跳 hidden 页 "Modify MLD Static Router Port"(+ Back) |
 
+## R3 第八批:Multicast VLAN(Global Settings / VLAN Table / Group Setup / Associate Group Setup)(2026-07-14)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_mcvlanGlobal` | get | 🆕 | `{ipv4State,ipv6State:bool, vlans:[{id,name,state:bool, receiver:{tagged:[],untagged:[]}, source:{tagged:[],untagged:[]}}]}`;Port Setting 表:VLAN ID/Name/State(行内 select 默认 Enabled)/Receiver Ports(Edit→跳页)/Source Ports(Edit→跳页)/Action(Apply=提交 State) |
+| `net_mcvlanGlobalState` | set | 🆕 | `{ipv4State,ipv6State}`(全局 Apply) |
+| `net_mcvlanVlanAdd/Del/State` | set | 🆕 | Add:`{id,name}`;Del:`{id}`;State:`{id,state}`(行 Action) |
+| `net_mcvlanPorts` | set | 🆕 | `{vlan,type:'receiver'|'source',tagged:[],untagged:[]}`;Edit 跳 hidden 页 ports-settings?vlan=&type=(basetitle "Receiver/Source Ports Settings",VLAN ID/Name 只读 + 三格 PortMemberRadioGrid[Tagged/Untagged X Ports/Not Member Ports] + Previous Page/Clear/Apply) |
+| `net_mcvlanTable` | get | 🆕 | 只读:`{list:[{id,name,state,taggedReceiver,untaggedReceiver,taggedSource,untaggedSource}]}`(端口区间串) |
+| `net_mcvlanGroup` | get | 🆕 | `{profiles:[{name,ranges:[range 串]}]}`;Multicast Profile Table:Profile Name/Multicast Group Profiles/Action(Delete) |
+| `net_mcvlanProfileAdd/Del` | set | 🆕 | Profile Create:`{name}`;Del:`{name}` |
+| `net_mcvlanRangeAdd/Del` | set | 🆕 | Group Profile Settings:`{name,ipType:'ipv4'|'ipv6',from,to}`(IPv4/IPv6 单选切换两组 IP 输入) |
+| `net_mcvlanAssoc` | get | 🆕 | `{list:[{vlan,profileName}]}` |
+| `net_mcvlanAssocAdd/Del` | set | 🆕 | `{vlan,profileName}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

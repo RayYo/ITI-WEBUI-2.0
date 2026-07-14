@@ -1,0 +1,8 @@
+{
+  "data": {
+    "list": [
+      { "id": 100, "name": "MVR-IPTV", "state": true, "taggedReceiver": "1-2", "untaggedReceiver": "3-4", "taggedSource": "25", "untaggedSource": "-" },
+      { "id": 200, "name": "MVR-Voice", "state": false, "taggedReceiver": "-", "untaggedReceiver": "5-6", "taggedSource": "26", "untaggedSource": "-" }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "data": {
+    "profiles": [
+      { "name": "IPTV", "ranges": ["239.1.1.1 - 239.1.1.100"] },
+      { "name": "Radio", "ranges": ["239.2.2.1 - 239.2.2.50"] },
+      { "name": "IPv6Group", "ranges": ["FF05::1 - FF05::10"] }
+    ]
+  }
+}
