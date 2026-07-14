@@ -202,6 +202,16 @@
 | `net_igmpRouterPort` | get | 🆕 | `{status:bool, rows:[{vlan,staticPorts:[],dynamicPorts:[]}]}`;端口空显示 "N/A";行 Modify 按钮在 IGMP 全局关时禁用(btnDisabled) |
 | `net_igmpRouterPortEdit` | set | 🆕 | `{vlan,staticPorts:[...]}`。Modify 跳转到**独立编辑页**"Modify IGS Static Router Port"(hidden 路由 router-port-modify?vlan=,已按原版 DOM 确证:common-table "Router Port Settings"→802.1Q VLAN + PortCheckboxGrid(title "Static Router Port"+All)+ Apply/Restore) |
 
+## R3 第七批:MLD Snooping(Settings / Router Port)(2026-07-14)
+
+与 IGMP Snooping 完全对称(IPv6 组播)。字段/区间/Note/禁用规则/翻页/Modify 独立页全同 IGMP,仅 cmd 与个别文案不同。
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_mldSettings` | get/set | 🆕 | 同 net_igmpSettings 结构(原始字段 mldStatus/mldCfgQuerierStatus/mldCfgFastLeaveStatus/mldHostPortPurgeInterval/mldQuerierQueryInterval/mldQueryMaxResponseTime/mldRobustnessValue/mldGrpQueryInterval/mldRouterTimeout);MGE 列头 "VLAN Index"(带空格) |
+| `net_mldRouterPort` | get | 🆕 | 同 net_igmpRouterPort;Router Port 首列表头 "802.1Q VLAN"(IGMP 是 "VLAN ID") |
+| `net_mldRouterPortEdit` | set | 🆕 | `{vlan,staticPorts:[...]}`;Modify 跳 hidden 页 "Modify MLD Static Router Port"(+ Back) |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

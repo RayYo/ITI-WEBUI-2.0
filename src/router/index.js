@@ -495,6 +495,33 @@ export const constantRoutes = [
         ]
       },
       {
+        path: 'mld-snooping',
+        name: 'MLD-Snooping',
+        component: () => import('@/views/network/mld-snooping/index'),
+        meta: { title: 'MLD Snooping', icon: 'submenu' },
+        redirect: '/network/mld-snooping/settings',
+        children: [
+          {
+            path: 'settings',
+            name: 'MLD-Settings',
+            component: () => import('@/views/network/mld-snooping/settings'),
+            meta: { title: 'Settings', icon: 'submenu' }
+          },
+          {
+            path: 'router-port',
+            name: 'MLD-RouterPort',
+            component: () => import('@/views/network/mld-snooping/router-port'),
+            meta: { title: 'Router Port', icon: 'submenu' }
+          },
+          {
+            path: 'router-port-modify',
+            name: 'MLD-RouterPort-Modify',
+            hidden: true,
+            component: () => import('@/views/network/mld-snooping/router-port-modify')
+          }
+        ]
+      },
+      {
         path: 'vlan',
         name: 'VLAN',
         component: () => import('@/views/network/vlan/index'),
