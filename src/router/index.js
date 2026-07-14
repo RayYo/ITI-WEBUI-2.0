@@ -805,10 +805,28 @@ export const constantRoutes = [
         meta: { title: 'CoS', icon: 'submenu' }
       },
       {
-        path: 'port-pri',
-        name: 'Port-Priority',
+        path: 'port-priority',
+        name: 'QoS-Port-Priority',
         component: () => import('@/views/qos/port-priority'),
         meta: { title: 'Port Priority', icon: 'submenu' }
+      },
+      {
+        path: 'dscp',
+        name: 'DSCP',
+        component: () => import('@/views/qos/dscp'),
+        meta: { title: 'DSCP', icon: 'submenu' }
+      },
+      {
+        path: 'scheduling-algorithm',
+        name: 'Scheduling-Algorithm',
+        component: () => import('@/views/qos/scheduling-algorithm'),
+        meta: { title: 'Scheduling Algorithm', icon: 'submenu' }
+      },
+      {
+        path: 'ipv6-traffic-class',
+        name: 'IPv6-Traffic-Class',
+        component: () => import('@/views/qos/ipv6-traffic-class'),
+        meta: { title: 'IPv6 Traffic Class', icon: 'submenu' }
       }
     ]
   },

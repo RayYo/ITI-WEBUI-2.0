@@ -301,6 +301,21 @@
 | `net_protoVlanInterface` | get | 🆕 | `{profiles:[id],list:[{port,profileId,vid,priority}]}`;Add Interface(Port select/Profile ID select/VID(1-4094)/Priority 0-7)+ Interface Table 白表头 5 列 + Total Entries + Delete + 翻页 |
 | `net_protoVlanInterfaceAdd` / `net_protoVlanInterfaceDel` | set | 🆕 | `{port,profileId,vid,priority}` / `{port,profileId}` |
 
+## R3 第十六批:QoS(CoS / Port Priority / DSCP / Scheduling Algorithm / IPv6 Traffic Class)(2026-07-14)
+
+| cmd | 方向 | 状态 | 说明 |
+| --- | --- | --- | --- |
+| `net_qosCos` | get | 🆕 | `{status:bool,table:[{priority,queue}]}`;CoS Status select+Apply;CoS Table 白表头 Priority/Queue ID(0-7)/Action(All+0-7 共9行);**status Disabled 时表格置灰(由加载态决定)**;表下 Note |
+| `net_qosCosStatusEdit` / `net_qosCosEdit` | set | 🆕 | `{status}` / `{priority|all,queue}` |
+| `net_qosPortPriority` | get | 🆕 | `{ports:[{port,priority}]}`;PortEditTable 深表头 Port/User Priority(0-7)/Action |
+| `net_qosPortPriorityEdit` | set | 🆕 | `{port|all,priority}` |
+| `net_qosDscp` | get | 🆕 | `{status:bool,map:[64]}`;DSCP Mapping Status select+Apply;自定义白表头 8 列(4 对 DSCP In/Priority),All 区间行(0-15/16-31/32-47/48-63,Ignore=-1)+16 数据行;Apply+Reset to Default;**status Disabled 时置灰** |
+| `net_qosDscpStatusEdit` / `net_qosDscpEdit` / `net_qosDscpReset` | set | 🆕 | `{status}` / `{map(逗号64)}` / `{reset:1}` |
+| `net_qosScheduling` | get | 🆕 | `{algorithm}`;单 select(Strict Priority=1/Weighted Round Robin=2)+Apply |
+| `net_qosSchedulingEdit` | set | 🆕 | `{algorithm}` |
+| `net_qosIpv6Tc` | get | 🆕 | `{state:bool,list:[{tc,priority}]}`;State select+Apply;Settings(IPv6 Traffic Class input/Priority 0-7)+Add;Table 白表头+Total Entries+Delete;**state Disabled 时 add 表单置灰** |
+| `net_qosIpv6TcStateEdit` / `net_qosIpv6TcAdd` / `net_qosIpv6TcDel` | set | 🆕 | `{state}` / `{tc,priority}` / `{tc}` |
+
 ## 待登记(随 R3 实现逐步补充)
 
 <!-- 每实现一批页面,在此追加对应 cmd 行 -->

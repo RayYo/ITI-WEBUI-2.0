@@ -1,0 +1,39 @@
+{
+ "data": {
+  "status": false,
+  "table": [
+   {
+    "priority": 0,
+    "queue": 0
+   },
+   {
+    "priority": 1,
+    "queue": 1
+   },
+   {
+    "priority": 2,
+    "queue": 2
+   },
+   {
+    "priority": 3,
+    "queue": 3
+   },
+   {
+    "priority": 4,
+    "queue": 4
+   },
+   {
+    "priority": 5,
+    "queue": 5
+   },
+   {
+    "priority": 6,
+    "queue": 6
+   },
+   {
+    "priority": 7,
+    "queue": 7
+   }
+  ]
+ }
+}

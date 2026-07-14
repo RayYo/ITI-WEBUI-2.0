@@ -1,0 +1,23 @@
+{
+ "data": {
+  "state": false,
+  "list": [
+   {
+    "tc": 0,
+    "priority": 0
+   },
+   {
+    "tc": 16,
+    "priority": 2
+   },
+   {
+    "tc": 32,
+    "priority": 4
+   },
+   {
+    "tc": 48,
+    "priority": 6
+   }
+  ]
+ }
+}
