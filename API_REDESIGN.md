@@ -200,7 +200,7 @@
 | --- | --- | --- | --- |
 | `net_igmpSettings` | get/set | 🆕 | get:`{status,querierStatus,fastLeaveStatus:bool, agingTimeout,queryInterval,maxResponseTime,robustness,lastMemberQueryInterval,routerTimeout, free,total, groups:[{vlan,groupAddr,memberPorts}]}`;set 同名(前端校验各区间:Aging 130-153025/Query 60-600/MaxResp 10-25/Robust 2-255/LastMember 1-25/RouterTimeout 120-1200)。原始字段 igsStatus/igsCfgQuerierStatus/igsCfgFastLeaveStatus/igsHostPortPurgeInterval(=Aging)/igsQuerierQueryInterval/igsQueryMaxResponseTime/igsRobustnessValue/igsGrpQueryInterval(=LastMember)/igsRouterTimeout |
 | `net_igmpRouterPort` | get | 🆕 | `{status:bool, rows:[{vlan,staticPorts:[],dynamicPorts:[]}]}`;端口空显示 "N/A";行 Modify 按钮在 IGMP 全局关时禁用(btnDisabled) |
-| `net_igmpRouterPortEdit` | set | 🆕 | `{vlan,staticPorts:[...]}`。**⚠️ Modify 弹窗内容未从原版确证**(默认禁用、静态 emulator 无法启用后抓取),现按标准解释=编辑该 VLAN 的 Static Router Port(el-dialog + bare 端口勾选格);待真机/原版确认后可调整 |
+| `net_igmpRouterPortEdit` | set | 🆕 | `{vlan,staticPorts:[...]}`。Modify 跳转到**独立编辑页**"Modify IGS Static Router Port"(hidden 路由 router-port-modify?vlan=,已按原版 DOM 确证:common-table "Router Port Settings"→802.1Q VLAN + PortCheckboxGrid(title "Static Router Port"+All)+ Apply/Restore) |
 
 ## 待登记(随 R3 实现逐步补充)
 

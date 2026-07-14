@@ -4,7 +4,7 @@
     <div>
       <el-table
         v-loading="loading"
-        :data="rows"
+        :data="pageRows"
         class="tableBox"
         stripe
         border
@@ -36,28 +36,24 @@
           </template>
         </el-table-column>
       </el-table>
-
-      <!-- Modify:编辑该 VLAN 的 Static Router Port(原版弹窗内容在静态 emulator 中无法抓取,按标准解释实现) -->
-      <el-dialog title="Static Router Port" :visible.sync="dialogVisible" width="720px" append-to-body>
-        <div class="table_title">VLAN {{ editVlan }} Static Router Port</div>
-        <port-checkbox-grid v-model="editPorts" bare :ports="allPorts" />
-        <div slot="footer">
-          <input type="button" class="btnOutTable" value="Apply" @click="applyModify">
-          <input type="button" class="btnOutTable" value="Cancel" @click="dialogVisible = false">
-        </div>
-      </el-dialog>
+      <el-pagination
+        :current-page.sync="page"
+        :page-size.sync="pageSize"
+        small
+        layout="total, sizes, prev, pager, next, jumper"
+        :page-sizes="[5, 10, 20, 40]"
+        :total="rows.length"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { cgiGet, cgiSet } from '@/api/cgi'
+import { cgiGet } from '@/api/cgi'
 import { portsToRange } from '@/utils'
-import PortCheckboxGrid from '@/components/Emu/PortCheckboxGrid.vue'
 import { darkTableHeader, pageTableCell } from '@/utils/emu'
 
 export default {
-  components: { PortCheckboxGrid },
   data() {
     return {
       loading: false,
@@ -65,15 +61,14 @@ export default {
       pageTableCell,
       enabled: false,
       rows: [],
-      dialogVisible: false,
-      editVlan: '',
-      editPorts: []
+      page: 1,
+      pageSize: 20
     }
   },
   computed: {
-    allPorts() {
-      const n = this.$store.getters.modelInfo('portNum') || 0
-      return Array.from({ length: n }, (_, i) => i + 1)
+    pageRows() {
+      const start = (this.page - 1) * this.pageSize
+      return this.rows.slice(start, start + this.pageSize)
     }
   },
   created() {
@@ -95,15 +90,8 @@ export default {
       return ports && ports.length ? portsToRange(ports) : 'N/A'
     },
     openModify(row) {
-      this.editVlan = row.vlan
-      this.editPorts = row.staticPorts.slice()
-      this.dialogVisible = true
-    },
-    applyModify() {
-      cgiSet('net_igmpRouterPortEdit', { vlan: this.editVlan, staticPorts: this.editPorts }).then(() => {
-        this.dialogVisible = false
-        this.load()
-      })
+      // 原版 Modify 跳转到独立编辑页(Modify IGS Static Router Port)
+      this.$router.push({ path: '/network/igmp-snooping/router-port-modify', query: { vlan: row.vlan }})
     }
   }
 }

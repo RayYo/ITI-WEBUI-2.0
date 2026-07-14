@@ -485,6 +485,12 @@ export const constantRoutes = [
             name: 'IGMP-RouterPort',
             component: () => import('@/views/network/igmp-snooping/router-port'),
             meta: { title: 'Router Port', icon: 'submenu' }
+          },
+          {
+            path: 'router-port-modify',
+            name: 'IGMP-RouterPort-Modify',
+            hidden: true,
+            component: () => import('@/views/network/igmp-snooping/router-port-modify')
           }
         ]
       },
