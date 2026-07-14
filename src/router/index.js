@@ -508,6 +508,12 @@ export const constantRoutes = [
             meta: { title: 'Tagged', icon: 'submenu' }
           },
           {
+            path: 'vlan-tagged-modify',
+            name: 'VLAN-Tagged-Modify',
+            hidden: true,
+            component: () => import('@/views/network/vlan/tagged-modify')
+          },
+          {
             path: 'port',
             name: 'VLAN-Port',
             component: () => import('@/views/network/vlan/port'),

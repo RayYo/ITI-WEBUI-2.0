@@ -141,10 +141,8 @@ export default {
       this.members = this.portList.map(() => 2) // 默认全 Untagged
     },
     onModify(row) {
-      this.vlanId = String(row.id)
-      this.vlanName = row.name
-      this.members = (row.members || []).slice()
-      this.editing = true
+      // 原版 Modify 跳转到独立编辑页 "Modify VLAN"
+      this.$router.push({ path: '/network/vlan/vlan-tagged-modify', query: { id: row.id }})
     },
     onDelete(row) {
       message.confirmWarnBox(`Do you want to delete VLAN ${row.id} ?`, 'Please confirm').then(async() => {

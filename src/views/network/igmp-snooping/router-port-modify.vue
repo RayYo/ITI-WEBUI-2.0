@@ -13,6 +13,7 @@
     <div class="margin1015">
       <input type="button" class="btnOutTable" value="Apply" @click="onApply">
       <input type="button" class="btnOutTable" value="Restore" @click="onRestore">
+      <input type="button" class="btnOutTable" value="Back" @click="$router.back()">
     </div>
   </div>
 </template>
