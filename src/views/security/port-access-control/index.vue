@@ -108,7 +108,7 @@
             <tr>
               <td>Secure VLAN</td>
               <td>
-                <select v-model="ps.secureVlan" class="disabledStyle" disabled>
+                <select v-model="ps.secureVlan" :class="{ disabledStyle: ps.vlanAssign === '2' }" :disabled="ps.vlanAssign === '2'">
                   <option value="1">ON</option>
                   <option value="2">OFF</option>
                 </select>
