@@ -72,7 +72,7 @@
             <tr>
               <td>Re-authentication Status</td>
               <td>
-                <select v-model="ps.reAuthStatus">
+                <select v-model="ps.reAuthStatus" :class="{ disabledStyle: ps.authMode === '2' }" :disabled="ps.authMode === '2'">
                   <option value="1">Enabled</option>
                   <option value="2">Disabled</option>
                 </select>
@@ -90,7 +90,7 @@
             <tr>
               <td>Piggyback Mode</td>
               <td>
-                <select v-model="ps.piggyback" class="disabledStyle" disabled>
+                <select v-model="ps.piggyback" :class="{ disabledStyle: ps.supplicantMode === '1' }" :disabled="ps.supplicantMode === '1'">
                   <option value="1">Enabled</option>
                   <option value="2">Disabled</option>
                 </select>

@@ -21,12 +21,10 @@
       </div>
 
       <div class="table_title">
-        <div>
-          Dial-In User Table
-          <span class="tipInTableTitle">( Free Entries: {{ 64 - rows.length }}, Total Entries: {{ rows.length }} )</span>
-          <div>
-            <input type="button" value="Delete All" class="btnInTitle" :class="{ btnDisabled: !rows.length }" :disabled="!rows.length" @click="onDeleteAll">
-          </div>
+        Dial-In User Table
+        <span class="tipInTableTitle">( Free Entries: {{ 64 - rows.length }}, Total Entries: {{ rows.length }} )</span>
+        <div style="display: inline; float: right; margin-top: 4px">
+          <input type="button" value="Delete All" :disabled="!rows.length" :class="['btnInTitle', { btnDisabled: !rows.length }]" @click="onDeleteAll">
         </div>
       </div>
       <el-table

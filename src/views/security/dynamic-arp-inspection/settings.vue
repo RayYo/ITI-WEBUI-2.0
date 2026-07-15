@@ -69,6 +69,7 @@
         :page-sizes="[5, 10, 20, 40]"
         :total="logRows.length"
       />
+      <br>
 
       <div class="table_title">ARP Inspection Filter</div>
       <table border="" cellspacing="0" class="from_table">

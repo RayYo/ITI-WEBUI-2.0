@@ -50,7 +50,7 @@
           <tr>
             <td>Aging Time &nbsp;(0 - 1440)</td>
             <td>
-              <base-input v-model="form.agingTime" max-len="4" @check="onlyNum('agingTime')" />
+              <base-input v-model="form.agingTime" max-len="4" :disabled="form.mode === '3'" @check="onlyNum('agingTime')" />
             </td>
           </tr>
           <tr>

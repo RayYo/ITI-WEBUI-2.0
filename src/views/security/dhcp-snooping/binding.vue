@@ -67,12 +67,10 @@
       </div>
 
       <div class="table_title">
-        <div>
-          Binding Database Table
-          <span class="tipInTableTitle">( Total Entries: {{ rows.length }} )</span>
-          <div>
-            <input type="button" value="Delete All" class="btnInTitle" :class="{ btnDisabled: !rows.length }" :disabled="!rows.length" @click="onDeleteAll">
-          </div>
+        Binding Database Table
+        <span class="tipInTableTitle">( Total Entries: {{ rows.length }} )</span>
+        <div style="display: inline; float: right; margin-top: 4px">
+          <input type="button" value="Delete All" :disabled="!rows.length" :class="['btnInTitle', { btnDisabled: !rows.length }]" @click="onDeleteAll">
         </div>
       </div>
       <el-table

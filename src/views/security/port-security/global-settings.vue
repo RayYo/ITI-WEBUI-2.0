@@ -5,7 +5,7 @@
       <common-table header-title="Port Security System Settings" :first-column="['System Maximum Address (1 - 6656)']">
         <template #0>
           <base-input v-model="maxAddr" max-len="4" :disabled="noLimit" @check="onlyNum" />
-          <input v-model="noLimit" type="checkbox" class="tipAfterInputBox"><span>No Limit</span>
+          <input v-model="noLimit" type="checkbox" class="tipAfterInputBox">{{ ' ' }}<span>No Limit</span>
         </template>
       </common-table>
       <div class="margin1015">

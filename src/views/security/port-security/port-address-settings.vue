@@ -22,13 +22,13 @@
       <div class="table_title">
         Port Security Address Entries
         <span class="tipInTableTitle">( Total Entries: {{ rows.length }} )</span>
-        <div>
-          <input type="button" value="Delete All" class="btnInTitle" :class="{ btnDisabled: !rows.length }" :disabled="!rows.length" @click="onDeleteAll">
+        <div style="display: inline; float: right; margin-top: 4px">
+          <input type="button" value="Delete All" :disabled="!rows.length" :class="['btnInTitle', { btnDisabled: !rows.length }]" @click="onDeleteAll">
         </div>
       </div>
       <el-table
         v-loading="loading"
-        :data="rows"
+        :data="pageRows"
         class="tableBox"
         stripe
         border
@@ -47,6 +47,13 @@
           </template>
         </el-table-column>
       </el-table>
+      <el-pagination
+        :current-page.sync="page"
+        :page-size.sync="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :page-sizes="[5, 10, 20, 40]"
+        :total="rows.length"
+      />
     </div>
   </div>
 </template>
@@ -69,7 +76,15 @@ export default {
       port: '1',
       mac: '',
       vid: '',
-      rows: []
+      rows: [],
+      page: 1,
+      pageSize: 20
+    }
+  },
+  computed: {
+    pageRows() {
+      const start = (this.page - 1) * this.pageSize
+      return this.rows.slice(start, start + this.pageSize)
     }
   },
   created() {
