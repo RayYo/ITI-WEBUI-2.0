@@ -1,0 +1,18 @@
+{
+ "data": {
+  "profileIds": [
+   1,
+   2,
+   3
+  ],
+  "list": [
+   {
+    "profileId": 1,
+    "accessId": 1,
+    "profileType": "ACL-L2",
+    "summary": "Source MAC",
+    "status": "Active"
+   }
+  ]
+ }
+}

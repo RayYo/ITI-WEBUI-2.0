@@ -1,0 +1,10 @@
+{
+ "data": {
+  "snooping": false,
+  "passThrough": false,
+  "verifyMac": false,
+  "backup": false,
+  "interval": 1200,
+  "insertion": false
+ }
+}

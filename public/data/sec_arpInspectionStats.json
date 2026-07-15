@@ -1,0 +1,18 @@
+{
+ "data": {
+  "list": [
+   {
+    "vlan": 10,
+    "forwarded": 120,
+    "dropped": 3,
+    "dhcpDrops": 1,
+    "aclDrops": 2,
+    "dhcpPermits": 50,
+    "aclPermits": 70,
+    "srcMacFail": 0,
+    "dstMacFail": 0,
+    "ipValFail": 1
+   }
+  ]
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "data": {
+  "logBuffer": 32,
+  "list": [
+   {
+    "port": 1,
+    "vlan": 10,
+    "senderIp": "192.168.10.99",
+    "senderMac": "00:11:22:33:44:55",
+    "occurrence": 2
+   }
+  ]
+ }
+}

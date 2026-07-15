@@ -1,0 +1,12 @@
+{
+ "data": {
+  "list": [
+   {
+    "name": "acl-trust"
+   },
+   {
+    "name": "acl-guest"
+   }
+  ]
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "data": {
+  "curProfile": 2,
+  "maxProfile": 150,
+  "curRule": 1,
+  "maxRule": 256,
+  "l2": [
+   {
+    "id": 1,
+    "owner": "ACL",
+    "summary": "Source MAC"
+   }
+  ],
+  "l3": [
+   {
+    "id": 2,
+    "owner": "ACL",
+    "summary": "IPv4 DSCP"
+   }
+  ]
+ }
+}

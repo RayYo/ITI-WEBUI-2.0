@@ -1,0 +1,11 @@
+{
+ "data": {
+  "land": true,
+  "blat": true,
+  "tcpNull": true,
+  "tcpXmas": true,
+  "tcpSynFin": true,
+  "tcpSynSrc": false,
+  "tcpTinyFrag": true
+ }
+}

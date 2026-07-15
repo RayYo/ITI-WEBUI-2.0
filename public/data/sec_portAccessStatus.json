@@ -1,0 +1,289 @@
+{
+ "data": {
+  "nasId": "Nas1",
+  "access": "Disabled",
+  "method": 3,
+  "ports": [
+   {
+    "port": 1,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 2,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 3,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 4,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 5,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 6,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 7,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 8,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 9,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 10,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 11,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 12,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 13,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 14,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 15,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 16,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 17,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 18,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 19,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 20,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 21,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 22,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 23,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 24,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 25,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 26,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 27,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   },
+   {
+    "port": 28,
+    "authMode": "802.1x",
+    "portControl": "Force Authorized",
+    "authStatus": "Authorized",
+    "supplicantMode": "Multiple",
+    "piggyback": "Disabled",
+    "mac": "-",
+    "vlanList": "-"
+   }
+  ]
+ }
+}

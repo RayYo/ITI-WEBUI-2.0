@@ -1,0 +1,21 @@
+{
+ "data": {
+  "srcMac": false,
+  "dstMac": false,
+  "ip": false,
+  "logList": [
+   {
+    "vid": 10,
+    "aclLogging": "Deny",
+    "dhcpLogging": "Deny"
+   }
+  ],
+  "filterList": [
+   {
+    "vid": 10,
+    "name": "acl-trust",
+    "staticAcl": true
+   }
+  ]
+ }
+}

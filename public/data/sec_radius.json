@@ -1,0 +1,13 @@
+{
+ "data": {
+  "list": [
+   {
+    "priority": 1,
+    "ip": "192.168.10.50",
+    "serverPort": 1812,
+    "acctPort": 1813,
+    "secret": "secret1"
+   }
+  ]
+ }
+}

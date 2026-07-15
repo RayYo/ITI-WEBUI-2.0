@@ -1,0 +1,20 @@
+{
+ "data": {
+  "list": [
+   {
+    "port": 1,
+    "vid": 1,
+    "mac": "00:11:22:33:44:55",
+    "addrType": "Permanent",
+    "remaining": "-"
+   },
+   {
+    "port": 3,
+    "vid": 10,
+    "mac": "00:aa:bb:cc:dd:ee",
+    "addrType": "Delete-On-Timeout",
+    "remaining": 120
+   }
+  ]
+ }
+}

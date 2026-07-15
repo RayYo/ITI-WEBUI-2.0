@@ -871,7 +871,7 @@ export const constantRoutes = [
         name: 'Port-Security',
         component: () => import('@/views/security/port-security'),
         meta: { title: 'Port Security', icon: 'submenu' },
-        redirect: '/security/global-settings',
+        redirect: '/security/port-security/global-settings',
         children: [
           {
             path: 'global-settings',
@@ -898,6 +898,148 @@ export const constantRoutes = [
         name: 'Port-Access-Control',
         component: () => import('@/views/security/port-access-control'),
         meta: { title: 'Port Access Control', icon: 'submenu' }
+      },
+      {
+        path: 'dial-in-user',
+        name: 'Dial-In-User',
+        component: () => import('@/views/security/dial-in-user'),
+        meta: { title: 'Dial-In User', icon: 'submenu' }
+      },
+      {
+        path: 'radius',
+        name: 'RADIUS',
+        component: () => import('@/views/security/radius'),
+        meta: { title: 'RADIUS', icon: 'submenu' }
+      },
+      {
+        path: 'tacacs',
+        name: 'TACACS',
+        component: () => import('@/views/security/tacacs'),
+        meta: { title: 'TACACS+', icon: 'submenu' }
+      },
+      {
+        path: 'destination-mac-filter',
+        name: 'Destination-MAC-Filter',
+        component: () => import('@/views/security/destination-mac-filter'),
+        meta: { title: 'Destination MAC Filter', icon: 'submenu' }
+      },
+      {
+        path: 'denial-of-service',
+        name: 'Denial-of-Service',
+        component: () => import('@/views/security/denial-of-service'),
+        meta: { title: 'Denial of Service', icon: 'submenu' }
+      },
+      {
+        path: 'dhcp-snooping',
+        name: 'DHCP-Snooping',
+        component: () => import('@/views/security/dhcp-snooping'),
+        meta: { title: 'DHCP Snooping', icon: 'submenu' },
+        redirect: '/security/dhcp-snooping/settings',
+        children: [
+          {
+            path: 'settings',
+            name: 'DHCP-Snooping-Settings',
+            component: () => import('@/views/security/dhcp-snooping/settings'),
+            meta: { title: 'Settings', icon: 'submenu' }
+          },
+          {
+            path: 'vlan',
+            name: 'DHCP-Snooping-VLAN',
+            component: () => import('@/views/security/dhcp-snooping/vlan'),
+            meta: { title: 'VLAN', icon: 'submenu' }
+          },
+          {
+            path: 'interfaces',
+            name: 'DHCP-Snooping-Interfaces',
+            component: () => import('@/views/security/dhcp-snooping/interfaces'),
+            meta: { title: 'Interfaces', icon: 'submenu' }
+          },
+          {
+            path: 'binding',
+            name: 'DHCP-Snooping-Binding',
+            component: () => import('@/views/security/dhcp-snooping/binding'),
+            meta: { title: 'Binding', icon: 'submenu' }
+          }
+        ]
+      },
+      {
+        path: 'dynamic-arp-inspection',
+        name: 'Dynamic-ARP-Inspection',
+        component: () => import('@/views/security/dynamic-arp-inspection'),
+        meta: { title: 'Dynamic ARP Inspection', icon: 'submenu' },
+        redirect: '/security/dynamic-arp-inspection/arp-access-list',
+        children: [
+          {
+            path: 'arp-access-list',
+            name: 'ARP-Access-List',
+            component: () => import('@/views/security/dynamic-arp-inspection/arp-access-list'),
+            meta: { title: 'ARP Access List', icon: 'submenu' }
+          },
+          {
+            path: 'settings',
+            name: 'ARP-Inspection-Settings',
+            component: () => import('@/views/security/dynamic-arp-inspection/settings'),
+            meta: { title: 'Settings', icon: 'submenu' }
+          },
+          {
+            path: 'port-settings',
+            name: 'ARP-Inspection-Port-Settings',
+            component: () => import('@/views/security/dynamic-arp-inspection/port-settings'),
+            meta: { title: 'Port Settings', icon: 'submenu' }
+          },
+          {
+            path: 'vlan',
+            name: 'ARP-Inspection-VLAN',
+            component: () => import('@/views/security/dynamic-arp-inspection/vlan'),
+            meta: { title: 'VLAN', icon: 'submenu' }
+          },
+          {
+            path: 'statistics',
+            name: 'ARP-Inspection-Statistics',
+            component: () => import('@/views/security/dynamic-arp-inspection/statistics'),
+            meta: { title: 'Statistics', icon: 'submenu' }
+          },
+          {
+            path: 'log',
+            name: 'ARP-Inspection-Log',
+            component: () => import('@/views/security/dynamic-arp-inspection/log'),
+            meta: { title: 'Log', icon: 'submenu' }
+          }
+        ]
+      },
+      {
+        path: 'acl',
+        name: 'ACL',
+        component: () => import('@/views/security/acl'),
+        meta: { title: 'ACL', icon: 'submenu' },
+        redirect: '/security/acl/configuration-wizard',
+        children: [
+          {
+            path: 'configuration-wizard',
+            name: 'ACL-Configuration-Wizard',
+            component: () => import('@/views/security/acl/configuration-wizard'),
+            meta: { title: 'Configuration Wizard', icon: 'submenu' }
+          },
+          {
+            path: 'access-profile-list',
+            name: 'Access-Profile-List',
+            component: () => import('@/views/security/acl/access-profile-list'),
+            meta: { title: 'Access Profile List', icon: 'submenu' }
+          },
+          {
+            path: 'finder',
+            name: 'ACL-Finder',
+            component: () => import('@/views/security/acl/finder'),
+            meta: { title: 'ACL Finder', icon: 'submenu' }
+          },
+          {
+            path: 'add-profile',
+            name: 'ACL-Add-Profile',
+            component: () => import('@/views/security/acl/add-profile'),
+            meta: { title: 'Add ACL Profile', icon: 'submenu' },
+            hidden: true
+          }
+        ]
       }
     ]
   },
