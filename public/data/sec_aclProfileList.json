@@ -1,22 +1,41 @@
 {
  "data": {
-  "curProfile": 2,
+  "curProfile": 1,
   "maxProfile": 150,
   "curRule": 1,
   "maxRule": 256,
+  "vlans": [
+   1,
+   10,
+   20
+  ],
   "l2": [
    {
     "id": 1,
-    "owner": "ACL",
-    "summary": "Source MAC"
+    "owner": "ACL-L2",
+    "srcMask": "FF-FF-FF-FF-FF-FF",
+    "dstMask": "FF-FF-FF-FF-FF-FF",
+    "p8021": true,
+    "vlan": true,
+    "etherType": true,
+    "rules": [
+     {
+      "accessId": 1,
+      "profileType": "ACL-L2",
+      "summary": "Src MAC, Dst MAC, 802.1p, VLAN, EthType",
+      "status": "Permit",
+      "srcMac": "00-00-00-00-00-10",
+      "dstMac": "00-00-00-00-FF-FF",
+      "vlanId": 1,
+      "p8021": 6,
+      "etherType": "0x05DD",
+      "ports": "1",
+      "action": 1,
+      "actionVal": ""
+     }
+    ]
    }
   ],
-  "l3": [
-   {
-    "id": 2,
-    "owner": "ACL",
-    "summary": "IPv4 DSCP"
-   }
-  ]
+  "l3": []
  }
 }

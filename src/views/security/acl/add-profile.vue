@@ -108,6 +108,7 @@
 
 <script>
 import { cgiSet } from '@/api/cgi'
+import message from '@/utils/message'
 import baseInput from '@/components/CustomInput/base-input.vue'
 
 const dotted = (prefix) => {
@@ -159,7 +160,10 @@ export default {
     onApply() {
       const payload = { type: this.type, profileId: this.profileId }
       Object.assign(payload, this.type === 'L2' ? this.l2 : this.l3)
-      cgiSet('sec_aclProfileAdd', payload).then(() => this.$router.back())
+      cgiSet('sec_aclProfileAdd', payload, { successMsg: false }).then(() => {
+        this.$router.back()
+        message.warnBox(`Create new acl profile ${this.profileId || 1} Successfully.`)
+      })
     }
   }
 }

@@ -1038,6 +1038,27 @@ export const constantRoutes = [
             component: () => import('@/views/security/acl/add-profile'),
             meta: { title: 'Add ACL Profile', icon: 'submenu' },
             hidden: true
+          },
+          {
+            path: 'profile-details',
+            name: 'ACL-Profile-Details',
+            component: () => import('@/views/security/acl/profile-details'),
+            meta: { title: 'Access Profile Details', icon: 'submenu' },
+            hidden: true
+          },
+          {
+            path: 'profile-rules',
+            name: 'ACL-Profile-Rules',
+            component: () => import('@/views/security/acl/profile-rules'),
+            meta: { title: 'Access Profile List', icon: 'submenu' },
+            hidden: true
+          },
+          {
+            path: 'rule-edit',
+            name: 'ACL-Rule-Edit',
+            component: () => import('@/views/security/acl/rule-edit'),
+            meta: { title: 'Add Access Rule List', icon: 'submenu' },
+            hidden: true
           }
         ]
       }
