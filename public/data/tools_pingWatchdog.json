@@ -1,0 +1,16 @@
+{
+ "data": {
+  "globalStatus": 2,
+  "hosts": [
+   {
+    "ip": "192.168.10.23",
+    "queryInterval": 33,
+    "retryCounts": 5,
+    "rebootCounts": 65535,
+    "tryCnt": 0,
+    "okCnt": 0,
+    "rebootCnt": 0
+   }
+  ]
+ }
+}

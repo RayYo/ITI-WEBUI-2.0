@@ -1,0 +1,10 @@
+{
+ "data": {
+  "nextBoot": 2,
+  "running": "Image2",
+  "ver1": "3.01.015",
+  "ver2": "3.01.015",
+  "newVersion": "3.10.C40",
+  "newDesc": "debug fw"
+ }
+}

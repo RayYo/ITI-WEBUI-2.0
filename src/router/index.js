@@ -1101,6 +1101,26 @@ export const constantRoutes = [
         name: 'Ping',
         component: () => import('@/views/tools/ping'),
         meta: { title: 'Ping', icon: 'submenu' }
+      },
+      {
+        path: 'ping/result',
+        name: 'Ping-Result',
+        component: () => import('@/views/tools/ping/result'),
+        meta: { title: 'Ping Test Result', icon: 'submenu' },
+        hidden: true
+      },
+      {
+        path: 'ping-watchdog',
+        name: 'Ping-Watchdog',
+        component: () => import('@/views/tools/ping-watchdog'),
+        meta: { title: 'Ping Watchdog', icon: 'submenu' }
+      },
+      {
+        path: 'ping-watchdog/host-edit',
+        name: 'Ping-Watchdog-Host-Edit',
+        component: () => import('@/views/tools/ping-watchdog/host-edit'),
+        meta: { title: 'Ping Watchdog', icon: 'submenu' },
+        hidden: true
       }
     ]
   },

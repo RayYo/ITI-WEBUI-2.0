@@ -364,6 +364,13 @@ button, input, optgroup, select, textarea {
 .selectInTable {
   width: 100%!important;
 }
+// 原版 Cable Diagnostics:表格单元格内多行文本按 \n 换行
+.white-space_pre {
+  white-space: pre;
+  .el-table .cell {
+    white-space: pre;
+  }
+}
 .tipInTableTitle {
   font-size: 14px;
   color: #fff;
