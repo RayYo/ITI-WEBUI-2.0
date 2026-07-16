@@ -2,7 +2,7 @@
  "data": {
   "curProfile": 3,
   "maxProfile": 150,
-  "curRule": 2,
+  "curRule": 3,
   "maxRule": 256,
   "vlans": [
    1,
@@ -92,7 +92,22 @@
     "icmpType": false,
     "icmpCode": false,
     "tcpFlag": false,
-    "rules": []
+    "rules": [
+     {
+      "accessId": 1,
+      "profileType": "ACL-IPv6",
+      "summary": "Src Ip, Dst Ip, Traffic Class, Src Port, Dst Port",
+      "status": "Permit",
+      "srcIp6": "1234::1234",
+      "dstIp6": "5678::5678",
+      "srcPort": "0x0035",
+      "dstPort": "0x0035",
+      "ipv6Class": "10",
+      "ports": "3",
+      "action": 1,
+      "actionVal": ""
+     }
+    ]
    }
   ]
  }
