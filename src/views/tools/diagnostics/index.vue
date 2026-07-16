@@ -37,7 +37,7 @@
               <el-table-column prop="port" label="Port" min-width="193" />
               <el-table-column prop="result" label="Test Result" min-width="287" />
               <el-table-column prop="faultDistance" label="Cable Fault Distance (meters)" min-width="575" />
-              <el-table-column prop="length" label="Cable Length (meters) [in range]" min-width="575" />
+              <el-table-column prop="length" label="Cable Length (meters)" min-width="575" />
             </el-table>
           </div>
         </div>
