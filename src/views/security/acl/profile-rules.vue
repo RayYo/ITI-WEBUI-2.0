@@ -51,6 +51,10 @@ export default {
       rows: []
     }
   },
+  watch: {
+    // 同页不同 query 导航时组件被复用,需重新加载
+    $route: 'load'
+  },
   created() {
     this.load()
   },
@@ -62,7 +66,7 @@ export default {
         this.rows = ((profile && profile.rules) || []).map(r => ({
           profileId: profile.id,
           accessId: r.accessId,
-          profileType: r.profileType || (type === 'L3' ? 'ACL-L3' : 'ACL-L2'),
+          profileType: r.profileType || profile.owner || 'ACL',
           summary: r.summary,
           status: r.status || 'Permit'
         }))

@@ -1,8 +1,8 @@
 {
  "data": {
-  "curProfile": 1,
+  "curProfile": 3,
   "maxProfile": 150,
-  "curRule": 1,
+  "curRule": 2,
   "maxRule": 256,
   "vlans": [
    1,
@@ -36,6 +36,64 @@
     ]
    }
   ],
-  "l3": []
+  "l3": [
+   {
+    "id": 1,
+    "owner": "ACL-IPv4",
+    "ipType": "IPv4",
+    "srcMask": "128.0.0.0",
+    "dstMask": "192.0.0.0",
+    "dscp": true,
+    "tos": false,
+    "protocol": 6,
+    "protocolName": "TCP",
+    "tcpFlag": true,
+    "srcPort": true,
+    "dstPort": true,
+    "icmpType": false,
+    "icmpCode": false,
+    "igmpType": false,
+    "rules": [
+     {
+      "accessId": 1,
+      "profileType": "ACL-IPv4",
+      "summary": "Src Ip, Dst Ip, Dscp, TCP Flag, Src Port, Dst Port",
+      "status": "Permit",
+      "srcIp": "192.168.1.10",
+      "dstIp": "192.168.1.20",
+      "srcPort": "80",
+      "dstPort": "443",
+      "dscp": 10,
+      "tcpFlags": {
+       "urg": "0",
+       "ack": "1",
+       "psh": "0",
+       "rst": "0",
+       "syn": "1",
+       "fin": "0"
+      },
+      "ports": "1,2",
+      "action": 1,
+      "actionVal": ""
+     }
+    ]
+   },
+   {
+    "id": 2,
+    "owner": "ACL-IPv6",
+    "ipType": "IPv6",
+    "srcMask": "8000::",
+    "dstMask": "c000::",
+    "trafficClass": true,
+    "protocol": 17,
+    "protocolName": "UDP",
+    "srcPort": true,
+    "dstPort": true,
+    "icmpType": false,
+    "icmpCode": false,
+    "tcpFlag": false,
+    "rules": []
+   }
+  ]
  }
 }

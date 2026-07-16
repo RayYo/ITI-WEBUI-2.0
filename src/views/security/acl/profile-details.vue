@@ -27,11 +27,21 @@ export default {
       rows: []
     }
   },
+  watch: {
+    // 同页不同 query 导航时组件被复用,需重新加载
+    $route: 'init'
+  },
   created() {
-    const { type, id } = this.$route.query
-    loadAclProfile(type, id).then(({ profile }) => {
-      if (profile) this.rows = aclProfileDetailRows(profile)
-    })
+    this.init()
+  },
+  methods: {
+    init() {
+      const { type, id } = this.$route.query
+      this.rows = []
+      loadAclProfile(type, id).then(({ profile }) => {
+        if (profile) this.rows = aclProfileDetailRows(profile)
+      })
+    }
   }
 }
 </script>

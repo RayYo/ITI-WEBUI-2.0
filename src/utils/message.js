@@ -8,6 +8,12 @@ const message = {
       message: 'Success.'
     })
   },
+  successMsg: function(msg) {
+    Message.success({
+      showClose: true,
+      message: msg
+    })
+  },
   warnBox: function(msg) {
     MessageBox({
       type: 'warning',
