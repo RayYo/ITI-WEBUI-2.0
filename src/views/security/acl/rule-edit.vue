@@ -19,7 +19,8 @@
           <tr>
             <td>Access ID</td>
             <td>
-              <base-input v-model="accessId" max-len="5" @check="onlyNum('accessId')" />
+              <!-- 点 Access ID 链接进入编辑时,Access ID 置灰不可改 -->
+              <base-input v-model="accessId" max-len="5" :disabled="isEdit" @check="onlyNum('accessId')" />
               <span class="tipAfterInputBox">* keep blank means auto-assign</span>
             </td>
           </tr>
@@ -43,14 +44,14 @@
             <tr v-if="p.srcMask">
               <td>Source MAC</td>
               <td>
-                <base-input v-model="f.srcMac" max-len="17" placeholder="00-00-00-00-00-10" />
+                <base-input v-model="f.srcMac" max-len="17" />
                 <span class="tipAfterInputBox">ex:(00-00-00-00-00-10)</span>
               </td>
             </tr>
             <tr v-if="p.dstMask">
               <td>Destination MAC</td>
               <td>
-                <base-input v-model="f.dstMac" max-len="17" placeholder="00-00-00-00-FF-FF" />
+                <base-input v-model="f.dstMac" max-len="17" />
                 <span class="tipAfterInputBox">ex:(00-00-00-00-FF-FF)</span>
               </td>
             </tr>
@@ -72,7 +73,7 @@
             <tr v-if="p.etherType">
               <td>Ether Type</td>
               <td>
-                <base-input v-model="f.etherType" max-len="6" placeholder="0x05DD" />
+                <base-input v-model="f.etherType" max-len="6" />
                 <span class="tipAfterInputBox">ex:(0x05DD-0xFFFF)</span>
               </td>
             </tr>
@@ -249,6 +250,7 @@ export default {
   computed: {
     isL3() { return this.$route.query.type === 'L3' },
     isV4() { return this.p.ipType !== 'IPv6' },
+    isEdit() { return this.$route.query.accessId != null },
     profileId() { return this.$route.query.id },
     typeText() {
       if (!this.isL3) return 'Layer 2'
@@ -316,46 +318,68 @@ export default {
       if (/^\d+$/.test(s)) return Number(s)
       return NaN
     },
-    // 留空 = Don't Care;有值才校验
-    checkRange(val, max, label) {
-      if (val === '') return true
-      if (Number(val) > max) { message.warnBox(`${label} must be within 0 ~ ${max}.`); return false }
+    // 必填 + 范围校验(0 ~ max)
+    checkNum(val, max, label) {
+      if (val === '') { message.warnBox(`Please input ${label}.`); return false }
+      if (!/^\d+$/.test(val) || Number(val) > max) { message.warnBox(`${label} must be within 0 ~ ${max}.`); return false }
       return true
     },
     onApply() {
       const f = this.f
-      const macOk = v => v === '' || /^([0-9a-f]{2}-){5}[0-9a-f]{2}$/i.test(v)
-      const ip4Ok = v => {
-        if (v === '') return true
-        const m = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(v)
-        return !!m && m.slice(1, 5).every(n => Number(n) <= 255)
+      const p = this.p
+      // 仅校验当前表单中显示的行;每项必填且在范围内
+      const macOk = (v, label, ex) => {
+        if (v === '') { message.warnBox(`Please input ${label}.`); return false }
+        if (!/^([0-9a-f]{2}-){5}[0-9a-f]{2}$/i.test(v)) { message.warnBox(`Invalid ${label}. ex:(${ex})`); return false }
+        return true
       }
-      const ip6Ok = v => v === '' || (/^[0-9a-f:]+$/i.test(v) && v.indexOf(':') !== -1)
+      const ip4Ok = (v, label) => {
+        if (v === '') { message.warnBox(`Please input ${label}.`); return false }
+        const m = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(v)
+        if (!m || !m.slice(1, 5).every(n => Number(n) <= 255)) { message.warnBox(`Invalid ${label}. ex:(192.168.1.10)`); return false }
+        return true
+      }
+      const ip6Ok = (v, label) => {
+        if (v === '') { message.warnBox(`Please input ${label}.`); return false }
+        if (!/^[0-9a-f:]+$/i.test(v) || v.indexOf(':') === -1) { message.warnBox(`Invalid ${label}. Ex:(1234::1234)`); return false }
+        return true
+      }
       const portOk = (v, label) => {
-        if (v === '') return true
+        if (v === '') { message.warnBox(`Please input ${label}.`); return false }
         const n = this.hexVal(v)
         if (isNaN(n) || n > 0xFFFF) { message.warnBox(`${label} must be within 0 ~ 0xFFFF.`); return false }
         return true
       }
-      if (!macOk(f.srcMac)) { message.warnBox('Invalid Source MAC. ex:(00-00-00-00-00-10)'); return }
-      if (!macOk(f.dstMac)) { message.warnBox('Invalid Destination MAC. ex:(00-00-00-00-FF-FF)'); return }
-      if (!this.checkRange(f.p8021, 7, '802.1p')) return
-      if (f.etherType !== '') {
-        const v = this.hexVal(f.etherType)
-        if (isNaN(v) || v < 0x05DD || v > 0xFFFF) { message.warnBox('Ether Type must be within 0x05DD ~ 0xFFFF.'); return }
+      if (!this.isL3) {
+        if (p.srcMask && !macOk(f.srcMac, 'Source MAC', '00-00-00-00-00-10')) return
+        if (p.dstMask && !macOk(f.dstMac, 'Destination MAC', '00-00-00-00-FF-FF')) return
+        if (p.p8021 && !this.checkNum(f.p8021, 7, '802.1p')) return
+        if (p.etherType) {
+          if (f.etherType === '') { message.warnBox('Please input Ether Type.'); return }
+          const v = this.hexVal(f.etherType)
+          if (isNaN(v) || v < 0x05DD || v > 0xFFFF) { message.warnBox('Ether Type must be within 0x05DD ~ 0xFFFF.'); return }
+        }
+      } else if (this.isV4) {
+        if (p.srcMask && !ip4Ok(f.srcIp, 'Source IP')) return
+        if (p.dstMask && !ip4Ok(f.dstIp, 'Destination IP')) return
+        if (p.srcPort && !portOk(f.srcPort, 'Source Port')) return
+        if (p.dstPort && !portOk(f.dstPort, 'Destination Port')) return
+        if (p.dscp && !this.checkNum(f.dscp, 63, 'DSCP')) return
+        if (p.tos && !this.checkNum(f.tos, 255, 'ToS')) return
+        if (p.icmpType && !this.checkNum(f.icmpType, 255, 'ICMP Type')) return
+        if (p.icmpCode && !this.checkNum(f.icmpCode, 255, 'ICMP Code')) return
+        if (p.igmpType && !this.checkNum(f.igmpType, 255, 'IGMP Type')) return
+      } else {
+        if (p.srcPort && !portOk(f.srcPort, 'Source Port')) return
+        if (p.dstPort && !portOk(f.dstPort, 'Destination Port')) return
+        if (p.trafficClass && !this.checkNum(f.ipv6Class, 255, 'IPv6 Class')) return
+        if (p.icmpType && !this.checkNum(f.icmpType, 255, 'ICMP Type')) return
+        if (p.icmpCode && !this.checkNum(f.icmpCode, 255, 'ICMP Code')) return
+        if (p.srcMask && !ip6Ok(f.srcIp6, 'Source IPv6')) return
+        if (p.dstMask && !ip6Ok(f.dstIp6, 'Destination IPv6')) return
       }
-      if (!ip4Ok(f.srcIp)) { message.warnBox('Invalid Source IP. ex:(192.168.1.10)'); return }
-      if (!ip4Ok(f.dstIp)) { message.warnBox('Invalid Destination IP. ex:(192.168.1.10)'); return }
-      if (!portOk(f.srcPort, 'Source Port') || !portOk(f.dstPort, 'Destination Port')) return
-      if (!this.checkRange(f.dscp, 63, 'DSCP')) return
-      if (!this.checkRange(f.tos, 255, 'ToS')) return
-      if (!this.checkRange(f.ipv6Class, 255, 'IPv6 Class')) return
-      if (!this.checkRange(f.icmpType, 255, 'ICMP Type')) return
-      if (!this.checkRange(f.icmpCode, 255, 'ICMP Code')) return
-      if (!this.checkRange(f.igmpType, 255, 'IGMP Type')) return
-      if (!ip6Ok(f.srcIp6)) { message.warnBox('Invalid Source IPv6. Ex:(1234::1234)'); return }
-      if (!ip6Ok(f.dstIp6)) { message.warnBox('Invalid Destination IPv6. Ex:(1234::1234)'); return }
-      if (f.ports !== '' && !/^\d+(-\d+)?(,\d+(-\d+)?)*$/.test(f.ports)) { message.warnBox('Invalid Ports. Ex:(1,2)'); return }
+      if (f.ports === '') { message.warnBox('Please input Ports.'); return }
+      if (!/^\d+(-\d+)?(,\d+(-\d+)?)*$/.test(f.ports)) { message.warnBox('Invalid Ports. Ex:(1,2)'); return }
       if (f.action === '4') {
         const v = Number(f.actionVal)
         if (!/^\d+$/.test(f.actionVal) || v < 16 || v > 1000000) { message.warnBox('Rate Limit must be within 16 ~ 1000000.'); return }
