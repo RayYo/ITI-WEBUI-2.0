@@ -114,15 +114,15 @@ export default {
 <style lang="scss" scoped>
     // 面板必须保持整条水平结构:任何窗口宽度下都不许换行分层,
     // 窄窗口由外层容器(overflow:auto)横向滚动;
-    // 宽度随机型端口数自适应(inline-block 收缩包裹)并水平居中
+    // inline-flex + flex:none:子块始终按内容宽排一行(inline-block 会随容器收缩导致 float 换行)
     .panel_box {
-        display: inline-block;
-        overflow: hidden;
+        display: inline-flex;
+        align-items: flex-start;
         text-align: left;
-        white-space: nowrap;
     }
     .blue, .green {
         padding: 20px 15px;
+        flex: none;
         float: left;
         white-space: nowrap;
     }

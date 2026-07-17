@@ -35,6 +35,19 @@ module.exports = {
   publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',
+  // 与原版真机一致的双层结构:public/index.html 是静态壳页(iframe),
+  // Vue 应用模板 public/app.html 构建输出为 main.html 供 iframe 加载。
+  // 地址栏/标签页标题因此永远只显示 IP,不暴露组件路由。
+  pages: {
+    index: {
+      entry: 'src/main.js',
+      template: 'public/app.html',
+      filename: 'main.html',
+      // 显式列出注入 chunk:pages 模式默认只注入 chunk-vendors/chunk-common,
+      // 与下方自定义 splitChunks 名(chunk-libs 等)不符会导致 html 里零脚本
+      chunks: ['runtime', 'chunk-libs', 'chunk-elementUI', 'chunk-commons', 'index']
+    }
+  },
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
@@ -57,7 +70,8 @@ module.exports = {
   },
   chainWebpack(config) {
     // it can improve the speed of the first screen, it is recommended to turn on preload
-    config.plugin('preload').tap(() => [
+    // 启用 pages 配置后,html/preload/prefetch 插件名带页面名后缀(-index)
+    config.plugin('preload-index').tap(() => [
       {
         rel: 'preload',
         // to ignore runtime.js
@@ -68,7 +82,7 @@ module.exports = {
     ])
 
     // when there are many pages, it will cause too many meaningless requests
-    config.plugins.delete('prefetch')
+    config.plugins.delete('prefetch-index')
 
     // set svg-sprite-loader
     config.module
@@ -92,7 +106,7 @@ module.exports = {
         config => {
           config
             .plugin('ScriptExtHtmlWebpackPlugin')
-            .after('html')
+            .after('html-index')
             .use('script-ext-html-webpack-plugin', [{
             // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
