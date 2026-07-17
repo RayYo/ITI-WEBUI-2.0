@@ -73,6 +73,14 @@ module.exports = {
     }
   },
   chainWebpack(config) {
+    // 真机包(npm run build,非 mock)不携带 public/data mock 数据;
+    // mock 静态包(npm run build:mock)保留 data/ 供 cgi 层直读
+    if (process.env.VUE_APP_MOCK !== 'true') {
+      config.plugin('copy').tap(args => {
+        args[0][0].ignore = (args[0][0].ignore || []).concat(['data/**'])
+        return args
+      })
+    }
     // it can improve the speed of the first screen, it is recommended to turn on preload
     // 启用 pages 配置后,html/preload/prefetch 插件名带页面名后缀(-index)
     config.plugin('preload-index').tap(() => [
