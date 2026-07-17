@@ -80,11 +80,12 @@
 
     <div class="table_title">
       RMON Alarm Table
+      <span class="tipInTableTitle">( Free Entries: {{ 256 - entries.length }}, Total Entries: {{ entries.length }} )</span>
       <div style="display: inline; float: right; margin-top: 4px">
         <input type="button" value="Delete All" class="btnInTitle" :disabled="deleteAllDisabled" :class="{ btnDisabled: deleteAllDisabled }" @click="onDeleteAll">
       </div>
     </div>
-    <el-table v-loading="loading" :data="entries" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
+    <el-table v-loading="loading" :data="entries.slice((currentPage - 1) * pageSize, currentPage * pageSize)" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
       <el-table-column prop="idx" label="Index" />
       <el-table-column prop="interval" label="Interval" />
       <el-table-column prop="variable" label="Variable" />
@@ -100,6 +101,9 @@
         </template>
       </el-table-column>
     </el-table>
+    <div>
+      <emu-pagination :current-page.sync="currentPage" :page-size.sync="pageSize" :total="entries.length" />
+    </div>
   </div>
 </template>
 
@@ -124,7 +128,9 @@ export default {
       risingEvent: '',
       fallingEvent: '',
       owner: '',
-      entries: []
+      entries: [],
+      currentPage: 1,
+      pageSize: 5
     }
   },
   computed: {

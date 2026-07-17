@@ -55,13 +55,7 @@
         </el-table-column>
       </el-table>
       <p class="note">Note: If a port does not belong to any VLAN, its PVID will be changed to default VLAN ID and attends to default VLAN automatically.</p>
-      <el-pagination
-        :current-page.sync="page"
-        :page-size.sync="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[5, 10, 20, 40]"
-        :total="rows.length"
-      />
+      <emu-pagination :current-page.sync="page" :page-size.sync="pageSize" :total="rows.length" />
     </div>
   </div>
 </template>
@@ -94,7 +88,7 @@ export default {
       editing: false, // Modify 时锁定 VLAN ID
       rows: [],
       page: 1,
-      pageSize: 20
+      pageSize: 5
     }
   },
   computed: {

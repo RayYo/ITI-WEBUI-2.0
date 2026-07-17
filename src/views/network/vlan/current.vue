@@ -20,13 +20,7 @@
         <el-table-column prop="untaggedPorts" label="Untagged Ports" min-width="200" />
         <el-table-column prop="status" label="Status" min-width="100" />
       </el-table>
-      <el-pagination
-        :current-page.sync="page"
-        :page-size.sync="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[5, 10, 20, 40]"
-        :total="rows.length"
-      />
+      <emu-pagination :current-page.sync="page" :page-size.sync="pageSize" :total="rows.length" />
     </div>
   </div>
 </template>
@@ -43,7 +37,7 @@ export default {
       pageTableCell,
       rows: [],
       page: 1,
-      pageSize: 20
+      pageSize: 5
     }
   },
   computed: {

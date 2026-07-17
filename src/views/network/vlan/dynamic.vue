@@ -31,13 +31,7 @@
           <el-table-column prop="mac" label="MAC Address" min-width="140" />
           <el-table-column prop="type" label="Type" min-width="80" />
         </el-table>
-        <el-pagination
-          :current-page.sync="curPage"
-          :page-size.sync="pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :page-sizes="[5, 10, 20, 40]"
-          :total="rows.length"
-        />
+        <emu-pagination :current-page.sync="curPage" :page-size.sync="pageSize" :total="rows.length" />
       </div>
     </div>
   </div>
@@ -58,7 +52,7 @@ export default {
       port: '0',
       allRows: [],
       curPage: 1,
-      pageSize: 20
+      pageSize: 5
     }
   },
   computed: {

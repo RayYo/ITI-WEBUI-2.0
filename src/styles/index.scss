@@ -129,6 +129,25 @@ div:focus {
 }
 
 // for ds
+// Dashboard 六张信息表网格:宽裕 3 列;内容开始换行前切 2 列;再窄切 1 列
+.das-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2.27%;
+  row-gap: 20px;
+}
+// 断点按实测换行程度校准:三列在 <1800 时长字段(IPv6 地址等)明显增多换行,
+// 两列在 <1250 时同样劣化,各自降档
+@media (max-width: 1800px) {
+  .das-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 1250px) {
+  .das-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
 .das_form {
   height: calc(100% - 45px);
 }
@@ -429,13 +448,9 @@ button, input, optgroup, select, textarea {
   .inputBox {
     width: 100% !important;
   }
-  // Dashboard 信息表:三列 flex → 单列堆叠
-  .das-flex-row {
-    display: block !important;
-    > div {
-      width: 100%;
-      margin-bottom: 20px;
-    }
+  // Dashboard 信息表:移动端单列(das-info-grid 的 1020px 断点已覆盖,此处兜底)
+  .das-info-grid {
+    grid-template-columns: 1fr;
   }
   // PoE / CPU 图表面板:绝对定位布局 → 纵向流式
   #pannel2 {

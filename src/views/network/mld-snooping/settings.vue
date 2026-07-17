@@ -73,13 +73,7 @@
         <el-table-column prop="groupAddr" label="Multicast Group Address" min-width="220" />
         <el-table-column prop="memberPorts" label="Member Ports" min-width="160" />
       </el-table>
-      <el-pagination
-        :current-page.sync="page"
-        :page-size.sync="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[5, 10, 20, 40]"
-        :total="groups.length"
-      />
+      <emu-pagination :current-page.sync="page" :page-size.sync="pageSize" :total="groups.length" />
     </div>
   </div>
 </template>
@@ -111,7 +105,7 @@ export default {
       free: 256,
       total: 0,
       page: 1,
-      pageSize: 20
+      pageSize: 5
     }
   },
   computed: {

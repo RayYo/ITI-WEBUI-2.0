@@ -56,7 +56,9 @@
         <input type="button" class="btnOutTable" value="Apply" @click="onApply">
       </div>
 
-      <div class="table_title">Time Range Table</div>
+      <div class="table_title">Time Range Table
+        <span class="tipInTableTitle">( Total Entries: {{ rows.length }} )</span>
+      </div>
       <el-table
         v-loading="loading"
         :data="rows"

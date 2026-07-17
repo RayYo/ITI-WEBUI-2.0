@@ -18,6 +18,10 @@ import '@/permission' // permission control
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 
+// 全站统一翻页组件(以 IPv4 ARP Table 的设计为准),全局注册免逐页 import
+import EmuPagination from '@/components/Emu/EmuPagination.vue'
+Vue.component('EmuPagination', EmuPagination)
+
 Vue.config.productionTip = false
 
 new Vue({

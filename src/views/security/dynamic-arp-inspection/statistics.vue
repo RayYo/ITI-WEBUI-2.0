@@ -37,13 +37,7 @@
         <el-table-column prop="dstMacFail" label="Dest MAC Failure" min-width="190" />
         <el-table-column prop="ipValFail" label="IP Validation Failure" min-width="217" />
       </el-table>
-      <el-pagination
-        :current-page.sync="page"
-        :page-size.sync="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[5, 10, 20, 40]"
-        :total="rows.length"
-      />
+      <emu-pagination :current-page.sync="page" :page-size.sync="pageSize" :total="rows.length" />
     </div>
   </div>
 </template>
@@ -64,7 +58,7 @@ export default {
       vidList: '',
       rows: [],
       page: 1,
-      pageSize: 20
+      pageSize: 5
     }
   },
   computed: {

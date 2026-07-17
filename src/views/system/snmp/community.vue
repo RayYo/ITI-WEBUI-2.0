@@ -42,13 +42,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-        :current-page.sync="page"
-        :page-size.sync="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[10, 20, 50]"
-        :total="entries.length"
-      />
+      <emu-pagination :current-page.sync="page" :page-size.sync="pageSize" :total="entries.length" />
     </div>
   </div>
 </template>
@@ -68,7 +62,7 @@ export default {
       max: 0,
       entries: [],
       page: 1,
-      pageSize: 20
+      pageSize: 5
     }
   },
   computed: {

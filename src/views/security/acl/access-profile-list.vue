@@ -44,13 +44,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-        :current-page.sync="l2Page"
-        :page-size.sync="l2PageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[5, 10, 20, 40]"
-        :total="l2Rows.length"
-      />
+      <emu-pagination :current-page.sync="l2Page" :page-size.sync="l2PageSize" :total="l2Rows.length" />
       <br>
 
       <div class="table_title">
@@ -89,13 +83,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-        :current-page.sync="l3Page"
-        :page-size.sync="l3PageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[5, 10, 20, 40]"
-        :total="l3Rows.length"
-      />
+      <emu-pagination :current-page.sync="l3Page" :page-size.sync="l3PageSize" :total="l3Rows.length" />
     </div>
   </div>
 </template>

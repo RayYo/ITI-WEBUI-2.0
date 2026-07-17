@@ -40,7 +40,7 @@
         <input type="button" value="Delete All" class="btnInTitle" :disabled="deleteAllDisabled" :class="{ btnDisabled: deleteAllDisabled }" @click="onDeleteAll">
       </div>
     </div>
-    <el-table v-loading="loading" :data="entries" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
+    <el-table v-loading="loading" :data="entries.slice((currentPage - 1) * pageSize, currentPage * pageSize)" class="tableBox" stripe border empty-text="< < Table is empty > >" :header-cell-style="pageTableHeader" :cell-style="pageTableCell">
       <el-table-column prop="idx" label="Index" />
       <el-table-column prop="port" label="Port" />
       <el-table-column prop="dropEvents" label="Drop Events" />
@@ -55,6 +55,9 @@
         </template>
       </el-table-column>
     </el-table>
+    <div>
+      <emu-pagination :current-page.sync="currentPage" :page-size.sync="pageSize" :total="entries.length" />
+    </div>
   </div>
 </template>
 
@@ -71,7 +74,9 @@ export default {
       index: '',
       port: '',
       owner: '',
-      entries: []
+      entries: [],
+      currentPage: 1,
+      pageSize: 5
     }
   },
   computed: {

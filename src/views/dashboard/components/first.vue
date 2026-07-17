@@ -1,53 +1,48 @@
 <template>
   <div>
     <div style="margin-bottom: 25px; overflow: auto;">
-      <div class="das-flex-row" style="display: flex; margin-bottom: 20px;">
+      <!-- 六张信息表:宽裕 3 列 → 内容将换行前切 2 列 → 再窄 1 列(断点见 index.scss .das-info-grid) -->
+      <div class="das-info-grid">
         <from-table
           header-title="Switch Information"
-          :extra-style="{flex: '14 1 0%', background: 'white'}"
+          :extra-style="{background: 'white'}"
           :extra-class="{das_form: true}"
           :first-column="['System Uptime','Runtime Image','Boot Loader']"
           :table-data="swInfoTableData"
         />
-        <div style="flex: 1 1 0%;" />
         <from-table
           header-title="Hardware Information"
           :extra-class="{das_form: true}"
-          :extra-style="{flex: '14 1 0%', background: 'white'}"
+          :extra-style="{background: 'white'}"
           :first-column="['DRAM Size','Flash Size']"
           :table-data="hwInfoTableData"
         />
-        <div style="flex: 1 1 0%;" />
         <from-table
           header-title="Administration Information"
           :extra-class="{das_form: true}"
-          :extra-style="{flex: '14 1 0%', background: 'white'}"
+          :extra-style="{background: 'white'}"
           :first-column="['System Name','System Location','System Contact']"
           :table-data="adminInfoTableData"
         />
-      </div>
-      <div class="das-flex-row" style="display: flex;">
         <from-table
           header-title="System Information"
           :extra-class="{das_form: true}"
-          :extra-style="{flex: '14 1 0%', background: 'white'}"
+          :extra-style="{background: 'white'}"
           :first-column="['Serial Number','MAC Address','IP Address','Subnet Mask','Default Gateway']"
           :table-data="sysInfoTableData"
         />
-        <div style="flex: 1 1 0%;" />
         <from-table
           header-title="IPv6 Information"
           :extra-class="{das_form: true}"
-          :extra-style="{flex: '14 1 0%', background: 'white'}"
+          :extra-style="{background: 'white'}"
           :first-column="['IPv6 Unicast Address / Prefix Length','IPv6 Default Gateway',
                           'Link Local Address / Prefix length']"
           :table-data="ipv6InfoTableData"
         />
-        <div style="flex: 1 1 0%;" />
         <from-table
           header-title="Automatic Network Features"
           :extra-class="{das_form: true}"
-          :extra-style="{flex: '14 1 0%', background: 'white'}"
+          :extra-style="{background: 'white'}"
           :first-column="['IPv4 DHCP Client Mode','IPv6 DHCP Client Mode']"
           :table-data="netFeaturesTableData"
         />

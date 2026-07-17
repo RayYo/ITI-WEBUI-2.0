@@ -62,13 +62,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-        :current-page.sync="logPage"
-        :page-size.sync="logPageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[5, 10, 20, 40]"
-        :total="logRows.length"
-      />
+      <emu-pagination :current-page.sync="logPage" :page-size.sync="logPageSize" :total="logRows.length" />
       <br>
 
       <div class="table_title">ARP Inspection Filter</div>
@@ -116,13 +110,7 @@
         <el-table-column prop="name" label="ARP Access List Name" min-width="954" />
         <el-table-column prop="staticAcl" label="Static ACL" min-width="489" />
       </el-table>
-      <el-pagination
-        :current-page.sync="filterPage"
-        :page-size.sync="filterPageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[5, 10, 20, 40]"
-        :total="filterRows.length"
-      />
+      <emu-pagination :current-page.sync="filterPage" :page-size.sync="filterPageSize" :total="filterRows.length" />
     </div>
   </div>
 </template>

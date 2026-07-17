@@ -81,16 +81,7 @@
     </el-table>
 
     <div>
-      <el-pagination
-        :current-page="currentPage"
-        :page-sizes="[5, 10, 20, 40]"
-        :page-size="pageSize"
-        background
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="tableData.length"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-      />
+      <emu-pagination :current-page.sync="currentPage" :page-size.sync="pageSize" :total="tableData.length" />
     </div>
   </div>
 </template>
@@ -148,12 +139,6 @@ export default {
     }
   },
   methods: {
-    handleSizeChange(val) {
-      this.pageSize = val
-    },
-    handleCurrentChange(val) {
-      this.currentPage = val
-    },
     stateApply() {
       // todo: post
       message.success()
