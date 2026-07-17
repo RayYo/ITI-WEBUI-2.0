@@ -43,9 +43,13 @@ module.exports = {
       entry: 'src/main.js',
       template: 'public/app.html',
       filename: 'main.html',
-      // 显式列出注入 chunk:pages 模式默认只注入 chunk-vendors/chunk-common,
-      // 与下方自定义 splitChunks 名(chunk-libs 等)不符会导致 html 里零脚本
-      chunks: ['runtime', 'chunk-libs', 'chunk-elementUI', 'chunk-commons', 'index']
+      // 显式列出注入 chunk,且必须区分环境:
+      // 生产 = 下方自定义 splitChunks 名(chunk-libs 等)+ runtime;
+      // dev 未启用自定义 splitChunks,真实名是默认的 chunk-vendors/chunk-common,
+      // 若沿用生产名会导致 dev 下 main.html 只注入 index.js 而白屏
+      chunks: process.env.NODE_ENV === 'development'
+        ? ['chunk-vendors', 'chunk-common', 'index']
+        : ['runtime', 'chunk-libs', 'chunk-elementUI', 'chunk-commons', 'index']
     }
   },
   lintOnSave: process.env.NODE_ENV === 'development',
