@@ -38,7 +38,7 @@
             <td>Port</td>
             <td>
               <select v-model="port">
-                <option v-for="p in 28" :key="p" :value="String(p)">{{ p }}</option>
+                <option v-for="p in portNum" :key="p" :value="String(p)">{{ p }}</option>
               </select>
             </td>
           </tr>
@@ -136,6 +136,7 @@ export default {
     }
   },
   computed: {
+    portNum() { return this.$store.getters.modelInfo('portNum') || 0 },
     pageRows() {
       const start = (this.page - 1) * this.pageSize
       return this.rows.slice(start, start + this.pageSize)

@@ -45,7 +45,7 @@
               <td>Port</td>
               <td>
                 <select v-model="ps.port">
-                  <option v-for="p in 28" :key="p" :value="String(p)">{{ p }}</option>
+                  <option v-for="p in portNum" :key="p" :value="String(p)">{{ p }}</option>
                 </select>
                 <input type="button" class="btnInTable btnDisabled" value="Initialize" disabled>
               </td>
@@ -230,6 +230,9 @@ export default {
       cur: { nasId: '', access: '', method: '' },
       statusRows: []
     }
+  },
+  computed: {
+    portNum() { return this.$store.getters.modelInfo('portNum') || 0 }
   },
   created() {
     this.load()

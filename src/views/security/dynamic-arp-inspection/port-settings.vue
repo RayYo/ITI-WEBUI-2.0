@@ -9,7 +9,7 @@
             <td>Port</td>
             <td>
               <select v-model="port">
-                <option v-for="p in 28" :key="p" :value="String(p)">{{ p }}</option>
+                <option v-for="p in portNum" :key="p" :value="String(p)">{{ p }}</option>
               </select>
             </td>
           </tr>
@@ -60,6 +60,9 @@ export default {
       trustState: '2',
       rows: []
     }
+  },
+  computed: {
+    portNum() { return this.$store.getters.modelInfo('portNum') || 0 }
   },
   created() {
     this.load()

@@ -10,7 +10,7 @@
             <td>
               <select v-model="form.port">
                 <option value="0">All</option>
-                <option v-for="p in 28" :key="p" :value="String(p)">{{ p }}</option>
+                <option v-for="p in portNum" :key="p" :value="String(p)">{{ p }}</option>
               </select>
             </td>
           </tr>
@@ -111,6 +111,9 @@ export default {
       form: { port: '0', state: '2', maximum: '32', violation: '1', mode: '3', agingTime: '0', agingType: '1' },
       rows: []
     }
+  },
+  computed: {
+    portNum() { return this.$store.getters.modelInfo('portNum') || 0 }
   },
   created() {
     this.load()

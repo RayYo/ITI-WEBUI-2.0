@@ -38,7 +38,10 @@ export default {
       'sidebar'
     ]),
     routes() {
-      return this.$router.options.routes
+      // 机型能力过滤:meta.requiresPoe 的顶层菜单在无 PoE 机型隐藏
+      // (devinfo 在 permission.js 路由守卫里先于页面加载,此处 store 已就绪)
+      const poeNum = this.$store.getters.modelInfo('poeNum') || 0
+      return this.$router.options.routes.filter(r => !(r.meta && r.meta.requiresPoe) || poeNum > 0)
     },
     activeMenu() {
       const route = this.$route

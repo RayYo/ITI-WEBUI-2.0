@@ -13,6 +13,7 @@ import PortEditTable from '@/components/Emu/PortEditTable.vue'
 
 const EN_DIS = [{ value: '1', label: 'Enabled' }, { value: '2', label: 'Disabled' }]
 const IGNORE = { value: '0', label: 'Ignore' }
+// Giga(铜)口速率/双工模式
 const MODES = [
   { value: 'auto', label: 'Auto' },
   { value: '1000full', label: '1000/Full' },
@@ -20,6 +21,12 @@ const MODES = [
   { value: '10full', label: '10/Full' },
   { value: '100half', label: '100/Half' },
   { value: '10half', label: '10/Half' }
+]
+// SFP+(光)口只有 Auto / 10G/Full / 1G/Full
+const MODES_SFP = [
+  { value: 'auto', label: 'Auto' },
+  { value: '10gfull', label: '10G/Full' },
+  { value: '1000full', label: '1G/Full' }
 ]
 
 export default {
@@ -33,7 +40,7 @@ export default {
         { prop: 'type', label: 'Type', minWidth: 110, type: 'text' },
         { prop: 'linkStatus', label: 'Link Status', minWidth: 100, type: 'text' },
         { prop: 'adminStatus', label: 'Admin Status', minWidth: 130, type: 'select', options: EN_DIS, allExtra: IGNORE },
-        { prop: 'mode', label: 'Mode', minWidth: 150, type: 'select', options: MODES, allExtra: { value: 'ignore', label: 'Ignore' }},
+        { prop: 'mode', label: 'Mode', minWidth: 150, type: 'select', optionsFn: row => this.isFiber(row.port) ? MODES_SFP : MODES, allExtra: { value: 'ignore', label: 'Ignore' }},
         { prop: 'jumbo', label: 'Jumbo', minWidth: 130, type: 'select', options: EN_DIS, allExtra: IGNORE },
         { prop: 'flowCtrl', label: 'Flow Ctrl', minWidth: 130, type: 'select', options: EN_DIS, allExtra: IGNORE },
         { prop: 'eapPassThrough', label: 'EAP PassThrough', minWidth: 150, type: 'select', options: EN_DIS, allExtra: IGNORE },
@@ -48,6 +55,11 @@ export default {
     this.load()
   },
   methods: {
+    // 按 sys_devinfo 端口类型区分 Giga/SFP+(All 行返回 false 用 Giga 选项)
+    isFiber(port) {
+      const meta = (this.$store.getters.modelInfo('ports') || []).find(p => p.port === port)
+      return !!(meta && meta.type === 'fiber')
+    },
     load() {
       this.loading = true
       cgiGet('net_phyInterface').then(d => {

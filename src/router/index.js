@@ -835,7 +835,8 @@ export const constantRoutes = [
     path: '/poe',
     component: Layout,
     name: 'PoE',
-    meta: { title: 'PoE', icon: 'PoE' },
+    // requiresPoe:无 PoE 机型(sys_devinfo 无 poe 口)整组菜单隐藏
+    meta: { title: 'PoE', icon: 'PoE', requiresPoe: true },
     redirect: '/poe/power-over-ethernet',
     children: [
       {

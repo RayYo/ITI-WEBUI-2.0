@@ -380,6 +380,12 @@ export default {
       }
       if (f.ports === '') { message.warnBox('Please input Ports.'); return }
       if (!/^\d+(-\d+)?(,\d+(-\d+)?)*$/.test(f.ports)) { message.warnBox('Invalid Ports. Ex:(1,2)'); return }
+      const maxPort = this.$store.getters.modelInfo('portNum') || 0
+      const portsInRange = f.ports.split(',').every(seg => {
+        const [a, b] = seg.split('-').map(Number)
+        return a >= 1 && a <= maxPort && (b === undefined || (b <= maxPort && a < b))
+      })
+      if (!portsInRange) { message.warnBox('Invalid Ports. Ex:(1,2)'); return }
       if (f.action === '4') {
         const v = Number(f.actionVal)
         if (!/^\d+$/.test(f.actionVal) || v < 16 || v > 1000000) { message.warnBox('Rate Limit must be within 16 ~ 1000000.'); return }

@@ -41,7 +41,7 @@
                 v-if="scope.row.port === 'All' && col.allExtra"
                 :value="col.allExtra.value"
               >{{ col.allExtra.label }}</option>
-              <option v-for="o in col.options" :key="o.value" :value="o.value">{{ o.label }}</option>
+              <option v-for="o in colOptions(col, scope.row)" :key="o.value" :value="o.value">{{ o.label }}</option>
             </select>
             <!-- 文本输入:baseInput;可选 prefix/suffix 文字与 inputWidth(如 Threshold "64pps x [input] (1-4096)") -->
             <template v-else-if="col.type === 'input'">
@@ -89,6 +89,11 @@ export default {
     return { darkTableHeader, pageTableCell }
   },
   methods: {
+    // select 列选项:列可带 optionsFn(row) 按行给不同选项(如 Giga/SFP+ 口 Mode 不同)
+    colOptions(col, row) {
+      if (typeof col.optionsFn === 'function') return col.optionsFn(row) || []
+      return col.options || []
+    },
     displayText(row, col) {
       const v = row[col.prop]
       return v === '' || v === undefined || v === null ? '-' : v

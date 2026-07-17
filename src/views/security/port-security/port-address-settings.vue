@@ -5,7 +5,7 @@
       <common-table header-title="Port Security Address Settings" :first-column="['Port', 'MAC Address', 'VID (1 - 4094)']">
         <template #0>
           <select v-model="port">
-            <option v-for="p in 28" :key="p" :value="String(p)">{{ p }}</option>
+            <option v-for="p in portNum" :key="p" :value="String(p)">{{ p }}</option>
           </select>
         </template>
         <template #1>
@@ -82,6 +82,7 @@ export default {
     }
   },
   computed: {
+    portNum() { return this.$store.getters.modelInfo('portNum') || 0 },
     pageRows() {
       const start = (this.page - 1) * this.pageSize
       return this.rows.slice(start, start + this.pageSize)

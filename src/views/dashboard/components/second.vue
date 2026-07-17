@@ -1,9 +1,6 @@
 <template>
   <div>
-    <switch-panel
-      :copper-group-num="copperGroupNum"
-      :port-link-change="portLinkData"
-    />
+    <switch-panel :port-link-change="portLinkData" />
     <!-- 窄窗口时表格横向滚动而非压缩列宽,保证数据与格式完整 -->
     <div class="table-scroll">
       <el-table
@@ -95,7 +92,6 @@ export default {
   },
   data() {
     return {
-      copperGroupNum: 0,
       portLinkData: [],
       tableData: [],
       isPoe: false,
@@ -109,7 +105,6 @@ export default {
     ])
   },
   created() {
-    this.copperGroupNum = this.modelInfo('copperPortNum') / 8
     if (this.modelInfo('poeNum') > 0) { this.isPoe = true }
     this.loading = true
     this.updateData()

@@ -10,7 +10,7 @@
               <td>Port</td>
               <td>
                 <select v-model="port">
-                  <option v-for="p in 28" :key="p" :value="String(p)">{{ p }}</option>
+                  <option v-for="p in portNum" :key="p" :value="String(p)">{{ p }}</option>
                 </select>
               </td>
             </tr>
@@ -80,6 +80,9 @@ export default {
       port: '1',
       rows: []
     }
+  },
+  computed: {
+    portNum() { return this.$store.getters.modelInfo('portNum') || 0 }
   },
   methods: {
     // Test Now:发请求取该 port 的测线结果(mock:linkUp 表给出接入 port 的线长)

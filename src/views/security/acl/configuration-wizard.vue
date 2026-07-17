@@ -224,9 +224,10 @@ export default {
     },
     validPorts(val) {
       if (!/^\d+(-\d+)?(,\d+(-\d+)?)*$/.test(val)) return false
+      const max = this.$store.getters.modelInfo('portNum') || 0
       return val.split(',').every(seg => {
         const [a, b] = seg.split('-').map(Number)
-        return a >= 1 && a <= 28 && (b === undefined || (b <= 28 && a < b))
+        return a >= 1 && a <= max && (b === undefined || (b <= max && a < b))
       })
     },
     onApply() {
